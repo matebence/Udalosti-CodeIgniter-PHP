@@ -2,14 +2,14 @@
 
 class Rola_pouzivatela_model extends CI_model
 {
-    public function rola_pouzivatela($id_pouzivatel, $id_roli)
+    public function rola_pouzivatela($id_pouzivatel, $id_rola)
     {
-        if ($id_pouzivatel == 0 || $id_roli == 0) {
+        if ($id_pouzivatel == 0 || $id_rola == 0) {
             return false;
         } else {
             $priradenie_roli = array(
                 "idPouzivatel" => $id_pouzivatel,
-                "idRola" => $id_roli
+                "idRola" => $id_rola
             );
             $novy_zaznam = $this->db->insert('rola_pouzivatela', $priradenie_roli);
             if ($novy_zaznam) {
@@ -20,18 +20,18 @@ class Rola_pouzivatela_model extends CI_model
         }
     }
 
-    public function aktualizuj_rolu_pouzivatela($id_pouzivatel, $aktualizacne_udaje)
+    public function aktualizuj_rolu_pouzivatela($id_pouzivatel, $udaj)
     {
-        if (!empty($aktualizacne_udaje)) {
+        if (!empty($udaj)) {
             $this->db->where('idPouzivatel', $id_pouzivatel);
-            $this->db->update('rola_pouzivatela', $aktualizacne_udaje);
+            $this->db->update('rola_pouzivatela', $udaj);
             return true;
         } else {
             return false;
         }
     }
 
-    public function prihlasuj_podla_roli($prihlasovacie_udaje)
+    public function prihlas_pouzivatela($prihlasovacie_udaje)
     {
         $this->db->select('nazov');
         $this->db->from('rola_pouzivatela');
@@ -48,5 +48,4 @@ class Rola_pouzivatela_model extends CI_model
         }
     }
 }
-
 ?>

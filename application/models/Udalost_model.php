@@ -2,21 +2,21 @@
 
 class Udalost_model extends CI_model
 {
-    public function nova_udalost($nova_udalost = array())
+    public function udalost($udalost= array())
     {
-        $udalost = $this->db->insert('udalost', $nova_udalost);
-        if ($udalost) {
+        $udaj = $this->db->insert('udalost', $udalost);
+        if ($udaj) {
             return $this->db->insert_id();
         } else {
             return 0;
         }
     }
 
-    public function aktualizuj_udalost($id_udalost, $aktualizacne_udaje)
+    public function aktualizuj_udalost($id_udalost, $udaj)
     {
-        if (!empty($aktualizacne_udaje)) {
+        if (!empty($udaj)) {
             $this->db->where('idUdalost', $id_udalost);
-            $this->db->update('udalost', $aktualizacne_udaje);
+            $this->db->update('udalost', $udaj);
             return true;
         } else {
             return false;
@@ -31,9 +31,8 @@ class Udalost_model extends CI_model
 
     public function zoznam_udalosti($stat, $od, $pocet)
     {
-        $this->db->select('idZaujem, udalost.idUdalost, obrazok, nazov, datum, cas, mesto');
-        $this->db->from('zaujem');
-        $this->db->join('udalost', 'udalost.idUdalost = zaujem.idUdalost', "right");
+        $this->db->select('udalost.idUdalost, obrazok, nazov, datum, cas, miesto');
+        $this->db->from('udalost');
         $this->db->join('cennik', 'cennik.idCennik = udalost.idCennik');
         if ($stat != null) {
             $this->db->where("stat", $stat);
@@ -49,9 +48,8 @@ class Udalost_model extends CI_model
 
     public function zoznam_udalosti_v_okoli($stat, $okres, $mesto)
     {
-        $this->db->select('idZaujem, udalost.idUdalost, obrazok, nazov, datum, cas, mesto');
-        $this->db->from('zaujem');
-        $this->db->join('udalost', 'udalost.idUdalost = zaujem.idUdalost', "right");
+        $this->db->select('udalost.idUdalost, obrazok, nazov, datum, cas, miesto');
+        $this->db->from('udalost');
         $this->db->join('cennik', 'cennik.idCennik = udalost.idCennik');
         if ($stat != null) {
             $this->db->or_where("(stat ='" . $stat . "'");

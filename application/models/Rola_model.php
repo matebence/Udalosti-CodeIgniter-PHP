@@ -2,21 +2,21 @@
 
 class Rola_model extends CI_model
 {
-    public function nova_rola($nova_rola = array())
+    public function rola($rola= array())
     {
-        $rola = $this->db->insert('rola', $nova_rola);
-        if ($rola) {
+        $udaj = $this->db->insert('rola', $rola);
+        if ($udaj) {
             return $this->db->insert_id();
         } else {
             return 0;
         }
     }
 
-    public function aktualizuj_rolu($id_rola, $aktualizacne_udaje)
+    public function aktualizuj_rolu($id_rola, $udaj)
     {
-        if (!empty($aktualizacne_udaje)) {
+        if (!empty($udaj)) {
             $this->db->where('idRola', $id_rola);
-            $this->db->update('rola', $aktualizacne_udaje);
+            $this->db->update('rola', $udaj);
             return true;
         } else {
             return false;
@@ -29,7 +29,7 @@ class Rola_model extends CI_model
         return $odstran ? true : false;
     }
 
-    public function rola($typ_roli)
+    public function pouzivatel($typ_roli)
     {
         $this->db->select('idRola');
         $this->db->from('rola');
