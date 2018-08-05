@@ -42,5 +42,17 @@ class Pouzivatel_model extends CI_model
             return null;
         }
     }
+
+    public function token($email){
+        $this->db->select('token');
+        $this->db->from('pouzivatel');
+        $this->db->where('email', $email);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return  $query->row()->token;
+        }else{
+            return "";
+        }
+    }
 }
 ?>
