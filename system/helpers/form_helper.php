@@ -1053,3 +1053,24 @@ if ( ! function_exists('_get_validation_object'))
 		return $return;
 	}
 }
+
+// ------------------------------------------------------------------------
+
+if (!function_exists('validation_errors_array')) {
+    /**
+     * Validation Object
+     *
+     * Determines what the form validation class was instantiated as, fetches
+     * the object and returns it.
+     *
+     * @return    mixed as array
+     */
+    function validation_errors_array($prefix = '', $suffix = '')
+    {
+        if (FALSE === ($OBJ = &_get_validation_object())) {
+            return '';
+        }
+
+        return $OBJ->error_array($prefix, $suffix);
+    }
+}

@@ -29,9 +29,9 @@ class Registracia extends CI_Controller
                         'heslo' => $this->sifrovanie_hesla($this->input->post('heslo')),
                         'token' => "",
                     );
-                    $id_noveho_pouzivatela = $this->Pouzivatel_model->novy_pouzivatel($novy_pouzivatel);
+                    $id_noveho_pouzivatela = $this->Pouzivatel_model->pouzivatel($novy_pouzivatel);
                     if ($id_noveho_pouzivatela) {
-                        if ($this->Rola_pouzivatela_model->nova_rola_pouzivatela($id_noveho_pouzivatela, $this->Rola_model->zisti_rolu(POUZIVATEL))) {
+                        if ($this->Rola_pouzivatela_model->rola_pouzivatela($id_noveho_pouzivatela, $this->Rola_model->pouzivatel(POUZIVATEL))) {
                             $this->session->set_flashdata('uspech', 'Registrácia prebehla úspšne.');
                             $this->load->view("json/json_vystup_pridanie_dat");
                         } else {
@@ -85,13 +85,13 @@ class Registracia extends CI_Controller
 
     private function sifrovanie_hesla($password)
     {
-        $salt = $this->generuj_nahodny_retazec(22);
+        $salt = $this->retazec(22);
         $spolu = BLOWFISH_FORMAT . $salt;
         $hash = crypt($password, $spolu);
         return $hash;
     }
 
-    private function generuj_nahodny_retazec($dlzka_vystupu)
+    private function retazec($dlzka_vystupu)
     {
         $unique_random_retazec = md5(uniqid(mt_rand(), true));
         $base64_retazec = base64_encode($unique_random_retazec);

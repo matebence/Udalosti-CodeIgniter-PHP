@@ -104,14 +104,3 @@ define('BLOWFISH_FORMAT', "$2y$10$");
 */
 define('POUZIVATEL', "pouzivatel");
 define('ADMIN', "admin");
-
-/*
-|--------------------------------------------------------------------------
-| Pocet udalosti
-|--------------------------------------------------------------------------
-|
-|Pocet udalosti pri vyhladavani
-|
-*/
-define('TOP_5', 5);
-define('TOP_10', 10);

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Prihlasovanie extends CI_Controller
+class Prihlasenie extends CI_Controller
 {
     public function __construct()
     {
@@ -32,7 +32,7 @@ class Prihlasovanie extends CI_Controller
                         $this->Pouzivatel_model->aktualizuj_pouzivatela($prihlasovacie_udaje['email'], array("token" => md5(uniqid(rand(), true))));
                         $this->session->set_flashdata('autentifikacia', 'Spravné prihlasovacie údaje');
 
-                        $data["token"] = $this->Pouzivatel_model->token_pouzivatela($prihlasovacie_udaje["email"]);
+                        $data["token"] = $this->Pouzivatel_model->token($prihlasovacie_udaje["email"]);
                         $this->load->view("json/json_vystup_pridanie_dat", $data);
                     }
                 } else {
@@ -66,7 +66,7 @@ class Prihlasovanie extends CI_Controller
 
     private function rola($prihlasovacie_udaje)
     {
-        return $this->Rola_pouzivatela_model->prihlasuj_podla_roli($prihlasovacie_udaje) ? true : false;
+        return $this->Rola_pouzivatela_model->prihlas_pouzivatela($prihlasovacie_udaje) ? true : false;
     }
 
     private function spravnost_hesla($heslo_vstup, $heslo_db)

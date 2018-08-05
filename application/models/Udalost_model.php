@@ -2,7 +2,7 @@
 
 class Udalost_model extends CI_model
 {
-    public function udalost($udalost= array())
+    public function udalost($udalost = array())
     {
         $udaj = $this->db->insert('udalost', $udalost);
         if ($udaj) {
@@ -29,7 +29,7 @@ class Udalost_model extends CI_model
         return $odstran ? true : false;
     }
 
-    public function zoznam_udalosti($stat, $od, $pocet)
+    public function zoznam_udalosti($stat)
     {
         $this->db->select('udalost.idUdalost, obrazok, nazov, datum, cas, miesto');
         $this->db->from('udalost');
@@ -38,10 +38,9 @@ class Udalost_model extends CI_model
             $this->db->where("stat", $stat);
         }
         $this->db->where("datum >= CURDATE()");
-        $this->db->order_by("vaha", "desc");
         $this->db->order_by("datum", "asc");
+        $this->db->order_by("vaha", "desc");
         $this->db->order_by("udalost.timestamp", "desc");
-        $this->db->limit($pocet, $od);
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -52,19 +51,30 @@ class Udalost_model extends CI_model
         $this->db->from('udalost');
         $this->db->join('cennik', 'cennik.idCennik = udalost.idCennik');
         if ($stat != null) {
-            $this->db->or_where("(stat ='" . $stat . "'");
+            $podmienka = "";
+            if ($okres == null) {
+                $podmienka = "(stat ='" . $stat . "')";
+            } else {
+                $podmienka = "(stat ='" . $stat . "'";
+            }
+            $this->db->or_where($podmienka);
         }
         if ($okres != null) {
-            $this->db->or_where("okres ='" . $okres . "'");
+            $podmienka = "";
+            if ($mesto == null) {
+                $podmienka = "okres ='" . $okres . "')";
+            } else {
+                $podmienka = "okres ='" . $okres . "'";
+            }
+            $this->db->where($podmienka);
         }
         if ($mesto != null) {
-            $this->db->or_where("mesto ='" . $mesto . "')");
+            $this->db->where("mesto ='" . $mesto . "')");
         }
         $this->db->where("(datum >= CURDATE())");
-        $this->db->order_by("vaha", "desc");
         $this->db->order_by("datum", "asc");
+        $this->db->order_by("vaha", "desc");
         $this->db->order_by("udalost.timestamp", "desc");
-        $this->db->limit(TOP_10);
         $query = $this->db->get();
         return $query->result_array();
     }
