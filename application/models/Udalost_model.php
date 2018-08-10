@@ -31,7 +31,7 @@ class Udalost_model extends CI_model
 
     public function zoznam_udalosti($stat)
     {
-        $this->db->select('udalost.idUdalost, obrazok, nazov, datum, cas, miesto');
+        $this->db->select("udalost.idUdalost, obrazok, nazov, DAY(datum) as den, MONTHNAME(datum) as mesiac, DATE_FORMAT(cas, '%H:%i') as cas, miesto");
         $this->db->from('udalost');
         $this->db->join('cennik', 'cennik.idCennik = udalost.idCennik');
         if ($stat != null) {
@@ -47,7 +47,7 @@ class Udalost_model extends CI_model
 
     public function zoznam_udalosti_v_okoli($stat, $okres, $mesto)
     {
-        $this->db->select('udalost.idUdalost, obrazok, nazov, datum, cas, miesto');
+        $this->db->select("udalost.idUdalost, obrazok, nazov, DAY(datum) as den, MONTHNAME(datum) as mesiac, DATE_FORMAT(cas, '%H:%i') as cas, miesto");
         $this->db->from('udalost');
         $this->db->join('cennik', 'cennik.idCennik = udalost.idCennik');
         if ($stat != null) {
