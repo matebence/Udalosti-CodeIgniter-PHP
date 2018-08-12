@@ -13,7 +13,7 @@ if (!empty(validation_errors_array())) {
     $json["validacia"] = array("oznam" => $this->session->flashdata('uspech'));
 } else if ($this->session->flashdata('autentifikacia') != null) {
     $json["chyba"] = false;
-    $json["pouzivatel"] = array("token" => $token);
+    $json["pouzivatel"] = array("meno" => $meno, "obrazok" => $obrazok, "token" => $token);
 }
 
 if (!(empty($json))) {

@@ -2,21 +2,21 @@
 
 class Pouzivatel_model extends CI_model
 {
-    public function pouzivatel($pouzivatel= array())
+    public function novy_pouzivatel($novy_pouzivatel = array())
     {
-        $udaj = $this->db->insert('pouzivatel', $pouzivatel);
-        if ($udaj) {
+        $novy = $this->db->insert('pouzivatel', $novy_pouzivatel);
+        if ($novy) {
             return $this->db->insert_id();
         } else {
             return 0;
         }
     }
 
-    public function aktualizuj_pouzivatela($email, $udaj)
+    public function aktualizuj_pouzivatela($email, $aktualizacne_udaje)
     {
-        if (!empty($udaj)) {
+        if (!empty($aktualizacne_udaje)) {
             $this->db->where('email', $email);
-            $this->db->update('pouzivatel', $udaj);
+            $this->db->update('pouzivatel', $aktualizacne_udaje);
             return true;
         } else {
             return false;
@@ -29,7 +29,46 @@ class Pouzivatel_model extends CI_model
         return $odstran ? true : false;
     }
 
-    public function existuje($prihlasovacie_udaje)
+    public function nove_heslo_pouzivatela($email, $nove_heslo)
+    {
+        if (!empty($nove_heslo)) {
+            $this->db->where('md5(email)', $email);
+            $this->db->update('pouzivatel', $nove_heslo);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function zisti_pouzivatela_podla_emailu($email)
+    {
+        $this->db->select('meno, heslo, obrazok, idPouzivatel, idTelefonu');
+        $this->db->from('pouzivatel');
+        $this->db->where('email', $email);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $riadok = $query->row();
+            return $riadok;
+        } else {
+            return null;
+        }
+    }
+
+    public function zisti_pouzivatela_podla_id($id_pouzivatel)
+    {
+        $this->db->select('meno, heslo, obrazok, idPouzivatel, idTelefonu');
+        $this->db->from('pouzivatel');
+        $this->db->where('idPouzivatel', $id_pouzivatel);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $riadok = $query->row();
+            return $riadok;
+        } else {
+            return null;
+        }
+    }
+
+    public function zisti_ci_pouzivatel_existuje($prihlasovacie_udaje)
     {
         $this->db->select('heslo');
         $this->db->from('pouzivatel');
@@ -43,7 +82,7 @@ class Pouzivatel_model extends CI_model
         }
     }
 
-    public function token($email){
+    public function token_pouzivatela($email){
         $this->db->select('token');
         $this->db->from('pouzivatel');
         $this->db->where('email', $email);

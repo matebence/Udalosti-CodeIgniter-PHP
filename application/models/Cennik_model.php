@@ -2,21 +2,21 @@
 
 class Cennik_model extends CI_model
 {
-    public function cennik($cennik= array())
+    public function novy_cennik($cena = array())
     {
-        $udaj = $this->db->insert('cennik', $cennik);
-        if ($udaj) {
+        $nova_cena = $this->db->insert('cennik', $cena);
+        if ($nova_cena) {
             return $this->db->insert_id();
         } else {
             return 0;
         }
     }
 
-    public function aktualizuj_cennik($id_cennik, $udaje)
+    public function aktualizuj_cennik($id_cennik, $aktualizacne_udaje)
     {
-        if (!empty($udaje)) {
+        if (!empty($aktualizacne_udaje)) {
             $this->db->where('idCennik', $id_cennik);
-            $this->db->update('cennik', $udaje);
+            $this->db->update('cennik', $aktualizacne_udaje);
             return true;
         } else {
             return false;
@@ -29,4 +29,5 @@ class Cennik_model extends CI_model
         return $odstran ? true : false;
     }
 }
+
 ?>
