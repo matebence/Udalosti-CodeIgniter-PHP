@@ -81,15 +81,36 @@ input[type="submit"] {
     text-align: center;
 }
 
-.formular{
+input[type="submit"]:hover {
+    background: #037cb0;
+}
+
+.formular_prihlasenie{
     width: 320px;
     margin: 0 auto;
 }
 
-.zabudnuteHeslo{
-    display: none;
+.prihlasovanie > #zabudnute_heslo{
+    font-family: RalewayRegular, serif;
+    color: white;
+}
+
+.prihlasovanie > #zabudnute_heslo:hover{
+    color: #0397d6;
+    cursor:pointer;
+}
+
+.formular_zabudnute_heslo{
     width: 320px;
     margin: 0 auto;
+}
+
+#email_zabudnute{
+    display: none;
+}
+
+#poslat{
+    display: none;
 }
 
 footer.pata > p {

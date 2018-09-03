@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Udalosti</title>
+
         <link rel="apple-touch-icon" sizes="57x57" href="<?php echo base_url() . "assets/img/favicon/"; ?>apple-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="60x60" href="<?php echo base_url() . "assets/img/favicon/"; ?>apple-icon-60x60.png">
         <link rel="apple-touch-icon" sizes="72x72" href="<?php echo base_url() . "assets/img/favicon/"; ?>apple-icon-72x72.png">
@@ -24,10 +25,13 @@
         <meta name="msapplication-TileColor" content="#ffffff">
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="theme-color" content="#ffffff">
 
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() . "assets/css/"; ?>prihlasenie.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script type="text/javascript" src="<?php echo base_url() . "node_modules/jquery/dist/"; ?>jquery.min.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() . "assets/js/"; ?>prihlasovanie.js"></script>
     </head>
 
     <body>
@@ -37,22 +41,22 @@
                 <h1 id="nazov">Udalosti</h1>
             </div>
 
-            <div class="formular">
+            <div class="formular_prihlasenie">
                 <form action="<?php echo site_url('prihlasenie/prihlasit_sa'); ?>">
-                    <input type="text" name="email" placeholder="Email" />
-                    <input type="password" name="heslo" placeholder="Heslo" />
-                    <input type="submit" name="pokus_o_prihlasenie" value="Prihlásiť sa">
+                    <input id="email_prihlasenie" type="text" name="email" placeholder="Email" />
+                    <input id="heslo" type="password" name="heslo" placeholder="Heslo" />
+                    <input id="prihlasenie" type="submit" name="pokus_o_prihlasenie" value="Prihlásiť sa">
                 </form>
             </div>
 
-            <div class="zabudnuteHeslo">
-                <form action="<?php echo site_url('prihlasenie/prihlasit_sa'); ?>">
-                    <input type="text" name="email" placeholder="Email" />
-                    <input type="submit" name="pokus_o_prihlasenie" value="Poslať">
+            <div class="formular_zabudnute_heslo">
+                <form action="<?php echo site_url(''); ?>">
+                    <input id="email_zabudnute" type="text" name="email" placeholder="Email" />
+                    <input id="poslat" type="submit" name="" value="Poslať">
                 </form>
             </div>
 
-            
+            <a id="zabudnute_heslo">Zabudliste heslo?</a>
         </div>
         <footer class="pata">
             <p>©2018 Udalosti</p>
