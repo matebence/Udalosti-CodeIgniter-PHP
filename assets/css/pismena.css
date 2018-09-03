@@ -1,0 +1,89 @@
+@font-face {
+    font-family: RalewayBlack;
+    src: url(../font/raleway/raleway_black.ttf);
+}
+
+@font-face {
+    font-family: RalewayBlackItalic;
+    src: url(../font/raleway/raleway_black_italic.ttf);
+}
+
+@font-face {
+    font-family: RalewayBold;
+    src: url(../font/raleway/raleway_bold.ttf);
+}
+
+@font-face {
+    font-family: RalewayBoldItalic;
+    src: url(../font/raleway/raleway_bold_italic.ttf);
+}
+
+@font-face {
+    font-family: RalewayExtraBold;
+    src: url(../font/raleway/raleway_extra_bold.ttf);
+}
+
+@font-face {
+    font-family: RalewayExtraBoldItalic;
+    src: url(../font/raleway/raleway_extra_bold_italic.ttf);
+}
+
+@font-face {
+    font-family: RalewayExtraLight;
+    src: url(../font/raleway/raleway_extra_light.ttf);
+}
+
+@font-face {
+    font-family: RalewayExtraLightItalic;
+    src: url(../font/raleway/raleway_extra_light_italic.ttf);
+}
+
+@font-face {
+    font-family: RalewayItalic;
+    src: url(../font/raleway/raleway_italic.ttf);
+}
+
+@font-face {
+    font-family: RalewayLight;
+    src: url(../font/raleway/raleway_light.ttf);
+}
+
+@font-face {
+    font-family: RalewayLightItalic;
+    src: url(../font/raleway/raleway_light_italic.ttf);
+}
+
+@font-face {
+    font-family: RalewayMedium;
+    src: url(../font/raleway/raleway_medium.ttf);
+}
+
+@font-face {
+    font-family: RalewayMediumItalic;
+    src: url(../font/raleway/raleway_medium_italic.ttf);
+}
+
+@font-face {
+    font-family: RalewayRegular;
+    src: url(../font/raleway/raleway_regular.ttf);
+}
+
+@font-face {
+    font-family: RalewaySemiBold;
+    src: url(../font/raleway/raleway_semi_bold.ttf);
+}
+
+@font-face {
+    font-family: RalewaySemiBoldItalic;
+    src: url(../font/raleway/raleway_semi_bold_italic.ttf);
+}
+
+@font-face {
+    font-family: RalewayThin;
+    src: url(../font/raleway/raleway_thin.ttf);
+}
+
+@font-face {
+    font-family: RalewayThinItalic;
+    src: url(../font/raleway/raleway_thin_italic.ttf);
+}
