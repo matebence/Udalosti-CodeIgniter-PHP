@@ -16,6 +16,7 @@ class Prihlasenie extends CI_Controller
     public function index()
     {
         $this->prihlasit_sa();
+        $this->load->view("admin/index");
     }
 
     private function prihlasit_sa()
