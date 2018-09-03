@@ -14,5 +14,8 @@
     "zabava"
   ],
   "author": "Bence Mate",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "jquery": "^3.3.1"
+  }
 }
