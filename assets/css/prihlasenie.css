@@ -33,7 +33,7 @@ body.prihlasovanie {
 }
 
 img#obrazok {
-    width: 60px;
+    width: 55px;
     height: 70px;
 }
 
@@ -43,7 +43,7 @@ img#obrazok {
 }
 
 h1#nazov {
-    font-family: RalewayMedium, serif;
+    font-family: RalewayRegular, serif;
     font-size: 3.5em;
     color: white;
 }

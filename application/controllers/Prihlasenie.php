@@ -15,35 +15,51 @@ class Prihlasenie extends CI_Controller
 
     public function index()
     {
-        $this->prihlasit_sa();
+        $this->load->view("admin/cast/index_hlavicka");
         $this->load->view("admin/index");
+
+        $this->prihlasit_sa();
     }
 
-    private function prihlasit_sa()
+    public function prihlasit_sa()
     {
         if ($this->input->post('pokus_o_prihlasenie')) {
             if ($this->validacia_prihlasovacych_udajov()) {
-                $prihlasovacie_udaje = array(
-                    'email' => $this->input->post('email'),
-                    'heslo' => $this->input->post('heslo')
-                );
-                if ($this->spravnost_hesla($prihlasovacie_udaje["heslo"], $this->Pouzivatel_model->existuje($prihlasovacie_udaje))) {
-                    if (!($this->rola($prihlasovacie_udaje))) {
+
+                $prihlasovacie_udaje = array('email' => $this->input->post('email'), 'heslo' => $this->input->post('heslo'));
+                $prihlasovacie_udaje["heslo"] = $this->spravnost_hesla($prihlasovacie_udaje["heslo"], $this->Pouzivatel_model->existuje($prihlasovacie_udaje));
+
+                if ($prihlasovacie_udaje["heslo"] != null) {
+                    if (!($this->Rola_pouzivatela_model->prihlas_pouzivatela($prihlasovacie_udaje))) {
 
                         $this->Pouzivatel_model->aktualizuj_pouzivatela($prihlasovacie_udaje['email'], array("token" => md5(uniqid(rand(), true))));
                         $this->session->set_flashdata('autentifikacia', 'Spravné prihlasovacie údaje');
 
                         $data["token"] = $this->Pouzivatel_model->token($prihlasovacie_udaje["email"]);
                         $this->load->view("json/json_vystup_pridanie_dat", $data);
+                    } else {
+
                     }
                 } else {
                     $this->session->set_flashdata('chyba', 'Nesprávne prihlasovacie údaje!');
-                    $this->load->view("json/json_vystup_pridanie_dat");
+
+                    if ($this->input->post('prehliadac')) {
+                        $this->load->view("admin/cast/dialog");
+                    } else {
+                        $this->load->view("json/json_vystup_pridanie_dat");
+                    }
                 }
             } else {
                 $this->session->set_flashdata('chyba', 'Nesprávne prihlasovacie údaje!');
-                $this->load->view("json/json_vystup_pridanie_dat");
+
+                if ($this->input->post('prehliadac')) {
+                    $this->load->view("admin/cast/dialog");
+                } else {
+                    $this->load->view("json/json_vystup_pridanie_dat");
+                }
             }
+        } else {
+            $this->load->view("admin/cast/index_pata");
         }
     }
 
@@ -65,18 +81,13 @@ class Prihlasenie extends CI_Controller
         }
     }
 
-    private function rola($prihlasovacie_udaje)
-    {
-        return $this->Rola_pouzivatela_model->prihlas_pouzivatela($prihlasovacie_udaje) ? true : false;
-    }
-
     private function spravnost_hesla($heslo_vstup, $heslo_db)
     {
         $hash = crypt($heslo_vstup, $heslo_db);
         if ($hash === $heslo_db) {
-            return true;
+            return $heslo_db;
         } else {
-            return false;
+            return null;
         }
     }
 
@@ -84,6 +95,7 @@ class Prihlasenie extends CI_Controller
     {
         $this->session->sess_destroy();
         $this->Pouzivatel_model->aktualizuj_pouzivatela($this->input->post('email'), array("token" => ""));
+
         $this->session->set_flashdata('uspech', 'Odhlásenie prebehlo úspešne.');
 
         $this->load->view("json/json_vystup_pridanie_dat");
