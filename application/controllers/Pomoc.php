@@ -27,31 +27,30 @@ class Pomoc extends CI_Controller
                 array('required' => 'Nesprávny formát emailovej adresi!',
                     'valid_email' => 'Nesprávny formát emailovej adresi!'));
 
-            if ($this->form_validation->run() == true) {
-                $emailova_adresa_prijemcu = $this->input->post("email");
-                $pouzivatel_object = $this->Pouzivatel_model->zisti_pouzivatela_podla_emailu($emailova_adresa_prijemcu);
+            if ($this->form_validation->run() == false) {
+                $emailova_adresa_prijemcu = array(
+                    "email" => $this->input->post("email")
+                );
 
-                if ($pouzivatel_object != null) {
-                    $heslo = $pouzivatel_object->heslo;
+                $heslo = $this->Pouzivatel_model->existuje($emailova_adresa_prijemcu);
+                if ($heslo != null) {
                     $this->posli_obnovovaciu_adresu_na_email($emailova_adresa_prijemcu, $heslo);
                 } else {
                     $this->session->set_flashdata('chyba', 'Na Vašu emailovú adresu sme poslali mail!');
-                    $this->load->view("json/json_vystup_pridanie_dat");
+                    $this->load->view("admin/cast/dialog");
                 }
             } else {
-                $this->load->view("json/json_vystup_pridanie_dat");
+                $this->load->view("admin/cast/dialog");
             }
-        } else {
-            redirect("prihlasovanie/odhlasit_sa");
         }
     }
 
     private function posli_obnovovaciu_adresu_na_email($emailova_adresa_prijemcu, $heslo)
     {
         $obsah = "Dobrý deň,\npožiadal(a) ste nás o zaslanie zabudnutého hesla, pokračujte cez nižšie uvedený odkaz prosím:\n%s\nĎakujeme a prajeme príjemný deň.\nS priateľským pozdravom\nZákaznícky servis udalosti.sk\nTento e-mail je generovaný automaticky, prosím neodpovedajte naň.";
-        $adresa = site_url() . "/pomoc/formular_pre_zabudnute_heslo?kluc=" . md5($emailova_adresa_prijemcu) . "&hodnota=" . $heslo;
+        $adresa = site_url() . "/pomoc/formular_pre_zabudnute_heslo?kluc=" . md5($emailova_adresa_prijemcu["email"]) . "&hodnota=" . $heslo;
 
-        if ($heslo != null && $this->posli_email($emailova_adresa_prijemcu, "Zabudnuté heslo", sprintf($obsah, $adresa))) {
+        if ($heslo != null && $this->posli_email($emailova_adresa_prijemcu["email"], "Zabudnuté heslo", sprintf($obsah, $adresa))) {
             $this->session->set_flashdata('uspech', 'Na Vašu emailovú adresu sme poslali mail.');
             $this->load->view("json/json_vystup_pridanie_dat");
         } else {
@@ -99,7 +98,7 @@ class Pomoc extends CI_Controller
                     'max_length' => 'Heslá sa nezhodujú!',
                     'matches' => 'Heslá sa nezhodujú!'));
 
-            if ($this->form_validation->run() == true) {
+            if ($this->form_validation->run() == false) {
                 $nove_heslo = array('heslo' => $this->sifrovanie_hesla($this->input->post('heslo')));
                 $email = $this->input->post("email_hash");
 
