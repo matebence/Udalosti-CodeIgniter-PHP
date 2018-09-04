@@ -104,3 +104,14 @@ define('BLOWFISH_FORMAT', "$2y$10$");
 */
 define('POUZIVATEL', "pouzivatel");
 define('ADMIN', "admin");
+
+/*
+|--------------------------------------------------------------------------
+| Vlastne premenne
+|--------------------------------------------------------------------------
+|
+|Udaje ktore sa pouzivau pri posielani emailov
+|
+*/
+define('NOREPLY_EMAIL_ADDRESS', "udalosti@localhost");
+define('FIRMA', "udalosti.sk");

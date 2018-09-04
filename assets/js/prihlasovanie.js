@@ -33,7 +33,6 @@ $( document ).ready(function() {
 
                 if($( "#dialog" )){
                 $( "#dialog" ).remove();
-
             }
                 $(".prihlasovanie").append(data);
             },
