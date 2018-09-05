@@ -16,6 +16,7 @@
   "author": "Bence Mate",
   "license": "MIT",
   "devDependencies": {
-    "jquery": "^3.3.1"
+    "jquery": "^3.3.1",
+    "boostrap": "4.1.3"
   }
 }

@@ -30,18 +30,18 @@ $( document ).ready(function() {
             type: 'post',
             contentType: 'application/x-www-form-urlencoded',
             data: $(this).serialize(),
-            success: function( data){
+            success: function(data){
 
                 if($( "#dialog" )){
-                $( "#dialog" ).remove();
-            }
+                    $( "#dialog" ).remove();
+                }
+
                 $(".telo").append(data);
-            },
+            }
         });
         e.preventDefault();
     }
 
-    $('#telo_formulara_prihlasenie').submit( requestNaServer );
     $('#telo_formulara_zabudnute_heslo').submit( requestNaServer );
     $('#telo_formulara_obnovenie_hesla').submit( requestNaServer );
 });

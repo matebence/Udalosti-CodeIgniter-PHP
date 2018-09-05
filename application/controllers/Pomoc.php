@@ -27,7 +27,7 @@ class Pomoc extends CI_Controller
                 array('required' => 'Nesprávny formát emailovej adresi!',
                     'valid_email' => 'Nesprávny formát emailovej adresi!'));
 
-            if ($this->form_validation->run() == false) {
+            if ($this->form_validation->run() == true) {
                 $emailova_adresa_prijemcu = array(
                     "email" => $this->input->post("email")
                 );
@@ -104,14 +104,12 @@ class Pomoc extends CI_Controller
                 $nove_heslo = array('heslo' => $this->sifrovanie_hesla($this->input->post('heslo')));
                 $email = $this->input->post("email_hash");
 
-                if ($this->Pouzivatel_model->aktualizuj_pouzivatela($email, $nove_heslo)) {
+                if ($this->Pouzivatel_model->nove_heslo_pouzivatela($email, $nove_heslo)) {
                     $this->session->set_flashdata('uspech', 'Aktualizácia hesla prebehla úspešne.');
                 } else {
                     $this->session->set_flashdata('chyba', 'Pri aktualizácií hesla došlo ku chybe!');
                 }
 
-                $this->load->view("admin/cast/index_hlavicka");
-                $this->load->view("admin/index");
                 $this->load->view("admin/cast/dialog");
             } else {
                 $this->load->view("admin/cast/dialog");

@@ -43,6 +43,17 @@ class Pouzivatel_model extends CI_model
         }
     }
 
+    public function nove_heslo_pouzivatela($email, $nove_heslo)
+    {
+        if (!empty($nove_heslo)) {
+            $this->db->where('md5(email)', $email);
+            $this->db->update('pouzivatel', $nove_heslo);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function token($email){
         $this->db->select('token');
         $this->db->from('pouzivatel');

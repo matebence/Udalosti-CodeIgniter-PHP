@@ -13,6 +13,7 @@
 
             <input type="hidden" name="prehliadac" value="1">
             <input type="hidden" name="nove_heslo" value="nove_heslo">
+            <?php if (isset($email_hash)) { echo "<input type='hidden' name='email_hash' value='" . $email_hash . "'required>";}?>
         </form>
     </div>
 </div>

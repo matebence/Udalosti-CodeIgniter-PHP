@@ -19,7 +19,7 @@
 </div>
 <script type="text/javascript" src="<?php echo base_url() . "assets/js/"; ?>dialog.js"></script>
 <footer class="pata">
-    <p>©2018 Udalosti</p>
+    <p>©<?php echo date("Y"); ?> Udalosti</p>
 </footer>
 </body>
 </html>

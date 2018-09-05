@@ -18,7 +18,11 @@ class Prihlasenie extends CI_Controller
         $this->load->view("admin/cast/index_hlavicka");
         $this->load->view("admin/index");
 
-        $this->prihlasit_sa();
+        if ($this->session->userdata('email_admina')) {
+            redirect("udalosti/admin_panel");
+        }else{
+            $this->prihlasit_sa();
+        }
     }
 
     public function prihlasit_sa()
@@ -42,7 +46,8 @@ class Prihlasenie extends CI_Controller
                             $this->load->view("json/json_vystup_pridanie_dat", $data);
                         }
                     } else {
-
+                        $this->session->set_userdata('email_admina', $this->input->post('email'));
+                        $this->index();
                     }
                 } else {
                     $this->session->set_flashdata('chyba', 'Nesprávne prihlasovacie údaje!');
@@ -93,6 +98,14 @@ class Prihlasenie extends CI_Controller
         } else {
             return null;
         }
+    }
+
+    public function pristup(){
+        $this->session->sess_destroy();
+
+        $this->load->view("admin/cast/index_hlavicka");
+        $this->load->view("admin/index");
+        $this->load->view("admin/cast/index_pata");
     }
 
     public function odhlasit_sa()

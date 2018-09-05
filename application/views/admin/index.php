@@ -6,7 +6,7 @@
         </div>
 
         <div class="formular_prihlasenie">
-            <form id="telo_formulara_prihlasenie" action="<?php echo site_url('prihlasenie/prihlasit_sa'); ?>" method="post">
+            <form action="<?php echo site_url('prihlasenie'); ?>" method="post">
                 <input id="email_prihlasenie" type="text" name="email" placeholder="Email" />
                 <input id="heslo" type="password" name="heslo" placeholder="Heslo" />
                 <input id="prihlasenie" type="submit" value="Prihlásiť sa">

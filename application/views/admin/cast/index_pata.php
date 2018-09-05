@@ -1,5 +1,5 @@
 <footer class="pata">
-    <p>©2018 Udalosti</p>
+    <p>©<?php echo date("Y"); ?> Udalosti</p>
 </footer>
 </body>
 </html>
