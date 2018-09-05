@@ -19,7 +19,11 @@ class Udalosti extends CI_Controller
 
     public function admin_panel()
     {
-
+        if ($this->session->userdata('email_admina')) {
+            $this->load->view("admin/panel");
+        } else {
+            redirect("prihlasenie/pristup");
+        }
     }
 
     private function zoznam_udalosti()
