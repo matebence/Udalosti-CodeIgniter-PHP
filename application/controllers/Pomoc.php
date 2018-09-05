@@ -27,7 +27,7 @@ class Pomoc extends CI_Controller
                 array('required' => 'Nesprávny formát emailovej adresi!',
                     'valid_email' => 'Nesprávny formát emailovej adresi!'));
 
-            if ($this->form_validation->run() == true) {
+            if ($this->form_validation->run() == false) {
                 $emailova_adresa_prijemcu = array(
                     "email" => $this->input->post("email")
                 );
@@ -136,5 +136,4 @@ class Pomoc extends CI_Controller
         return $salt;
     }
 }
-
 ?>

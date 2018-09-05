@@ -21,7 +21,7 @@ footer {
     background: rgba(0, 0, 0, 0.61);
 }
 
-body.prihlasovanie {
+body.telo {
     display: inline-block;
     width: 200px; height: 200px;
 }
@@ -85,24 +85,19 @@ input[type="submit"]:hover {
     background: #037cb0;
 }
 
-.formular_prihlasenie{
+.formular_prihlasenie, .formular_zabudnute_heslo, .formular_obnovenie_hesla{
     width: 320px;
     margin: 0 auto;
 }
 
-.prihlasovanie > #zabudnute_heslo{
+.telo > #zabudnute_heslo{
     font-family: RalewayRegular, serif;
     color: white;
 }
 
-.prihlasovanie > #zabudnute_heslo:hover{
+.telo > #zabudnute_heslo:hover{
     color: #0397d6;
     cursor:pointer;
-}
-
-.formular_zabudnute_heslo{
-    width: 320px;
-    margin: 0 auto;
 }
 
 #email_zabudnute{
