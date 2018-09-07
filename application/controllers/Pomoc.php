@@ -37,10 +37,10 @@ class Pomoc extends CI_Controller
                     $this->posli_obnovovaciu_adresu_na_email($emailova_adresa_prijemcu, $heslo);
                 } else {
                     $this->session->set_flashdata('chyba', 'Na Vašu emailovú adresu sme poslali mail!');
-                    $this->load->view("admin/cast/dialog");
+                    $this->load->view("admin/dialog");
                 }
             } else {
-                $this->load->view("admin/cast/dialog");
+                $this->load->view("admin/dialog");
             }
         }
     }
@@ -52,10 +52,10 @@ class Pomoc extends CI_Controller
 
         if ($heslo != null && $this->posli_email($emailova_adresa_prijemcu["email"], "Zabudnuté heslo", sprintf($obsah, $adresa))) {
             $this->session->set_flashdata('uspech', 'Na Vašu emailovú adresu sme poslali mail.');
-            $this->load->view("admin/cast/dialog");
+            $this->load->view("admin/dialog");
         } else {
             $this->session->set_flashdata('chyba', 'Na Vašu emailovú adresu sme poslali mail!');
-            $this->load->view("admin/cast/dialog");
+            $this->load->view("admin/dialog");
         }
     }
 
@@ -110,9 +110,9 @@ class Pomoc extends CI_Controller
                     $this->session->set_flashdata('chyba', 'Pri aktualizácií hesla došlo ku chybe!');
                 }
 
-                $this->load->view("admin/cast/dialog");
+                $this->load->view("admin/dialog");
             } else {
-                $this->load->view("admin/cast/dialog");
+                $this->load->view("admin/dialog");
             }
         }
     }

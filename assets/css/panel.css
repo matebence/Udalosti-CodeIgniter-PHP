@@ -1,0 +1,22 @@
+@import 'pismena.css';
+
+html,
+li, p, a, span,
+h1, h2, h3, h4, h5, h6{
+    font-family: RalewayRegular, serif;
+}
+
+.sidebar .logo .simple-text {
+    display: inline;
+    margin-left: 10px;
+}
+
+.sidebar .logo {
+    margin: 0 auto;
+    width: 70%;
+}
+
+#obrazok{
+    width: 28px;
+    height: 35px;
+}

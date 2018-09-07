@@ -17,6 +17,7 @@
   "license": "MIT",
   "devDependencies": {
     "jquery": "^3.3.1",
-    "unofficial-light-bootstrap-dashboard": "1.0.0"
+    "unofficial-light-bootstrap-dashboard": "1.0.0",
+    "font-awesome": "4.7.0"
   }
 }

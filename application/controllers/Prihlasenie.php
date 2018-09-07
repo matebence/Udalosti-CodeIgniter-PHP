@@ -19,7 +19,7 @@ class Prihlasenie extends CI_Controller
         $this->load->view("admin/index");
 
         if ($this->session->userdata('email_admina')) {
-            redirect("udalosti/admin_panel");
+            redirect("panel");
         }else{
             $this->prihlasit_sa();
         }
@@ -37,7 +37,7 @@ class Prihlasenie extends CI_Controller
                     if (!($this->Rola_pouzivatela_model->prihlas_pouzivatela($prihlasovacie_udaje))) {
                         if ($this->input->post('prehliadac')) {
                             $this->session->set_flashdata('chyba', 'Nesprávne prihlasovacie údaje!');
-                            $this->load->view("admin/cast/dialog");
+                            $this->load->view("admin/dialog");
                         }else{
                             $this->Pouzivatel_model->aktualizuj_pouzivatela($prihlasovacie_udaje['email'], array("token" => md5(uniqid(rand(), true))));
                             $this->session->set_flashdata('autentifikacia', 'Spravné prihlasovacie údaje');
@@ -53,7 +53,7 @@ class Prihlasenie extends CI_Controller
                     $this->session->set_flashdata('chyba', 'Nesprávne prihlasovacie údaje!');
 
                     if ($this->input->post('prehliadac')) {
-                        $this->load->view("admin/cast/dialog");
+                        $this->load->view("admin/dialog");
                     } else {
                         $this->load->view("json/json_vystup_pridanie_dat");
                     }
@@ -62,7 +62,7 @@ class Prihlasenie extends CI_Controller
                 $this->session->set_flashdata('chyba', 'Nesprávne prihlasovacie údaje!');
 
                 if ($this->input->post('prehliadac')) {
-                    $this->load->view("admin/cast/dialog");
+                    $this->load->view("admin/dialog");
                 } else {
                     $this->load->view("json/json_vystup_pridanie_dat");
                 }
