@@ -11,6 +11,7 @@ class Panel extends CI_Controller
         parent::__construct();
 
         $this->load->model('Pouzivatel_model');
+        $this->load->model('Rola_pouzivatela_model');
         $this->load->model('Udalost_model');
         $this->load->model('Cennik_model');
     }
@@ -46,6 +47,8 @@ class Panel extends CI_Controller
     public function pouzivatelia()
     {
         if ($this->session->userdata('email_admina')) {
+            $this->pridaj_data("vsetky_pouzivatelia", $this->Rola_pouzivatela_model->vsetky_pouzivatelia());
+
             $this->load->view("admin/cast/panel_hlavicka");
             $this->load->view("admin/cast/panel_navigacia");
             $this->load->view("admin/pouzivatelia", $this->data);
@@ -58,9 +61,11 @@ class Panel extends CI_Controller
     public function udalosti()
     {
         if ($this->session->userdata('email_admina')) {
+            $this->pridaj_data("vsetky_udalosti", $this->Udalost_model->vsetky_udalosti());
+
             $this->load->view("admin/cast/panel_hlavicka");
             $this->load->view("admin/cast/panel_navigacia");
-            $this->load->view("admin/pouzivatelia", $this->data);
+            $this->load->view("admin/udalosti", $this->data);
             $this->load->view("admin/cast/panel_pata");
         } else {
             redirect("prihlasenie/pristup");
@@ -82,6 +87,8 @@ class Panel extends CI_Controller
     public function administratori()
     {
         if ($this->session->userdata('email_admina')) {
+            $this->pridaj_data("zoznam_administratorov", $this->Rola_pouzivatela_model->zoznam_administratorov($this->session->userdata('email_admina')));
+
             $this->load->view("admin/cast/panel_hlavicka");
             $this->load->view("admin/cast/panel_navigacia");
             $this->load->view("admin/administratori", $this->data);

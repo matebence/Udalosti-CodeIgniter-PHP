@@ -79,6 +79,17 @@ class Udalost_model extends CI_model
         return $query->result_array();
     }
 
+    public function vsetky_udalosti(){
+        $this->db->select('*');
+        $this->db->from('udalost');
+        $this->db->order_by("udalost.timestamp", "desc");
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return null;
+    }
+
     public function pocet_udalosti(){
         $this->db->select('nazov');
         $this->db->from('udalost');
