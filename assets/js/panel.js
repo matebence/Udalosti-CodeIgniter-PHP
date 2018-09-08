@@ -1,6 +1,6 @@
 type = ['','info','success','warning','danger'];
 
-demo = {
+grafy = {
     checkScrollForTransparentNavbar: debounce(function() {
         $navbar = $('.navbar[color-on-scroll]');
         scroll_distance = $navbar.attr('color-on-scroll') || 500;
@@ -59,12 +59,10 @@ demo = {
 
         Chartist.Line('#chartHours', dataSales, optionsSales, responsiveSales);
 
-
         var data = {
             labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
             series: [
                 [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895],
-                [412, 243, 280, 580, 453, 353, 300, 364, 368, 410, 636, 695]
             ]
         };
 
@@ -120,46 +118,31 @@ function navigacia() {
     var castStranky = adresa.substr(adresa.lastIndexOf("/")+1,adresa.length);
 
     if(castStranky == "panel"){
-        var prvokNavigacie = $(".nav li");
-        if(prvokNavigacie.eq(0).hasClass("active")){
-            prvokNavigacie.eq(0).removeClass("active");
-        }else{
-            prvokNavigacie.eq(0).addClass("active");
-        }
+        aktivnyPrvokNavigacie($(".nav li"), 0);
 
     }else if(castStranky == "udalosti"){
-        var prvokNavigacie = $(".nav li");
-        if(prvokNavigacie.eq(1).hasClass("active")){
-            prvokNavigacie.eq(1).removeClass("active");
-        }else{
-            prvokNavigacie.eq(1).addClass("active");
-        }
+        aktivnyPrvokNavigacie($(".nav li"), 1);
+
     }else if(castStranky == "pouzivatelia"){
-        var prvokNavigacie = $(".nav li");
-        if(prvokNavigacie.eq(2).hasClass("active")){
-            prvokNavigacie.eq(2).removeClass("active");
-        }else{
-            prvokNavigacie.eq(2).addClass("active");
-        }
+        aktivnyPrvokNavigacie($(".nav li"), 2);
+
     }else if(castStranky == "miesta"){
-        var prvokNavigacie = $(".nav li");
-        if(prvokNavigacie.eq(3).hasClass("active")){
-            prvokNavigacie.eq(3).removeClass("active");
-        }else{
-            prvokNavigacie.eq(3).addClass("active");
-        }
+        aktivnyPrvokNavigacie($(".nav li"), 3);
+
     }else if(castStranky == "administratori"){
-        var prvokNavigacie = $(".nav li");
-        if(prvokNavigacie.eq(4).hasClass("active")){
-            prvokNavigacie.eq(4).removeClass("active");
-        }else{
-            prvokNavigacie.eq(4).addClass("active");
-        }
+        aktivnyPrvokNavigacie($(".nav li"), 4);
+    }
+}
+
+function aktivnyPrvokNavigacie(prvok, pozicia){
+    if(prvok.eq(pozicia).hasClass("active")){
+        prvok.eq(pozicia).removeClass("active");
+    }else{
+        prvok.eq(pozicia).addClass("active");
     }
 }
 
 $(document).ready(function(){
-    demo.initChartist();
-
+    grafy.initChartist();
     $("ul.nav li").on("click", navigacia());
 });

@@ -78,5 +78,37 @@ class Udalost_model extends CI_model
         $query = $this->db->get();
         return $query->result_array();
     }
+
+    public function pocet_udalosti(){
+        $this->db->select('nazov');
+        $this->db->from('udalost');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->num_rows();
+        }
+        return 0;
+    }
+
+    public function udalosti_podla_okresu(){
+        $this->db->select('okres, COUNT(*) AS Pocet');
+        $this->db->from('udalost');
+        $this->db->group_by('okres');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return 0;
+    }
+
+    public function pocet_udalosti_v_mesiaci(){
+        $this->db->select('MONTHNAME(datum), COUNT(*) AS Pocet');
+        $this->db->from('udalost');
+        $this->db->group_by('MONTHNAME(datum)');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return 0;
+    }
 }
 ?>

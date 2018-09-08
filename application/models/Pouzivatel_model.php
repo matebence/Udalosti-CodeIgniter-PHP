@@ -43,6 +43,18 @@ class Pouzivatel_model extends CI_model
         }
     }
 
+    public function token($email){
+        $this->db->select('token');
+        $this->db->from('pouzivatel');
+        $this->db->where('email', $email);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return  $query->row()->token;
+        }else{
+            return "";
+        }
+    }
+
     public function nove_heslo_pouzivatela($email, $nove_heslo)
     {
         if (!empty($nove_heslo)) {
@@ -54,16 +66,25 @@ class Pouzivatel_model extends CI_model
         }
     }
 
-    public function token($email){
-        $this->db->select('token');
+    public function pocet_pouzivatelov(){
+        $this->db->select('meno');
         $this->db->from('pouzivatel');
-        $this->db->where('email', $email);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
-            return  $query->row()->token;
-        }else{
-            return "";
+            return $query->num_rows();
         }
+        return 0;
+    }
+
+    public function registrovali_dnes(){
+        $this->db->select('meno');
+        $this->db->from('pouzivatel');
+        $this->db->where('DATE(timestamp) = CURDATE()');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->num_rows();
+        }
+        return 0;
     }
 }
 ?>
