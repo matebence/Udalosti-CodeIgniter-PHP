@@ -42,7 +42,7 @@
                                 <p class="category">Počet udalostí podľa cenníka</p>
                             </div>
                             <div class="content">
-                                <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
+                                <div id="kolacovyGraf" class="ct-chart ct-perfect-fourth"></div>
 
                                 <div class="footer">
                                     <div class="legend">
@@ -66,7 +66,7 @@
                                 <p class="category">Počet udalostí v danom mesiaci</p>
                             </div>
                             <div class="content">
-                                <div id="chartHours" class="ct-chart"></div>
+                                <div id="ciarovyGraf" class="ct-chart"></div>
                                 <div class="footer">
                                     <div class="legend">
                                         <i class="fa fa-circle text-info"></i> Udalosti
@@ -89,7 +89,7 @@
                                 <p class="category">Podľa Okresu</p>
                             </div>
                             <div class="content">
-                                <div id="chartActivity" class="ct-chart"></div>
+                                <div id="stlpcovyGraf" class="ct-chart"></div>
 
                                 <div class="footer">
                                     <div class="legend">

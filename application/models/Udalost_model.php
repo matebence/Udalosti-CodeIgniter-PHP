@@ -101,7 +101,7 @@ class Udalost_model extends CI_model
     }
 
     public function pocet_udalosti_v_mesiaci(){
-        $this->db->select('MONTHNAME(datum), COUNT(*) AS Pocet');
+        $this->db->select('MONTHNAME(datum) AS Mesiac, COUNT(*) AS Pocet');
         $this->db->from('udalost');
         $this->db->group_by('MONTHNAME(datum)');
         $query = $this->db->get();

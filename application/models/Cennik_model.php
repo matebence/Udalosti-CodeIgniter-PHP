@@ -31,7 +31,7 @@ class Cennik_model extends CI_model
 
     public function pocet_udalosti_podla_cennika(){
         $this->db->select('idCennik, COUNT(*) AS Pocet');
-        $this->db->from('cennik');
+        $this->db->from('udalost');
         $this->db->group_by('idCennik');
         $query = $this->db->get();
         if ($query->num_rows() > 0) {

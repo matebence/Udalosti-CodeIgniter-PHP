@@ -12,7 +12,7 @@ class Panel extends CI_Controller
 
         $this->load->model('Pouzivatel_model');
         $this->load->model('Udalost_model');
-
+        $this->load->model('Cennik_model');
     }
 
     public function index()
@@ -23,8 +23,13 @@ class Panel extends CI_Controller
     private function panel()
     {
         if ($this->session->userdata('email_admina')) {
-
             $this->pridaj_data("email_admina", $this->session->userdata('email_admina'));
+
+            if($this->session->userdata('prihlaseny')){
+                $this->pridaj_data("prihlaseny", true);
+                $this->session->unset_userdata('prihlaseny');
+            }
+
             $this->pridaj_data("pocet_pouzivatelov", $this->Pouzivatel_model->pocet_pouzivatelov());
             $this->pridaj_data("pocet_udalosti", $this->Udalost_model->pocet_udalosti());
             $this->pridaj_data("registrovali_dnes", $this->Pouzivatel_model->registrovali_dnes());
@@ -81,6 +86,18 @@ class Panel extends CI_Controller
             $this->load->view("admin/cast/panel_navigacia");
             $this->load->view("admin/administratori", $this->data);
             $this->load->view("admin/cast/panel_pata");
+        } else {
+            redirect("prihlasenie/pristup");
+        }
+    }
+
+    public function ziskaj_data(){
+        if ($this->session->userdata('email_admina')) {
+            $this->load->view("json/admin_vystup_dat",
+                array(
+                "cennik" => $this->Cennik_model->pocet_udalosti_podla_cennika(),
+                "mesiac" => $this->Udalost_model->pocet_udalosti_v_mesiaci(),
+                "okres" => $this->Udalost_model->udalosti_podla_okresu()));
         } else {
             redirect("prihlasenie/pristup");
         }
