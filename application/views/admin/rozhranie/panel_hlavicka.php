@@ -40,4 +40,6 @@
     <link href="<?php echo base_url() . "node_modules/unofficial-light-bootstrap-dashboard/"; ?>assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() . "assets/css/"; ?>panel.css">
+
+    <script src="<?php echo base_url() . "node_modules/unofficial-light-bootstrap-dashboard/"; ?>assets/js/jquery.3.2.1.min.js"></script>
 </head>

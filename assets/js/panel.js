@@ -36,3 +36,26 @@ function aktivnyPrvokNavigacie(prvok, pozicia){
         prvok.eq(pozicia).addClass("active");
     }
 }
+
+$(function() {
+    $(document).on('change', ':file', function() {
+        var vstup = $(this),
+            subor = vstup.get(0).files ? vstup.get(0).files.length : 1,
+            nazov = vstup.val().replace(/\\/g, '/').replace(/.*\//, '');
+        vstup.trigger('fileselect', [subor, nazov]);
+    });
+
+    $(document).ready( function() {
+        $(':file').on('fileselect', function(event, subor, nazov) {
+
+            var vstup = $(this).parents('.input-group').find(':text'),
+                data = subor > 1 ? subor + ' files selected' : nazov;
+
+            if( vstup.length ) {
+                vstup.val(data);
+            } else {
+                if( data ) alert(data);
+            }
+        });
+    });
+});

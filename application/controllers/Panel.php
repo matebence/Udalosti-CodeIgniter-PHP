@@ -35,10 +35,11 @@ class Panel extends CI_Controller
             $this->pridaj_data("pocet_udalosti", $this->Udalost_model->pocet_udalosti());
             $this->pridaj_data("registrovali_dnes", $this->Pouzivatel_model->registrovali_dnes());
 
-            $this->load->view("admin/cast/panel_hlavicka");
-            $this->load->view("admin/cast/panel_navigacia");
-            $this->load->view("admin/panel", $this->data);
-            $this->load->view("admin/cast/panel_pata");
+            $this->load->view("admin/rozhranie/panel_hlavicka");
+            $this->load->view("admin/rozhranie/panel_navigacia");
+            $this->load->view("admin/panel/panel", $this->data);
+            $this->load->view("admin/dialog/dialog_udalosti");
+            $this->load->view("admin/rozhranie/panel_pata");
         } else {
             redirect("prihlasenie/pristup");
         }
@@ -49,10 +50,10 @@ class Panel extends CI_Controller
         if ($this->session->userdata('email_admina')) {
             $this->pridaj_data("vsetky_pouzivatelia", $this->Rola_pouzivatela_model->vsetky_pouzivatelia());
 
-            $this->load->view("admin/cast/panel_hlavicka");
-            $this->load->view("admin/cast/panel_navigacia");
-            $this->load->view("admin/panel_pouzivatelia", $this->data);
-            $this->load->view("admin/cast/panel_pata");
+            $this->load->view("admin/rozhranie/panel_hlavicka");
+            $this->load->view("admin/rozhranie/panel_navigacia");
+            $this->load->view("admin/panel/panel_pouzivatelia", $this->data);
+            $this->load->view("admin/rozhranie/panel_pata");
         } else {
             redirect("prihlasenie/pristup");
         }
@@ -63,10 +64,11 @@ class Panel extends CI_Controller
         if ($this->session->userdata('email_admina')) {
             $this->pridaj_data("vsetky_udalosti", $this->Udalost_model->vsetky_udalosti());
 
-            $this->load->view("admin/cast/panel_hlavicka");
-            $this->load->view("admin/cast/panel_navigacia");
-            $this->load->view("admin/panel_udalosti", $this->data);
-            $this->load->view("admin/cast/panel_pata");
+            $this->load->view("admin/rozhranie/panel_hlavicka");
+            $this->load->view("admin/rozhranie/panel_navigacia");
+            $this->load->view("admin/panel/panel_udalosti", $this->data);
+            $this->load->view("admin/dialog/dialog_udalosti");
+            $this->load->view("admin/rozhranie/panel_pata");
         } else {
             redirect("prihlasenie/pristup");
         }
@@ -75,10 +77,10 @@ class Panel extends CI_Controller
     public function miesta()
     {
         if ($this->session->userdata('email_admina')) {
-            $this->load->view("admin/cast/panel_hlavicka");
-            $this->load->view("admin/cast/panel_navigacia");
-            $this->load->view("admin/panel_miesta", $this->data);
-            $this->load->view("admin/cast/panel_pata");
+            $this->load->view("admin/rozhranie/panel_hlavicka");
+            $this->load->view("admin/rozhranie/panel_navigacia");
+            $this->load->view("admin/panel/panel_miesta", $this->data);
+            $this->load->view("admin/rozhranie/panel_pata");
         } else {
             redirect("prihlasenie/pristup");
         }
@@ -89,10 +91,10 @@ class Panel extends CI_Controller
         if ($this->session->userdata('email_admina')) {
             $this->pridaj_data("zoznam_administratorov", $this->Rola_pouzivatela_model->zoznam_administratorov($this->session->userdata('email_admina')));
 
-            $this->load->view("admin/cast/panel_hlavicka");
-            $this->load->view("admin/cast/panel_navigacia");
-            $this->load->view("admin/panel_administratori", $this->data);
-            $this->load->view("admin/cast/panel_pata");
+            $this->load->view("admin/rozhranie/panel_hlavicka");
+            $this->load->view("admin/rozhranie/panel_navigacia");
+            $this->load->view("admin/panel/panel_administratori", $this->data);
+            $this->load->view("admin/rozhranie/panel_pata");
         } else {
             redirect("prihlasenie/pristup");
         }
