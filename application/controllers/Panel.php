@@ -51,7 +51,7 @@ class Panel extends CI_Controller
 
             $this->load->view("admin/cast/panel_hlavicka");
             $this->load->view("admin/cast/panel_navigacia");
-            $this->load->view("admin/pouzivatelia", $this->data);
+            $this->load->view("admin/panel_pouzivatelia", $this->data);
             $this->load->view("admin/cast/panel_pata");
         } else {
             redirect("prihlasenie/pristup");
@@ -65,7 +65,7 @@ class Panel extends CI_Controller
 
             $this->load->view("admin/cast/panel_hlavicka");
             $this->load->view("admin/cast/panel_navigacia");
-            $this->load->view("admin/udalosti", $this->data);
+            $this->load->view("admin/panel_udalosti", $this->data);
             $this->load->view("admin/cast/panel_pata");
         } else {
             redirect("prihlasenie/pristup");
@@ -77,7 +77,7 @@ class Panel extends CI_Controller
         if ($this->session->userdata('email_admina')) {
             $this->load->view("admin/cast/panel_hlavicka");
             $this->load->view("admin/cast/panel_navigacia");
-            $this->load->view("admin/miesta", $this->data);
+            $this->load->view("admin/panel_miesta", $this->data);
             $this->load->view("admin/cast/panel_pata");
         } else {
             redirect("prihlasenie/pristup");
@@ -91,7 +91,7 @@ class Panel extends CI_Controller
 
             $this->load->view("admin/cast/panel_hlavicka");
             $this->load->view("admin/cast/panel_navigacia");
-            $this->load->view("admin/administratori", $this->data);
+            $this->load->view("admin/panel_administratori", $this->data);
             $this->load->view("admin/cast/panel_pata");
         } else {
             redirect("prihlasenie/pristup");
@@ -100,7 +100,7 @@ class Panel extends CI_Controller
 
     public function ziskaj_data(){
         if ($this->session->userdata('email_admina')) {
-            $this->load->view("json/admin_vystup_dat",
+            $this->load->view("json/json_admin",
                 array(
                 "cennik" => $this->Cennik_model->pocet_udalosti_podla_cennika(),
                 "mesiac" => $this->Udalost_model->pocet_udalosti_v_mesiaci(),

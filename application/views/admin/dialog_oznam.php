@@ -15,12 +15,6 @@
             echo "<p>".$this->session->flashdata('uspech')."</p>";
         }
         ?>
+    </div>
 </div>
-</div>
-<script src="<?php echo base_url() . "node_modules/jquery/dist/"; ?>jquery.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url() . "assets/js/"; ?>dialog.js"></script>
-<footer class="pata">
-    <p>©<?php echo date("Y"); ?> Udalosti</p>
-</footer>
-</body>
-</html>
+<script src="<?php echo base_url() . "assets/js/"; ?>dialog.js"></script>

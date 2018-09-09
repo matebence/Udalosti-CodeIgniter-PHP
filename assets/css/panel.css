@@ -21,6 +21,21 @@ h1, h2, h3, h4, h5, h6{
     height: 35px;
 }
 
+#editovat{
+    color: #2071a1;
+}
+
+#editovat:hover{
+    cursor: pointer;
+}
+
+#odstranit{
+    color: red;
+}
+#odstranit:hover{
+    cursor: pointer;
+}
+
 .info-box {
     display: block;
     min-height: 90px;
@@ -62,4 +77,26 @@ h1, h2, h3, h4, h5, h6{
     overflow: hidden;
     text-transform: uppercase;
     text-overflow: ellipsis;
+}
+
+.btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open > .btn-success.dropdown-toggle {
+    background-color: transparent;
+    color: #13a152;
+    border-color: #13a152;
+}
+
+.btn-success, .btn-success, .btn-success, .btn-success, .open > .btn-success.dropdown-toggle{
+    background-color: transparent;
+    color: #4ba155;
+    border-color: #4ba155;
+}
+
+.modal-body{
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+}
+
+.modal {
+    background: rgba(000, 000, 000, 0.8);
+    min-height:1000000px;
 }

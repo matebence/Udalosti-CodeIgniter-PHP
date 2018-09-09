@@ -54,12 +54,12 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Adminer</a>
+                    <a class="navbar-brand" href="<?php echo site_url("panel"); ?>">Adminer</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="">
+                            <a href="" id="nova_udalost">
                                 <p>Pridať novú udalosť</p>
                             </a>
                         </li>

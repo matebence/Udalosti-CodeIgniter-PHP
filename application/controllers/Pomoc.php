@@ -52,6 +52,7 @@ class Pomoc extends CI_Controller
 
         if ($heslo != null && $this->posli_email($emailova_adresa_prijemcu["email"], "Zabudnuté heslo", sprintf($obsah, $adresa))) {
             $this->session->set_flashdata('uspech', 'Na Vašu emailovú adresu sme poslali mail.');
+
             $this->load->view("admin/dialog_oznam");
         } else {
             $this->session->set_flashdata('chyba', 'Na Vašu emailovú adresu sme poslali mail!');
@@ -77,9 +78,9 @@ class Pomoc extends CI_Controller
     {
         if (($this->input->get("kluc")) && ($this->input->get("hodnota"))) {
             $data['email_hash'] = $this->input->get("kluc");
-            $this->load->view("admin/cast/index_hlavicka");
-            $this->load->view("admin/zabudnute_heslo", $data);
-            $this->load->view("admin/cast/index_pata");
+            $this->load->view("admin/cast/prihlasenie_hlavicka");
+            $this->load->view("admin/prihlasenie_zabudnute_heslo", $data);
+            $this->load->view("admin/cast/prihlasenie_pata");
         }
     }
 

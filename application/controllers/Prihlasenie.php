@@ -15,8 +15,8 @@ class Prihlasenie extends CI_Controller
 
     public function index()
     {
-        $this->load->view("admin/cast/index_hlavicka");
-        $this->load->view("admin/index");
+        $this->load->view("admin/cast/prihlasenie_hlavicka");
+        $this->load->view("admin/prihlasenie");
 
         if ($this->session->userdata('email_admina')) {
             redirect("panel");
@@ -38,6 +38,8 @@ class Prihlasenie extends CI_Controller
                         if ($this->input->post('prehliadac')) {
                             $this->session->set_flashdata('chyba', 'Nesprávne prihlasovacie údaje!');
                             $this->load->view("admin/dialog_oznam");
+                            $this->load->view("admin/cast/prihlasenie_pata");
+
                         }else{
                             $this->Pouzivatel_model->aktualizuj_pouzivatela($prihlasovacie_udaje['email'], array("token" => md5(uniqid(rand(), true))));
                             $this->session->set_flashdata('autentifikacia', 'Spravné prihlasovacie údaje');
@@ -55,6 +57,7 @@ class Prihlasenie extends CI_Controller
 
                     if ($this->input->post('prehliadac')) {
                         $this->load->view("admin/dialog_oznam");
+                        $this->load->view("admin/cast/prihlasenie_pata");
                     } else {
                         $this->load->view("json/json_vystup_pridanie_dat");
                     }
@@ -64,12 +67,13 @@ class Prihlasenie extends CI_Controller
 
                 if ($this->input->post('prehliadac')) {
                     $this->load->view("admin/dialog_oznam");
+                    $this->load->view("admin/cast/prihlasenie_pata");
                 } else {
                     $this->load->view("json/json_vystup_pridanie_dat");
                 }
             }
         } else {
-            $this->load->view("admin/cast/index_pata");
+            $this->load->view("admin/cast/prihlasenie_pata");
         }
     }
 
@@ -104,9 +108,9 @@ class Prihlasenie extends CI_Controller
     public function pristup(){
         $this->session->sess_destroy();
 
-        $this->load->view("admin/cast/index_hlavicka");
-        $this->load->view("admin/index");
-        $this->load->view("admin/cast/index_pata");
+        $this->load->view("admin/cast/prihlasenie_hlavicka");
+        $this->load->view("admin/prihlasenie");
+        $this->load->view("admin/cast/prihlasenie_pata");
     }
 
     public function odhlasit_sa()

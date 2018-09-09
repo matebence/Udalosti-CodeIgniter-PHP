@@ -34,4 +34,6 @@
 
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() . "assets/css/"; ?>prihlasenie.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() . "assets/css/"; ?>dialog.css">
+
+    <script src="<?php echo base_url() . "node_modules/jquery/dist/"; ?>jquery.min.js"></script>
 </head>
