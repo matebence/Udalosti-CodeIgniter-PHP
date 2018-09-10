@@ -3,29 +3,30 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Nová udalosť</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Nová udalosť</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
                             <div class="content">
-                                <form>
+                                <form action="<?php if(isset($adresa)){echo $adresa;}?>" method="post">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Cenník</label>
-                                                <select class="form-control">
-                                                    <option>Váha 1</option>
-                                                    <option>Váha 2</option>
-                                                    <option>Váha 3</option>
+                                                <select name="cennik" class="form-control">
+                                                    <option value="1">Váha 1</option>
+                                                    <option value="2">Váha 2</option>
+                                                    <option value="3">Váha 3</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Názov</label>
-                                                <input type="text" class="form-control" placeholder="Názov">
+                                                <input type="text" name="nazov" class="form-control" placeholder="Názov">
                                             </div>
                                         </div>
                                     </div>
@@ -36,7 +37,7 @@
                                             <div class="input-group">
                                                 <label class="input-group-btn">
                                                     <span class="btn btn-basic">
-                                                        Prehladávať&hellip; <input type="file" style="display: none;" multiple>
+                                                        Prehladávať&hellip; <input type="file" name="obrazok" style="display: none;">
                                                     </span>
                                                 </label>
                                                 <input type="text" class="form-control" readonly title="">
@@ -48,13 +49,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Dátum</label>
-                                                <input type="text" class="form-control" placeholder="Dátum">
+                                                <input type="text" name="datum" class="form-control" placeholder="Dátum">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Čas</label>
-                                                <input type="text" class="form-control" placeholder="Čas">
+                                                <input type="text" name="cas" class="form-control" placeholder="Čas">
                                             </div>
                                         </div>
                                     </div>
@@ -63,7 +64,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Miesto</label>
-                                                <input type="text" class="form-control" placeholder="Miesto udalosti">
+                                                <input type="text" name="miesto" class="form-control" placeholder="Miesto udalosti">
                                             </div>
                                         </div>
                                     </div>
@@ -72,19 +73,19 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Štát</label>
-                                                <input type="text" class="form-control" placeholder="Štát">
+                                                <input type="text" name="stat" class="form-control" placeholder="Štát">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Okres</label>
-                                                <input type="text" class="form-control" placeholder="Okres">
+                                                <input type="text" name="okres" class="form-control" placeholder="Okres">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Mesto</label>
-                                                <input type="text" class="form-control" placeholder="Mesto">
+                                                <input type="text" name="mesto" class="form-control" placeholder="Mesto">
                                             </div>
                                         </div>
                                     </div>
@@ -97,7 +98,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Zrušiť</button>
-                <button type="button" class="btn btn-success">Vytvoriť udalosť</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal">Vytvoriť udalosť</button>
             </div>
         </div>
     </div>

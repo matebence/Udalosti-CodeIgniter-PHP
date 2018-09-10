@@ -24,21 +24,32 @@ class Panel extends CI_Controller
     private function panel()
     {
         if ($this->session->userdata('email_admina')) {
-            $this->pridaj_data("email_admina", $this->session->userdata('email_admina'));
+            $this->pridaj_data("email_admina",
+                $this->session->userdata('email_admina'));
 
             if($this->session->userdata('prihlaseny')){
                 $this->pridaj_data("prihlaseny", true);
                 $this->session->unset_userdata('prihlaseny');
             }
 
-            $this->pridaj_data("pocet_pouzivatelov", $this->Pouzivatel_model->pocet_pouzivatelov());
-            $this->pridaj_data("pocet_udalosti", $this->Udalost_model->pocet_udalosti());
-            $this->pridaj_data("registrovali_dnes", $this->Pouzivatel_model->registrovali_dnes());
+            $this->pridaj_data("pocet_pouzivatelov",
+                $this->Pouzivatel_model->pocet_pouzivatelov());
+            $this->pridaj_data("pocet_udalosti",
+                $this->Udalost_model->pocet_udalosti());
+            $this->pridaj_data("registrovali_dnes",
+                $this->Pouzivatel_model->registrovali_dnes());
 
             $this->load->view("admin/rozhranie/panel_hlavicka");
             $this->load->view("admin/rozhranie/panel_navigacia");
-            $this->load->view("admin/panel/panel", $this->data);
-            $this->load->view("admin/dialog/dialog_udalosti");
+
+            $this->load->view("admin/panel/panel",
+                $this->data);
+
+            $this->load->view("admin/dialog/dialog_udalosti",
+                array(
+                    "adresa" => site_url('udalosti/nova_udalost')
+                ));
+
             $this->load->view("admin/rozhranie/panel_pata");
         } else {
             redirect("prihlasenie/pristup");
@@ -48,12 +59,17 @@ class Panel extends CI_Controller
     public function udalosti()
     {
         if ($this->session->userdata('email_admina')) {
-            $this->pridaj_data("vsetky_udalosti", $this->Udalost_model->vsetky_udalosti());
+            $this->pridaj_data("vsetky_udalosti",
+                $this->Udalost_model->vsetky_udalosti());
 
             $this->load->view("admin/rozhranie/panel_hlavicka");
             $this->load->view("admin/rozhranie/panel_navigacia");
-            $this->load->view("admin/panel/panel_udalosti", $this->data);
+
+            $this->load->view("admin/panel/panel_udalosti",
+                $this->data);
+
             $this->load->view("admin/dialog/dialog_udalosti");
+
             $this->load->view("admin/rozhranie/panel_pata");
         } else {
             redirect("prihlasenie/pristup");
@@ -63,24 +79,30 @@ class Panel extends CI_Controller
     public function pouzivatelia()
     {
         if ($this->session->userdata('email_admina')) {
-            $this->pridaj_data("zoznam_pouzivatelov", $this->Rola_pouzivatela_model->zoznam_pouzivatelov());
+            $this->pridaj_data("zoznam_pouzivatelov",
+                $this->Rola_pouzivatela_model->zoznam_pouzivatelov());
 
             $this->load->view("admin/rozhranie/panel_hlavicka");
             $this->load->view("admin/rozhranie/panel_navigacia");
-            $this->load->view("admin/panel/panel_pouzivatelia", $this->data);
+
+            $this->load->view("admin/panel/panel_pouzivatelia",
+                $this->data);
+
             $this->load->view("admin/rozhranie/panel_pata");
         } else {
             redirect("prihlasenie/pristup");
         }
     }
 
-
     public function miesta()
     {
         if ($this->session->userdata('email_admina')) {
             $this->load->view("admin/rozhranie/panel_hlavicka");
             $this->load->view("admin/rozhranie/panel_navigacia");
-            $this->load->view("admin/panel/panel_miesta", $this->data);
+
+            $this->load->view("admin/panel/panel_miesta",
+                $this->data);
+
             $this->load->view("admin/rozhranie/panel_pata");
         } else {
             redirect("prihlasenie/pristup");
@@ -90,11 +112,15 @@ class Panel extends CI_Controller
     public function administratori()
     {
         if ($this->session->userdata('email_admina')) {
-            $this->pridaj_data("zoznam_administratorov", $this->Rola_pouzivatela_model->zoznam_administratorov($this->session->userdata('email_admina')));
+            $this->pridaj_data("zoznam_administratorov",
+                $this->Rola_pouzivatela_model->zoznam_administratorov($this->session->userdata('email_admina')));
 
             $this->load->view("admin/rozhranie/panel_hlavicka");
             $this->load->view("admin/rozhranie/panel_navigacia");
-            $this->load->view("admin/panel/panel_administratori", $this->data);
+
+            $this->load->view("admin/panel/panel_administratori",
+                $this->data);
+
             $this->load->view("admin/rozhranie/panel_pata");
         } else {
             redirect("prihlasenie/pristup");
