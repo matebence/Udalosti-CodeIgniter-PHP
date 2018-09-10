@@ -1,10 +1,10 @@
-<div class="modal fade" id="nova-udalost" data-backdrop="false" tabindex="-1" role="dialog"
+<div class="modal fade" id="<?php if(isset($identifikator)){echo $identifikator;}?>" data-backdrop="false" tabindex="-1" role="dialog"
      aria-labelledby="nova-udalost" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title">Nová udalosť</h4>
+                <h4 class="modal-title"><?php if(isset($titul)){echo $titul;}?></h4>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -45,17 +45,27 @@
                                         </div>
                                     </div>
 
-                                    <div class="row">
+                                    <div class="row" align="center">
                                         <div class="col-md-6">
-                                            <div class="form-group">
+                                            <div class="form-group" align="left">
                                                 <label>Dátum</label>
-                                                <input type="text" name="datum" class="form-control" placeholder="Dátum">
+                                                <input id="datum" type="text" name="datum" class="form-control" placeholder="Dátum">
+                                                <script>
+                                                    $('#datum').datepicker({
+                                                        uiLibrary: 'bootstrap4'
+                                                    });
+                                                </script>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Čas</label>
-                                                <input type="text" name="cas" class="form-control" placeholder="Čas">
+                                                <input id="cas" type="text" name="cas" class="form-control" placeholder="Čas">
+                                                <script>
+                                                    $('#cas').timepicker({
+                                                        uiLibrary: 'bootstrap4'
+                                                    });
+                                                </script>
                                             </div>
                                         </div>
                                     </div>
@@ -103,3 +113,4 @@
         </div>
     </div>
 </div>
+<script src="<?php echo base_url() . "assets/js/"; ?>dialog.js"></script>

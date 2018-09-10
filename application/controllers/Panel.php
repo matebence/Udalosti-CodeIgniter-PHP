@@ -27,10 +27,7 @@ class Panel extends CI_Controller
             $this->pridaj_data("email_admina",
                 $this->session->userdata('email_admina'));
 
-            if($this->session->userdata('prihlaseny')){
-                $this->pridaj_data("prihlaseny", true);
-                $this->session->unset_userdata('prihlaseny');
-            }
+            $this->uspesne_prihlasenie();
 
             $this->pridaj_data("pocet_pouzivatelov",
                 $this->Pouzivatel_model->pocet_pouzivatelov());
@@ -45,11 +42,7 @@ class Panel extends CI_Controller
             $this->load->view("admin/panel/panel",
                 $this->data);
 
-            $this->load->view("admin/dialog/dialog_udalosti",
-                array(
-                    "adresa" => site_url('udalosti/nova_udalost')
-                ));
-
+            $this->dialog(site_url('udalosti/nova_udalost'),"Nová udalosť", "nova-udalost");
             $this->load->view("admin/rozhranie/panel_pata");
         } else {
             redirect("prihlasenie/pristup");
@@ -67,8 +60,6 @@ class Panel extends CI_Controller
 
             $this->load->view("admin/panel/panel_udalosti",
                 $this->data);
-
-            $this->load->view("admin/dialog/dialog_udalosti");
 
             $this->load->view("admin/rozhranie/panel_pata");
         } else {
@@ -147,6 +138,22 @@ class Panel extends CI_Controller
 
     private function pridaj_data($nazov, $udaj){
         return $this->data[$nazov] = $udaj;
+    }
+
+    private function uspesne_prihlasenie(){
+        if($this->session->userdata('prihlaseny')){
+            $this->pridaj_data("prihlaseny", true);
+            $this->session->unset_userdata('prihlaseny');
+        }
+    }
+
+    private function dialog($adresa, $titul, $identifikator){
+        $this->load->view("admin/dialog/dialog_udalosti",
+            array(
+                "adresa" => $adresa,
+                "titul" => $titul,
+                "identifikator" => $identifikator
+            ));
     }
 }
 ?>

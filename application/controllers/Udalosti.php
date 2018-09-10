@@ -40,5 +40,9 @@ class Udalosti extends CI_Controller
             redirect("prihlasenie/pristup");
         }
     }
+
+    public function nova_udalost(){
+
+    }
 }
 ?>
