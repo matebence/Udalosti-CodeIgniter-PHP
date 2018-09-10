@@ -45,20 +45,6 @@ class Panel extends CI_Controller
         }
     }
 
-    public function pouzivatelia()
-    {
-        if ($this->session->userdata('email_admina')) {
-            $this->pridaj_data("vsetky_pouzivatelia", $this->Rola_pouzivatela_model->vsetky_pouzivatelia());
-
-            $this->load->view("admin/rozhranie/panel_hlavicka");
-            $this->load->view("admin/rozhranie/panel_navigacia");
-            $this->load->view("admin/panel/panel_pouzivatelia", $this->data);
-            $this->load->view("admin/rozhranie/panel_pata");
-        } else {
-            redirect("prihlasenie/pristup");
-        }
-    }
-
     public function udalosti()
     {
         if ($this->session->userdata('email_admina')) {
@@ -73,6 +59,21 @@ class Panel extends CI_Controller
             redirect("prihlasenie/pristup");
         }
     }
+
+    public function pouzivatelia()
+    {
+        if ($this->session->userdata('email_admina')) {
+            $this->pridaj_data("zoznam_pouzivatelov", $this->Rola_pouzivatela_model->zoznam_pouzivatelov());
+
+            $this->load->view("admin/rozhranie/panel_hlavicka");
+            $this->load->view("admin/rozhranie/panel_navigacia");
+            $this->load->view("admin/panel/panel_pouzivatelia", $this->data);
+            $this->load->view("admin/rozhranie/panel_pata");
+        } else {
+            redirect("prihlasenie/pristup");
+        }
+    }
+
 
     public function miesta()
     {
@@ -102,11 +103,17 @@ class Panel extends CI_Controller
 
     public function ziskaj_data(){
         if ($this->session->userdata('email_admina')) {
+        if($this->input->post("panel")){
             $this->load->view("json/json_admin",
                 array(
-                "cennik" => $this->Cennik_model->pocet_udalosti_podla_cennika(),
-                "mesiac" => $this->Udalost_model->pocet_udalosti_v_mesiaci(),
-                "okres" => $this->Udalost_model->udalosti_podla_okresu()));
+                    "cennik" => $this->Cennik_model->pocet_udalosti_podla_cennika(),
+                    "mesiac" => $this->Udalost_model->pocet_udalosti_v_mesiaci(),
+                    "okres" => $this->Udalost_model->udalosti_podla_okresu()));
+        }else{
+            $this->load->view("json/json_admin",
+                array(
+                    "udalosti" => $this->Udalost_model->vsetky_udalosti()));
+        }
         } else {
             redirect("prihlasenie/pristup");
         }

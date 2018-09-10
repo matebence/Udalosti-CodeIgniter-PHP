@@ -1,5 +1,9 @@
 $(document).ready(function(){
     $("ul.nav li").on("click", navigacia());
+
+    nacitanieMapy();
+    nacitanieSuborov();
+    zvolenySubor();
 });
 
 function navigacia() {
@@ -37,25 +41,47 @@ function aktivnyPrvokNavigacie(prvok, pozicia){
     }
 }
 
-$(function() {
+function nacitanieMapy(){
+    var adresa = window.location.origin+"/mapa.php";
+    if(implementaciaMapy(adresa)){
+        $("#mapa").attr('src',adresa);
+    }else{
+        alert("Súbor nebol nájdený "+window.location.origin+"/mapa.php");
+        alert("Funkcia MIESTA je nefunkčná");
+    }
+}
+
+function nacitanieSuborov(){
+    $(':file').on('fileselect', function(event, subor, nazov) {
+
+        var vstup = $(this).parents('.input-group').find(':text'),
+            data = subor > 1 ? subor + ' files selected' : nazov;
+
+        if( vstup.length ) {
+            vstup.val(data);
+        } else {
+            if( data ) alert(data);
+        }
+    });
+}
+
+function zvolenySubor(){
     $(document).on('change', ':file', function() {
         var vstup = $(this),
             subor = vstup.get(0).files ? vstup.get(0).files.length : 1,
             nazov = vstup.val().replace(/\\/g, '/').replace(/.*\//, '');
         vstup.trigger('fileselect', [subor, nazov]);
     });
+}
 
-    $(document).ready( function() {
-        $(':file').on('fileselect', function(event, subor, nazov) {
-
-            var vstup = $(this).parents('.input-group').find(':text'),
-                data = subor > 1 ? subor + ' files selected' : nazov;
-
-            if( vstup.length ) {
-                vstup.val(data);
-            } else {
-                if( data ) alert(data);
-            }
-        });
-    });
-});
+function implementaciaMapy(adresa){
+    var poziadavka;
+    if(window.XMLHttpRequest){
+        poziadavka = new XMLHttpRequest();
+    }else{
+        poziadavka = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    poziadavka.open('GET', adresa, false);
+    poziadavka.send();
+    return poziadavka.status !== 404;
+}

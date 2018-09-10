@@ -19,9 +19,9 @@
                             </thead>
                             <tbody>
                             <?php
-                            if(isset($vsetky_pouzivatelia)){
-                                if(!empty($vsetky_pouzivatelia)){
-                                    foreach ($vsetky_pouzivatelia as $pouzivatel) {
+                            if(isset($zoznam_pouzivatelov)){
+                                if(!empty($zoznam_pouzivatelov)){
+                                    foreach ($zoznam_pouzivatelov as $pouzivatel) {
                                         echo "<tr>";
                                         echo "<td>".$pouzivatel['idPouzivatel']."</td>";
                                         echo "<td>".$pouzivatel['email']."</td>";

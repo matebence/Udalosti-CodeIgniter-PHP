@@ -48,7 +48,7 @@ class Rola_pouzivatela_model extends CI_model
         }
     }
 
-    public function vsetky_pouzivatelia(){
+    public function zoznam_pouzivatelov(){
         $this->db->select('*');
         $this->db->from('rola_pouzivatela');
         $this->db->join('pouzivatel', 'pouzivatel.idPouzivatel = rola_pouzivatela.idPouzivatel');

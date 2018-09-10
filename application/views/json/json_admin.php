@@ -8,6 +8,9 @@ if (isset($cennik) && !(empty($cennik))) {
 if (isset($mesiac) && !(empty($mesiac))) {
     $json["mesiac"] = $mesiac;
 }
+if (isset($udalosti) && !(empty($udalosti))) {
+    $json["udalosti"] = $udalosti;
+}
 if (isset($okres) && !(empty($okres))) {
     $json["okres"] = $okres;
 }

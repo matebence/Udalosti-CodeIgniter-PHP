@@ -1,9 +1,12 @@
 $(document).ready(function(){
     $.ajax({
-        url: window.location.href+"/ziskaj_data",
+        url: window.location.origin+"/udalosti/index.php/panel/ziskaj_data",
         dataType: 'text',
         type: 'post',
         format: "json",
+        data: {
+            'panel': true
+        },
         success: function(data){
             var udaje = JSON.parse(data);
 
