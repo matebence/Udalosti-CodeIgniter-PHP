@@ -5,7 +5,7 @@
                 <h5 class="modal-title">Odstránenie</h5>
             </div>
             <div class="modal-body">
-                Naozaj chcete odstrániť udalosť ?
+                Naozaj chcete odstrániť udalosť?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Zrušiť</button>

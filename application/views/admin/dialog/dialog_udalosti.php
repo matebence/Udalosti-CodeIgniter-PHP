@@ -11,7 +11,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="content">
-                                <form action="<?php if(isset($adresa)){echo $adresa;}?>" method="post">
+                                <form id="nova_udalost_formular" action="<?php if(isset($adresa)){echo $adresa;}?>" method="post" enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">

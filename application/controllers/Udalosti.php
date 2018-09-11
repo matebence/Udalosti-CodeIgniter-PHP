@@ -47,7 +47,52 @@ class Udalosti extends CI_Controller
 
     public function nova_udalost(){
         if ($this->session->userdata('email_admina')) {
-            
+            if ($this->validacia_vstupnych_udajov_novej_udalosti()) {
+                $obrazok = $this->fotka_udalosti();
+
+                if(strcmp($obrazok, "") == 0){
+                    $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                        array(
+                            "ikona" => "pe-7s-attention",
+                            "typ" => "warning",
+                            "oznam" => "Chyba obrázka! Skúste ešte raz."
+                        ));
+                }else{
+                    $nova_udalost = array(
+                        "idCennik" => $this->input->post("cennik"),
+                        "nazov" => $this->input->post("nazov"),
+                        "obrazok" => $obrazok,
+                        "datum" => $this->input->post("datum"),
+                        "cas" => $this->input->post("cas"),
+                        "miesto" => $this->input->post("miesto"),
+                        "stat" => $this->input->post("stat"),
+                        "okres" => $this->input->post("okres"),
+                        "mesto" => $this->input->post("mesto")
+                    );
+                    $id_novej_udalosti = $this->Udalost_model->udalost($nova_udalost);
+                    if ($id_novej_udalosti) {
+                        $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                            array(
+                                "ikona" => "pe-7s-check",
+                                "typ" => "success",
+                                "oznam" => "Udalosť bola vytvorená"
+                            ));
+                    } else {
+                        $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                            array(
+                                "ikona" => "pe-7s-attention",
+                                "typ" => "warning",
+                                "oznam" => "Pri vytvorenie novej udalosti došlo chybe!"
+                            ));
+                    }
+                }
+            }else{
+                $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                    array(
+                        "ikona" => "pe-7s-attention",
+                        "typ" => "warning"
+                    ));
+            }
         } else {
             redirect("prihlasenie/pristup");
         }
@@ -62,11 +107,10 @@ class Udalosti extends CI_Controller
                 'numeric' => 'Nesprávny formát cenníka!'));
         $this->form_validation->set_rules('nazov',
             'Názov udalosti',
-            'required|min_length[3]|max_length[20]|alpha',
+            'required|min_length[3]|max_length[20]',
             array('required' => 'Nesprávny formát názvu!',
                 'min_length' => 'Nesprávny formát názvu!',
-                'max_length' => 'Nesprávny formát názvu!',
-                'alpha' => 'Nesprávny formát názvu!'));
+                'max_length' => 'Nesprávny formát názvu!'));
         $this->form_validation->set_rules('datum',
             'Dátum kedy sa udalosť koná',
             'required',
@@ -77,32 +121,28 @@ class Udalosti extends CI_Controller
             array('required' => 'Čas nie je vyplnené'));
         $this->form_validation->set_rules('miesto',
             'Miesto kde sa udalosť koná',
-            'required|min_length[3]|max_length[20]|alpha',
+            'required|min_length[3]|max_length[20]',
             array('required' => 'Nesprávny formát miesta!',
                 'min_length' => 'Nesprávny formát miesta!',
-                'max_length' => 'Nesprávny formát miesta!',
-                'alpha' => 'Nesprávny formát miesta!'));
+                'max_length' => 'Nesprávny formát miesta!'));
         $this->form_validation->set_rules('stat',
             'Štát kde sa udalosť koná',
-            'required|min_length[3]|max_length[20]|alpha',
+            'required|min_length[3]|max_length[20]',
             array('required' => 'Nesprávny formát štátu!',
                 'min_length' => 'Nesprávny formát štátu!',
-                'max_length' => 'Nesprávny formát štátu!',
-                'alpha' => 'Nesprávny formát štátu!'));
+                'max_length' => 'Nesprávny formát štátu!'));
         $this->form_validation->set_rules('okres',
             'Okres kde sa udalosť koná',
-            'required|min_length[3]|max_length[20]|alpha',
+            'required|min_length[3]|max_length[20]',
             array('required' => 'Nesprávny formát okresu!',
                 'min_length' => 'Nesprávny formát okresu!',
-                'max_length' => 'Nesprávny formát okresu!',
-                'alpha' => 'Nesprávny formát okresu!'));
+                'max_length' => 'Nesprávny formát okresu!'));
           $this->form_validation->set_rules('mesto',
             'Mesto kde sa udalosť koná',
-            'required|min_length[3]|max_length[20]|alpha',
+            'required|min_length[3]|max_length[20]',
             array('required' => 'Nesprávny formát mesta!',
                 'min_length' => 'Nesprávny formát mesta!',
-                'max_length' => 'Nesprávny formát mesta!',
-                'alpha' => 'Nesprávny formát mesta!'));
+                'max_length' => 'Nesprávny formát mesta!'));
         if ($this->form_validation->run() == true) {
             return true;
         } else {

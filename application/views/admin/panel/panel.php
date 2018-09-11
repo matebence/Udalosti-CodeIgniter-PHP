@@ -41,7 +41,7 @@
                                 <h4 class="title">Cenník</h4>
                                 <p class="category">Počet udalostí podľa cenníka</p>
                             </div>
-                            <div class="content">
+                            <div class="content grafUdalosti">
                                 <div id="kolacovyGraf" class="ct-chart ct-perfect-fourth"></div>
 
                                 <div class="footer">
@@ -65,7 +65,7 @@
                                 <h4 class="title">Udalosti</h4>
                                 <p class="category">Počet udalostí v danom mesiaci</p>
                             </div>
-                            <div class="content">
+                            <div class="content grafUdalosti">
                                 <div id="ciarovyGraf" class="ct-chart"></div>
                                 <div class="footer">
                                     <div class="legend">
@@ -88,9 +88,8 @@
                                 <h4 class="title">Udalosti</h4>
                                 <p class="category">Podľa Okresu</p>
                             </div>
-                            <div class="content">
+                            <div class="content grafUdalosti">
                                 <div id="stlpcovyGrafOkres" class="ct-chart"></div>
-
                                 <div class="footer">
                                     <div class="legend">
                                         <i class="fa fa-circle text-info"></i> Udalosti
@@ -109,7 +108,7 @@
                                 <h4 class="title">Udalosti</h4>
                                 <p class="category">Podľa Štátov</p>
                             </div>
-                            <div class="content">
+                            <div class="content grafUdalosti">
                                 <div id="stlpcovyGrafStat" class="ct-chart"></div>
 
                                 <div class="footer">

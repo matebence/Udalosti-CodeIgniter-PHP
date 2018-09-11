@@ -10,10 +10,14 @@ $(document).ready(function(){
         success: function(data){
             var udaje = JSON.parse(data);
 
-            kolacovyGraf(udaje);
-            stlpcovyGrafOkres(udaje);
-            stlpcovyGrafStat(udaje);
-            ciarovyGraf(udaje);
+            if(udaje.length > 0){
+                kolacovyGraf(udaje);
+                stlpcovyGrafOkres(udaje);
+                stlpcovyGrafStat(udaje);
+                ciarovyGraf(udaje);
+            }else{
+                $(".grafUdalosti").html("<p>Databazá udalostí je prázdna</p>");
+            }
         }
     });
 });
@@ -30,7 +34,7 @@ function kolacovyGraf(udaje){
 
     for (i = 0; i < udaje.cennik.length; i++) {
         percenta[i] = (parseInt(udaje.cennik[i].Pocet) / spolu) * 100;
-        percenta[i] = percenta[i]+"%"
+        percenta[i] = Math.floor(percenta[i])+"%"
     }
 
     var nastavenia = {
