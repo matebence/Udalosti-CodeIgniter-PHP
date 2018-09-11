@@ -34,7 +34,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <label>Obrázok</label>
-                                            <div class="input-group">
+                                            <div class="input-group upload">
                                                 <label class="input-group-btn">
                                                     <span class="btn btn-basic">
                                                         Prehladávať&hellip; <input type="file" name="obrazok" style="display: none;">
@@ -45,20 +45,21 @@
                                         </div>
                                     </div>
 
-                                    <div class="row" align="center">
-                                        <div class="col-md-6">
-                                            <div class="form-group" align="left">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group dateTimePicker">
                                                 <label>Dátum</label>
                                                 <input id="datum" type="text" name="datum" class="form-control" placeholder="Dátum">
                                                 <script>
                                                     $('#datum').datepicker({
-                                                        uiLibrary: 'bootstrap4'
+                                                        uiLibrary: 'bootstrap4',
+                                                        format: 'yyyy/mm/dd'
                                                     });
                                                 </script>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
+                                        <div class="col-sm-6">
+                                            <div class="form-group dateTimePicker">
                                                 <label>Čas</label>
                                                 <input id="cas" type="text" name="cas" class="form-control" placeholder="Čas">
                                                 <script>
@@ -108,7 +109,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Zrušiť</button>
-                <button type="button" class="btn btn-success" data-dismiss="modal">Vytvoriť udalosť</button>
+                <button type="button" class="btn btn-success" id="udalost_dialog">Vytvoriť udalosť</button>
             </div>
         </div>
     </div>

@@ -1,3 +1,5 @@
+@import 'pismena.css';
+
 .dialog {
     display: block;
     position: fixed;
@@ -41,4 +43,63 @@
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+
+.gj-picker-bootstrap [role="header"] {
+    color: white;
+    background: rgb(67, 116, 191);
+}
+
+.gj-picker-bootstrap .selected {
+    color: #d7d7d7;
+}
+
+.input-group {
+    width: 85%;
+}
+
+#datum, #cas{
+    position: relative;
+}
+
+.input-group-append{
+    position: absolute;
+}
+
+.modal-body{
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+}
+
+.modal {
+    background: rgba(000, 000, 000, 0.8);
+    min-height:1000000px;
+}
+
+@media (max-width: 991px) {
+    .dateTimePicker{
+        margin-top: 8px;
+    }
+}
+
+@media (max-width: 767px) {
+    .input-group {
+        width: 94%;
+    }
+}
+
+@media (max-width: 540px) {
+    .input-group {
+        width: 91%;
+    }
+}
+
+@media (max-width: 393px) {
+    .input-group {
+        width: 84%;
+    }
+}
+
+.upload{
+    width: auto;
 }

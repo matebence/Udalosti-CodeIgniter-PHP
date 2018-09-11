@@ -32,15 +32,16 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
 
-    <link href="<?php echo base_url() . "node_modules/unofficial-light-bootstrap-dashboard/"; ?>assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="<?php echo base_url() . "node_modules/unofficial-light-bootstrap-dashboard/"; ?>assets/css/animate.min.css" rel="stylesheet"/>
-    <link href="<?php echo base_url() . "node_modules/unofficial-light-bootstrap-dashboard/"; ?>assets/css/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet"/>
-    <link href="<?php echo base_url() . "node_modules/gijgo/css/"; ?>gijgo.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url() . "node_modules/unofficial-light-bootstrap-dashboard/"; ?>assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url() . "node_modules/unofficial-light-bootstrap-dashboard/"; ?>assets/css/animate.min.css"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url() . "node_modules/unofficial-light-bootstrap-dashboard/"; ?>assets/css/light-bootstrap-dashboard.css?v=1.4.0"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url() . "node_modules/gijgo/css/"; ?>gijgo.min.css"/>
 
-    <link href="<?php echo base_url() . "node_modules/font-awesome/css/"; ?>font-awesome.min.css" rel="stylesheet" />
-    <link href="<?php echo base_url() . "node_modules/unofficial-light-bootstrap-dashboard/"; ?>assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url() . "node_modules/font-awesome/css/"; ?>font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url() . "node_modules/unofficial-light-bootstrap-dashboard/"; ?>assets/css/pe-icon-7-stroke.css"/>
 
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() . "assets/css/"; ?>panel.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url() . "assets/css/"; ?>dialog.css">
 
     <script src="<?php echo base_url() . "node_modules/unofficial-light-bootstrap-dashboard/"; ?>assets/js/jquery.3.2.1.min.js"></script>
     <script src="<?php echo base_url() . "node_modules/gijgo/js/"; ?>gijgo.min.js"></script>

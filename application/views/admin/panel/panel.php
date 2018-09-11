@@ -89,7 +89,28 @@
                                 <p class="category">Podľa Okresu</p>
                             </div>
                             <div class="content">
-                                <div id="stlpcovyGraf" class="ct-chart"></div>
+                                <div id="stlpcovyGrafOkres" class="ct-chart"></div>
+
+                                <div class="footer">
+                                    <div class="legend">
+                                        <i class="fa fa-circle text-info"></i> Udalosti
+                                    </div>
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="fa fa-history"></i> Aktualizované práve teraz
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card ">
+                            <div class="header">
+                                <h4 class="title">Udalosti</h4>
+                                <p class="category">Podľa Štátov</p>
+                            </div>
+                            <div class="content">
+                                <div id="stlpcovyGrafStat" class="ct-chart"></div>
 
                                 <div class="footer">
                                     <div class="legend">

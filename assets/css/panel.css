@@ -107,30 +107,3 @@ h1, h2, h3, h4, h5, h6{
     border-color: rgb(67, 116, 191);
     color: rgb(67, 116, 191);
 }
-
-.gj-picker-bootstrap [role="header"] {
-    color: white;
-    background: rgb(67, 116, 191);
-}
-
-.gj-picker-bootstrap .selected {
-    color: #d7d7d7;
-}
-
-#datum, #cas{
-    position: relative;
-}
-
-.input-group-append{
-    position: absolute;
-}
-
-.modal-body{
-    max-height: calc(100vh - 200px);
-    overflow-y: auto;
-}
-
-.modal {
-    background: rgba(000, 000, 000, 0.8);
-    min-height:1000000px;
-}

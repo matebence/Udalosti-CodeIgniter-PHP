@@ -14,6 +14,9 @@ if (isset($udalosti) && !(empty($udalosti))) {
 if (isset($okres) && !(empty($okres))) {
     $json["okres"] = $okres;
 }
+if (isset($stat) && !(empty($stat))) {
+    $json["stat"] = $stat;
+}
 
 echo json_encode($json, JSON_UNESCAPED_UNICODE);
 ?>

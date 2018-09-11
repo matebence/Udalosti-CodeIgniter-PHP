@@ -111,6 +111,17 @@ class Udalost_model extends CI_model
         return 0;
     }
 
+    public function udalosti_podla_statu(){
+        $this->db->select('stat, COUNT(*) AS Pocet');
+        $this->db->from('udalost');
+        $this->db->group_by('stat');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return 0;
+    }
+
     public function pocet_udalosti_v_mesiaci(){
         $this->db->select('MONTHNAME(datum) AS Mesiac, COUNT(*) AS Pocet');
         $this->db->from('udalost');

@@ -11,7 +11,8 @@ $(document).ready(function(){
             var udaje = JSON.parse(data);
 
             kolacovyGraf(udaje);
-            stlpcovyGraf(udaje);
+            stlpcovyGrafOkres(udaje);
+            stlpcovyGrafStat(udaje);
             ciarovyGraf(udaje);
         }
     });
@@ -56,7 +57,7 @@ function kolacovyGraf(udaje){
     });
 }
 
-function stlpcovyGraf(udaje){
+function stlpcovyGrafOkres(udaje){
     var pocet = new Array(udaje.okres.length);
     var okres = new Array(udaje.okres.length);
 
@@ -86,7 +87,40 @@ function stlpcovyGraf(udaje){
         }]
     ];
 
-    Chartist.Bar('#stlpcovyGraf', nastavenia, preferencie, graf);
+    Chartist.Bar('#stlpcovyGrafOkres', nastavenia, preferencie, graf);
+}
+
+function stlpcovyGrafStat(udaje){
+    var pocet = new Array(udaje.stat.length);
+    var stat = new Array(udaje.stat.length);
+
+    for (i = 0; i < udaje.stat.length; i++) {
+        stat[i] = udaje.stat[i].stat;
+        pocet[i] = udaje.stat[i].Pocet;
+    }
+
+    var nastavenia = {
+        labels: stat,
+        series: [
+            pocet
+        ]
+    };
+
+    var preferencie = {
+        seriesBarDistance: 10,
+        axisX: {
+            showGrid: false
+        },
+        height: "245px"
+    };
+
+    var graf = [
+        ['screen and (max-width: 640px)', {
+            seriesBarDistance: 5
+        }]
+    ];
+
+    Chartist.Bar('#stlpcovyGrafStat', nastavenia, preferencie, graf);
 }
 
 function ciarovyGraf(udaje){

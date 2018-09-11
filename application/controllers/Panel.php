@@ -125,6 +125,7 @@ class Panel extends CI_Controller
                 array(
                     "cennik" => $this->Cennik_model->pocet_udalosti_podla_cennika(),
                     "mesiac" => $this->Udalost_model->pocet_udalosti_v_mesiaci(),
+                    "stat" => $this->Udalost_model->udalosti_podla_statu(),
                     "okres" => $this->Udalost_model->udalosti_podla_okresu()));
         }else{
             $this->load->view("json/json_admin",
