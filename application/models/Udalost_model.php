@@ -79,6 +79,27 @@ class Udalost_model extends CI_model
         return $query->result_array();
     }
 
+    public function pocet_udalosti(){
+        $this->db->select('nazov');
+        $this->db->from('udalost');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->num_rows();
+        }
+        return 0;
+    }
+
+    public function informacia_o_udalosti($idUdalost){
+        $this->db->select('*');
+        $this->db->from('udalost');
+        $this->db->where("idUdalost", $idUdalost);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result_array()[0];
+        }
+        return null;
+    }
+
     public function vsetky_udalosti(){
         $this->db->select('*');
         $this->db->from('udalost');
@@ -88,16 +109,6 @@ class Udalost_model extends CI_model
             return $query->result_array();
         }
         return null;
-    }
-
-    public function pocet_udalosti(){
-        $this->db->select('nazov');
-        $this->db->from('udalost');
-        $query = $this->db->get();
-        if ($query->num_rows() > 0) {
-            return $query->num_rows();
-        }
-        return 0;
     }
 
     public function udalosti_podla_okresu(){

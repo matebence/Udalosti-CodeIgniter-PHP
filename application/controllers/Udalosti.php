@@ -21,30 +21,6 @@ class Udalosti extends CI_Controller
         $this->zoznam_udalosti();
     }
 
-    private function zoznam_udalosti()
-    {
-        if ((strcmp($this->input->post("token"), $this->Pouzivatel_model->token($this->input->post("email"))) == 0 && ($this->input->post("email")))) {
-            $data["udalosti"] = $this->Udalost_model->zoznam_udalosti(
-                $this->input->post("stat"));
-            $this->load->view("json/json_vystup_dat", $data);
-        } else {
-            redirect("prihlasenie/pristup");
-        }
-    }
-
-    public function udalosti_podla_pozicie()
-    {
-        if ((strcmp($this->input->post("token"), $this->Pouzivatel_model->token($this->input->post("email"))) == 0) && ($this->input->post("email"))) {
-            $data["udalosti"] = $this->Udalost_model->zoznam_udalosti_v_okoli(
-                $this->input->post("stat"),
-                $this->input->post("okres"),
-                $this->input->post("mesto"));
-            $this->load->view("json/json_vystup_dat", $data);
-        } else {
-            redirect("prihlasenie/pristup");
-        }
-    }
-
     public function nova_udalost(){
         if ($this->session->userdata('email_admina')) {
             if ($this->validacia_vstupnych_udajov_novej_udalosti()) {
@@ -100,6 +76,8 @@ class Udalosti extends CI_Controller
 
     public function odstran_udalost($idUdalost){
         if (($this->session->userdata('email_admina')) && ($idUdalost)) {
+
+            $this->odstran_obrazok($idUdalost);
             $id_udalosti = $this->Udalost_model->odstran_udalost($idUdalost);
 
             if($id_udalosti){
@@ -118,6 +96,88 @@ class Udalosti extends CI_Controller
                     ));
             }
         }else {
+            redirect("prihlasenie/pristup");
+        }
+    }
+
+    public function aktualizuj_udalost($idUdalost){
+        if (($this->session->userdata('email_admina')) && ($idUdalost)) {
+            if ($this->validacia_vstupnych_udajov_novej_udalosti()) {
+
+                $obrazok = $this->fotka_udalosti();
+                $udalost = array(
+                    "idCennik" => $this->input->post("cennik"),
+                    "nazov" => $this->input->post("nazov"),
+                    "datum" => $this->input->post("datum"),
+                    "cas" => $this->input->post("cas"),
+                    "miesto" => $this->input->post("miesto"),
+                    "stat" => $this->input->post("stat"),
+                    "okres" => $this->input->post("okres"),
+                    "mesto" => $this->input->post("mesto"));
+
+                if(!strcmp($obrazok, "") == 0) {
+                    $udalost["obrazok"] = $obrazok;
+                    $this->odstran_obrazok($idUdalost);
+                }
+
+                $aktualizovana_udalost = $this->Udalost_model->aktualizuj_udalost($idUdalost, $udalost);
+                if ($aktualizovana_udalost) {
+                    $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                        array(
+                            "ikona" => "pe-7s-check",
+                            "typ" => "success",
+                            "oznam" => "Udalosť bola aktualizovaná"
+                        ));
+                } else {
+                    $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                        array(
+                            "ikona" => "pe-7s-attention",
+                            "typ" => "warning",
+                            "oznam" => "Pri aktualizovanie udalosti došlo chybe!"
+                        ));
+                }
+            }else{
+                $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                    array(
+                        "ikona" => "pe-7s-attention",
+                        "typ" => "warning"
+                    ));
+            }
+        }else {
+            redirect("prihlasenie/pristup");
+        }
+    }
+
+    public function informacia_o_udalosti($idUdalost){
+        if (($this->session->userdata('email_admina')) && ($idUdalost)) {
+            $this->load->view("json/json_admin", array(
+                "aktualne_udaje_udalosti" => $this->Udalost_model->informacia_o_udalosti($idUdalost)
+            ));
+        }else {
+            redirect("prihlasenie/pristup");
+        }
+    }
+
+    private function zoznam_udalosti()
+    {
+        if ((strcmp($this->input->post("token"), $this->Pouzivatel_model->token($this->input->post("email"))) == 0 && ($this->input->post("email")))) {
+            $data["udalosti"] = $this->Udalost_model->zoznam_udalosti(
+                $this->input->post("stat"));
+            $this->load->view("json/json_vystup_dat", $data);
+        } else {
+            redirect("prihlasenie/pristup");
+        }
+    }
+
+    public function udalosti_podla_pozicie()
+    {
+        if ((strcmp($this->input->post("token"), $this->Pouzivatel_model->token($this->input->post("email"))) == 0) && ($this->input->post("email"))) {
+            $data["udalosti"] = $this->Udalost_model->zoznam_udalosti_v_okoli(
+                $this->input->post("stat"),
+                $this->input->post("okres"),
+                $this->input->post("mesto"));
+            $this->load->view("json/json_vystup_dat", $data);
+        } else {
             redirect("prihlasenie/pristup");
         }
     }
@@ -209,6 +269,12 @@ class Udalosti extends CI_Controller
         $this->image_lib->resize();
 
         return 'uploads/' . $nazov_obrazka;
+    }
+
+    private function odstran_obrazok($idUdalost)
+    {
+        $udalost = $this->Udalost_model->informacia_o_udalosti($idUdalost);
+        unlink($udalost["obrazok"]);
     }
 }
 ?>

@@ -42,7 +42,7 @@ class Panel extends CI_Controller
             $this->load->view("admin/panel/panel",
                 $this->data);
 
-            $this->dialog(site_url('udalosti/nova_udalost'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "dialog_udalosti");
+            $this->dialog(site_url('udalosti/nova_udalost'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
             $this->load->view("admin/rozhranie/panel_pata");
         } else {
             redirect("prihlasenie/pristup");
@@ -61,8 +61,9 @@ class Panel extends CI_Controller
             $this->load->view("admin/panel/panel_udalosti",
                 $this->data);
 
-            $this->dialog(site_url('udalosti/nova_udalost'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "dialog_udalosti");
-            $this->dialog(site_url('udalosti/nova_udalost'),"Odstránenie udalosti", "Naozaj chcete odstrániť udalosť?", "odstranit-udalost", "udalost_dialog_odstranit", "dialog_odstranit");
+            $this->dialog(site_url('udalosti/nova_udalost'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
+            $this->dialog(site_url('udalosti/odstran_udalost'),"Odstránenie udalosti", "Naozaj chcete odstrániť udalosť?", "odstranit-udalost", "udalost_dialog_odstranit", "", "dialog_odstranit");
+            $this->dialog(site_url('udalosti/aktualizuj_udalost'),"Aktualizovanie udalosti", "", "aktualizovat-udalost", "udalost_dialog_aktualizuj", "aktulizovat_udalost_formular", "dialog_udalosti");
             $this->load->view("admin/rozhranie/panel_pata");
         } else {
             redirect("prihlasenie/pristup");
@@ -150,14 +151,15 @@ class Panel extends CI_Controller
         }
     }
 
-    private function dialog($adresa, $titul, $text, $identifikator, $tlacidlo, $dialog){
+    private function dialog($adresa, $titul, $text, $identifikator, $tlacidlo, $formular, $dialog){
         $this->load->view("admin/dialog/".$dialog,
             array(
                 "adresa" => $adresa,
                 "titul" => $titul,
                 "text" => $text,
                 "identifikator" => $identifikator,
-                "tlacidlo" => $tlacidlo
+                "tlacidlo" => $tlacidlo,
+                "formular" => $formular
             ));
     }
 }

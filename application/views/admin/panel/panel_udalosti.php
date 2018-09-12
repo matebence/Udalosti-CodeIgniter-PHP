@@ -46,7 +46,7 @@
                                             echo "<td>" . $udalost['mesto'] . "</td>";
                                             echo "<td>" . $udalost['timestamp'] . "</td>";
                                             echo "<td>
-                                                    <i class='fa fa-edit editovat'></i>
+                                                    <i class='fa fa-edit editovat' id='".$udalost['idUdalost']."' data-toggle='modal' data-target='#aktualizovat-udalost'></i>
                                                     <i class='fa fa-trash odstranit' id='".$udalost['idUdalost']."' data-toggle='modal' data-target='#odstranit-udalost'></i>
                                                   </td>";
                                         echo "</tr>";

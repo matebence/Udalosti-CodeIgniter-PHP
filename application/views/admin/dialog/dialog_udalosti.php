@@ -11,12 +11,12 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="content">
-                                <form id="nova_udalost_formular" action="<?php if(isset($adresa)){echo $adresa;}?>" method="post" enctype="multipart/form-data">
+                                <form id="<?php if(isset($formular)){echo $formular;}?>" action="<?php if(isset($adresa)){echo $adresa;}?>" method="post" enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Cenník</label>
-                                                <select name="cennik" class="form-control">
+                                                <select id="cennik-<?php if(isset($identifikator)){echo $identifikator;}?>" name="cennik" class="form-control">
                                                     <option value="1">Váha 1</option>
                                                     <option value="2">Váha 2</option>
                                                     <option value="3">Váha 3</option>
@@ -26,7 +26,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Názov</label>
-                                                <input type="text" name="nazov" class="form-control" placeholder="Názov">
+                                                <input type="text" id="nazov-<?php if(isset($identifikator)){echo $identifikator;}?>" name="nazov" class="form-control" placeholder="Názov">
                                             </div>
                                         </div>
                                     </div>
@@ -40,7 +40,7 @@
                                                         Prehladávať&hellip; <input type="file" name="obrazok" style="display: none;">
                                                     </span>
                                                 </label>
-                                                <input type="text" class="form-control" readonly title="">
+                                                <input type="text" id="obrazok_udalosti-<?php if(isset($identifikator)){echo $identifikator;}?>" class="form-control" readonly title="">
                                             </div>
                                         </div>
                                     </div>
@@ -49,9 +49,9 @@
                                         <div class="col-sm-6">
                                             <div class="form-group dateTimePicker">
                                                 <label>Dátum</label>
-                                                <input id="datum" type="text" name="datum" class="form-control" placeholder="Dátum">
+                                                <input id="datum-<?php if(isset($identifikator)){echo $identifikator;}?>" type="text" name="datum" class="form-control" placeholder="Dátum">
                                                 <script>
-                                                    $('#datum').datepicker({
+                                                    $('#datum-<?php if(isset($identifikator)){echo $identifikator;}?>').datepicker({
                                                         uiLibrary: 'bootstrap4',
                                                         format: 'yyyy/mm/dd'
                                                     });
@@ -61,9 +61,9 @@
                                         <div class="col-sm-6">
                                             <div class="form-group dateTimePicker">
                                                 <label>Čas</label>
-                                                <input id="cas" type="text" name="cas" class="form-control" placeholder="Čas">
+                                                <input id="cas-<?php if(isset($identifikator)){echo $identifikator;}?>" type="text" name="cas" class="form-control" placeholder="Čas">
                                                 <script>
-                                                    $('#cas').timepicker({
+                                                    $('#cas-<?php if(isset($identifikator)){echo $identifikator;}?>').timepicker({
                                                         uiLibrary: 'bootstrap4'
                                                     });
                                                 </script>
@@ -75,7 +75,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Miesto</label>
-                                                <input type="text" name="miesto" class="form-control" placeholder="Miesto udalosti">
+                                                <input type="text" id="miesto-<?php if(isset($identifikator)){echo $identifikator;}?>" name="miesto" class="form-control" placeholder="Miesto udalosti">
                                             </div>
                                         </div>
                                     </div>
@@ -84,19 +84,19 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Štát</label>
-                                                <input type="text" name="stat" class="form-control" placeholder="Štát">
+                                                <input type="text" id="stat-<?php if(isset($identifikator)){echo $identifikator;}?>" name="stat" class="form-control" placeholder="Štát">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Okres</label>
-                                                <input type="text" name="okres" class="form-control" placeholder="Okres">
+                                                <input type="text" id="okres-<?php if(isset($identifikator)){echo $identifikator;}?>" name="okres" class="form-control" placeholder="Okres">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Mesto</label>
-                                                <input type="text" name="mesto" class="form-control" placeholder="Mesto">
+                                                <input type="text" id="mesto-<?php if(isset($identifikator)){echo $identifikator;}?>" name="mesto" class="form-control" placeholder="Mesto">
                                             </div>
                                         </div>
                                     </div>
@@ -109,7 +109,15 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Zrušiť</button>
-                <button type="button" class="btn btn-success" id="<?php if(isset($tlacidlo)){echo $tlacidlo;}?>">Vytvoriť udalosť</button>
+                <?php
+                if(isset($tlacidlo)){
+                    if(strcmp($tlacidlo, "udalost_dialog_aktualizuj") == 0){
+                        echo "<button type='button' class='btn btn-success' id='".$tlacidlo."'>Aktulizovať udalosť</button>";
+                    }else{
+                        echo "<button type='button' class='btn btn-success' id='".$tlacidlo."'>Vytvoriť udalosť</button>";
+                    }
+                }
+                ?>
             </div>
         </div>
     </div>
