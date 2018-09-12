@@ -1,4 +1,4 @@
-<?php if((empty(validation_errors_array())) && (strcmp($oznam, "Udalosť bola vytvorená") == 0)){
+<?php if((empty(validation_errors_array())) && (strcmp($ikona, "pe-7s-check") == 0)){
     echo "uspech";
 }
 ?>

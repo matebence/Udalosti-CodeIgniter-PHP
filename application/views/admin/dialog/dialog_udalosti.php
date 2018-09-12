@@ -109,9 +109,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Zrušiť</button>
-                <button type="button" class="btn btn-success" id="udalost_dialog">Vytvoriť udalosť</button>
+                <button type="button" class="btn btn-success" id="<?php if(isset($tlacidlo)){echo $tlacidlo;}?>">Vytvoriť udalosť</button>
             </div>
         </div>
     </div>
 </div>
-<script src="<?php echo base_url() . "assets/js/"; ?>dialog.js"></script>

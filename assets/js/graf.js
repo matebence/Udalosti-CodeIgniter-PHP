@@ -10,7 +10,7 @@ $(document).ready(function(){
         success: function(data){
             var udaje = JSON.parse(data);
 
-            if(udaje.length > 0){
+            if(udaje.length != 0){
                 kolacovyGraf(udaje);
                 stlpcovyGrafOkres(udaje);
                 stlpcovyGrafStat(udaje);

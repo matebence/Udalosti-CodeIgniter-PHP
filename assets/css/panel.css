@@ -11,18 +11,18 @@ h1, h2, h3, h4, h5, h6{
     height: 35px;
 }
 
-#editovat{
+.editovat{
     color: #2071a1;
 }
 
-#editovat:hover{
+.editovat:hover{
     cursor: pointer;
 }
 
-#odstranit{
+.odstranit{
     color: red;
 }
-#odstranit:hover{
+.odstranit:hover{
     cursor: pointer;
 }
 

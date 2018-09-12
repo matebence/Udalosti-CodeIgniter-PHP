@@ -14,6 +14,7 @@
         <script src="<?php echo base_url() . "node_modules/unofficial-light-bootstrap-dashboard/"; ?>assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
 
         <script src="<?php echo base_url() . "assets/js/"; ?>panel.js"></script>
+        <script src="<?php echo base_url() . "assets/js/"; ?>dialog.js"></script>
 
         <script>
             <?php

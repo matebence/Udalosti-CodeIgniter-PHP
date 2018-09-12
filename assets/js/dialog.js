@@ -1,18 +1,31 @@
+var identifikator = 0;
+
 $(".zatvorit").click(function () {
     $( "#dialog" ).fadeOut()
 });
 
-$( "#udalost_dialog" ).click(function() {
+$( ".odstranit" ).click(function() {
+    identifikator = parseInt($(this).attr('id'));
+});
+
+$( "#udalost_dialog_vytvorit" ).click(function() {
     $( "#nova_udalost_formular" ).trigger( "submit" );
+});
+
+$( ".udalost_dialog_odstranit" ).click(function() {
+    spracujData("/udalosti/index.php/udalosti/odstran_udalost/"+identifikator);
 });
 
 $("#nova_udalost_formular").on('submit',(function(e) {
     e.preventDefault();
+    spracujData("/udalosti/index.php/udalosti/nova_udalost", this);
+}));
 
+function spracujData(adresa, _this) {
     $.ajax({
-        url: window.location.origin+"/udalosti/index.php/udalosti/nova_udalost",
+        url: window.location.origin+adresa,
         type: 'POST',
-        data: new FormData(this),
+        data: new FormData(_this),
         contentType: false,
         cache: false,
         processData: false,
@@ -27,4 +40,4 @@ $("#nova_udalost_formular").on('submit',(function(e) {
             $(".modal").append(data);
         }
     });
-}));
+}

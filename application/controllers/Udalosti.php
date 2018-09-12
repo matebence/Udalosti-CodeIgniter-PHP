@@ -98,6 +98,30 @@ class Udalosti extends CI_Controller
         }
     }
 
+    public function odstran_udalost($idUdalost){
+        if (($this->session->userdata('email_admina')) && ($idUdalost)) {
+            $id_udalosti = $this->Udalost_model->odstran_udalost($idUdalost);
+
+            if($id_udalosti){
+                $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                    array(
+                        "ikona" => "pe-7s-check",
+                        "typ" => "success",
+                        "oznam" => "Udalosť bola odstránena"
+                    ));
+            }else {
+                $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                    array(
+                        "ikona" => "pe-7s-attention",
+                        "typ" => "warning",
+                        "oznam" => "Pri odstránení udalosti došlo chybe"
+                    ));
+            }
+        }else {
+            redirect("prihlasenie/pristup");
+        }
+    }
+
     private function validacia_vstupnych_udajov_novej_udalosti()
     {
         $this->form_validation->set_rules('cennik',
