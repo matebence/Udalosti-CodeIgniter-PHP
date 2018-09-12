@@ -1,5 +1,5 @@
 <div class="modal fade" id="<?php if(isset($identifikator)){echo $identifikator;}?>" data-backdrop="false" tabindex="-1" role="dialog"
-     aria-labelledby="nova-udalost" aria-hidden="true">
+     aria-labelledby="<?php if(isset($identifikator)){echo $identifikator;}?>" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">

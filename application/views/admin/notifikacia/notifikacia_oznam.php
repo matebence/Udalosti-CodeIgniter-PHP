@@ -23,3 +23,11 @@
         });
     });
 </script>
+
+<?php if(isset($presmeruj)){
+    if($presmeruj){
+        echo "uspech";
+
+    }
+}
+?>

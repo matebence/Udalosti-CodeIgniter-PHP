@@ -30,7 +30,7 @@ class Panel extends CI_Controller
             $this->uspesne_prihlasenie();
 
             $this->pridaj_data("pocet_pouzivatelov",
-                $this->Pouzivatel_model->pocet_pouzivatelov());
+                $this->Rola_pouzivatela_model->pocet_pouzivatelov());
             $this->pridaj_data("pocet_udalosti",
                 $this->Udalost_model->pocet_udalosti());
             $this->pridaj_data("registrovali_dnes",
@@ -82,6 +82,11 @@ class Panel extends CI_Controller
             $this->load->view("admin/panel/panel_pouzivatelia",
                 $this->data);
 
+            $this->dialog(site_url('udalosti/nova_udalost'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
+
+            $this->dialog(site_url('registracia/registrovat_sa'),"Nový používatel", "", "novy-pouzivatel", "pouzivatel_dialog_vytvorit", "novy_pouzivatel_formular", "dialog_pouzivatelia");
+            $this->dialog(site_url('pouzivatelia/odstran_pouzivatela'),"Odstránenie používatela", "Naozaj chcete odstrániť používatela?", "odstranit-pouzivatela", "pouzivatel_dialog_odstranit", "", "dialog_odstranit");
+            $this->dialog(site_url('pouzivatelia/aktualizuj_pouzivatela'),"Aktualizovať používatela", "", "aktualizovat-pouzivatela", "pouzivatel_dialog_aktualizuj", "aktulizovat_pouzivatela_formular", "dialog_pouzivatelia");
             $this->load->view("admin/rozhranie/panel_pata");
         } else {
             redirect("prihlasenie/pristup");

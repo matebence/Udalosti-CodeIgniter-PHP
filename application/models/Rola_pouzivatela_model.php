@@ -48,6 +48,19 @@ class Rola_pouzivatela_model extends CI_model
         }
     }
 
+    public function pocet_pouzivatelov(){
+        $this->db->select('meno');
+        $this->db->from('rola_pouzivatela');
+        $this->db->join('pouzivatel', 'pouzivatel.idPouzivatel = rola_pouzivatela.idPouzivatel');
+        $this->db->join('rola', 'rola.idRola = rola_pouzivatela.idRola');
+        $this->db->where('nazov', 'pouzivatel');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->num_rows();
+        }
+        return 0;
+    }
+
     public function zoznam_pouzivatelov(){
         $this->db->select('*');
         $this->db->from('rola_pouzivatela');

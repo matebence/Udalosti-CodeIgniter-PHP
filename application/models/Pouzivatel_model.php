@@ -66,16 +66,6 @@ class Pouzivatel_model extends CI_model
         }
     }
 
-    public function pocet_pouzivatelov(){
-        $this->db->select('meno');
-        $this->db->from('pouzivatel');
-        $query = $this->db->get();
-        if ($query->num_rows() > 0) {
-            return $query->num_rows();
-        }
-        return 0;
-    }
-
     public function registrovali_dnes(){
         $this->db->select('meno');
         $this->db->from('pouzivatel');
