@@ -20,6 +20,9 @@ if (isset($stat) && !(empty($stat))) {
 if (isset($aktualne_udaje_udalosti) && !(empty($aktualne_udaje_udalosti))) {
     $json["udaje_udalosti"] = $aktualne_udaje_udalosti;
 }
+if (isset($aktualny_pouzivatel) && !(empty($aktualny_pouzivatel))) {
+    $json["udaje_pouzivatela"] = $aktualny_pouzivatel;
+}
 
 echo json_encode($json, JSON_UNESCAPED_UNICODE);
 ?>

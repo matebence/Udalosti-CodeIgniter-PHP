@@ -74,34 +74,8 @@ class Udalosti extends CI_Controller
         }
     }
 
-    public function odstran_udalost($idUdalost){
-        if (($this->session->userdata('email_admina')) && ($idUdalost)) {
-
-            $this->odstran_obrazok($idUdalost);
-            $id_udalosti = $this->Udalost_model->odstran_udalost($idUdalost);
-
-            if($id_udalosti){
-                $this->load->view("admin/notifikacia/notifikacia_oznam.php",
-                    array(
-                        "ikona" => "pe-7s-check",
-                        "typ" => "success",
-                        "oznam" => "Udalosť bola odstránena"
-                    ));
-            }else {
-                $this->load->view("admin/notifikacia/notifikacia_oznam.php",
-                    array(
-                        "ikona" => "pe-7s-attention",
-                        "typ" => "warning",
-                        "oznam" => "Pri odstránení udalosti došlo chybe"
-                    ));
-            }
-        }else {
-            redirect("prihlasenie/pristup");
-        }
-    }
-
-    public function aktualizuj_udalost($idUdalost){
-        if (($this->session->userdata('email_admina')) && ($idUdalost)) {
+    public function aktualizuj_udalost($id_udalost){
+        if (($this->session->userdata('email_admina')) && ($id_udalost)) {
             if ($this->validacia_vstupnych_udajov_novej_udalosti()) {
 
                 $obrazok = $this->fotka_udalosti();
@@ -117,10 +91,10 @@ class Udalosti extends CI_Controller
 
                 if(!strcmp($obrazok, "") == 0) {
                     $udalost["obrazok"] = $obrazok;
-                    $this->odstran_obrazok($idUdalost);
+                    $this->odstran_obrazok($id_udalost);
                 }
 
-                $aktualizovana_udalost = $this->Udalost_model->aktualizuj_udalost($idUdalost, $udalost);
+                $aktualizovana_udalost = $this->Udalost_model->aktualizuj_udalost($id_udalost, $udalost);
                 if ($aktualizovana_udalost) {
                     $this->load->view("admin/notifikacia/notifikacia_oznam.php",
                         array(
@@ -148,10 +122,36 @@ class Udalosti extends CI_Controller
         }
     }
 
-    public function informacia_o_udalosti($idUdalost){
-        if (($this->session->userdata('email_admina')) && ($idUdalost)) {
+    public function odstran_udalost($id_udalost){
+        if (($this->session->userdata('email_admina')) && ($id_udalost)) {
+
+            $this->odstran_obrazok($id_udalost);
+            $id_udalosti = $this->Udalost_model->odstran_udalost($id_udalost);
+
+            if($id_udalosti){
+                $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                    array(
+                        "ikona" => "pe-7s-check",
+                        "typ" => "success",
+                        "oznam" => "Udalosť bola odstránena"
+                    ));
+            }else {
+                $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                    array(
+                        "ikona" => "pe-7s-attention",
+                        "typ" => "warning",
+                        "oznam" => "Pri odstránení udalosti došlo chybe"
+                    ));
+            }
+        }else {
+            redirect("prihlasenie/pristup");
+        }
+    }
+
+    public function informacia_o_udalosti($id_udalost){
+        if (($this->session->userdata('email_admina')) && ($id_udalost)) {
             $this->load->view("json/json_admin", array(
-                "aktualne_udaje_udalosti" => $this->Udalost_model->informacia_o_udalosti($idUdalost)
+                "aktualne_udaje_udalosti" => $this->Udalost_model->informacia_o_udalosti($id_udalost)
             ));
         }else {
             redirect("prihlasenie/pristup");
@@ -271,9 +271,9 @@ class Udalosti extends CI_Controller
         return 'uploads/' . $nazov_obrazka;
     }
 
-    private function odstran_obrazok($idUdalost)
+    private function odstran_obrazok($id_udalost)
     {
-        $udalost = $this->Udalost_model->informacia_o_udalosti($idUdalost);
+        $udalost = $this->Udalost_model->informacia_o_udalosti($id_udalost);
         unlink($udalost["obrazok"]);
     }
 }

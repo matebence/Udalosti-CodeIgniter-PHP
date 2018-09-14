@@ -31,6 +31,12 @@ class Rola_pouzivatela_model extends CI_model
         }
     }
 
+    public function odstran_rolu_pouzivatela($id_pouzivatel)
+    {
+        $odstran = $this->db->delete('rola_pouzivatela', array('idPouzivatel' => $id_pouzivatel));
+        return $odstran ? true : false;
+    }
+
     public function prihlas_pouzivatela($prihlasovacie_udaje)
     {
         $this->db->select('nazov');
@@ -48,17 +54,31 @@ class Rola_pouzivatela_model extends CI_model
         }
     }
 
-    public function pocet_pouzivatelov(){
+    public function pocet_pouzivatelov($typ_roli){
         $this->db->select('meno');
         $this->db->from('rola_pouzivatela');
         $this->db->join('pouzivatel', 'pouzivatel.idPouzivatel = rola_pouzivatela.idPouzivatel');
         $this->db->join('rola', 'rola.idRola = rola_pouzivatela.idRola');
-        $this->db->where('nazov', 'pouzivatel');
+        $this->db->where('nazov', $typ_roli);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             return $query->num_rows();
         }
         return 0;
+    }
+
+    public function informacia_o_pouzivatelovi($id_pouzivatel)
+    {
+        $this->db->select('meno, email, nazov');
+        $this->db->from('rola_pouzivatela');
+        $this->db->join('pouzivatel', 'pouzivatel.idPouzivatel = rola_pouzivatela.idPouzivatel');
+        $this->db->join('rola', 'rola.idRola = rola_pouzivatela.idRola');
+        $this->db->where("pouzivatel.idPouzivatel", $id_pouzivatel);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result_array()[0];
+        }
+        return null;
     }
 
     public function zoznam_pouzivatelov(){

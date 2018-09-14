@@ -89,10 +89,10 @@ class Udalost_model extends CI_model
         return 0;
     }
 
-    public function informacia_o_udalosti($idUdalost){
+    public function informacia_o_udalosti($id_udalost){
         $this->db->select('*');
         $this->db->from('udalost');
-        $this->db->where("idUdalost", $idUdalost);
+        $this->db->where("idUdalost", $id_udalost);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             return $query->result_array()[0];

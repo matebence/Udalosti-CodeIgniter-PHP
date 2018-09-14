@@ -7,7 +7,7 @@
                         <div class="col-md-12">
                             <div class="header">
                                 <h4 class="title" style="display: inline;">Používatelia</h4>
-                                <a href="#" class="btn btn-success pull-right" data-toggle="modal" data-target='#novy-pouzivatel'><i
+                                <a href="#" class="btn btn-success pull-right" data-toggle="modal" data-target='#novy-pouzivatel_admin'><i
                                         class="fa fa-plus-circle"></i><span>Nový používatel</span></a>
                                 <p class="category">Zoznam všetkých použivatelov</p>
                             </div>
@@ -36,8 +36,8 @@
                                         echo "<td>".$pouzivatel['token']."</td>";
                                         echo "<td>".$pouzivatel['timestamp']."</td>";
                                         echo "<td>
-                                                    <i class='fa fa-edit editovat' id='".$pouzivatel['idPouzivatel']."' data-toggle='modal' data-target='#aktualizovat-pouzivatela'></i>
-                                                    <i class='fa fa-trash odstranit' id='".$pouzivatel['idPouzivatel']."' data-toggle='modal' data-target='#odstranit-pouzivatela'></i>
+                                                    <i class='fa fa-edit editovat' id='".$pouzivatel['idPouzivatel']."' data-toggle='modal' data-target='#aktualizovat-pouzivatel_admin'></i>
+                                                    <i class='fa fa-trash odstranit' id='".$pouzivatel['idPouzivatel']."' data-toggle='modal' data-target='#odstranit-pouzivatel_admin'></i>
                                                   </td>";
                                         echo "</tr>";
                                     }

@@ -7,13 +7,26 @@ $(".zatvorit").click(function () {
 
 
 
-$("#novy_pouzivatel_formular").on('submit',(function(e) {
+$("#novy_pouzivatel_admin_formular").on('submit',(function(e) {
     e.preventDefault();
     spracujData("/udalosti/index.php/registracia/registrovat_sa", this, false);
 }));
 
-$( "#udalost_dialog_vytvorit" ).click(function() {
-    $( "#nova_udalost_formular" ).trigger( "submit" );
+$( "#pouzivatel_admin_dialog_vytvorit" ).click(function() {
+    $( "#novy_pouzivatel_admin_formular" ).trigger( "submit" );
+});
+
+$("#aktulizovat_pouzivatel_admin_formular").on('submit',(function(e) {
+    e.preventDefault();
+    spracujData("/udalosti/index.php/pouzivatelia/aktualizuj_pouzivatela/"+identifikator, this, false);
+}));
+
+$( "#pouzivatel_admin_dialog_aktualizuj" ).click(function() {
+    $( "#aktulizovat_pouzivatel_admin_formular" ).trigger( "submit" );
+});
+
+$( ".pouzivatel_admin_dialog_odstranit" ).click(function() {
+    spracujData("/udalosti/index.php/pouzivatelia/odstran_pouzivatela/"+identifikator, null, false);
 });
 
 
@@ -23,8 +36,8 @@ $("#nova_udalost_formular").on('submit',(function(e) {
     spracujData("/udalosti/index.php/udalosti/nova_udalost", this, false);
 }));
 
-$( "#pouzivatel_dialog_vytvorit" ).click(function() {
-    $( "#novy_pouzivatel_formular" ).trigger( "submit" );
+$( "#udalost_dialog_vytvorit" ).click(function() {
+    $( "#nova_udalost_formular" ).trigger( "submit" );
 });
 
 $("#aktulizovat_udalost_formular").on('submit',(function(e) {
@@ -54,8 +67,8 @@ $( ".editovat" ).click(function() {
 
     if(castStranky == "udalosti"){
         spracujData("/udalosti/index.php/udalosti/informacia_o_udalosti/"+identifikator, null, true);
-    }else if(castStranky == "pouzivatelia"){
-    }else if(castStranky == "administratori"){
+    }else if((castStranky == "pouzivatelia") || (castStranky == "administratori")){
+        spracujData("/udalosti/index.php/pouzivatelia/informacia_o_pouzivatelovi/"+identifikator, null, true);
     }
 });
 
@@ -74,18 +87,11 @@ function dataFormulara(_this){
 function odpovedServera(data){
     var uspech = "uspech";
 
-    presmetujPodlaObsahu(data, uspech);
-    $(".modal").append(data);
-}
-
-function presmetujPodlaObsahu(data, uspech){
-    if(data.substr(0,uspech.length) == uspech){
-        if(data.substr((data.length-uspech.length), data.length) == uspech){
-            setTimeout(function(){ window.location.href = window.location.origin+"/udalosti/index.php/panel/administratori";}, 1500);
-        }else{
-            setTimeout(function(){ location.reload(); }, 1500);
-        }
+    if(data.substr(0,uspech.length) == uspech) {
+        setTimeout(function(){ location.reload(); }, 1500);
     }
+
+    $(".modal").append(data);
 }
 
 
@@ -126,7 +132,11 @@ function naplnPoleExistujucimyUdajmy(data) {
         $("#okres-aktualizovat-udalost").val(udalost.okres);
         $("#mesto-aktualizovat-udalost").val(udalost.mesto);
 
-    }else if(castStranky == "pouzivatelia"){
-    }else if(castStranky == "administratori"){
+    }else if((castStranky == "pouzivatelia") || (castStranky == "administratori")){
+        var pouzivatel = data.udaje_pouzivatela;
+
+        $("#meno-aktualizovat-pouzivatel_admin").val(pouzivatel.meno);
+        $("#email-aktualizovat-pouzivatel_admin").val(pouzivatel.email);
+        $("#rola-aktualizovat-pouzivatel_admin").val(pouzivatel.nazov);
     }
 }

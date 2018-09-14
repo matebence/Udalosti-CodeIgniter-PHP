@@ -54,15 +54,19 @@ h1, h2, h3, h4, h5, h6{
 
 .info-box-icon {
     border-radius: 2px 0 0 2px;
-    display: block;
+    display: inline;
     float: left;
     height: 90px;
     width: 90px;
-    padding-left: 26px;
     font-size: 45px;
     line-height: 90px;
     color: white;
     background: rgb(67, 116, 191);
+    text-align: center;
+}
+
+.fa{
+    display: inline;
 }
 
 .info-box-content {

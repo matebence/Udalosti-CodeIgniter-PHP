@@ -12,10 +12,16 @@ class Pouzivatel_model extends CI_model
         }
     }
 
-    public function aktualizuj_pouzivatela($email, $udaj)
+    public function aktualizuj_pouzivatela($email, $id_pouzivatel, $udaj)
     {
         if (!empty($udaj)) {
-            $this->db->where('email', $email);
+
+            if($email != null){
+                $this->db->where('email', $email);
+            }else{
+                $this->db->where('idPouzivatel', $id_pouzivatel);
+            }
+
             $this->db->update('pouzivatel', $udaj);
             return true;
         } else {
@@ -64,6 +70,18 @@ class Pouzivatel_model extends CI_model
         } else {
             return false;
         }
+    }
+
+    public function aktivny_pouzivatelia()
+    {
+        $this->db->select('*');
+        $this->db->from('pouzivatel');
+        $this->db->where("LENGTH(token) > 1");
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->num_rows();
+        }
+        return 0;
     }
 
     public function registrovali_dnes(){

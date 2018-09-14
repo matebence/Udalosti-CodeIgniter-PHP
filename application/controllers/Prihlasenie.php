@@ -41,7 +41,7 @@ class Prihlasenie extends CI_Controller
                             $this->load->view("admin/rozhranie/prihlasenie_pata");
 
                         }else{
-                            $this->Pouzivatel_model->aktualizuj_pouzivatela($prihlasovacie_udaje['email'], array("token" => md5(uniqid(rand(), true))));
+                            $this->Pouzivatel_model->aktualizuj_pouzivatela($prihlasovacie_udaje['email'], null, array("token" => md5(uniqid(rand(), true))));
                             $this->session->set_flashdata('autentifikacia', 'Spravné prihlasovacie údaje');
 
                             $data["token"] = $this->Pouzivatel_model->token($prihlasovacie_udaje["email"]);
