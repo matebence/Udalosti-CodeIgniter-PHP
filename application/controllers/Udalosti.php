@@ -191,7 +191,7 @@ class Udalosti extends CI_Controller
                 'numeric' => 'Nesprávny formát cenníka!'));
         $this->form_validation->set_rules('nazov',
             'Názov udalosti',
-            'required|min_length[3]|max_length[20]',
+            'required|min_length[3]|max_length[40]',
             array('required' => 'Nesprávny formát názvu!',
                 'min_length' => 'Nesprávny formát názvu!',
                 'max_length' => 'Nesprávny formát názvu!'));
@@ -205,7 +205,7 @@ class Udalosti extends CI_Controller
             array('required' => 'Čas nie je vyplnené'));
         $this->form_validation->set_rules('miesto',
             'Miesto kde sa udalosť koná',
-            'required|min_length[3]|max_length[20]',
+            'required|min_length[3]|max_length[40]',
             array('required' => 'Nesprávny formát miesta!',
                 'min_length' => 'Nesprávny formát miesta!',
                 'max_length' => 'Nesprávny formát miesta!'));
@@ -239,8 +239,8 @@ class Udalosti extends CI_Controller
         $config['upload_path'] = './uploads';
         $config['allowed_types'] = 'gif|jpg|png';
         $config['max_size'] = 8000;
-        $config['max_width'] = 1500;
-        $config['max_height'] = 1000;
+        $config['max_width'] = 2000;
+        $config['max_height'] = 1500;
         $config['overwrite'] = FALSE;
         $config['encrypt_name'] = TRUE;
 
