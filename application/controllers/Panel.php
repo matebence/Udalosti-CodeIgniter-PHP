@@ -100,6 +100,8 @@ class Panel extends CI_Controller
             $this->load->view("admin/panel/panel_miesta",
                 $this->data);
 
+            $this->dialog(site_url('udalosti/nova_udalost'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
+
             $this->load->view("admin/rozhranie/panel_pata");
         } else {
             redirect("prihlasenie/pristup");

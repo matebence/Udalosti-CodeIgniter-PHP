@@ -25,5 +25,5 @@
             </form>
         </div>
 
-        <a id="zabudnute_heslo">Zabudliste heslo?</a>
+        <a id="zabudnute_heslo">Zabudli ste heslo?</a>
     </div>

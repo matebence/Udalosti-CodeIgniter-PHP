@@ -14,7 +14,7 @@ $( document ).ready(function() {
             $( "#email_zabudnute" ).hide();
             $( "#poslat" ).hide();
 
-            $("#zabudnute_heslo").text("Zabudliste heslo?");
+            $("#zabudnute_heslo").text("Zabudli ste heslo?");
 
             $( "#email_prihlasenie" ).slideDown( "slow" );
             $( "#heslo" ).slideDown( "slow" );
