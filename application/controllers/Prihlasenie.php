@@ -116,7 +116,7 @@ class Prihlasenie extends CI_Controller
     public function odhlasit_sa()
     {
         $this->session->sess_destroy();
-        $this->Pouzivatel_model->aktualizuj_pouzivatela($this->input->post('email'), array("token" => ""));
+        $this->Pouzivatel_model->aktualizuj_pouzivatela($this->input->post('email'), null, array("token" => ""));
 
         $this->session->set_flashdata('uspech', 'Odhlásenie prebehlo úspešne.');
 

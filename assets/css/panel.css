@@ -29,7 +29,7 @@ h1, h2, h3, h4, h5, h6{
 #mapa{
     position:relative;
     width:100%;
-    height: calc(100% - 125px);
+    height: calc(100% - 127px);
 }
 
 .sidebar .logo .simple-text {
