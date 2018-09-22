@@ -249,7 +249,7 @@ class Udalosti extends CI_Controller
             return "";
         } else {
             $meta_data_obrazka = $this->upload->data();
-            return $this->velkost_obrazka($meta_data_obrazka, 1350, 900);
+            return $this->velkost_obrazka($meta_data_obrazka, 850, 400);
         }
     }
 

@@ -108,7 +108,7 @@
                         <div class="card ">
                             <div class="header">
                                 <h4 class="title">Udalosti</h4>
-                                <p class="category">Podľa Okresu</p>
+                                <p class="category">Podľa okresu</p>
                             </div>
                             <div class="content grafUdalosti">
                                 <div id="stlpcovyGrafOkres" class="ct-chart"></div>
@@ -128,7 +128,7 @@
                         <div class="card ">
                             <div class="header">
                                 <h4 class="title">Udalosti</h4>
-                                <p class="category">Podľa Štátov</p>
+                                <p class="category">Podľa štátov</p>
                             </div>
                             <div class="content grafUdalosti">
                                 <div id="stlpcovyGrafStat" class="ct-chart"></div>
