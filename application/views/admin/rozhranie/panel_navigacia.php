@@ -18,7 +18,7 @@
                 </li>
                 <li>
                     <a href="<?php echo site_url("panel/udalosti"); ?>">
-                        <i class="pe-7s-map-marker"></i>
+                        <i class="pe-7s-star"></i>
                         <p>Udalosti</p>
                     </a>
                 </li>
@@ -29,9 +29,27 @@
                     </a>
                 </li>
                 <li>
+                    <a href="<?php echo site_url("panel/cennik"); ?>">
+                        <i class="pe-7s-cash"></i>
+                        <p>Cenník</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?php echo site_url("panel/zaujmy"); ?>">
+                        <i class="pe-7s-like"></i>
+                        <p>Záujmy používatelov</p>
+                    </a>
+                </li>
+                <li>
                     <a href="<?php echo site_url("panel/miesta"); ?>">
-                        <i class="pe-7s-map-2"></i>
+                        <i class="pe-7s-map-marker"></i>
                         <p>Miesta</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?php echo site_url("panel/lokalizacia"); ?>">
+                        <i class="pe-7s-map-2"></i>
+                        <p>Lokalizácia</p>
                     </a>
                 </li>
                 <li>

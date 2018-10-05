@@ -20,6 +20,9 @@ if (isset($okres) && !(empty($okres))) {
 if (isset($stat) && !(empty($stat))) {
     $json["stat"] = $stat;
 }
+if (isset($zaujmy) && !(empty($zaujmy))) {
+    $json["zaujmy"] = $zaujmy;
+}
 if (isset($aktualne_udaje_udalosti) && !(empty($aktualne_udaje_udalosti))) {
     $json["udaje_udalosti"] = $aktualne_udaje_udalosti;
 }

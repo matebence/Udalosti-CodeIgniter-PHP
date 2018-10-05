@@ -22,14 +22,25 @@ function navigacia() {
         aktivnyPrvokNavigacie($(".nav li"), 2);
         $("#nova_udalost").show();
 
-    }else if(castStranky == "miesta"){
+    }else if(castStranky == "cennik"){
         aktivnyPrvokNavigacie($(".nav li"), 3);
         $("#nova_udalost").show();
 
-    }else if(castStranky == "administratori"){
+    }else if(castStranky == "zaujmy"){
         aktivnyPrvokNavigacie($(".nav li"), 4);
         $("#nova_udalost").show();
 
+    }else if(castStranky == "miesta"){
+        aktivnyPrvokNavigacie($(".nav li"), 5);
+        $("#nova_udalost").show();
+
+    }else if(castStranky == "lokalizacia"){
+        aktivnyPrvokNavigacie($(".nav li"), 6);
+        $("#nova_udalost").show();
+
+    }else if(castStranky == "administratori"){
+        aktivnyPrvokNavigacie($(".nav li"), 7);
+        $("#nova_udalost").show();
     }
 }
 

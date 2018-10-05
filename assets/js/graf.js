@@ -14,6 +14,7 @@ $(document).ready(function(){
                 kolacovyGraf(udaje);
                 stlpcovyGrafOkres(udaje);
                 stlpcovyGrafStat(udaje);
+                stlpcovyGrafZaujmy(udaje);
                 ciarovyGraf(udaje);
             }else{
                 $(".grafUdalosti").html("<p>Databazá udalostí je prázdna</p>");
@@ -125,6 +126,39 @@ function stlpcovyGrafStat(udaje){
     ];
 
     Chartist.Bar('#stlpcovyGrafStat', nastavenia, preferencie, graf);
+}
+
+function stlpcovyGrafZaujmy(udaje){
+    var pocet = new Array(udaje.zaujmy.length);
+    var udalost = new Array(udaje.zaujmy.length);
+
+    for (i = 0; i < udaje.zaujmy.length; i++) {
+        udalost[i] = udaje.zaujmy[i].nazov;
+        pocet[i] = udaje.zaujmy[i].pocet;
+    }
+
+    var nastavenia = {
+        labels: udalost,
+        series: [
+            pocet
+        ]
+    };
+
+    var preferencie = {
+        seriesBarDistance: 10,
+        axisX: {
+            showGrid: false
+        },
+        height: "245px"
+    };
+
+    var graf = [
+        ['screen and (max-width: 640px)', {
+            seriesBarDistance: 5
+        }]
+    ];
+
+    Chartist.Bar('#stlpcovyGrafZaujmy', nastavenia, preferencie, graf);
 }
 
 function ciarovyGraf(udaje){

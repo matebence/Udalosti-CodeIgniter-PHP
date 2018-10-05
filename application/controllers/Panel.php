@@ -14,6 +14,7 @@ class Panel extends CI_Controller
         $this->load->model('Rola_pouzivatela_model');
         $this->load->model('Udalost_model');
         $this->load->model('Cennik_model');
+        $this->load->model('Zaujem_model');
     }
 
     public function index()
@@ -91,13 +92,47 @@ class Panel extends CI_Controller
         }
     }
 
+    public function cennik()
+    {
+        if ($this->session->userdata('email_admina')) {
+            $this->pridaj_data("zoznam_pouzivatelov",
+                $this->Rola_pouzivatela_model->zoznam_pouzivatelov());
+
+            $this->load->view("admin/rozhranie/panel_hlavicka");
+            $this->load->view("admin/rozhranie/panel_navigacia");
+
+            $this->load->view("admin/panel/panel_cennik",
+                $this->data);
+
+            $this->load->view("admin/rozhranie/panel_pata");
+        } else {
+            redirect("prihlasenie/pristup");
+        }
+    }
+
+    public function zaujmy()
+    {
+        if ($this->session->userdata('email_admina')) {
+        } else {
+            redirect("prihlasenie/pristup");
+        }
+    }
+
     public function miesta()
+    {
+        if ($this->session->userdata('email_admina')) {
+        } else {
+            redirect("prihlasenie/pristup");
+        }
+    }
+
+    public function lokalizacia()
     {
         if ($this->session->userdata('email_admina')) {
             $this->load->view("admin/rozhranie/panel_hlavicka");
             $this->load->view("admin/rozhranie/panel_navigacia");
 
-            $this->load->view("admin/panel/panel_miesta",
+            $this->load->view("admin/panel/panel_lokalizacia",
                 $this->data);
 
             $this->dialog(site_url('udalosti/nova_udalost'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
@@ -140,7 +175,8 @@ class Panel extends CI_Controller
                     "cennik" => $this->Cennik_model->pocet_udalosti_podla_cennika(),
                     "mesiac" => $this->Udalost_model->pocet_udalosti_v_mesiaci(),
                     "stat" => $this->Udalost_model->udalosti_podla_statu(),
-                    "okres" => $this->Udalost_model->udalosti_podla_okresu()));
+                    "okres" => $this->Udalost_model->udalosti_podla_okresu(),
+                    "zaujmy" => $this->Zaujem_model->zaujmy_pouzivatelov()));
         }else{
             $this->load->view("json/json_admin",
                 array(
