@@ -19,13 +19,13 @@ class Udalosti extends CI_Controller
 
     public function index()
     {
-        $this->zoznam_udalosti();
+        $this->zoznam();
     }
 
-    public function nova_udalost(){
+    public function vytvorit(){
         if ($this->session->userdata('email_admina')) {
-            if ($this->validacia_vstupnych_udajov_novej_udalosti()) {
-                $obrazok = $this->fotka_udalosti();
+            if ($this->validacia_vstupnych_udajov()) {
+                $obrazok = $this->obrazok();
 
                 if(strcmp($obrazok, "") == 0){
                     $this->load->view("admin/notifikacia/notifikacia_oznam.php",
@@ -44,14 +44,14 @@ class Udalosti extends CI_Controller
 
                     $nova_udalost = array(
                         "idCennik" => $this->input->post("cennik"),
-                        "idMiesto" => $this->Miesto_model->miesto($miesto_udalosti),
+                        "idMiesto" => $this->Miesto_model->vytvorit($miesto_udalosti),
                         "obrazok" => $obrazok,
                         "nazov" => $this->input->post("nazov"),
                         "datum" => $this->input->post("datum"),
                         "cas" => $this->input->post("cas"),
                         "vstupenka" => $this->input->post("vstupenka")
                     );
-                    $id_novej_udalosti = $this->Udalost_model->udalost($nova_udalost);
+                    $id_novej_udalosti = $this->Udalost_model->vytvorit($nova_udalost);
                     if ($id_novej_udalosti) {
                         $this->load->view("admin/notifikacia/notifikacia_oznam.php",
                             array(
@@ -80,10 +80,10 @@ class Udalosti extends CI_Controller
         }
     }
 
-    public function aktualizuj_udalost($id_udalost){
+    public function aktualizuj($id_udalost){
         if (($this->session->userdata('email_admina')) && ($id_udalost)) {
-            if ($this->validacia_vstupnych_udajov_novej_udalosti()) {
-                $obrazok = $this->fotka_udalosti();
+            if ($this->validacia_vstupnych_udajov()) {
+                $obrazok = $this->obrazok();
 
                 $miesto_udalosti = array(
                     "stat" => $this->input->post("stat"),
@@ -94,7 +94,7 @@ class Udalosti extends CI_Controller
 
                 $udalost = array(
                     "idCennik" => $this->input->post("cennik"),
-                    "idMiesto" => $this->Miesto_model->miesto($miesto_udalosti),
+                    "idMiesto" => $this->Miesto_model->vytvorit($miesto_udalosti),
                     "obrazok" => $obrazok,
                     "nazov" => $this->input->post("nazov"),
                     "datum" => $this->input->post("datum"),
@@ -107,7 +107,7 @@ class Udalosti extends CI_Controller
                     $this->odstran_obrazok($id_udalost);
                 }
 
-                $aktualizovana_udalost = $this->Udalost_model->aktualizuj_udalost($id_udalost, $udalost);
+                $aktualizovana_udalost = $this->Udalost_model->aktualizuj($id_udalost, $udalost);
                 if ($aktualizovana_udalost) {
                     $this->load->view("admin/notifikacia/notifikacia_oznam.php",
                         array(
@@ -135,11 +135,11 @@ class Udalosti extends CI_Controller
         }
     }
 
-    public function odstran_udalost($id_udalost){
+    public function odstran($id_udalost){
         if (($this->session->userdata('email_admina')) && ($id_udalost)) {
 
             $this->odstran_obrazok_a_miesto($id_udalost);
-            $id_udalosti = $this->Udalost_model->odstran_udalost($id_udalost);
+            $id_udalosti = $this->Udalost_model->odstran($id_udalost);
 
             if($id_udalosti){
                 $this->load->view("admin/notifikacia/notifikacia_oznam.php",
@@ -161,17 +161,17 @@ class Udalosti extends CI_Controller
         }
     }
 
-    public function informacia_o_udalosti($id_udalost){
+    public function informacia($id_udalost){
         if (($this->session->userdata('email_admina')) && ($id_udalost)) {
             $this->load->view("json/json_admin", array(
-                "aktualne_udaje_udalosti" => $this->Udalost_model->informacia_o_udalosti($id_udalost)
+                "aktualne_udaje_udalosti" => $this->Udalost_model->informacia($id_udalost)
             ));
         }else {
             redirect("prihlasenie/pristup");
         }
     }
 
-    private function zoznam_udalosti()
+    private function zoznam()
     {
         if ((strcmp($this->input->post("token"), $this->Pouzivatel_model->token($this->input->post("email"))) == 0 && ($this->input->post("email")))) {
             $data["udalosti"] = $this->Udalost_model->zoznam_udalosti(
@@ -182,7 +182,7 @@ class Udalosti extends CI_Controller
         }
     }
 
-    public function udalosti_podla_pozicie()
+    public function zoznam_podla_pozicie()
     {
         if ((strcmp($this->input->post("token"), $this->Pouzivatel_model->token($this->input->post("email"))) == 0) && ($this->input->post("email"))) {
             $data["udalosti"] = $this->Udalost_model->zoznam_udalosti_v_okoli(
@@ -195,7 +195,7 @@ class Udalosti extends CI_Controller
         }
     }
 
-    private function validacia_vstupnych_udajov_novej_udalosti()
+    private function validacia_vstupnych_udajov()
     {
         $this->form_validation->set_rules('cennik',
             'Váha danej udalosti podľa cenníka',
@@ -252,7 +252,7 @@ class Udalosti extends CI_Controller
         }
     }
 
-    private function fotka_udalosti()
+    private function obrazok()
     {
         $config['upload_path'] = './uploads';
         $config['allowed_types'] = 'gif|jpg|png';
@@ -291,9 +291,9 @@ class Udalosti extends CI_Controller
 
     private function odstran_obrazok_a_miesto($id_udalost)
     {
-        $udalost = $this->Udalost_model->informacia_o_udalosti($id_udalost);
+        $udalost = $this->Udalost_model->informacia($id_udalost);
 
-        $this->Miesto_model->odstran_miesto($udalost["idMiesto"]);
+        $this->Miesto_model->odstran($udalost["idMiesto"]);
         unlink($udalost["obrazok"]);
     }
 }

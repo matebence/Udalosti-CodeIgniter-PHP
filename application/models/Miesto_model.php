@@ -2,7 +2,7 @@
 
 class Miesto_model extends CI_model
 {
-    public function miesto($miesto = array())
+    public function vytvorit($miesto = array())
     {
         $udaj = $this->db->insert('miesto', $miesto);
         if ($udaj) {
@@ -12,7 +12,7 @@ class Miesto_model extends CI_model
         }
     }
 
-    public function aktualizuj_miesto($id_miesto, $udaj)
+    public function aktualizuj($id_miesto, $udaj)
     {
         if (!empty($udaj)) {
             $this->db->where('idMiesto', $id_miesto);
@@ -23,7 +23,7 @@ class Miesto_model extends CI_model
         }
     }
 
-    public function odstran_miesto($id_miesto)
+    public function odstran($id_miesto)
     {
         $odstran = $this->db->delete('miesto', array('idMiesto' => $id_miesto));
         return $odstran ? true : false;

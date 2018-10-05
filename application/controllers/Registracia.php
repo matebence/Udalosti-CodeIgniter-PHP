@@ -16,13 +16,13 @@ class Registracia extends CI_Controller
 
     public function index()
     {
-        $this->registrovat_sa();
+        $this->vyvorit();
     }
 
-    public function registrovat_sa()
+    public function vyvorit()
     {
         if ($this->input->post("nova_registracia")) {
-            if ($this->validacia_registracnych_udajov()) {
+            if ($this->validacia_vstupnych_udajov()) {
 
                     $novy_pouzivatel = array(
                         'email' => $this->input->post('email'),
@@ -30,7 +30,7 @@ class Registracia extends CI_Controller
                         'heslo' => $this->sifrovanie_hesla($this->input->post('heslo')),
                         'token' => "",
                     );
-                    $id_noveho_pouzivatela = $this->Pouzivatel_model->pouzivatel($novy_pouzivatel);
+                    $id_noveho_pouzivatela = $this->Pouzivatel_model->vytvorit($novy_pouzivatel);
 
                     if ($id_noveho_pouzivatela) {
                         if(($this->input->post('prehliadac')) && ($this->session->userdata('email_admina'))){
@@ -40,10 +40,10 @@ class Registracia extends CI_Controller
                             $oznam = "";
 
                             if(strcmp($this->input->post('rola'), "admin") == 0){
-                                $pouzivatel = $this->Rola_pouzivatela_model->rola_pouzivatela($id_noveho_pouzivatela, $this->Rola_model->pouzivatel(ADMIN));
+                                $pouzivatel = $this->Rola_pouzivatela_model->vytvorit($id_noveho_pouzivatela, $this->Rola_model->rola(ADMIN));
                                 $admin = true;
                             }else if(strcmp($this->input->post('rola'), "pouzivatel") == 0){
-                                $pouzivatel = $this->Rola_pouzivatela_model->rola_pouzivatela($id_noveho_pouzivatela, $this->Rola_model->pouzivatel(POUZIVATEL));
+                                $pouzivatel = $this->Rola_pouzivatela_model->vytvorit($id_noveho_pouzivatela, $this->Rola_model->rola(POUZIVATEL));
                             }
 
                             if($pouzivatel){
@@ -69,7 +69,7 @@ class Registracia extends CI_Controller
                                     ));
                             }
                         }else{
-                            if ($this->Rola_pouzivatela_model->rola_pouzivatela($id_noveho_pouzivatela, $this->Rola_model->pouzivatel(POUZIVATEL))) {
+                            if ($this->Rola_pouzivatela_model->vytvorit($id_noveho_pouzivatela, $this->Rola_model->rola(POUZIVATEL))) {
                                 $this->session->set_flashdata('uspech', 'Registrácia prebehla úspšne.');
                                 $this->load->view("json/json_vystup_pridanie_dat");
                             } else {
@@ -106,7 +106,7 @@ class Registracia extends CI_Controller
         }
     }
 
-    private function validacia_registracnych_udajov()
+    private function validacia_vstupnych_udajov()
     {
         $this->form_validation->set_rules('meno',
             'Meno regitrujúcého',

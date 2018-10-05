@@ -2,7 +2,7 @@
 
 class Zaujem_model extends CI_model
 {
-    public function zaujem($zaujem = array())
+    public function vytvorit($zaujem = array())
     {
         $udaj = $this->db->insert('zaujem', $zaujem);
         if ($udaj) {
@@ -12,7 +12,7 @@ class Zaujem_model extends CI_model
         }
     }
 
-    public function aktualizuj_zaujem($id_zaujem, $udaj)
+    public function aktualizuj($id_zaujem, $udaj)
     {
         if (!empty($udaj)) {
             $this->db->where('idZaujem', $id_zaujem);
@@ -23,13 +23,13 @@ class Zaujem_model extends CI_model
         }
     }
 
-    public function odstran_zaujem($id_zaujem)
+    public function odstran($id_zaujem)
     {
         $odstran = $this->db->delete('zaujem', array('idZaujem' => $id_zaujem));
         return $odstran ? true : false;
     }
 
-    public function zaujmy_pouzivatelov()
+    public function zaujmy()
     {
         $this->db->select('nazov, COUNT(*) as pocet');
         $this->db->from('zaujem');

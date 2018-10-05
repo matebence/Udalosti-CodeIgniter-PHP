@@ -21,27 +21,27 @@ class Prihlasenie extends CI_Controller
         if ($this->session->userdata('email_admina')) {
             redirect("panel");
         }else{
-            $this->prihlasit_sa();
+            $this->prihlasit();
         }
     }
 
-    public function prihlasit_sa()
+    public function prihlasit()
     {
         if ($this->input->post('pokus_o_prihlasenie')) {
-            if ($this->validacia_prihlasovacych_udajov()) {
+            if ($this->validacia_vstupnych_udajov()) {
 
                 $prihlasovacie_udaje = array('email' => $this->input->post('email'), 'heslo' => $this->input->post('heslo'));
                 $prihlasovacie_udaje["heslo"] = $this->spravnost_hesla($prihlasovacie_udaje["heslo"], $this->Pouzivatel_model->existuje($prihlasovacie_udaje));
 
                 if ($prihlasovacie_udaje["heslo"] != null) {
-                    if (!($this->Rola_pouzivatela_model->prihlas_pouzivatela($prihlasovacie_udaje))) {
+                    if (!($this->Rola_pouzivatela_model->prihlas($prihlasovacie_udaje))) {
                         if ($this->input->post('prehliadac')) {
                             $this->session->set_flashdata('chyba', 'Nesprávne prihlasovacie údaje!');
                             $this->load->view("admin/dialog/dialog_oznam");
                             $this->load->view("admin/rozhranie/prihlasenie_pata");
 
                         }else{
-                            $this->Pouzivatel_model->aktualizuj_pouzivatela($prihlasovacie_udaje['email'], null, array("token" => md5(uniqid(rand(), true))));
+                            $this->Pouzivatel_model->aktualizuj($prihlasovacie_udaje['email'], null, array("token" => md5(uniqid(rand(), true))));
                             $this->session->set_flashdata('autentifikacia', 'Spravné prihlasovacie údaje');
 
                             $data["token"] = $this->Pouzivatel_model->token($prihlasovacie_udaje["email"]);
@@ -77,7 +77,7 @@ class Prihlasenie extends CI_Controller
         }
     }
 
-    private function validacia_prihlasovacych_udajov()
+    private function validacia_vstupnych_udajov()
     {
         $this->form_validation->set_rules('email',
             'Email',
@@ -116,7 +116,7 @@ class Prihlasenie extends CI_Controller
     public function odhlasit_sa()
     {
         $this->session->sess_destroy();
-        $this->Pouzivatel_model->aktualizuj_pouzivatela($this->input->post('email'), null, array("token" => ""));
+        $this->Pouzivatel_model->aktualizuj($this->input->post('email'), null, array("token" => ""));
 
         $this->session->set_flashdata('uspech', 'Odhlásenie prebehlo úspešne.');
 

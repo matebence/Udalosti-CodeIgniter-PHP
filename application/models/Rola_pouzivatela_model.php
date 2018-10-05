@@ -2,7 +2,7 @@
 
 class Rola_pouzivatela_model extends CI_model
 {
-    public function rola_pouzivatela($id_pouzivatel, $id_rola)
+    public function vytvorit($id_pouzivatel, $id_rola)
     {
         if ($id_pouzivatel == 0 || $id_rola == 0) {
             return false;
@@ -20,7 +20,7 @@ class Rola_pouzivatela_model extends CI_model
         }
     }
 
-    public function aktualizuj_rolu_pouzivatela($id_pouzivatel, $udaj)
+    public function aktualizuj($id_pouzivatel, $udaj)
     {
         if (!empty($udaj)) {
             $this->db->where('idPouzivatel', $id_pouzivatel);
@@ -31,13 +31,13 @@ class Rola_pouzivatela_model extends CI_model
         }
     }
 
-    public function odstran_rolu_pouzivatela($id_pouzivatel)
+    public function odstran($id_pouzivatel)
     {
         $odstran = $this->db->delete('rola_pouzivatela', array('idPouzivatel' => $id_pouzivatel));
         return $odstran ? true : false;
     }
 
-    public function prihlas_pouzivatela($prihlasovacie_udaje)
+    public function prihlas($prihlasovacie_udaje)
     {
         $this->db->select('nazov');
         $this->db->from('rola_pouzivatela');
@@ -54,7 +54,7 @@ class Rola_pouzivatela_model extends CI_model
         }
     }
 
-    public function pocet_pouzivatelov($typ_roli){
+    public function pocet($typ_roli){
         $this->db->select('meno');
         $this->db->from('rola_pouzivatela');
         $this->db->join('pouzivatel', 'pouzivatel.idPouzivatel = rola_pouzivatela.idPouzivatel');
@@ -67,7 +67,7 @@ class Rola_pouzivatela_model extends CI_model
         return 0;
     }
 
-    public function informacia_o_pouzivatelovi($id_pouzivatel)
+    public function informacia($id_pouzivatel)
     {
         $this->db->select('meno, email, nazov');
         $this->db->from('rola_pouzivatela');

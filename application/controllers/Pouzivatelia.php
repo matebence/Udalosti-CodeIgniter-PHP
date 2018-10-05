@@ -10,21 +10,20 @@ class Pouzivatelia extends CI_Controller
         $this->load->library('form_validation');
 
         $this->load->model('Pouzivatel_model');
-        $this->load->model('Rola_model');
         $this->load->model('Rola_pouzivatela_model');
     }
 
-    public function informacia_o_pouzivatelovi($id_pouzivatel){
+    public function informacia($id_pouzivatel){
         if (($this->session->userdata('email_admina')) && ($id_pouzivatel)) {
             $this->load->view("json/json_admin", array(
-                "aktualny_pouzivatel" => $this->Rola_pouzivatela_model->informacia_o_pouzivatelovi($id_pouzivatel)
+                "aktualny_pouzivatel" => $this->Rola_pouzivatela_model->informacia($id_pouzivatel)
             ));
         } else {
             redirect("prihlasenie/pristup");
         }
     }
 
-    public function aktualizuj_pouzivatela($id_pouzivatel){
+    public function aktualizuj($id_pouzivatel){
         if (($this->session->userdata('email_admina')) && ($id_pouzivatel)) {
             $heslo_bolo_aktualizovane = false;
 
@@ -32,7 +31,7 @@ class Pouzivatelia extends CI_Controller
                 $heslo_bolo_aktualizovane = true;
             }
 
-            if ($this->validacia_novych_pouzivatelskych_udajov($heslo_bolo_aktualizovane)) {
+            if ($this->validacia_vstupnych_udajov($heslo_bolo_aktualizovane)) {
                 $pouzivatel = array(
                     "meno" => $this->input->post("meno"),
                     "email" => $this->input->post("email"));
@@ -40,7 +39,7 @@ class Pouzivatelia extends CI_Controller
                     $pouzivatel["heslo"] = $this->sifrovanie_hesla($this->input->post('heslo'));
                 }
 
-                $aktualizovany_pouzivatel = $this->Pouzivatel_model->aktualizuj_pouzivatela(null, $id_pouzivatel, $pouzivatel);
+                $aktualizovany_pouzivatel = $this->Pouzivatel_model->aktualizuj(null, $id_pouzivatel, $pouzivatel);
                 if($aktualizovany_pouzivatel){
 
                     $pouzivatel = null;
@@ -48,10 +47,10 @@ class Pouzivatelia extends CI_Controller
                     $oznam = "";
 
                     if(strcmp($this->input->post('rola'), "admin") == 0){
-                        $pouzivatel = $this->Rola_pouzivatela_model->aktualizuj_rolu_pouzivatela($id_pouzivatel, array("idRola" => 1));
+                        $pouzivatel = $this->Rola_pouzivatela_model->aktualizuj($id_pouzivatel, array("idRola" => 1));
                         $admin = true;
                     }else if(strcmp($this->input->post('rola'), "pouzivatel") == 0){
-                        $pouzivatel = $this->Rola_pouzivatela_model->aktualizuj_rolu_pouzivatela($id_pouzivatel, array("idRola" => 2));
+                        $pouzivatel = $this->Rola_pouzivatela_model->aktualizuj($id_pouzivatel, array("idRola" => 2));
                     }
 
                     if($pouzivatel){
@@ -89,10 +88,10 @@ class Pouzivatelia extends CI_Controller
         }
     }
 
-    public function odstran_pouzivatela($id_pouzivatel){
+    public function odstran($id_pouzivatel){
         if (($this->session->userdata('email_admina')) && ($id_pouzivatel)) {
 
-            if(($this->Pouzivatel_model->odstran_pouzivatela($id_pouzivatel)) && ($this->Rola_pouzivatela_model->odstran_rolu_pouzivatela($id_pouzivatel))){
+            if(($this->Pouzivatel_model->odstran($id_pouzivatel)) && ($this->Rola_pouzivatela_model->odstran($id_pouzivatel))){
                 $this->load->view("admin/notifikacia/notifikacia_oznam.php",
                     array(
                         "ikona" => "pe-7s-check",
@@ -112,7 +111,7 @@ class Pouzivatelia extends CI_Controller
         }
     }
 
-    private function validacia_novych_pouzivatelskych_udajov($nove_heslo)
+    private function validacia_vstupnych_udajov($nove_heslo)
     {
         $this->form_validation->set_rules('meno',
             'Meno regitrujúcého',

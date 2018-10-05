@@ -2,7 +2,7 @@
 
 class Pouzivatel_model extends CI_model
 {
-    public function pouzivatel($pouzivatel= array())
+    public function vytvorit($pouzivatel= array())
     {
         $udaj = $this->db->insert('pouzivatel', $pouzivatel);
         if ($udaj) {
@@ -12,7 +12,7 @@ class Pouzivatel_model extends CI_model
         }
     }
 
-    public function aktualizuj_pouzivatela($email, $id_pouzivatel, $udaj)
+    public function aktualizuj($email, $id_pouzivatel, $udaj)
     {
         if (!empty($udaj)) {
 
@@ -29,7 +29,7 @@ class Pouzivatel_model extends CI_model
         }
     }
 
-    public function odstran_pouzivatela($id_pouzivatel)
+    public function odstran($id_pouzivatel)
     {
         $odstran = $this->db->delete('pouzivatel', array('idPouzivatel' => $id_pouzivatel));
         return $odstran ? true : false;

@@ -2,7 +2,7 @@
 
 class Udalost_model extends CI_model
 {
-    public function udalost($udalost = array())
+    public function vytvorit($udalost = array())
     {
         $udaj = $this->db->insert('udalost', $udalost);
         if ($udaj) {
@@ -12,7 +12,7 @@ class Udalost_model extends CI_model
         }
     }
 
-    public function aktualizuj_udalost($id_udalost, $udaj)
+    public function aktualizuj($id_udalost, $udaj)
     {
         if (!empty($udaj)) {
             $this->db->where('idUdalost', $id_udalost);
@@ -23,7 +23,7 @@ class Udalost_model extends CI_model
         }
     }
 
-    public function odstran_udalost($id_udalost)
+    public function odstran($id_udalost)
     {
         $odstran = $this->db->delete('udalost', array('idUdalost' => $id_udalost));
         return $odstran ? true : false;
@@ -91,7 +91,19 @@ class Udalost_model extends CI_model
         return 0;
     }
 
-    public function informacia_o_udalosti($id_udalost){
+    public function pocet_udalosti_v_mesiaci(){
+        $this->db->select('MONTHNAME(datum) AS Mesiac, COUNT(*) AS Pocet');
+        $this->db->from('udalost');
+        $this->db->order_by('datum');
+        $this->db->group_by('MONTHNAME(datum)');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return 0;
+    }
+
+    public function informacia($id_udalost){
         $this->db->select('*');
         $this->db->from('udalost');
         $this->db->join('miesto', 'udalost.idMiesto = miesto.idMiesto');
@@ -103,7 +115,7 @@ class Udalost_model extends CI_model
         return null;
     }
 
-    public function vsetky_udalosti(){
+    public function zoznam(){
         $this->db->select('*');
         $this->db->from('udalost');
         $this->db->join('cennik', 'udalost.idCennik = cennik.idCennik');
@@ -139,17 +151,6 @@ class Udalost_model extends CI_model
         }
         return 0;
     }
-
-    public function pocet_udalosti_v_mesiaci(){
-        $this->db->select('MONTHNAME(datum) AS Mesiac, COUNT(*) AS Pocet');
-        $this->db->from('udalost');
-        $this->db->order_by('datum');
-        $this->db->group_by('MONTHNAME(datum)');
-        $query = $this->db->get();
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
-        }
-        return 0;
-    }
 }
+
 ?>
