@@ -5,6 +5,9 @@ $json = array();
 if (isset($cennik) && !(empty($cennik))) {
     $json["cennik"] = $cennik;
 }
+if (isset($zoznam_cien) && !(empty($zoznam_cien))) {
+    $json["zoznam_cien"] = $zoznam_cien;
+}
 if (isset($mesiac) && !(empty($mesiac))) {
     $json["mesiac"] = $mesiac;
 }

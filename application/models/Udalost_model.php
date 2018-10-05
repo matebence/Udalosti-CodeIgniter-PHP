@@ -31,9 +31,10 @@ class Udalost_model extends CI_model
 
     public function zoznam_udalosti($stat)
     {
-        $this->db->select("udalost.idUdalost, obrazok, nazov, DAY(datum) as den, MONTHNAME(datum) as mesiac, DATE_FORMAT(cas, '%H:%i') as cas, mesto, miesto");
+        $this->db->select("udalost.idUdalost, obrazok, nazov, DAY(datum) as den, MONTHNAME(datum) as mesiac, DATE_FORMAT(cas, '%H:%i') as cas, mesto, ulica");
         $this->db->from('udalost');
         $this->db->join('cennik', 'cennik.idCennik = udalost.idCennik');
+        $this->db->join('miesto', 'udalost.idMiesto = miesto.idMiesto');
         if ($stat != null) {
             $this->db->where("stat", $stat);
         }
@@ -47,9 +48,10 @@ class Udalost_model extends CI_model
 
     public function zoznam_udalosti_v_okoli($stat, $okres, $mesto)
     {
-        $this->db->select("udalost.idUdalost, obrazok, nazov, DAY(datum) as den, MONTHNAME(datum) as mesiac, DATE_FORMAT(cas, '%H:%i') as cas, mesto, miesto");
+        $this->db->select("udalost.idUdalost, obrazok, nazov, DAY(datum) as den, MONTHNAME(datum) as mesiac, DATE_FORMAT(cas, '%H:%i') as cas, mesto, ulica");
         $this->db->from('udalost');
         $this->db->join('cennik', 'cennik.idCennik = udalost.idCennik');
+        $this->db->join('miesto', 'udalost.idMiesto = miesto.idMiesto');
         if ($stat != null) {
             $podmienka = "";
             if ($okres == null) {
@@ -92,6 +94,7 @@ class Udalost_model extends CI_model
     public function informacia_o_udalosti($id_udalost){
         $this->db->select('*');
         $this->db->from('udalost');
+        $this->db->join('miesto', 'udalost.idMiesto = miesto.idMiesto');
         $this->db->where("idUdalost", $id_udalost);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
@@ -103,6 +106,8 @@ class Udalost_model extends CI_model
     public function vsetky_udalosti(){
         $this->db->select('*');
         $this->db->from('udalost');
+        $this->db->join('cennik', 'udalost.idCennik = cennik.idCennik');
+        $this->db->join('miesto', 'udalost.idMiesto = miesto.idMiesto');
         $this->db->order_by("udalost.timestamp", "desc");
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
@@ -114,6 +119,7 @@ class Udalost_model extends CI_model
     public function udalosti_podla_okresu(){
         $this->db->select('okres, COUNT(*) AS Pocet');
         $this->db->from('udalost');
+        $this->db->join('miesto', 'udalost.idMiesto = miesto.idMiesto');
         $this->db->group_by('okres');
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
@@ -125,6 +131,7 @@ class Udalost_model extends CI_model
     public function udalosti_podla_statu(){
         $this->db->select('stat, COUNT(*) AS Pocet');
         $this->db->from('udalost');
+        $this->db->join('miesto', 'udalost.idMiesto = miesto.idMiesto');
         $this->db->group_by('stat');
         $query = $this->db->get();
         if ($query->num_rows() > 0) {

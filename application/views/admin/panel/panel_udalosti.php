@@ -22,7 +22,8 @@
                             <th>Názov</th>
                             <th>Dátum</th>
                             <th>Čas</th>
-                            <th>Miesto</th>
+                            <th>Vstupenka</th>
+                            <th>Ulica</th>
                             <th>Štát</th>
                             <th>Okres</th>
                             <th>Mesto</th>
@@ -35,12 +36,13 @@
                                     foreach ($vsetky_udalosti as $udalost) {
                                         echo "<tr>";
                                             echo "<td>" . $udalost['idUdalost'] . "</td>";
-                                            echo "<td>" . $udalost['idCennik'] . "</td>";
+                                            echo "<td>" . $udalost['suma'] . " €</td>";
                                             echo "<td>" . $udalost['obrazok'] . "</td>";
                                             echo "<td>" . $udalost['nazov'] . "</td>";
                                             echo "<td>" . $udalost['datum'] . "</td>";
                                             echo "<td>" . $udalost['cas'] . "</td>";
-                                            echo "<td>" . $udalost['miesto'] . "</td>";
+                                            echo "<td>" . $udalost['vstupenka'] . "€</td>";
+                                            echo "<td>" . $udalost['ulica'] . "</td>";
                                             echo "<td>" . $udalost['stat'] . "</td>";
                                             echo "<td>" . $udalost['okres'] . "</td>";
                                             echo "<td>" . $udalost['mesto'] . "</td>";

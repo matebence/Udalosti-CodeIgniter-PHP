@@ -17,9 +17,6 @@
                                             <div class="form-group">
                                                 <label>Cenník</label>
                                                 <select id="cennik-<?php if(isset($identifikator)){echo $identifikator;}?>" name="cennik" class="form-control">
-                                                    <option value="1">Váha 1</option>
-                                                    <option value="2">Váha 2</option>
-                                                    <option value="3">Váha 3</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -72,10 +69,16 @@
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Miesto</label>
-                                                <input type="text" id="miesto-<?php if(isset($identifikator)){echo $identifikator;}?>" name="miesto" class="form-control" placeholder="Miesto udalosti">
+                                                <label>Ulica</label>
+                                                <input type="text" id="ulica-<?php if(isset($identifikator)){echo $identifikator;}?>" name="ulica" class="form-control" placeholder="Miesto udalosti">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Vstupenka</label>
+                                                <input type="text" id="vstupenka-<?php if(isset($identifikator)){echo $identifikator;}?>" name="vstupenka" class="form-control" placeholder="Cena vstupenky">
                                             </div>
                                         </div>
                                     </div>

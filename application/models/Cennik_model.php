@@ -29,6 +29,16 @@ class Cennik_model extends CI_model
         return $odstran ? true : false;
     }
 
+    public function zoznam_cien(){
+        $this->db->select('*');
+        $this->db->from('cennik');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return 0;
+    }
+
     public function pocet_udalosti_podla_cennika(){
         $this->db->select('idCennik, COUNT(*) AS Pocet');
         $this->db->from('udalost');

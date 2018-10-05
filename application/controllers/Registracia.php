@@ -110,11 +110,10 @@ class Registracia extends CI_Controller
     {
         $this->form_validation->set_rules('meno',
             'Meno regitrujúcého',
-            'required|min_length[3]|max_length[20]|alpha',
+            'required|min_length[3]|max_length[20]',
             array('required' => 'Nesprávny formát mena!',
                 'min_length' => 'Nesprávny formát mena!',
-                'max_length' => 'Nesprávny formát mena!',
-                'alpha' => 'Nesprávny formát mena!'));
+                'max_length' => 'Nesprávny formát mena!'));
         $this->form_validation->set_rules('email',
             'Email regitrujúcého',
             'required|valid_email|is_unique[pouzivatel.email]',
