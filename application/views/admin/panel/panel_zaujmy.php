@@ -14,10 +14,12 @@
                     <div class="content table-responsive table-full-width">
                         <table class="table table-hover table-striped">
                             <thead>
-                            <th>Udalost</th>
-                            <th>Miesto</th>
-                            <th>Dátum</th>
-                            <th>Počet používatelov</th>
+                                <tr>
+                                    <th>Udalost</th>
+                                    <th>Miesto</th>
+                                    <th>Dátum</th>
+                                    <th>Počet používatelov</th>
+                                </tr>
                             </thead>
                             <tbody>
                             <?php
@@ -25,8 +27,8 @@
                                 if(!empty($zaujmy)){
                                     foreach ($zaujmy as $zaujem) {
                                         echo "<tr>";
-                                        echo "<td>".$zaujem['udalost']."</td>";
-                                        echo "<td>".$zaujem['miesto']."</td>";
+                                        echo "<td>".$zaujem['nazov']."</td>";
+                                        echo "<td>".$zaujem['mesto']."</td>";
                                         echo "<td>".$zaujem['datum']."</td>";
                                         echo "<td>".$zaujem['pocet']."</td>";
                                         echo "</tr>";

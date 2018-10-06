@@ -29,11 +29,12 @@ class Zaujem_model extends CI_model
         return $odstran ? true : false;
     }
 
-    public function zaujmy()
+    public function zoznam()
     {
-        $this->db->select('nazov, COUNT(*) as pocet');
+        $this->db->select('nazov, mesto, datum, COUNT(*) as pocet');
         $this->db->from('zaujem');
         $this->db->join('udalost', 'zaujem.idUdalost = udalost.idUdalost');
+        $this->db->join('miesto', 'udalost.idMiesto = miesto.idMiesto ');
         $this->db->join('pouzivatel', 'zaujem.idPouzivatel = pouzivatel.idPouzivatel');
         $this->db->group_by('zaujem.idUdalost');
         $query = $this->db->get();

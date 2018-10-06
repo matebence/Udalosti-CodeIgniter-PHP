@@ -31,7 +31,17 @@ class Miesto_model extends CI_model
 
     public function zoznam()
     {
-        
+        $this->db->select('stat, okres, mesto');
+        $this->db->from('miesto');
+        $this->db->join('udalost', 'miesto.idMiesto = udalost.idMiesto');
+        $this->db->where("datum >= CURDATE()");
+        $this->db->group_by('mesto');
+        $this->db->order_by("datum", "asc");
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return null;
     }
 }
 

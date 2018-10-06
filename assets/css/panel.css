@@ -30,6 +30,11 @@ h1, h2, h3, h4, h5, h6{
     position:relative;
     width:100%;
     height: calc(100% - 127px);
+    border: none;
+}
+
+.cennik-operacie{
+    text-align: right;
 }
 
 a.nahlad {
@@ -41,15 +46,14 @@ a.nahlad {
 
 a.nahlad img {
     position: absolute;
-    opacity: 0;
+    display: none;
     width: 250px;
     left: 0;
     top: -20px;
-    transition: opacity .5s, top .5s;
 }
 
 a.nahlad:hover img {
-    opacity: 1;
+    display: block;
     top: 20px;
 }
 

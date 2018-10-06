@@ -86,14 +86,14 @@ $(".cennik_dialog_odstranit").click(function () {
 
 
 $(".odstranit").click(function () {
-    identifikator = parseInt($(this).attr('id'));
+    identifikator = parseInt($(this).attr('class').split(" ")[0]);
 });
 
 $(".editovat").click(function () {
     var adresa = window.location.href;
 
     castStranky = adresa.substr(adresa.lastIndexOf("/") + 1, adresa.length);
-    identifikator = parseInt($(this).attr('id'));
+    identifikator = parseInt($(this).attr('class').split(" ")[0]);
 
     if (castStranky == "udalosti") {
         spracujData("/udalosti/index.php/udalosti/informacia/" + identifikator, null, operacia.VYPLN_FORMULAR);

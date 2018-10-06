@@ -14,19 +14,21 @@
                     <div class="content table-responsive table-full-width">
                         <table class="table table-hover table-striped">
                             <thead>
-                            <th>Štát</th>
-                            <th>Okres</th>
-                            <th>Miesto</th>
+                                <tr>
+                                    <th>Štát</th>
+                                    <th>Okres</th>
+                                    <th>Miesto</th>
+                                </tr>
                             </thead>
                             <tbody>
                             <?php
-                            if(isset($zaujmy)){
-                                if(!empty($zaujmy)){
-                                    foreach ($zaujmy as $zaujem) {
+                            if(isset($miesta)){
+                                if(!empty($miesta)){
+                                    foreach ($miesta as $miesto) {
                                         echo "<tr>";
-                                        echo "<td>".$zaujem['stat']."</td>";
-                                        echo "<td>".$zaujem['okres']."</td>";
-                                        echo "<td>".$zaujem['miesto']."</td>";
+                                        echo "<td>".$miesto['stat']."</td>";
+                                        echo "<td>".$miesto['okres']."</td>";
+                                        echo "<td>".$miesto['mesto']."</td>";
                                         echo "</tr>";
                                     }
                                 }

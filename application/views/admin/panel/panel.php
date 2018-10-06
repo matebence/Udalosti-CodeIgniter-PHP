@@ -35,7 +35,7 @@
                     <span class="info-box-icon bg-red"><i class="fa fa-balance-scale"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Počet administrátorov</span>
-                        <span id="registrovali-dnes" class="info-box-number"><?php if (isset($pocet_administratorov)) {
+                        <span id="pocet-administratorov" class="info-box-number"><?php if (isset($pocet_administratorov)) {
                                 echo $pocet_administratorov;
                             } else {
                                 echo "Údaj je neprístupný";
@@ -51,7 +51,7 @@
                     <span class="info-box-icon bg-red"><i class="fa fa-mobile" style="font-size: 55px"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Aplikáciu momentálne používajú</span>
-                        <span id="pocet-udalosti" class="info-box-number"><?php if (isset($aktivny_pouzivatelia)) {
+                        <span id="aktivny-pouzivatelia" class="info-box-number"><?php if (isset($aktivny_pouzivatelia)) {
                                 echo $aktivny_pouzivatelia;
                             } else {
                                 echo "Údaj je neprístupný";

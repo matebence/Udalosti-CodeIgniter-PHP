@@ -16,9 +16,12 @@
                     <div class="content table-responsive table-full-width">
                         <table class="table table-hover table-striped">
                             <thead>
-                            <th>ID</th>
-                            <th>Váha</th>
-                            <th>Suma</th>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Váha</th>
+                                    <th>Suma</th>
+                                    <th></th>
+                                </tr>
                             </thead>
                             <tbody>
                             <?php
@@ -29,9 +32,9 @@
                                         echo "<td>".$cennik['idCennik']."</td>";
                                         echo "<td>".$cennik['vaha']."</td>";
                                         echo "<td>".$cennik['suma']. " €</td>";
-                                        echo "<td align='right'>
-                                                    <i class='fa fa-edit editovat' id='".$cennik['idCennik']."' data-toggle='modal' data-target='#aktualizovat-cennik'></i>
-                                                    <i class='fa fa-trash odstranit' id='".$cennik['idCennik']."' data-toggle='modal' data-target='#odstranit-cennik'></i>
+                                        echo "<td class='cennik-operacie'>
+                                                    <i class='".$cennik['idCennik']." fa fa-edit editovat' data-toggle='modal' data-target='#aktualizovat-cennik'></i>
+                                                    <i class='".$cennik['idCennik']." fa fa-trash odstranit' data-toggle='modal' data-target='#odstranit-cennik'></i>
                                                   </td>";
                                         echo "</tr>";
                                     }

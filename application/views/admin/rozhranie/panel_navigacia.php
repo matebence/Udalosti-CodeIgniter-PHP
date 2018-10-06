@@ -15,6 +15,7 @@
                         <i class="pe-7s-graph"></i>
                         <p>Panel</p>
                     </a>
+                    <hr>
                 </li>
                 <li>
                     <a href="<?php echo site_url("panel/udalosti"); ?>">
@@ -33,6 +34,7 @@
                         <i class="pe-7s-cash"></i>
                         <p>Cenník</p>
                     </a>
+                    <hr>
                 </li>
                 <li>
                     <a href="<?php echo site_url("panel/zaujmy"); ?>">
@@ -45,12 +47,14 @@
                         <i class="pe-7s-map-marker"></i>
                         <p>Miesta</p>
                     </a>
+                    <hr>
                 </li>
                 <li>
                     <a href="<?php echo site_url("panel/lokalizacia"); ?>">
                         <i class="pe-7s-map-2"></i>
                         <p>Lokalizácia</p>
                     </a>
+                    <hr>
                 </li>
                 <li>
                     <a href="<?php echo site_url("panel/administratori"); ?>">

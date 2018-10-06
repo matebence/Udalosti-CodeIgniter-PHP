@@ -16,12 +16,15 @@
                     <div class="content table-responsive table-full-width">
                         <table class="table table-hover table-striped">
                             <thead>
-                            <th>ID</th>
-                            <th>Email</th>
-                            <th>Meno</th>
-                            <th>Heslo</th>
-                            <th>Token</th>
-                            <th>Vytvorený</th>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Email</th>
+                                    <th>Meno</th>
+                                    <th>Heslo</th>
+                                    <th>Token</th>
+                                    <th>Vytvorený</th>
+                                    <th></th>
+                                </tr>
                             </thead>
                             <tbody>
                             <?php
@@ -36,8 +39,8 @@
                                         echo "<td>".$pouzivatel['token']."</td>";
                                         echo "<td>".$pouzivatel['timestamp']."</td>";
                                         echo "<td>
-                                                    <i class='fa fa-edit editovat' id='".$pouzivatel['idPouzivatel']."' data-toggle='modal' data-target='#aktualizovat-pouzivatel_admin'></i>
-                                                    <i class='fa fa-trash odstranit' id='".$pouzivatel['idPouzivatel']."' data-toggle='modal' data-target='#odstranit-pouzivatel_admin'></i>
+                                                    <i class='".$pouzivatel['idPouzivatel']." fa fa-edit editovat' data-toggle='modal' data-target='#aktualizovat-pouzivatel_admin'></i>
+                                                    <i class='".$pouzivatel['idPouzivatel']." fa fa-trash odstranit' data-toggle='modal' data-target='#odstranit-pouzivatel_admin'></i>
                                                   </td>";
                                         echo "</tr>";
                                     }

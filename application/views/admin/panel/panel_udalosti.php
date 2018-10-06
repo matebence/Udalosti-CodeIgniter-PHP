@@ -16,18 +16,21 @@
                     <div class="content table-responsive table-full-width">
                         <table class="table table-hover table-striped">
                             <thead>
-                            <th>ID</th>
-                            <th>Cenník</th>
-                            <th>Obrázok</th>
-                            <th>Názov</th>
-                            <th>Dátum</th>
-                            <th>Čas</th>
-                            <th>Vstupenka</th>
-                            <th>Ulica</th>
-                            <th>Štát</th>
-                            <th>Okres</th>
-                            <th>Mesto</th>
-                            <th>Vytvorený</th>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Cenník</th>
+                                    <th>Obrázok</th>
+                                    <th>Názov</th>
+                                    <th>Dátum</th>
+                                    <th>Čas</th>
+                                    <th>Vstupenka</th>
+                                    <th>Ulica</th>
+                                    <th>Štát</th>
+                                    <th>Okres</th>
+                                    <th>Mesto</th>
+                                    <th>Vytvorený</th>
+                                    <th></th>
+                                </tr>
                             </thead>
                             <tbody>
                             <?php
@@ -37,7 +40,7 @@
                                         echo "<tr>";
                                             echo "<td>" . $udalost['idUdalost'] . "</td>";
                                             echo "<td>" . $udalost['suma'] . " €</td>";
-                                            echo "<td><a class='nahlad' href='#'>".$udalost['obrazok']."<img src='".base_url().$udalost['obrazok']."' /></a></td>";
+                                            echo "<td><a class='nahlad' href='#'>".$udalost['obrazok']."<img alt='Obrázok udalosti' src='".base_url().$udalost['obrazok']."' /></a></td>";
                                             echo "<td>" . $udalost['nazov'] . "</td>";
                                             echo "<td>" . $udalost['datum'] . "</td>";
                                             echo "<td>" . $udalost['cas'] . "</td>";
@@ -48,8 +51,8 @@
                                             echo "<td>" . $udalost['mesto'] . "</td>";
                                             echo "<td>" . $udalost['timestamp'] . "</td>";
                                             echo "<td>
-                                                    <i class='fa fa-edit editovat' id='".$udalost['idUdalost']."' data-toggle='modal' data-target='#aktualizovat-udalost'></i>
-                                                    <i class='fa fa-trash odstranit' id='".$udalost['idUdalost']."' data-toggle='modal' data-target='#odstranit-udalost'></i>
+                                                    <i class='".$udalost['idUdalost']." fa fa-edit editovat' data-toggle='modal' data-target='#aktualizovat-udalost'></i>
+                                                    <i class='".$udalost['idUdalost']." fa fa-trash odstranit' data-toggle='modal' data-target='#odstranit-udalost'></i>
                                                   </td>";
                                         echo "</tr>";
                                     }

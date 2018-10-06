@@ -94,7 +94,7 @@ class Udalosti extends CI_Controller
 
                 $udalost = array(
                     "idCennik" => $this->input->post("cennik"),
-                    "idMiesto" => $this->Miesto_model->vytvorit($miesto_udalosti),
+                    "idMiesto" => $this->Miesto_model->aktualizuj($this->Udalost_model->informacia($id_udalost)["idMiesto"], $miesto_udalosti),
                     "obrazok" => $obrazok,
                     "nazov" => $this->input->post("nazov"),
                     "datum" => $this->input->post("datum"),

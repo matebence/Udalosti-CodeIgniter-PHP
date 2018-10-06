@@ -15,6 +15,7 @@ class Panel extends CI_Controller
         $this->load->model('Udalost_model');
         $this->load->model('Cennik_model');
         $this->load->model('Zaujem_model');
+        $this->load->model('Miesto_model');
     }
 
     public function index()
@@ -119,8 +120,8 @@ class Panel extends CI_Controller
     public function zaujmy()
     {
         if ($this->session->userdata('email_admina')) {
-            $this->pridaj_data("zoznam_cien",
-                $this->Cennik_model->zoznam());
+            $this->pridaj_data("zaujmy",
+                $this->Zaujem_model->zoznam());
 
             $this->load->view("admin/rozhranie/panel_hlavicka");
             $this->load->view("admin/rozhranie/panel_navigacia");
@@ -139,8 +140,8 @@ class Panel extends CI_Controller
     public function miesta()
     {
         if ($this->session->userdata('email_admina')) {
-            $this->pridaj_data("zoznam_cien",
-                $this->Cennik_model->zoznam());
+            $this->pridaj_data("miesta",
+                $this->Miesto_model->zoznam());
 
             $this->load->view("admin/rozhranie/panel_hlavicka");
             $this->load->view("admin/rozhranie/panel_navigacia");
@@ -206,7 +207,7 @@ class Panel extends CI_Controller
                     "mesiac" => $this->Udalost_model->pocet_udalosti_v_mesiaci(),
                     "stat" => $this->Udalost_model->udalosti_podla_statu(),
                     "okres" => $this->Udalost_model->udalosti_podla_okresu(),
-                    "zaujmy" => $this->Zaujem_model->zaujmy()));
+                    "zaujmy" => $this->Zaujem_model->zoznam()));
         }else{
             $this->load->view("json/json_admin",
                 array(
