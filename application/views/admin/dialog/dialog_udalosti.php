@@ -29,6 +29,30 @@
                                     </div>
 
                                     <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Štát</label>
+                                                <input type="text" id="stat-<?php if(isset($identifikator)){echo $identifikator;}?>" class="form-control" value="Slovensko" disabled>
+                                                <input type="hidden" name="stat" value="Slovensko">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Okres</label>
+                                                <input type="text" id="okres-<?php if(isset($identifikator)){echo $identifikator;}?>" name="okres" class="form-control" placeholder="Okres">
+                                                <ul class="list-group" id="okresy"></ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Mesto</label>
+                                                <input type="text" id="mesto-<?php if(isset($identifikator)){echo $identifikator;}?>" name="mesto" class="form-control" placeholder="Mesto">
+                                                <ul class="list-group" id="mesta-obce"></ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
                                         <div class="col-md-12">
                                             <label>Obrázok</label>
                                             <div class="input-group upload">
@@ -79,27 +103,6 @@
                                             <div class="form-group">
                                                 <label>Vstupenka</label>
                                                 <input type="text" id="vstupenka-<?php if(isset($identifikator)){echo $identifikator;}?>" name="vstupenka" class="form-control" placeholder="Cena vstupenky">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Štát</label>
-                                                <input type="text" id="stat-<?php if(isset($identifikator)){echo $identifikator;}?>" name="stat" class="form-control" placeholder="Štát">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Okres</label>
-                                                <input type="text" id="okres-<?php if(isset($identifikator)){echo $identifikator;}?>" name="okres" class="form-control" placeholder="Okres">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Mesto</label>
-                                                <input type="text" id="mesto-<?php if(isset($identifikator)){echo $identifikator;}?>" name="mesto" class="form-control" placeholder="Mesto">
                                             </div>
                                         </div>
                                     </div>

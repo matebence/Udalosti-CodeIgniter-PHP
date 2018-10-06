@@ -16,10 +16,10 @@ class Registracia extends CI_Controller
 
     public function index()
     {
-        $this->vyvorit();
+        $this->vytvorit();
     }
 
-    public function vyvorit()
+    public function vytvorit()
     {
         if ($this->input->post("nova_registracia")) {
             if ($this->validacia_vstupnych_udajov()) {

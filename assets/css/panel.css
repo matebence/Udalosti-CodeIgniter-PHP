@@ -37,6 +37,10 @@ h1, h2, h3, h4, h5, h6{
     text-align: right;
 }
 
+.zaujmy-miesta{
+    text-align: center;
+}
+
 a.nahlad {
     position: relative;
     margin: 5px 5px 0 -2px;
@@ -46,6 +50,7 @@ a.nahlad {
 
 a.nahlad img {
     position: absolute;
+    z-index: 999;
     display: none;
     width: 250px;
     left: 0;
@@ -57,6 +62,20 @@ a.nahlad:hover img {
     top: 20px;
 }
 
+#okresy, #mesta-obce {
+    position: absolute;
+    width: 90%;
+    cursor: pointer;
+    overflow-y: auto;
+    max-height: 200px;
+    box-sizing: border-box;
+    z-index: 1001;
+}
+
+.okres-mesta-obce-odpoved:hover{
+    background-color:#f1f1f1;
+}
+
 .sidebar .logo .simple-text {
     display: inline;
     margin-left: 10px;
@@ -65,6 +84,10 @@ a.nahlad:hover img {
 .sidebar .logo {
     margin: 0 auto;
     width: 70%;
+}
+
+.fa{
+    display: inline;
 }
 
 .info-box {
@@ -88,10 +111,6 @@ a.nahlad:hover img {
     color: white;
     background: rgb(67, 116, 191);
     text-align: center;
-}
-
-.fa{
-    display: inline;
 }
 
 .info-box-content {

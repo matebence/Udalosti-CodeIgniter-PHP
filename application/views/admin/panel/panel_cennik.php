@@ -17,9 +17,9 @@
                         <table class="table table-hover table-striped">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Váha</th>
-                                    <th>Suma</th>
+                                    <th class="zaujmy-miesta">ID</th>
+                                    <th class="zaujmy-miesta">Váha</th>
+                                    <th class="zaujmy-miesta">Suma</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -29,9 +29,9 @@
                                 if(!empty($zoznam_cien)){
                                     foreach ($zoznam_cien as $cennik) {
                                         echo "<tr>";
-                                        echo "<td>".$cennik['idCennik']."</td>";
-                                        echo "<td>".$cennik['vaha']."</td>";
-                                        echo "<td>".$cennik['suma']. " €</td>";
+                                        echo "<td class='zaujmy-miesta'>".$cennik['idCennik']."</td>";
+                                        echo "<td class='zaujmy-miesta'>".$cennik['vaha']."</td>";
+                                        echo "<td class='zaujmy-miesta'>".$cennik['suma']. " €</td>";
                                         echo "<td class='cennik-operacie'>
                                                     <i class='".$cennik['idCennik']." fa fa-edit editovat' data-toggle='modal' data-target='#aktualizovat-cennik'></i>
                                                     <i class='".$cennik['idCennik']." fa fa-trash odstranit' data-toggle='modal' data-target='#odstranit-cennik'></i>

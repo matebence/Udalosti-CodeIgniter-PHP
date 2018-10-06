@@ -81,7 +81,7 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="#" id="nova_udalost" data-toggle='modal' data-target='#nova-udalost'>
+                            <a href="#" class="nova_udalost" id="vytvorit_udalost" data-toggle='modal' data-target='#nova-udalost'>
                                 <p>Pridať novú udalosť</p>
                             </a>
                         </li>

@@ -15,9 +15,9 @@
                         <table class="table table-hover table-striped">
                             <thead>
                                 <tr>
-                                    <th>Štát</th>
-                                    <th>Okres</th>
-                                    <th>Miesto</th>
+                                    <th class="zaujmy-miesta">Štát</th>
+                                    <th class="zaujmy-miesta">Okres</th>
+                                    <th class="zaujmy-miesta">Miesto</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -25,7 +25,7 @@
                             if(isset($miesta)){
                                 if(!empty($miesta)){
                                     foreach ($miesta as $miesto) {
-                                        echo "<tr>";
+                                        echo "<tr class='zaujmy-miesta'>";
                                         echo "<td>".$miesto['stat']."</td>";
                                         echo "<td>".$miesto['okres']."</td>";
                                         echo "<td>".$miesto['mesto']."</td>";

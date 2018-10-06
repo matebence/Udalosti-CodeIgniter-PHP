@@ -7,7 +7,7 @@
                         <div class="col-md-12">
                             <div class="header">
                                 <h4 class="title" style="display: inline;">Udalosti</h4>
-                                <a href="#" class="btn btn-success pull-right" data-toggle="modal" data-target='#nova-udalost'><i
+                                <a href="#" class="btn btn-success pull-right nova_udalost" data-toggle="modal" data-target='#nova-udalost'><i
                                         class="fa fa-plus-circle"></i><span>Nová udalosť</span></a>
                                 <p class="category">Zoznam aktuálnych udalostí</p>
                             </div>

@@ -6,41 +6,49 @@ $(document).ready(function(){
     zvolenySubor();
 });
 
+$(".nova_udalost").click(function(){
+    zoznamMiestOkresov("#mesto-nova-udalost", "#mesta-obce", "mesta_obce.json");
+    zoznamMiestOkresov("#mesto-aktualizovat-udalost", "#mesta-obce", "mesta_obce.json");
+
+    zoznamMiestOkresov("#okres-nova-udalost", "#okresy", "okresy.json");
+    zoznamMiestOkresov("#okres-aktualizovat-udalost", "#okresy", "okresy.json");
+});
+
 function navigacia() {
     var adresa = window.location.href;
     var castStranky = adresa.substr(adresa.lastIndexOf("/")+1,adresa.length);
 
     if(castStranky == "panel"){
         aktivnyPrvokNavigacie($(".nav li"), 0);
-        $("#nova_udalost").show();
+        $("#vytvorit_udalost").show();
 
     }else if(castStranky == "udalosti"){
         aktivnyPrvokNavigacie($(".nav li"), 1);
-        $("#nova_udalost").hide();
+        $("#vytvorit_udalost").hide();
 
     }else if(castStranky == "pouzivatelia"){
         aktivnyPrvokNavigacie($(".nav li"), 2);
-        $("#nova_udalost").show();
+        $("#vytvorit_udalost").show();
 
     }else if(castStranky == "cennik"){
         aktivnyPrvokNavigacie($(".nav li"), 3);
-        $("#nova_udalost").show();
+        $("#vytvorit_udalost").show();
 
     }else if(castStranky == "zaujmy"){
         aktivnyPrvokNavigacie($(".nav li"), 4);
-        $("#nova_udalost").show();
+        $("#vytvorit_udalost").show();
 
     }else if(castStranky == "miesta"){
         aktivnyPrvokNavigacie($(".nav li"), 5);
-        $("#nova_udalost").show();
+        $("#vytvorit_udalost").show();
 
     }else if(castStranky == "lokalizacia"){
         aktivnyPrvokNavigacie($(".nav li"), 6);
-        $("#nova_udalost").show();
+        $("#vytvorit_udalost").show();
 
     }else if(castStranky == "administratori"){
         aktivnyPrvokNavigacie($(".nav li"), 7);
-        $("#nova_udalost").show();
+        $("#vytvorit_udalost").show();
     }
 }
 
@@ -58,7 +66,7 @@ function nacitanieMapy(){
         $("#mapa").attr('src',adresa);
     }else{
         alert("Súbor nebol nájdený "+window.location.origin+"/mapa.php");
-        alert("Funkcia MIESTA je nefunkčná");
+        alert("Funkcia LOKALIZACIA je nefunkčná");
     }
 }
 
@@ -95,4 +103,27 @@ function implementaciaMapy(adresa){
     poziadavka.open('GET', adresa, false);
     poziadavka.send();
     return poziadavka.status !== 404;
+}
+
+function zoznamMiestOkresov(prvok, vysledok, subor){
+    $.ajaxSetup({ cache: false });
+    $(prvok).keyup(function(){
+        $(vysledok).html('');
+        var vstup = $(prvok).val();
+        var vyraz = new RegExp(vstup, "i");
+        $.getJSON(window.location.origin+"/udalosti/assets/json/"+subor, function(udaje) {
+            $.each(udaje, function(kluc, hodnota){
+                if (hodnota.name.search(vyraz) != -1)
+                {
+                    $(vysledok).append('<li class="list-group-item okres-mesta-obce-odpoved">'+hodnota.name+'</span></li>');
+                }
+            });
+        });
+    });
+
+    $(vysledok).on('click', 'li', function() {
+        var zvolenyPrvok = $(this).text().split('|');
+        $(prvok).val($.trim(zvolenyPrvok[0]));
+        $(vysledok).html('');
+    });
 }

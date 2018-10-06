@@ -14,8 +14,8 @@ $(document).ready(function(){
                 kolacovyGraf(udaje);
                 stlpcovyGrafOkres(udaje);
                 stlpcovyGrafStat(udaje);
-                stlpcovyGrafZaujmy(udaje);
                 ciarovyGraf(udaje);
+                stlpcovyGrafZaujmy(udaje);
             }else{
                 $(".grafUdalosti").html("<p>Databazá udalostí je prázdna</p>");
             }
@@ -24,6 +24,10 @@ $(document).ready(function(){
 });
 
 function kolacovyGraf(udaje){
+    if(udaje.cennik == undefined){
+        $(".grafUdalosti").eq(0).html("<p>Databazá cien je prázdna</p>");
+    }
+
     var spolu = 0;
     var pocet = new Array(udaje.cennik.length);
     var percenta = new Array(udaje.cennik.length);
@@ -63,6 +67,10 @@ function kolacovyGraf(udaje){
 }
 
 function stlpcovyGrafOkres(udaje){
+    if(udaje.okres == undefined){
+        $(".grafUdalosti").eq(3).html("<p>Databazá udalostí je prázdna</p>");
+    }
+
     var pocet = new Array(udaje.okres.length);
     var okres = new Array(udaje.okres.length);
 
@@ -96,6 +104,10 @@ function stlpcovyGrafOkres(udaje){
 }
 
 function stlpcovyGrafStat(udaje){
+    if(udaje.stat == undefined){
+        $(".grafUdalosti").eq(4).html("<p>Databazá udalostí je prázdna</p>");
+    }
+
     var pocet = new Array(udaje.stat.length);
     var stat = new Array(udaje.stat.length);
 
@@ -129,6 +141,10 @@ function stlpcovyGrafStat(udaje){
 }
 
 function stlpcovyGrafZaujmy(udaje){
+    if(udaje.zaujmy == undefined){
+        $(".grafUdalosti").eq(1).html("<p>Databazá záujmov je prázdna</p>");
+    }
+
     var pocet = new Array(udaje.zaujmy.length);
     var udalost = new Array(udaje.zaujmy.length);
 
@@ -162,6 +178,10 @@ function stlpcovyGrafZaujmy(udaje){
 }
 
 function ciarovyGraf(udaje){
+    if(udaje.mesiac == undefined){
+        $(".grafUdalosti").eq(2).html("<p>Databazá udalostí je prázdna</p>");
+    }
+
     var pocet = new Array(udaje.mesiac.length);
     var mesiac = new Array(udaje.mesiac.length);
 
