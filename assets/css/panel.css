@@ -32,6 +32,27 @@ h1, h2, h3, h4, h5, h6{
     height: calc(100% - 127px);
 }
 
+a.nahlad {
+    position: relative;
+    margin: 5px 5px 0 -2px;
+    text-decoration: none;
+    color: black;
+}
+
+a.nahlad img {
+    position: absolute;
+    opacity: 0;
+    width: 250px;
+    left: 0;
+    top: -20px;
+    transition: opacity .5s, top .5s;
+}
+
+a.nahlad:hover img {
+    opacity: 1;
+    top: 20px;
+}
+
 .sidebar .logo .simple-text {
     display: inline;
     margin-left: 10px;

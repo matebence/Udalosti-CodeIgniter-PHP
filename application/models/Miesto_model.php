@@ -28,6 +28,11 @@ class Miesto_model extends CI_model
         $odstran = $this->db->delete('miesto', array('idMiesto' => $id_miesto));
         return $odstran ? true : false;
     }
+
+    public function zoznam()
+    {
+        
+    }
 }
 
 ?>

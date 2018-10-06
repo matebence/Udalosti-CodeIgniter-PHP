@@ -37,7 +37,7 @@
                                         echo "<tr>";
                                             echo "<td>" . $udalost['idUdalost'] . "</td>";
                                             echo "<td>" . $udalost['suma'] . " €</td>";
-                                            echo "<td>" . $udalost['obrazok'] . "</td>";
+                                            echo "<td><a class='nahlad' href='#'>".$udalost['obrazok']."<img src='".base_url().$udalost['obrazok']."' /></a></td>";
                                             echo "<td>" . $udalost['nazov'] . "</td>";
                                             echo "<td>" . $udalost['datum'] . "</td>";
                                             echo "<td>" . $udalost['cas'] . "</td>";

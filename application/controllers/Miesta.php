@@ -22,4 +22,5 @@ class Miesta extends CI_Controller
         }
     }
 }
+
 ?>

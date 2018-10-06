@@ -66,7 +66,7 @@ $("#novy_cennik_formular").on('submit', (function (e) {
 }));
 
 $("#cennik_dialog_vytvorit").click(function () {
-    $("#novy_pouzivatel_admin_formular").trigger("submit");
+    $("#novy_cennik_formular").trigger("submit");
 });
 
 $("#aktulizovat_cennik_formular").on('submit', (function (e) {
@@ -75,7 +75,7 @@ $("#aktulizovat_cennik_formular").on('submit', (function (e) {
 }));
 
 $("#cennik_dialog_aktualizuj").click(function () {
-    $("#aktulizovat_pouzivatel_admin_formular").trigger("submit");
+    $("#aktulizovat_cennik_formular").trigger("submit");
 });
 
 $(".cennik_dialog_odstranit").click(function () {
