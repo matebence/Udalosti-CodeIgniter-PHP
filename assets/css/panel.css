@@ -11,6 +11,13 @@ h1, h2, h3, h4, h5, h6{
     height: 35px;
 }
 
+#mapa{
+    position:relative;
+    width:100%;
+    height: calc(100% - 127px);
+    border: none;
+}
+
 .editovat{
     color: #2071a1;
 }
@@ -22,15 +29,9 @@ h1, h2, h3, h4, h5, h6{
 .odstranit{
     color: red;
 }
+
 .odstranit:hover{
     cursor: pointer;
-}
-
-#mapa{
-    position:relative;
-    width:100%;
-    height: calc(100% - 127px);
-    border: none;
 }
 
 .cennik-operacie{
@@ -74,6 +75,10 @@ a.nahlad:hover img {
 
 .okres-mesta-obce-odpoved:hover{
     background-color:#f1f1f1;
+}
+
+.table-responsive{
+    overflow: auto;
 }
 
 .sidebar .logo .simple-text {
