@@ -113,7 +113,7 @@ class Prihlasenie extends CI_Controller
         $this->load->view("admin/rozhranie/prihlasenie_pata");
     }
 
-    public function odhlasit_sa()
+    public function odhlasit()
     {
         $this->session->sess_destroy();
         $this->Pouzivatel_model->aktualizuj($this->input->post('email'), null, array("token" => ""));
