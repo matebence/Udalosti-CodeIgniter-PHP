@@ -61,6 +61,19 @@ class Pouzivatel_model extends CI_model
         }
     }
 
+    public function id_hladaneho_pouzivatela($email)
+    {
+        $this->db->select('idPouzivatel');
+        $this->db->from('pouzivatel');
+        $this->db->where('email', $email);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return  $query->row()->idPouzivatel;
+        }else{
+            return 0;
+        }
+    }
+
     public function nove_heslo_pouzivatela($email, $nove_heslo)
     {
         if (!empty($nove_heslo)) {

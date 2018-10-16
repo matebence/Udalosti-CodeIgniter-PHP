@@ -183,7 +183,8 @@ class Udalosti extends CI_Controller
     {
         if ((strcmp($this->input->post("token"), $this->Pouzivatel_model->token($this->input->post("email"))) == 0 && ($this->input->post("email")))) {
             $data["udalosti"] = $this->Udalost_model->zoznam_udalosti(
-                $this->input->post("stat"));
+                $this->input->post("stat"),
+                $this->input->post("email"));
             $this->load->view("json/json_vystup_dat", $data);
         } else {
             redirect("prihlasenie/pristup");
@@ -195,6 +196,7 @@ class Udalosti extends CI_Controller
         if ((strcmp($this->input->post("token"), $this->Pouzivatel_model->token($this->input->post("email"))) == 0) && ($this->input->post("email"))) {
             $data["udalosti"] = $this->Udalost_model->zoznam_udalosti_v_okoli(
                 $this->input->post("stat"),
+                $this->input->post("email"),
                 $this->input->post("okres"),
                 $this->input->post("mesto"));
             $this->load->view("json/json_vystup_dat", $data);

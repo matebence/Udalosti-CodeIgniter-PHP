@@ -29,11 +29,12 @@ class Udalost_model extends CI_model
         return $odstran ? true : false;
     }
 
-    public function zoznam_udalosti($stat)
+    public function zoznam_udalosti($stat, $email)
     {
-        $this->db->select("udalost.idUdalost, obrazok, nazov, DAY(datum) as den, MONTHNAME(datum) as mesiac, DATE_FORMAT(cas, '%H:%i') as cas, mesto, ulica, vstupenka, COUNT(zaujem.idUdalost) as zaujemcovia");
+        $this->db->select("udalost.idUdalost, obrazok, nazov, DAY(datum) as den, MONTHNAME(datum) as mesiac, DATE_FORMAT(cas, '%H:%i') as cas, mesto, ulica, vstupenka, COUNT(zaujem.idUdalost) as zaujemcovia, IF(SUM(pouzivatel.email = '".$email."') > 0, 1, 0) as zaujem");
         $this->db->from('zaujem');
         $this->db->join('udalost', 'udalost.idUdalost = zaujem.idUdalost', 'right');
+        $this->db->join('pouzivatel', 'pouzivatel.idPouzivatel = zaujem.idPouzivatel', 'left');
         $this->db->join('cennik', 'udalost.idCennik = cennik.idCennik');
         $this->db->join('miesto', 'udalost.idMiesto = miesto.idMiesto');
         if ($stat != null) {
@@ -48,11 +49,12 @@ class Udalost_model extends CI_model
         return $query->result_array();
     }
 
-    public function zoznam_udalosti_v_okoli($stat, $okres, $mesto)
+    public function zoznam_udalosti_v_okoli($stat, $email, $okres, $mesto)
     {
-        $this->db->select("udalost.idUdalost, obrazok, nazov, DAY(datum) as den, MONTHNAME(datum) as mesiac, DATE_FORMAT(cas, '%H:%i') as cas, mesto, ulica, vstupenka, COUNT(zaujem.idUdalost) as zaujemcovia");
+        $this->db->select("udalost.idUdalost, obrazok, nazov, DAY(datum) as den, MONTHNAME(datum) as mesiac, DATE_FORMAT(cas, '%H:%i') as cas, mesto, ulica, vstupenka, COUNT(zaujem.idUdalost) as zaujemcovia, IF(SUM(pouzivatel.email = '".$email."') > 0, 1, 0) as zaujem");
         $this->db->from('zaujem');
         $this->db->join('udalost', 'udalost.idUdalost = zaujem.idUdalost', 'right');
+        $this->db->join('pouzivatel', 'pouzivatel.idPouzivatel = zaujem.idPouzivatel', 'left');
         $this->db->join('cennik', 'udalost.idCennik = cennik.idCennik');
         $this->db->join('miesto', 'udalost.idMiesto = miesto.idMiesto');
         if ($stat != null) {
@@ -74,7 +76,7 @@ class Udalost_model extends CI_model
             $this->db->where($podmienka);
         }
         if ($mesto != null) {
-            $this->db->where("mesto ='" . $mesto . "')");
+            $this->db->or_where("mesto ='" . $mesto . "')");
         }
         $this->db->where("(datum >= CURDATE())");
         $this->db->group_by("udalost.idUdalost");
