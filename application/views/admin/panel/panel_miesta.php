@@ -17,7 +17,7 @@
                                 <tr>
                                     <th class="zaujmy-miesta">Štát</th>
                                     <th class="zaujmy-miesta">Okres</th>
-                                    <th class="zaujmy-miesta">Miesto</th>
+                                    <th class="zaujmy-miesta">Mesto</th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -170,7 +170,7 @@ function naplnPoleExistujucimyUdajmy(data) {
         $("#obrazok_udalosti-aktualizovat-udalost").val(udalost.obrazok);
         $("#datum-aktualizovat-udalost").val(udalost.datum);
         $("#cas-aktualizovat-udalost").val(udalost.cas);
-        $("#vstupenka-aktualizovat-udalost").val(udalost.cas);
+        $("#vstupenka-aktualizovat-udalost").val(udalost.vstupenka);
         $("#ulica-aktualizovat-udalost").val(udalost.ulica);
         $("#stat-aktualizovat-udalost").val(udalost.stat);
         $("#okres-aktualizovat-udalost").val(udalost.okres);
