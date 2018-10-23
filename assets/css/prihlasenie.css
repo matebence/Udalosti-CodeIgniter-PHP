@@ -115,3 +115,41 @@ footer.pata > p {
     margin: 0;
     padding: 5px;
 }
+
+@media (max-width: 540px) {
+    html {
+        background: url(../img/udalosti_pozadie_mobile.jpg) no-repeat fixed center;
+    }
+
+    img#obrazok {
+        width: 45px;
+        height: 60px;
+        margin-right: 20px;
+        margin-left: 20px;
+    }
+
+    h1#nazov {
+        font-family: RalewayRegular, serif;
+        font-size: 3em;
+        float: left;
+        color: white;
+    }
+
+    input[type="text"], input[type="password"] {
+        width: 295px;
+        height: 40px;
+    }
+
+    input[type="submit"] {
+        width: 305px;
+        height: 40px;
+    }
+
+    .telo > #zabudnute_heslo{
+        font-size: 0.9em;
+    }
+
+    .pata > p {
+        font-size: 0.8em;
+    }
+}

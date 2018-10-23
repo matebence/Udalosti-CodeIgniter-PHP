@@ -80,17 +80,29 @@
     .dateTimePicker{
         margin-top: 8px;
     }
+
+    .dialog-obsah {
+        width: 60%;
+    }
 }
 
 @media (max-width: 767px) {
     .input-group {
         width: 94%;
     }
+
+    .dialog-obsah {
+        width: 65%;
+    }
 }
 
 @media (max-width: 540px) {
     .input-group {
         width: 91%;
+    }
+
+    .dialog-obsah {
+        width: 74%;
     }
 }
 
