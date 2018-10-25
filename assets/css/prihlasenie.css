@@ -85,6 +85,18 @@ input[type="submit"]:hover {
     background: #037cb0;
 }
 
+::placeholder {
+    color: white;
+}
+
+:-ms-input-placeholder {
+    color: white;
+}
+
+::-ms-input-placeholder {
+    color: white;
+}
+
 .formular_prihlasenie, .formular_zabudnute_heslo, .formular_obnovenie_hesla{
     width: 320px;
     margin: 0 auto;
