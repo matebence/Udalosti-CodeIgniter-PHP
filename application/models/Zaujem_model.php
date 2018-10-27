@@ -29,15 +29,14 @@ class Zaujem_model extends CI_model
         return $odstran ? true : false;
     }
 
-    public function potvrdenie_zaujmu($id_udalost, $id_pouzivatel)
+    public function potvrdenie_zaujmu($id_udalost, $email)
     {
-        $this->db->select("udalost.idUdalost, obrazok, nazov, DAY(datum) as den, MONTHNAME(datum) as mesiac, DATE_FORMAT(cas, '%H:%i') as cas, mesto, ulica, vstupenka, COUNT(zaujem.idUdalost) as zaujemcovia, IF(SUM(zaujem.idPouzivatel = '".$id_pouzivatel."') > 0, 1, 0) as zaujem");
+        $this->db->select("udalost.idUdalost, obrazok, nazov, DAY(datum) as den, MONTHNAME(datum) as mesiac, DATE_FORMAT(cas, '%H:%i') as cas, mesto, ulica, vstupenka, COUNT(zaujem.idUdalost) as zaujemcovia, IF(SUM(pouzivatel.email = '".$email."') > 0, 1, 0) as zaujem");
         $this->db->from('zaujem');
         $this->db->join('udalost', 'udalost.idUdalost = zaujem.idUdalost', 'right');
+        $this->db->join('pouzivatel', 'pouzivatel.idPouzivatel = zaujem.idPouzivatel', 'left');
         $this->db->join('miesto', 'udalost.idMiesto = miesto.idMiesto');
-        $this->db->join('pouzivatel', 'pouzivatel.idPouzivatel = zaujem.idPouzivatel');
         $this->db->where("udalost.idUdalost", $id_udalost);
-        $this->db->where("zaujem.idPouzivatel", $id_pouzivatel);
         $query = $this->db->get();
         return $query->result_array();
     }

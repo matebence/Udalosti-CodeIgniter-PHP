@@ -70,8 +70,8 @@ class Zaujmy extends CI_Controller
         if ((strcmp($this->input->post("token"), $this->Pouzivatel_model->token($this->input->post("email"))) == 0 && ($this->input->post("email")))) {
             $data["udalosti"] = $this->Zaujem_model->potvrdenie_zaujmu(
                 $this->input->post("idUdalost"),
-                $this->Pouzivatel_model->id_hladaneho_pouzivatela($this->input->post("email")
-            ));
+                $this->input->post("email")
+            );
             $this->load->view("json/json_vystup_dat", $data);
         } else {
             redirect("prihlasenie/pristup");
