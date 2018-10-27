@@ -31,7 +31,7 @@ class Zaujem_model extends CI_model
 
     public function potvrdenie_zaujmu($id_udalost, $email)
     {
-        $this->db->select("udalost.idUdalost, obrazok, nazov, DAY(datum) as den, MONTHNAME(datum) as mesiac, DATE_FORMAT(cas, '%H:%i') as cas, mesto, ulica, vstupenka, COUNT(zaujem.idUdalost) as zaujemcovia, IF(SUM(pouzivatel.email = '".$email."') > 0, 1, 0) as zaujem");
+        $this->db->select("udalost.idUdalost, obrazok, nazov, DATE_FORMAT(datum,'%m') as den, MONTHNAME(datum) as mesiac, DATE_FORMAT(cas, '%H:%i') as cas, mesto, ulica, vstupenka, COUNT(zaujem.idUdalost) as zaujemcovia, IF(SUM(pouzivatel.email = '".$email."') > 0, 1, 0) as zaujem");
         $this->db->from('zaujem');
         $this->db->join('udalost', 'udalost.idUdalost = zaujem.idUdalost', 'right');
         $this->db->join('pouzivatel', 'pouzivatel.idPouzivatel = zaujem.idPouzivatel', 'left');
@@ -57,7 +57,7 @@ class Zaujem_model extends CI_model
     }
 
     public function zaujmy($email){
-        $this->db->select("udalost.idUdalost, obrazok, nazov, DAY(datum) as den, MONTHNAME(datum) as mesiac, DATE_FORMAT(cas, '%H:%i') as cas, mesto, ulica, vstupenka, COUNT(zaujem.idUdalost) as zaujemcovia, IF(SUM(pouzivatel.email = '".$email."') > 0, 1, 0) as zaujem");
+        $this->db->select("udalost.idUdalost, obrazok, nazov, DATE_FORMAT(datum,'%m') as den, MONTHNAME(datum) as mesiac, DATE_FORMAT(cas, '%H:%i') as cas, mesto, ulica, vstupenka, COUNT(zaujem.idUdalost) as zaujemcovia, IF(SUM(pouzivatel.email = '".$email."') > 0, 1, 0) as zaujem");
         $this->db->from('zaujem');
         $this->db->join('udalost', 'udalost.idUdalost = zaujem.idUdalost', 'right');
         $this->db->join('pouzivatel', 'pouzivatel.idPouzivatel = zaujem.idPouzivatel', 'left');
