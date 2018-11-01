@@ -30,6 +30,7 @@
 
     <meta name="theme-color" content="#ffffff">
 
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url() . "node_modules/unofficial-light-bootstrap-dashboard/"; ?>assets/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() . "assets/css/"; ?>prihlasenie.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() . "assets/css/"; ?>dialog.css">
 

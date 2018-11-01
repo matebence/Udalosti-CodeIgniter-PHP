@@ -1,8 +1,10 @@
 <body>
     <div class="telo">
         <div class="logo">
-            <img id="obrazok" src="<?php echo base_url() . "assets/img/"; ?>udalosti_logo.png" alt="Udalosti logo" title="Udalosti logo">
-            <h1 id="nazov">Udalosti</h1>
+            <div class="logo-stred">
+                <img id="obrazok" src="<?php echo base_url() . "assets/img/"; ?>udalosti_logo.png" alt="Udalosti logo" title="Udalosti logo">
+                <h1 id="nazov">Udalosti</h1>
+            </div>
         </div>
 
         <div class="formular_prihlasenie">

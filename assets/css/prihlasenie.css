@@ -11,6 +11,11 @@ body {
     height: 100vh;
     vertical-align: middle;
     text-align: center;
+    background-color: inherit;
+}
+
+p, a, li, ul, pre{
+    font-family: RalewayRegular, serif;
 }
 
 footer {
@@ -29,28 +34,27 @@ body.telo {
 .logo {
     width: 300px;
     height: 65px;
-    margin: 0 auto;
+    margin: 0 auto 20px;
+}
+
+.logo-stred{
+    display: inline-block;
 }
 
 img#obrazok {
-    width: 55px;
-    height: 70px;
-}
-
-#obrazok {
-    padding-top: 25px;
-    float: left;
+    width: 50px;
+    height: 60px;
 }
 
 h1#nazov {
-    font-family: RalewayRegular, serif;
+    font-family: RalewayMedium, serif;
     font-size: 3.5em;
     color: white;
+    margin-left: 20px;
 }
 
 #nazov {
     margin: 0;
-    padding-top: 30px;
     padding-bottom: 30px;
     float: right;
 }
@@ -64,13 +68,12 @@ input[type="text"], input[type="password"] {
     border-radius: 25px;
     border: 2px solid white;
     margin-bottom: 20px;
-    display: block;
     padding-left: 10px;
     text-align: center;
 }
 
 input[type="submit"] {
-    width: 310px;
+    width: 300px;
     height: 45px;
     font-family: RalewayRegular, serif;
     color: white;
@@ -102,6 +105,10 @@ input[type="submit"]:hover {
     margin: 0 auto;
 }
 
+.telo {
+    margin-bottom: 20px;
+}
+
 .telo > #zabudnute_heslo{
     font-family: RalewayRegular, serif;
     color: white;
@@ -130,21 +137,7 @@ footer.pata > p {
 
 @media (max-width: 540px) {
     html {
-        background: url(../img/udalosti_pozadie_mobile.jpg) no-repeat fixed center;
-    }
-
-    img#obrazok {
-        width: 45px;
-        height: 60px;
-        margin-right: 20px;
-        margin-left: 20px;
-    }
-
-    h1#nazov {
-        font-family: RalewayRegular, serif;
-        font-size: 3em;
-        float: left;
-        color: white;
+        background: url(../img/udalosti_pozadie_mobile.jpg) no-repeat center;
     }
 
     input[type="text"], input[type="password"] {
