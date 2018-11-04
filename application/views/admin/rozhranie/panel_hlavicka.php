@@ -29,6 +29,7 @@
     <meta name="theme-color" content="#ffffff"/>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
 
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() . "node_modules/unofficial-light-bootstrap-dashboard/"; ?>assets/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() . "node_modules/unofficial-light-bootstrap-dashboard/"; ?>assets/css/animate.min.css"/>
