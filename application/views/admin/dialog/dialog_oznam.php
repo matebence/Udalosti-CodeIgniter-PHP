@@ -1,4 +1,4 @@
-<div class="alert alert-danger" role="alert">
+<div id="dialog" class="alert alert-danger" role="alert">
     <h4 class="alert-heading">Oznam</h4>
     <?php
     if(!empty(validation_errors_array())){

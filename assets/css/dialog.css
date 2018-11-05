@@ -3,6 +3,7 @@
 .alert-danger {
     width: 23vw;
     margin: 0 auto;
+    margin-top: 20px;
 }
 
 .gj-picker-bootstrap [role="header"] {
