@@ -46,8 +46,11 @@ function navigacia() {
         aktivnyPrvokNavigacie($(".nav li"), 6);
         $("#vytvorit_udalost").show();
 
-    }else if(castStranky == "administratori"){
+    }else if(castStranky == "organizatori"){
         aktivnyPrvokNavigacie($(".nav li"), 7);
+        $("#vytvorit_udalost").show();
+    }else if(castStranky == "administratori"){
+        aktivnyPrvokNavigacie($(".nav li"), 8);
         $("#vytvorit_udalost").show();
     }
 }

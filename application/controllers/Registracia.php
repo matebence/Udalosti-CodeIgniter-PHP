@@ -39,10 +39,10 @@ class Registracia extends CI_Controller
                             $admin = false;
                             $oznam = "";
 
-                            if(strcmp($this->input->post('rola'), "admin") == 0){
+                            if(strcmp($this->input->post('rola'), ADMIN) == 0){
                                 $pouzivatel = $this->Rola_pouzivatela_model->vytvorit($id_noveho_pouzivatela, $this->Rola_model->rola(ADMIN));
                                 $admin = true;
-                            }else if(strcmp($this->input->post('rola'), "pouzivatel") == 0){
+                            }else if(strcmp($this->input->post('rola'), POUZIVATEL) == 0){
                                 $pouzivatel = $this->Rola_pouzivatela_model->vytvorit($id_noveho_pouzivatela, $this->Rola_model->rola(POUZIVATEL));
                             }
 

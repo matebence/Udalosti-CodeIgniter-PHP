@@ -9,7 +9,7 @@
 
         <div class="formular_prihlasenie">
             <form action="<?php echo site_url('prihlasenie'); ?>" method="post">
-                <input id="email_prihlasenie" type="text" name="email" placeholder="Email" autofocus/>
+                <input id="email_prihlasenie" type="email" name="email" placeholder="Email" autofocus/>
                 <input id="heslo" type="password" name="heslo" placeholder="Heslo" />
                 <input id="prihlasenie" type="submit" value="Prihlásiť sa">
 
@@ -18,14 +18,28 @@
             </form>
         </div>
 
+        <div class="formular_registracia">
+            <form id="telo_formulara_registracia" action="<?php echo site_url('registracia'); ?>">
+                <input id="registracia_meno" type="email" name="meno" placeholder="Meno"/>
+                <input id="registracia_email" type="text" name="email" placeholder="Email"/>
+                <input id="registracia_heslo" type="password" name="heslo" placeholder="Heslo"/>
+                <input id="registracia_potvrd" type="password" name="potvrd" placeholder="Potvrdenie hesla"/>
+                <input id="registrovat" type="submit" value="Registrovať">
+
+                <input type="hidden" name="novy_organizator" value="novy_organizator">
+            </form>
+        </div>
+
         <div class="formular_zabudnute_heslo">
             <form id="telo_formulara_zabudnute_heslo" action="<?php echo site_url('pomoc'); ?>">
-                <input id="email_zabudnute" type="text" name="email" placeholder="Email"/>
+                <input id="email_zabudnute" type="email" name="email" placeholder="Email"/>
                 <input id="poslat" type="submit" value="Poslať">
 
                 <input type="hidden" name="zabudnute_heslo" value="zabudnute_heslo">
             </form>
         </div>
 
-        <a id="zabudnute_heslo">Zabudli ste heslo?</a>
+        <a id="registracia">Registrácia</a>
+        <a id="oddelovac">|</a>
+        <a id="zabudnute_heslo">Zabudnuté heslo</a>
     </div>

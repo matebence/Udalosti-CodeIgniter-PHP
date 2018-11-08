@@ -57,6 +57,12 @@
                     <hr>
                 </li>
                 <li>
+                    <a href="<?php echo site_url("panel/organizatori"); ?>">
+                        <i class="pe-7s-portfolio"></i>
+                        <p>Organizátori</p>
+                    </a>
+                </li>
+                <li>
                     <a href="<?php echo site_url("panel/administratori"); ?>">
                         <i class="pe-7s-key"></i>
                         <p>Administrátori</p>

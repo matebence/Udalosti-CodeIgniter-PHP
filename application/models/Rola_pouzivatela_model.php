@@ -87,7 +87,22 @@ class Rola_pouzivatela_model extends CI_model
         $this->db->join('pouzivatel', 'pouzivatel.idPouzivatel = rola_pouzivatela.idPouzivatel');
         $this->db->join('rola', 'rola.idRola = rola_pouzivatela.idRola');
         $this->db->order_by("pouzivatel.timestamp", "desc");
-        $this->db->where('nazov', 'pouzivatel');
+        $this->db->where('nazov', POUZIVATEL);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return null;
+    }
+
+    public function zoznam_organizatorov($email){
+        $this->db->select('*');
+        $this->db->from('rola_pouzivatela');
+        $this->db->join('pouzivatel', 'pouzivatel.idPouzivatel = rola_pouzivatela.idPouzivatel');
+        $this->db->join('rola', 'rola.idRola = rola_pouzivatela.idRola');
+        $this->db->order_by("pouzivatel.timestamp", "desc");
+        $this->db->where('nazov', ORGANIZATOR);
+        $this->db->where('email <>', $email);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             return $query->result_array();
@@ -101,7 +116,7 @@ class Rola_pouzivatela_model extends CI_model
         $this->db->join('pouzivatel', 'pouzivatel.idPouzivatel = rola_pouzivatela.idPouzivatel');
         $this->db->join('rola', 'rola.idRola = rola_pouzivatela.idRola');
         $this->db->order_by("pouzivatel.timestamp", "desc");
-        $this->db->where('nazov', 'admin');
+        $this->db->where('nazov', ADMIN);
         $this->db->where('email <>', $email);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {

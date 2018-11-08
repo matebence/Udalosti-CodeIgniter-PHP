@@ -38,6 +38,22 @@ h1, h2, h3, h4, h5, h6{
     cursor: pointer;
 }
 
+.pridat{
+    color: green;
+}
+
+.pridat:hover{
+    cursor: pointer;
+}
+
+.odmietnut{
+    color: #ffc1a9;
+}
+
+.odmietnut:hover{
+    cursor: pointer;
+}
+
 .cennik-operacie{
     text-align: right;
 }

@@ -104,6 +104,19 @@ define('BLOWFISH_FORMAT', "$2y$10$");
 */
 define('POUZIVATEL', "pouzivatel");
 define('ADMIN', "admin");
+define('ORGANIZATOR', "organizator");
+
+/*
+|--------------------------------------------------------------------------
+| Udalosti
+|--------------------------------------------------------------------------
+|
+|Stav udalosti
+|
+*/
+define('PRIJATE', "prijate");
+define('ODMIETNUTE', "odmietnute");
+define('NEPRECITANE', "neprecitane");
 
 /*
 |--------------------------------------------------------------------------

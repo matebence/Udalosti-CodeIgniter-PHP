@@ -35,6 +35,11 @@ body.telo {
     width: 200px; height: 200px;
 }
 
+.telo{
+    margin-top: 35px;
+    margin-bottom: 35px;
+}
+
 .logo {
     width: 300px;
     height: 65px;
@@ -63,7 +68,7 @@ h1#nazov {
     float: right;
 }
 
-input[type="text"], input[type="password"] {
+input[type="text"], input[type="email"], input[type="password"] {
     width: 300px;
     height: 40px;
     font-family: RalewayRegular, serif;
@@ -104,27 +109,29 @@ input[type="submit"]:hover {
     color: white;
 }
 
-.formular_prihlasenie, .formular_zabudnute_heslo, .formular_obnovenie_hesla{
+.formular_prihlasenie, .formular_registracia, .formular_zabudnute_heslo, .formular_obnovenie_hesla{
     width: 320px;
     margin: 0 auto;
 }
 
-.telo > #zabudnute_heslo{
+.telo > #oddelovac{
+    color: white;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.telo > #zabudnute_heslo, .telo > #registracia{
     font-family: RalewayRegular, serif;
     color: white;
 }
 
-.telo > #zabudnute_heslo:hover{
+.telo > #zabudnute_heslo:hover, .telo > #registracia:hover{
     color: #0397d6;
     cursor:pointer;
     text-decoration: none;
 }
 
-#email_zabudnute{
-    display: none;
-}
-
-#poslat{
+#email_zabudnute, #poslat, #registracia_meno, #registracia_email, #registracia_heslo, #registracia_potvrd, #registrovat{
     display: none;
 }
 
@@ -141,7 +148,7 @@ footer.pata > p {
         background: url(../img/udalosti_pozadie_mobile.jpg) no-repeat center;
     }
 
-    input[type="text"], input[type="password"] {
+    input[type="text"], input[type="email"], input[type="password"] {
         width: 295px;
         height: 40px;
     }
@@ -151,7 +158,7 @@ footer.pata > p {
         height: 40px;
     }
 
-    .telo > #zabudnute_heslo{
+    .telo > #zabudnute_heslo,  .telo > #registracia{
         font-size: 0.9em;
     }
 
@@ -161,7 +168,7 @@ footer.pata > p {
 }
 
 @media (max-height: 380px){
-    input[type="text"], input[type="password"] {
+    input[type="text"], input[type="email"], input[type="password"] {
         width: 255px;
         height: 35px;
     }
@@ -171,7 +178,7 @@ footer.pata > p {
         height: 35px;
     }
 
-    .telo > #zabudnute_heslo{
+    .telo > #zabudnute_heslo,  .telo > #registracia{
         font-size: 0.9em;
     }
 
@@ -180,42 +187,8 @@ footer.pata > p {
     }
 }
 
-@media (max-height: 350px){
-    .logo{
-        height: auto;
-        margin: 0 auto 10px;
-    }
-
-    img#obrazok {
-        width: 30px;
-        height: 40px;
-    }
-
-    h1#nazov {
-        padding-bottom: 10px;
-        font-family: RalewayMedium, serif;
-        font-size: 2.8em;
-    }
-
-    input[type="text"], input[type="password"] {
-        width: 225px;
-        height: 35px;
-        font-size: 0.9em;
-
-    }
-
-    input[type="submit"] {
-        width: 225px;
-        height: 30px;
-        font-size: 0.9em;
-
-    }
-
-    .telo > #zabudnute_heslo{
-        font-size: 0.8em;
-    }
-
-    .pata > p {
-        font-size: 0.7em;
+@media (max-height: 500px){
+    .pata{
+        bottom: inherit;
     }
 }

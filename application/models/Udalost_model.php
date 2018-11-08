@@ -41,6 +41,7 @@ class Udalost_model extends CI_model
             $this->db->where("stat", $stat);
         }
         $this->db->where("datum >= CURDATE()");
+        $this->db->where("stav", PRIJATE);
         $this->db->group_by("udalost.idUdalost");
         $this->db->order_by("datum", "asc");
         $this->db->order_by("vaha", "desc");
@@ -79,6 +80,7 @@ class Udalost_model extends CI_model
             $this->db->or_where("mesto ='" . $mesto . "')");
         }
         $this->db->where("(datum >= CURDATE())");
+        $this->db->where("stav", PRIJATE);
         $this->db->group_by("udalost.idUdalost");
         $this->db->order_by("datum", "asc");
         $this->db->order_by("vaha", "desc");
@@ -90,6 +92,7 @@ class Udalost_model extends CI_model
     public function pocet_udalosti(){
         $this->db->select('nazov');
         $this->db->from('udalost');
+        $this->db->where("stav", PRIJATE);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             return $query->num_rows();
@@ -100,6 +103,7 @@ class Udalost_model extends CI_model
     public function pocet_udalosti_v_mesiaci(){
         $this->db->select('MONTHNAME(datum) AS Mesiac, COUNT(*) AS Pocet');
         $this->db->from('udalost');
+        $this->db->where("stav", PRIJATE);
         $this->db->order_by('datum');
         $this->db->group_by('MONTHNAME(datum)');
         $query = $this->db->get();
@@ -121,11 +125,12 @@ class Udalost_model extends CI_model
         return null;
     }
 
-    public function zoznam(){
+    public function zoznam($stav){
         $this->db->select('*');
         $this->db->from('udalost');
         $this->db->join('cennik', 'udalost.idCennik = cennik.idCennik');
         $this->db->join('miesto', 'udalost.idMiesto = miesto.idMiesto');
+        $this->db->where("stav", $stav);
         $this->db->order_by("udalost.timestamp", "desc");
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
@@ -138,6 +143,7 @@ class Udalost_model extends CI_model
         $this->db->select('okres, COUNT(*) AS Pocet');
         $this->db->from('udalost');
         $this->db->join('miesto', 'udalost.idMiesto = miesto.idMiesto');
+        $this->db->where("stav", PRIJATE);
         $this->db->group_by('okres');
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
@@ -150,6 +156,7 @@ class Udalost_model extends CI_model
         $this->db->select('stat, COUNT(*) AS Pocet');
         $this->db->from('udalost');
         $this->db->join('miesto', 'udalost.idMiesto = miesto.idMiesto');
+        $this->db->where("stav", PRIJATE);
         $this->db->group_by('stat');
         $query = $this->db->get();
         if ($query->num_rows() > 0) {

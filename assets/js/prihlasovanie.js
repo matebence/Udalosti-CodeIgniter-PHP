@@ -6,6 +6,9 @@ $( document ).ready(function() {
             $( "#heslo" ).hide();
             $( "#prihlasenie" ).hide();
 
+            $( "#registracia" ).hide();
+            $( "#oddelovac" ).hide();
+
             $("#zabudnute_heslo").text("Späť na prihlásenie");
 
             $( "#email_zabudnute" ).slideDown( "slow" );
@@ -14,7 +17,44 @@ $( document ).ready(function() {
             $( "#email_zabudnute" ).hide();
             $( "#poslat" ).hide();
 
-            $("#zabudnute_heslo").text("Zabudli ste heslo?");
+            $( "#registracia" ).show();
+            $( "#oddelovac" ).show();
+
+            $("#zabudnute_heslo").text("Zabudnuté heslo");
+
+            $( "#email_prihlasenie" ).slideDown( "slow" );
+            $( "#heslo" ).slideDown( "slow" );
+            $( "#prihlasenie" ).slideDown( "slow" );
+        }
+    });
+
+    $("#registracia").click(function () {
+        if ( $( "#registracia_meno" ).is( ":hidden" ) ) {
+            $( "#email_prihlasenie" ).hide();
+            $( "#heslo" ).hide();
+            $( "#prihlasenie" ).hide();
+
+            $( "#zabudnute_heslo" ).hide();
+            $( "#oddelovac" ).hide();
+
+            $("#registracia").text("Späť na prihlásenie");
+
+            $( "#registracia_meno" ).slideDown( "slow" );
+            $( "#registracia_email" ).slideDown( "slow" );
+            $( "#registracia_heslo" ).slideDown( "slow" );
+            $( "#registracia_potvrd" ).slideDown( "slow" );
+            $( "#registrovat" ).slideDown( "slow" );
+        } else {
+            $( "#registracia_meno" ).hide();
+            $( "#registracia_email" ).hide();
+            $( "#registracia_heslo" ).hide();
+            $( "#registracia_potvrd" ).hide();
+            $( "#registrovat" ).hide();
+
+            $( "#zabudnute_heslo" ).show();
+            $( "#oddelovac" ).show();
+
+            $("#registracia").text("Registrácia");
 
             $( "#email_prihlasenie" ).slideDown( "slow" );
             $( "#heslo" ).slideDown( "slow" );

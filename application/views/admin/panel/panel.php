@@ -18,11 +18,11 @@
 
             <div class="col-md-4">
                 <div class="info-box">
-                    <span class="info-box-icon bg-red"><i class="fa fa-calendar"></i></span>
+                    <span class="info-box-icon bg-red"><i class="fa fa-balance-scale"></i></span>
                     <div class="info-box-content">
-                        <span class="info-box-text">Počet udalostí</span>
-                        <span id="pocet-udalosti" class="info-box-number"><?php if (isset($pocet_udalosti)) {
-                                echo $pocet_udalosti;
+                        <span class="info-box-text">Počet organizátorov</span>
+                        <span id="pocet-udalosti" class="info-box-number"><?php if (isset($pocet_organizatorov)) {
+                                echo $pocet_organizatorov;
                             } else {
                                 echo "Údaj je neprístupný";
                             } ?></span>
@@ -32,7 +32,7 @@
 
             <div class="col-md-4">
                 <div class="info-box">
-                    <span class="info-box-icon bg-red"><i class="fa fa-balance-scale"></i></span>
+                    <span class="info-box-icon bg-red"><i class="fa fa-eye"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Počet administrátorov</span>
                         <span id="pocet-administratorov" class="info-box-number"><?php if (isset($pocet_administratorov)) {
@@ -46,11 +46,11 @@
         </div>
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="info-box">
                     <span class="info-box-icon bg-red"><i class="fa fa-mobile" style="font-size: 55px"></i></span>
                     <div class="info-box-content">
-                        <span class="info-box-text">Aplikáciu momentálne používajú</span>
+                        <span class="info-box-text">Aplikáciu používajú</span>
                         <span id="aktivny-pouzivatelia" class="info-box-number"><?php if (isset($aktivny_pouzivatelia)) {
                                 echo $aktivny_pouzivatelia;
                             } else {
@@ -60,13 +60,27 @@
                 </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="info-box">
                     <span class="info-box-icon bg-red"><i class="fa fa-unlock-alt"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Registrovali dnes</span>
                         <span id="registrovali-dnes" class="info-box-number"><?php if (isset($registrovali_dnes)) {
                                 echo $registrovali_dnes;
+                            } else {
+                                echo "Údaj je neprístupný";
+                            } ?></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="info-box">
+                    <span class="info-box-icon bg-red"><i class="fa fa-calendar"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Počet udalostí</span>
+                        <span id="pocet-udalosti" class="info-box-number"><?php if (isset($pocet_udalosti)) {
+                                echo $pocet_udalosti;
                             } else {
                                 echo "Údaj je neprístupný";
                             } ?></span>
