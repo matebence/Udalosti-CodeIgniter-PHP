@@ -21,6 +21,7 @@
                                     <th>Email</th>
                                     <th>Meno</th>
                                     <th>Heslo</th>
+                                    <th>Stav</th>
                                     <th>Token</th>
                                     <th>Vytvorený</th>
                                     <th></th>
@@ -36,6 +37,7 @@
                                         echo "<td>".$pouzivatel['email']."</td>";
                                         echo "<td>".$pouzivatel['meno']."</td>";
                                         echo "<td>".$pouzivatel['heslo']."</td>";
+                                        echo "<td>".$pouzivatel['stav']."</td>";
                                         echo "<td>".$pouzivatel['token']."</td>";
                                         echo "<td>".$pouzivatel['timestamp']."</td>";
                                         echo "<td>

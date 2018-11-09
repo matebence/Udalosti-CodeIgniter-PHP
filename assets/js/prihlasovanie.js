@@ -82,6 +82,7 @@ $( document ).ready(function() {
         e.preventDefault();
     }
 
+    $('#telo_formulara_registracia').submit( requestNaServer );
     $('#telo_formulara_zabudnute_heslo').submit( requestNaServer );
     $('#telo_formulara_obnovenie_hesla').submit( requestNaServer );
 });

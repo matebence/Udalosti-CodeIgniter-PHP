@@ -1,6 +1,6 @@
 @import 'pismena.css';
 
-.alert-danger {
+.alert-danger, .alert-success {
     width: 23vw;
     margin: 0 auto;
     margin-top: 20px;

@@ -43,12 +43,13 @@ class Rola_pouzivatela_model extends CI_model
         $this->db->from('rola_pouzivatela');
         $this->db->join('pouzivatel', 'pouzivatel.idPouzivatel = rola_pouzivatela.idPouzivatel');
         $this->db->join('rola', 'rola.idRola = rola_pouzivatela.idRola');
+        $this->db->where('stav', AKCEPTOVANE);
         $this->db->where('email', $prihlasovacie_udaje['email']);
         $this->db->where('heslo', $prihlasovacie_udaje['heslo']);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             $riadok = $query->row();
-            return (strcmp("admin", $riadok->nazov) == 0) ? true : false;
+            return $riadok->nazov;
         } else {
             return false;
         }

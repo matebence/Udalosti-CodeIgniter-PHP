@@ -28,57 +28,88 @@ class Registracia extends CI_Controller
                         'email' => $this->input->post('email'),
                         'meno' => $this->input->post('meno'),
                         'heslo' => $this->sifrovanie_hesla($this->input->post('heslo')),
-                        'token' => "",
+                        'token' => ""
                     );
+
+                    if(strcmp($this->input->post('rola'), ORGANIZATOR) == 0) {
+                        $novy_pouzivatel["stav"] = NEPRECITANE;
+                    }else{
+                        $novy_pouzivatel["stav"] = AKCEPTOVANE;
+                    }
+
                     $id_noveho_pouzivatela = $this->Pouzivatel_model->vytvorit($novy_pouzivatel);
+                    $pouzivatel = null;
 
                     if ($id_noveho_pouzivatela) {
                         if(($this->input->post('prehliadac')) && ($this->session->userdata('email_admina'))){
 
-                            $pouzivatel = null;
-                            $admin = false;
-                            $oznam = "";
-
                             if(strcmp($this->input->post('rola'), ADMIN) == 0){
                                 $pouzivatel = $this->Rola_pouzivatela_model->vytvorit($id_noveho_pouzivatela, $this->Rola_model->rola(ADMIN));
-                                $admin = true;
+
+                                if($pouzivatel){
+                                    $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                                        array(
+                                            "ikona" => "pe-7s-check",
+                                            "typ" => "success",
+                                            "oznam" => "Nový administrátor bol vytvorený",
+                                            "presmeruj" => true
+                                        ));
+                                }else{
+                                    $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                                        array(
+                                            "ikona" => "pe-7s-attention",
+                                            "typ" => "warning",
+                                            "oznam" => "Pri vytvorenie adminstrátora došlo chybe!"
+                                        ));
+                                }
                             }else if(strcmp($this->input->post('rola'), POUZIVATEL) == 0){
                                 $pouzivatel = $this->Rola_pouzivatela_model->vytvorit($id_noveho_pouzivatela, $this->Rola_model->rola(POUZIVATEL));
-                            }
 
-                            if($pouzivatel){
-                                if($admin){
-                                    $oznam = "Nový administrátor bol vytvorený";
+                                if($pouzivatel){
+                                    $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                                        array(
+                                            "ikona" => "pe-7s-check",
+                                            "typ" => "success",
+                                            "oznam" => "Nový používatel bol vytvorený",
+                                            "presmeruj" => false
+                                        ));
                                 }else{
-                                    $oznam = "Nový používatel bol vytvorený";
+                                    $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                                        array(
+                                            "ikona" => "pe-7s-attention",
+                                            "typ" => "warning",
+                                            "oznam" => "Pri vytvorenie používatela došlo chybe!"
+                                        ));
                                 }
-
-                                $this->load->view("admin/notifikacia/notifikacia_oznam.php",
-                                    array(
-                                        "ikona" => "pe-7s-check",
-                                        "typ" => "success",
-                                        "oznam" => $oznam,
-                                        "presmeruj" => $admin
-                                    ));
-                            }else{
-                                $this->load->view("admin/notifikacia/notifikacia_oznam.php",
-                                    array(
-                                        "ikona" => "pe-7s-attention",
-                                        "typ" => "warning",
-                                        "oznam" => "Pri vytvorenie používatela došlo chybe!"
-                                    ));
                             }
                         }else{
-                            if ($this->Rola_pouzivatela_model->vytvorit($id_noveho_pouzivatela, $this->Rola_model->rola(POUZIVATEL))) {
-                                $this->session->set_flashdata('uspech', 'Registrácia prebehla úspšne.');
-                                $this->load->view("json/json_vystup_pridanie_dat");
-                            } else {
-                                $this->session->set_flashdata('chyba', 'Pri registrácií došlo chybe!');
-                                $this->load->view("json/json_vystup_pridanie_dat");
+                            if(strcmp($this->input->post('rola'), ORGANIZATOR) == 0){
+                                $pouzivatel = $this->Rola_pouzivatela_model->vytvorit($id_noveho_pouzivatela, $this->Rola_model->rola(ORGANIZATOR));
+
+                                if($pouzivatel){
+                                    $this->session->set_flashdata('uspech', 'Registrácia prebehla úspešne! Účet bude schváleny najmänej do 24h.');
+                                    $this->load->view("admin/dialog/dialog_oznam");
+                                }else{
+                                    $this->session->set_flashdata('chyba', 'Pri registrácií došlo chybe!');
+                                    $this->load->view("admin/dialog/dialog_oznam");
+                                }
+                            }else{
+                                $this->Rola_pouzivatela_model->vytvorit($id_noveho_pouzivatela, $this->Rola_model->rola(POUZIVATEL));
+
+                                if ($pouzivatel) {
+                                    $this->session->set_flashdata('uspech', 'Registrácia prebehla úspšne.');
+                                    $this->load->view("json/json_vystup_pridanie_dat");
+                                } else {
+                                    $this->session->set_flashdata('chyba', 'Pri registrácií došlo chybe!');
+                                    $this->load->view("json/json_vystup_pridanie_dat");
+                                }
                             }
                         }
                     } else {
-                        if(($this->input->post('prehliadac')) && $this->session->userdata('email_admina')){
+                        if(strcmp($this->input->post('rola'), ORGANIZATOR) == 0){
+                            $this->session->set_flashdata('chyba', 'Pri registrácií došlo chybe!');
+                            $this->load->view("admin/dialog/dialog_oznam");
+                        }else if ((strcmp($this->input->post('rola'), POUZIVATEL) == 0) || (strcmp($this->input->post('rola'), ADMIN) == 0)){
                             $this->load->view("admin/notifikacia/notifikacia_oznam.php",
                                 array(
                                     "ikona" => "pe-7s-attention",
@@ -91,12 +122,15 @@ class Registracia extends CI_Controller
                         }
                     }
             } else {
-                if(($this->input->post('prehliadac')) && $this->session->userdata('email_admina')) {
+                if(strcmp($this->input->post('rola'), ORGANIZATOR) == 0){
+                    $this->load->view("admin/dialog/dialog_oznam");
+                }else if ((strcmp($this->input->post('rola'), POUZIVATEL) == 0) || (strcmp($this->input->post('rola'), ADMIN) == 0)){
                     $this->load->view("admin/notifikacia/notifikacia_oznam.php",
                         array(
                             "ikona" => "pe-7s-attention",
                             "typ" => "warning"
                         ));
+
                 }else{
                     $this->load->view("json/json_vystup_pridanie_dat");
                 }

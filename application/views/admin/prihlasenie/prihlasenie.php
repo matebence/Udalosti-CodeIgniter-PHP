@@ -8,7 +8,7 @@
         </div>
 
         <div class="formular_prihlasenie">
-            <form action="<?php echo site_url('prihlasenie'); ?>" method="post">
+            <form id="telo_formulara_prihlasenie" action="<?php echo site_url('prihlasenie'); ?>" method="post">
                 <input id="email_prihlasenie" type="email" name="email" placeholder="Email" autofocus/>
                 <input id="heslo" type="password" name="heslo" placeholder="Heslo" />
                 <input id="prihlasenie" type="submit" value="Prihlásiť sa">
@@ -20,13 +20,15 @@
 
         <div class="formular_registracia">
             <form id="telo_formulara_registracia" action="<?php echo site_url('registracia'); ?>">
-                <input id="registracia_meno" type="email" name="meno" placeholder="Meno"/>
-                <input id="registracia_email" type="text" name="email" placeholder="Email"/>
+                <input id="registracia_meno" type="text" name="meno" placeholder="Meno"/>
+                <input id="registracia_email" type="email" name="email" placeholder="Email"/>
                 <input id="registracia_heslo" type="password" name="heslo" placeholder="Heslo"/>
                 <input id="registracia_potvrd" type="password" name="potvrd" placeholder="Potvrdenie hesla"/>
                 <input id="registrovat" type="submit" value="Registrovať">
 
-                <input type="hidden" name="novy_organizator" value="novy_organizator">
+                <input type="hidden" name="prehliadac" value="1">
+                <input type="hidden" name="rola" value="<?php echo  ORGANIZATOR; ?>">
+                <input type="hidden" name="nova_registracia" value="novy_organizator">
             </form>
         </div>
 

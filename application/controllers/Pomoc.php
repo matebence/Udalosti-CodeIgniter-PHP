@@ -36,7 +36,7 @@ class Pomoc extends CI_Controller
                 if ($heslo != null) {
                     $this->posli_obnovovaciu_adresu_na_email($emailova_adresa_prijemcu, $heslo);
                 } else {
-                    $this->session->set_flashdata('chyba', 'Na Vašu emailovú adresu sme poslali mail!');
+                    $this->session->set_flashdata('uspech', 'Na Vašu emailovú adresu sme poslali mail!');
                     $this->load->view("admin/dialog/dialog_oznam");
                 }
             } else {
@@ -55,7 +55,7 @@ class Pomoc extends CI_Controller
 
             $this->load->view("admin/dialog/dialog_oznam");
         } else {
-            $this->session->set_flashdata('chyba', 'Na Vašu emailovú adresu sme poslali mail!');
+            $this->session->set_flashdata('uspech', 'Na Vašu emailovú adresu sme poslali mail!');
             $this->load->view("admin/dialog/dialog_oznam");
         }
     }

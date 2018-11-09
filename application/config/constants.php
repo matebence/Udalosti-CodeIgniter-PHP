@@ -108,16 +108,19 @@ define('ORGANIZATOR', "organizator");
 
 /*
 |--------------------------------------------------------------------------
-| Udalosti
+| Udalosti, Pouzivatelia
 |--------------------------------------------------------------------------
 |
-|Stav udalosti
+|Stav udalosti a pouzivatelov
 |
 */
 define('PRIJATE', "prijate");
 define('ODMIETNUTE', "odmietnute");
-define('NEPRECITANE', "neprecitane");
 
+define('AKCEPTOVANE', "akceptovane");
+define('BLOKOVANE', "blokovane");
+
+define('NEPRECITANE', "neprecitane");
 /*
 |--------------------------------------------------------------------------
 | Vlastne premenne
