@@ -22,7 +22,7 @@ class Pomoc extends CI_Controller
     {
         if ($this->input->post("zabudnute_heslo")) {
             $this->form_validation->set_rules('email',
-                'Email používatela',
+                'Email používateľa',
                 'required|valid_email',
                 array('required' => 'Nesprávny formát emailovej adresi!',
                     'valid_email' => 'Nesprávny formát emailovej adresi!'));
@@ -37,10 +37,10 @@ class Pomoc extends CI_Controller
                     $this->posli_obnovovaciu_adresu_na_email($emailova_adresa_prijemcu, $heslo);
                 } else {
                     $this->session->set_flashdata('uspech', 'Na Vašu emailovú adresu sme poslali mail!');
-                    $this->load->view("admin/dialog/dialog_oznam");
+                    $this->load->view("web/dialog/dialog_oznam");
                 }
             } else {
-                $this->load->view("admin/dialog/dialog_oznam");
+                $this->load->view("web/dialog/dialog_oznam");
             }
         }
     }
@@ -53,10 +53,10 @@ class Pomoc extends CI_Controller
         if ($heslo != null && $this->posli_email($emailova_adresa_prijemcu["email"], "Zabudnuté heslo", sprintf($obsah, $adresa))) {
             $this->session->set_flashdata('uspech', 'Na Vašu emailovú adresu sme poslali mail.');
 
-            $this->load->view("admin/dialog/dialog_oznam");
+            $this->load->view("web/dialog/dialog_oznam");
         } else {
             $this->session->set_flashdata('uspech', 'Na Vašu emailovú adresu sme poslali mail!');
-            $this->load->view("admin/dialog/dialog_oznam");
+            $this->load->view("web/dialog/dialog_oznam");
         }
     }
 
@@ -78,9 +78,9 @@ class Pomoc extends CI_Controller
     {
         if (($this->input->get("kluc")) && ($this->input->get("hodnota"))) {
             $data['email_hash'] = $this->input->get("kluc");
-            $this->load->view("admin/rozhranie/prihlasenie_hlavicka");
-            $this->load->view("admin/prihlasenie/prihlasenie_zabudnute_heslo", $data);
-            $this->load->view("admin/rozhranie/prihlasenie_pata");
+            $this->load->view("web/rozhranie/prihlasenie_hlavicka");
+            $this->load->view("web/prihlasenie/prihlasenie_zabudnute_heslo", $data);
+            $this->load->view("web/rozhranie/prihlasenie_pata");
         }
     }
 
@@ -88,13 +88,13 @@ class Pomoc extends CI_Controller
     {
         if ($this->input->post("nove_heslo")) {
             $this->form_validation->set_rules('heslo',
-                'Nové heslo používatela',
+                'Nové heslo používateľa',
                 'required|min_length[5]|max_length[20]',
                 array('required' => 'Políčko hesla je povinné!',
                     'min_length' => 'Slabé heslo. Heslo je príliš krátke!',
                     'max_length' => 'Dlžka hesla presahuje 20 charakterov!'));
             $this->form_validation->set_rules('potvrd',
-                'Potvrdenie nového hesla používatela',
+                'Potvrdenie nového hesla používateľa',
                 'required|min_length[5]|max_length[20]|matches[heslo]',
                 array('required' => 'Heslá sa nezhodujú!',
                     'min_length' => 'Heslá sa nezhodujú!',
@@ -111,9 +111,9 @@ class Pomoc extends CI_Controller
                     $this->session->set_flashdata('chyba', 'Pri aktualizácií hesla došlo ku chybe!');
                 }
 
-                $this->load->view("admin/dialog/dialog_oznam");
+                $this->load->view("web/dialog/dialog_oznam");
             } else {
-                $this->load->view("admin/dialog/dialog_oznam");
+                $this->load->view("web/dialog/dialog_oznam");
             }
         }
     }

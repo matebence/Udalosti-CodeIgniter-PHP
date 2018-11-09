@@ -31,7 +31,7 @@ class Registracia extends CI_Controller
                         'token' => ""
                     );
 
-                    if(strcmp($this->input->post('rola'), ORGANIZATOR) == 0) {
+                    if((strcmp($this->input->post('rola'), ORGANIZATOR) == 0) && !($this->session->userdata('email_admina'))) {
                         $novy_pouzivatel["stav"] = NEPRECITANE;
                     }else{
                         $novy_pouzivatel["stav"] = AKCEPTOVANE;
@@ -47,7 +47,7 @@ class Registracia extends CI_Controller
                                 $pouzivatel = $this->Rola_pouzivatela_model->vytvorit($id_noveho_pouzivatela, $this->Rola_model->rola(ADMIN));
 
                                 if($pouzivatel){
-                                    $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                                    $this->load->view("web/notifikacia/notifikacia_oznam.php",
                                         array(
                                             "ikona" => "pe-7s-check",
                                             "typ" => "success",
@@ -55,30 +55,49 @@ class Registracia extends CI_Controller
                                             "presmeruj" => true
                                         ));
                                 }else{
-                                    $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                                    $this->load->view("web/notifikacia/notifikacia_oznam.php",
                                         array(
                                             "ikona" => "pe-7s-attention",
                                             "typ" => "warning",
                                             "oznam" => "Pri vytvorenie adminstrátora došlo chybe!"
                                         ));
                                 }
+                            }else if(strcmp($this->input->post('rola'), ORGANIZATOR) == 0){
+                                $pouzivatel = $this->Rola_pouzivatela_model->vytvorit($id_noveho_pouzivatela, $this->Rola_model->rola(ORGANIZATOR));
+
+                                if($pouzivatel){
+                                    $this->load->view("web/notifikacia/notifikacia_oznam.php",
+                                        array(
+                                            "ikona" => "pe-7s-check",
+                                            "typ" => "success",
+                                            "oznam" => "Nový organizátor bol vytvorený",
+                                            "presmeruj" => false
+                                        ));
+                                }else{
+                                    $this->load->view("web/notifikacia/notifikacia_oznam.php",
+                                        array(
+                                            "ikona" => "pe-7s-attention",
+                                            "typ" => "warning",
+                                            "oznam" => "Pri vytvorenie organizátora došlo chybe!"
+                                        ));
+                                }
                             }else if(strcmp($this->input->post('rola'), POUZIVATEL) == 0){
                                 $pouzivatel = $this->Rola_pouzivatela_model->vytvorit($id_noveho_pouzivatela, $this->Rola_model->rola(POUZIVATEL));
 
                                 if($pouzivatel){
-                                    $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                                    $this->load->view("web/notifikacia/notifikacia_oznam.php",
                                         array(
                                             "ikona" => "pe-7s-check",
                                             "typ" => "success",
-                                            "oznam" => "Nový používatel bol vytvorený",
+                                            "oznam" => "Nový používateľ bol vytvorený",
                                             "presmeruj" => false
                                         ));
                                 }else{
-                                    $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                                    $this->load->view("web/notifikacia/notifikacia_oznam.php",
                                         array(
                                             "ikona" => "pe-7s-attention",
                                             "typ" => "warning",
-                                            "oznam" => "Pri vytvorenie používatela došlo chybe!"
+                                            "oznam" => "Pri vytvorenie používateľa došlo chybe!"
                                         ));
                                 }
                             }
@@ -88,10 +107,10 @@ class Registracia extends CI_Controller
 
                                 if($pouzivatel){
                                     $this->session->set_flashdata('uspech', 'Registrácia prebehla úspešne! Účet bude schváleny najmänej do 24h.');
-                                    $this->load->view("admin/dialog/dialog_oznam");
+                                    $this->load->view("web/dialog/dialog_oznam");
                                 }else{
                                     $this->session->set_flashdata('chyba', 'Pri registrácií došlo chybe!');
-                                    $this->load->view("admin/dialog/dialog_oznam");
+                                    $this->load->view("web/dialog/dialog_oznam");
                                 }
                             }else{
                                 $this->Rola_pouzivatela_model->vytvorit($id_noveho_pouzivatela, $this->Rola_model->rola(POUZIVATEL));
@@ -108,13 +127,13 @@ class Registracia extends CI_Controller
                     } else {
                         if(strcmp($this->input->post('rola'), ORGANIZATOR) == 0){
                             $this->session->set_flashdata('chyba', 'Pri registrácií došlo chybe!');
-                            $this->load->view("admin/dialog/dialog_oznam");
+                            $this->load->view("web/dialog/dialog_oznam");
                         }else if ((strcmp($this->input->post('rola'), POUZIVATEL) == 0) || (strcmp($this->input->post('rola'), ADMIN) == 0)){
-                            $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                            $this->load->view("web/notifikacia/notifikacia_oznam.php",
                                 array(
                                     "ikona" => "pe-7s-attention",
                                     "typ" => "warning",
-                                    "oznam" => "Pri vytvorenie používatela došlo chybe!"
+                                    "oznam" => "Pri vytvorenie používateľa došlo chybe!"
                                 ));
                         }else{
                             $this->session->set_flashdata('chyba', 'Pri registrácií došlo chybe!');
@@ -123,14 +142,21 @@ class Registracia extends CI_Controller
                     }
             } else {
                 if(strcmp($this->input->post('rola'), ORGANIZATOR) == 0){
-                    $this->load->view("admin/dialog/dialog_oznam");
+                    if($this->session->userdata('email_admina')){
+                        $this->load->view("web/notifikacia/notifikacia_oznam.php",
+                            array(
+                                "ikona" => "pe-7s-attention",
+                                "typ" => "warning"
+                            ));
+                    }else{
+                        $this->load->view("web/dialog/dialog_oznam");
+                    }
                 }else if ((strcmp($this->input->post('rola'), POUZIVATEL) == 0) || (strcmp($this->input->post('rola'), ADMIN) == 0)){
-                    $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                    $this->load->view("web/notifikacia/notifikacia_oznam.php",
                         array(
                             "ikona" => "pe-7s-attention",
                             "typ" => "warning"
                         ));
-
                 }else{
                     $this->load->view("json/json_vystup_pridanie_dat");
                 }

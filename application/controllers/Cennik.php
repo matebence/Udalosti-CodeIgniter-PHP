@@ -50,14 +50,14 @@ class Cennik extends CI_Controller
                 );
 
                 if ($this->Cennik_model->vytvorit($novy_cennik)) {
-                    $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                    $this->load->view("web/notifikacia/notifikacia_oznam.php",
                         array(
                             "ikona" => "pe-7s-check",
                             "typ" => "success",
                             "oznam" => "Cenník bol vytvorený"
                         ));
                 }else{
-                    $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                    $this->load->view("web/notifikacia/notifikacia_oznam.php",
                         array(
                             "ikona" => "pe-7s-attention",
                             "typ" => "warning",
@@ -65,7 +65,7 @@ class Cennik extends CI_Controller
                         ));
                 }
             }else{
-                $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                $this->load->view("web/notifikacia/notifikacia_oznam.php",
                     array(
                         "ikona" => "pe-7s-attention",
                         "typ" => "warning"
@@ -87,14 +87,14 @@ class Cennik extends CI_Controller
                 );
 
                 if ($this->Cennik_model->aktualizuj($id_cennik, $aktualny_cennik)) {
-                    $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                    $this->load->view("web/notifikacia/notifikacia_oznam.php",
                         array(
                             "ikona" => "pe-7s-check",
                             "typ" => "success",
                             "oznam" => "Cenník bol aktualizovaný"
                         ));
                 }else{
-                    $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                    $this->load->view("web/notifikacia/notifikacia_oznam.php",
                         array(
                             "ikona" => "pe-7s-attention",
                             "typ" => "warning",
@@ -102,7 +102,7 @@ class Cennik extends CI_Controller
                         ));
                 }
             }else{
-                $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                $this->load->view("web/notifikacia/notifikacia_oznam.php",
                     array(
                         "ikona" => "pe-7s-attention",
                         "typ" => "warning"
@@ -118,14 +118,14 @@ class Cennik extends CI_Controller
         if (($this->session->userdata('email_admina')) && ($id_cennik)) {
 
             if($this->Cennik_model->odstran($id_cennik)){
-                $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                $this->load->view("web/notifikacia/notifikacia_oznam.php",
                     array(
                         "ikona" => "pe-7s-check",
                         "typ" => "success",
                         "oznam" => "Cenník bol odstránení"
                     ));
             }else {
-                $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                $this->load->view("web/notifikacia/notifikacia_oznam.php",
                     array(
                         "ikona" => "pe-7s-attention",
                         "typ" => "warning",

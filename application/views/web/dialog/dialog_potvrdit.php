@@ -10,7 +10,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Zrušiť</button>
-                <button type="button" class="btn btn-danger <?php if(isset($tlacidlo)){echo $tlacidlo;}?>">Áno, odstrániť</button>
+                <button type="button" class="btn btn-danger <?php if(isset($tlacidlo)){echo $tlacidlo;}?>">Potvrdiť</button>
             </div>
         </div>
     </div>

@@ -29,7 +29,7 @@ class Udalosti extends CI_Controller
                 $obrazok = $this->obrazok();
 
                 if (strcmp($obrazok, "") == 0) {
-                    $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                    $this->load->view("web/notifikacia/notifikacia_oznam.php",
                         array(
                             "ikona" => "pe-7s-attention",
                             "typ" => "warning",
@@ -54,14 +54,14 @@ class Udalosti extends CI_Controller
                     );
                     $id_novej_udalosti = $this->Udalost_model->vytvorit($nova_udalost);
                     if ($id_novej_udalosti) {
-                        $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                        $this->load->view("web/notifikacia/notifikacia_oznam.php",
                             array(
                                 "ikona" => "pe-7s-check",
                                 "typ" => "success",
                                 "oznam" => "Udalosť bola vytvorená"
                             ));
                     } else {
-                        $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                        $this->load->view("web/notifikacia/notifikacia_oznam.php",
                             array(
                                 "ikona" => "pe-7s-attention",
                                 "typ" => "warning",
@@ -70,7 +70,7 @@ class Udalosti extends CI_Controller
                     }
                 }
             } else {
-                $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                $this->load->view("web/notifikacia/notifikacia_oznam.php",
                     array(
                         "ikona" => "pe-7s-attention",
                         "typ" => "warning"
@@ -114,14 +114,14 @@ class Udalosti extends CI_Controller
 
                     $aktualizovana_udalost = $this->Udalost_model->aktualizuj($id_udalost, $udalost);
                     if ($aktualizovana_udalost) {
-                        $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                        $this->load->view("web/notifikacia/notifikacia_oznam.php",
                             array(
                                 "ikona" => "pe-7s-check",
                                 "typ" => "success",
                                 "oznam" => "Udalosť bola aktualizovaná"
                             ));
                     } else {
-                        $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                        $this->load->view("web/notifikacia/notifikacia_oznam.php",
                             array(
                                 "ikona" => "pe-7s-attention",
                                 "typ" => "warning",
@@ -130,10 +130,64 @@ class Udalosti extends CI_Controller
                     }
                 }
             } else {
-                $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                $this->load->view("web/notifikacia/notifikacia_oznam.php",
                     array(
                         "ikona" => "pe-7s-attention",
                         "typ" => "warning"
+                    ));
+            }
+        } else {
+            redirect("prihlasenie/pristup");
+        }
+    }
+
+    public function prijat($id_udalost){
+        if (($this->session->userdata('email_admina')) && ($id_udalost)) {
+            $udalost = array(
+                "stav" => PRIJATE
+            );
+
+            $prijata_udalost = $this->Udalost_model->aktualizuj($id_udalost, $udalost);
+            if ($prijata_udalost) {
+                $this->load->view("web/notifikacia/notifikacia_oznam.php",
+                    array(
+                        "ikona" => "pe-7s-check",
+                        "typ" => "success",
+                        "oznam" => "Udalosť bola pridaná do aktuálnych udalostí"
+                    ));
+            } else {
+                $this->load->view("web/notifikacia/notifikacia_oznam.php",
+                    array(
+                        "ikona" => "pe-7s-attention",
+                        "typ" => "warning",
+                        "oznam" => "Pri pridaní udalosti do aktuálnych udalosti došlo chybe"
+                    ));
+            }
+        } else {
+            redirect("prihlasenie/pristup");
+        }
+    }
+
+    public function odmietnut($id_udalost){
+        if (($this->session->userdata('email_admina')) && ($id_udalost)) {
+            $udalost = array(
+                "stav" => ODMIETNUTE
+            );
+
+            $odmietnuta_udalost = $this->Udalost_model->aktualizuj($id_udalost, $udalost);
+            if ($odmietnuta_udalost) {
+                $this->load->view("web/notifikacia/notifikacia_oznam.php",
+                    array(
+                        "ikona" => "pe-7s-check",
+                        "typ" => "success",
+                        "oznam" => "Udalosť bola odobraná z aktuálnych udalostí"
+                    ));
+            } else {
+                $this->load->view("web/notifikacia/notifikacia_oznam.php",
+                    array(
+                        "ikona" => "pe-7s-attention",
+                        "typ" => "warning",
+                        "oznam" => "Pri odobraní udalosti z aktuálnych udalosti došlo chybe"
                     ));
             }
         } else {
@@ -149,14 +203,14 @@ class Udalosti extends CI_Controller
             $id_udalosti = $this->Udalost_model->odstran($id_udalost);
 
             if ($id_udalosti) {
-                $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                $this->load->view("web/notifikacia/notifikacia_oznam.php",
                     array(
                         "ikona" => "pe-7s-check",
                         "typ" => "success",
                         "oznam" => "Udalosť bola odstránena"
                     ));
             } else {
-                $this->load->view("admin/notifikacia/notifikacia_oznam.php",
+                $this->load->view("web/notifikacia/notifikacia_oznam.php",
                     array(
                         "ikona" => "pe-7s-attention",
                         "typ" => "warning",

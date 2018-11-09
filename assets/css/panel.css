@@ -38,23 +38,36 @@ h1, h2, h3, h4, h5, h6{
     cursor: pointer;
 }
 
-.pridat{
+.prijat, .akceptovat{
     color: green;
 }
 
-.pridat:hover{
+.prijat:hover, .akceptovat:hover{
     cursor: pointer;
 }
 
-.odmietnut{
+.odmietnut, .blokovat{
     color: #ffc1a9;
 }
 
-.odmietnut:hover{
+.odmietnut:hover, .blokovat:hover{
     cursor: pointer;
 }
 
-.cennik-operacie{
+.fa{
+    display: inline;
+}
+
+.editovat, .odstranit, .prijat, .akceptovat, .odmietnut, .blokovat{
+    margin-left: 5px;
+}
+
+td, th{
+    font-family: RalewayRegular, serif;
+    text-align: center;
+}
+
+th.cennik-operacie, .cennik-operacie{
     text-align: right;
 }
 
@@ -109,10 +122,6 @@ a.nahlad:hover img {
 .sidebar .logo {
     margin: 0 auto;
     width: 70%;
-}
-
-.fa{
-    display: inline;
 }
 
 .info-box {

@@ -7,13 +7,13 @@
                         <div class="col-md-12">
                             <div class="header">
                                 <h4 class="title" style="display: inline;">Organizátori</h4>
-                                <a href="#" class="btn btn-success pull-right" data-toggle="modal" data-target='#novy-pouzivatel_organizator'><i
+                                <a href="#" class="btn btn-success pull-right" data-toggle="modal" data-target='#novy-pouzivatel_admin'><i
                                             class="fa fa-plus-circle"></i><span>Nový organizátor</span></a>
                                 <p class="category">Zoznam nepotvrdených organizátorov</p>
                             </div>
                         </div>
                     </div>
-                    <div class="content table-responsive table-full-width">
+                    <div class="content table-responsive">
                         <table class="table table-hover table-striped">
                             <thead>
                             <tr>
@@ -22,25 +22,25 @@
                                 <th>Meno</th>
                                 <th>Heslo</th>
                                 <th>Vytvorený</th>
-                                <th></th>
+                                <th>Akceptovať</th>
+                                <th>Blokovať</th>
+                                <th>Odstrániť</th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php
-                            if(isset($zoznam_organizatorov)){
-                                if(!empty($zoznam_organizatorov)){
-                                    foreach ($zoznam_organizatorov as $organizator) {
+                            if(isset($nepotvrdene_organizatori)){
+                                if(!empty($nepotvrdene_organizatori)){
+                                    foreach ($nepotvrdene_organizatori as $organizator) {
                                         echo "<tr>";
-                                        echo "<td>".$organizator['idPouzivatel']."</td>";
-                                        echo "<td>".$organizator['email']."</td>";
-                                        echo "<td>".$organizator['meno']."</td>";
-                                        echo "<td>".$organizator['heslo']."</td>";
-                                        echo "<td>".$organizator['timestamp']."</td>";
-                                        echo "<td>
-                                                    <i class='".$organizator['idPouzivatel']." fa fa-check-circle pridat' data-toggle='modal' data-target='#potvrdit-pouzivatel_organizator'></i>
-                                                    <i class='".$organizator['idPouzivatel']." fa fa-minus-circle odmietnut' data-toggle='modal' data-target='#odmietnut-pouzivatel_organizator'></i>
-                                                    <i class='".$organizator['idPouzivatel']." fa fa-trash odstranit' data-toggle='modal' data-target='#odmietnut-pouzivatel_organizator'></i>
-                                                  </td>";
+                                            echo "<td>".$organizator['idPouzivatel']."</td>";
+                                            echo "<td>".$organizator['email']."</td>";
+                                            echo "<td>".$organizator['meno']."</td>";
+                                            echo "<td>".$organizator['heslo']."</td>";
+                                            echo "<td>".$organizator['timestamp']."</td>";
+                                            echo "<td><i class='".$organizator['idPouzivatel']." fa fa-check-circle akceptovat' data-toggle='modal' data-target='#akceptovat-pouzivatel_admin'></i></td>";
+                                            echo "<td><i class='".$organizator['idPouzivatel']." fa fa-minus-circle blokovat' data-toggle='modal' data-target='#blokovat-pouzivatel_admin'></i></td>";
+                                            echo "<td><i class='".$organizator['idPouzivatel']." fa fa-trash odstranit' data-toggle='modal' data-target='#odstranit-pouzivatel_admin'></i></i></td>";
                                         echo "</tr>";
                                     }
                                 }
@@ -71,7 +71,10 @@
                                 <th>Meno</th>
                                 <th>Heslo</th>
                                 <th>Vytvorený</th>
-                                <th></th>
+                                <th>Akceptovať</th>
+                                <th>Blokovať</th>
+                                <th>Editovať</th>
+                                <th>Odstrániť</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -80,15 +83,15 @@
                                 if(!empty($zoznam_organizatorov)){
                                     foreach ($zoznam_organizatorov as $organizator) {
                                         echo "<tr>";
-                                        echo "<td>".$organizator['idPouzivatel']."</td>";
-                                        echo "<td>".$organizator['email']."</td>";
-                                        echo "<td>".$organizator['meno']."</td>";
-                                        echo "<td>".$organizator['heslo']."</td>";
-                                        echo "<td>".$organizator['timestamp']."</td>";
-                                        echo "<td>
-                                                    <i class='".$organizator['idPouzivatel']." fa fa-edit editovat' data-toggle='modal' data-target='#aktualizovat-pouzivatel_organizator'></i>
-                                                    <i class='".$organizator['idPouzivatel']." fa fa-trash odstranit' data-toggle='modal' data-target='#odstranit-pouzivatel_organizator'></i>
-                                                  </td>";
+                                            echo "<td>".$organizator['idPouzivatel']."</td>";
+                                            echo "<td>".$organizator['email']."</td>";
+                                            echo "<td>".$organizator['meno']."</td>";
+                                            echo "<td>".$organizator['heslo']."</td>";
+                                            echo "<td>".$organizator['timestamp']."</td>";
+                                            echo "<td><i class='".$organizator['idPouzivatel']." fa fa-check-circle akceptovat' data-toggle='modal' data-target='#akceptovat-pouzivatel_admin'></i></td>";
+                                            echo "<td><i class='".$organizator['idPouzivatel']." fa fa-minus-circle blokovat' data-toggle='modal' data-target='#blokovat-pouzivatel_admin'></i></td>";
+                                            echo "<td><i class='".$organizator['idPouzivatel']." fa fa-edit editovat' data-toggle='modal' data-target='#aktualizovat-pouzivatel_admin'></i></i></td>";
+                                            echo "<td><i class='".$organizator['idPouzivatel']." fa fa-trash odstranit' data-toggle='modal' data-target='#odstranit-pouzivatel_admin'></i></i></td>";
                                         echo "</tr>";
                                     }
                                 }
@@ -119,24 +122,23 @@
                                 <th>Meno</th>
                                 <th>Heslo</th>
                                 <th>Vytvorený</th>
-                                <th></th>
+                                <th>Akceptovať</th>
+                                <th>Odstrániť</th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php
-                            if(isset($zoznam_organizatorov)){
-                                if(!empty($zoznam_organizatorov)){
-                                    foreach ($zoznam_organizatorov as $organizator) {
+                            if(isset($odmietnute_organizatori)){
+                                if(!empty($odmietnute_organizatori)){
+                                    foreach ($odmietnute_organizatori as $organizator) {
                                         echo "<tr>";
-                                        echo "<td>".$organizator['idPouzivatel']."</td>";
-                                        echo "<td>".$organizator['email']."</td>";
-                                        echo "<td>".$organizator['meno']."</td>";
-                                        echo "<td>".$organizator['heslo']."</td>";
-                                        echo "<td>".$organizator['timestamp']."</td>";
-                                        echo "<td>
-                                                    <i class='".$organizator['idPouzivatel']." fa fa-check-circle pridat' data-toggle='modal' data-target='#pridat-pouzivatel_organizator'></i>
-                                                    <i class='".$organizator['idPouzivatel']." fa fa-trash odstranit' data-toggle='modal' data-target='#odstranit-pouzivatel_organizator'></i>
-                                                  </td>";
+                                            echo "<td>".$organizator['idPouzivatel']."</td>";
+                                            echo "<td>".$organizator['email']."</td>";
+                                            echo "<td>".$organizator['meno']."</td>";
+                                            echo "<td>".$organizator['heslo']."</td>";
+                                            echo "<td>".$organizator['timestamp']."</td>";
+                                            echo "<td><i class='".$organizator['idPouzivatel']." fa fa-check-circle akceptovat' data-toggle='modal' data-target='#akceptovat-pouzivatel_admin'></i></td>";
+                                            echo "<td><i class='".$organizator['idPouzivatel']." fa fa-trash odstranit' data-toggle='modal' data-target='#odstranit-pouzivatel_admin'></i></i></td>";
                                         echo "</tr>";
                                     }
                                 }

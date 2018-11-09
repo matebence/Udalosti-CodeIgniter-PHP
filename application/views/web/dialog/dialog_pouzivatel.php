@@ -41,7 +41,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <?php if(isset($titul)){if(strcmp($titul, "Nový používatel") == 0){ echo "<input type='hidden' name='rola' value='".POUZIVATEL."'>"; }else if(strcmp($titul, "Nový organizátor") == 0){ echo "<input type='hidden' name='rola' value='".ORGANIZATOR."'>";}else if(strcmp($titul, "Nový administrátor") == 0){ echo "<input type='hidden' name='rola' value='".ADMIN."'>";}}?>
+                                    <?php if(isset($titul)){if(strcmp($titul, "Nový používateľ") == 0){ echo "<input type='hidden' name='rola' value='".POUZIVATEL."'>"; }else if(strcmp($titul, "Nový organizátor") == 0){ echo "<input type='hidden' name='rola' value='".ORGANIZATOR."'>";}else if(strcmp($titul, "Nový administrátor") == 0){ echo "<input type='hidden' name='rola' value='".ADMIN."'>";}}?>
 
                                     <input type="hidden" name="nova_registracia" value="1">
                                     <input type="hidden" name="prehliadac" value="1">
@@ -56,10 +56,10 @@
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Zrušiť</button>
                 <?php
                 if(isset($tlacidlo)){
-                    if(strcmp($tlacidlo, "pouzivatel_admin_dialog_aktualizuj") == 0){
+                    if(strcmp($tlacidlo, "pouzivatel_dialog_aktualizuj") == 0){
                         if(isset($titul)){
-                            if(strcmp($titul, "Aktualizovať používatela") == 0){
-                                echo "<button type='button' class='btn btn-success' id='".$tlacidlo."'>Aktulizovať používatela</button>";
+                            if(strcmp($titul, "Aktualizovať používateľa") == 0){
+                                echo "<button type='button' class='btn btn-success' id='".$tlacidlo."'>Aktulizovať používateľa</button>";
                             }else if(strcmp($titul, "Aktualizovať organizátora") == 0){
                                 echo "<button type='button' class='btn btn-success' id='".$tlacidlo."'>Aktulizovať organizátora</button>";
                             }else if(strcmp($titul, "Aktualizovať administrátora") == 0){
@@ -68,12 +68,12 @@
                         }
                     }else{
                         if(isset($titul)){
-                            if(strcmp($titul, "Nový používatel") == 0){
-                                echo "<button type='button' class='btn btn-success' id='".$tlacidlo."'>Vytvoriť používatela</button>";
+                            if(strcmp($titul, "Nový používateľ") == 0){
+                                echo "<button type='button' class='btn btn-success' id='".$tlacidlo."'>Vytvoriť používateľa</button>";
                             }else if(strcmp($titul, "Nový organizátor") == 0){
                                 echo "<button type='button' class='btn btn-success' id='".$tlacidlo."'>Vytvoriť organizátora</button>";
                             }else if(strcmp($titul, "Nový administrátor") == 0){
-                                echo "<button type='button' class='btn btn-success' id='".$tlacidlo."'>Aktulizovať adminstrátora</button>";
+                                echo "<button type='button' class='btn btn-success' id='".$tlacidlo."'>Vytvoriť adminstrátora</button>";
                             }
                         }
                     }

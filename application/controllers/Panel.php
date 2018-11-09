@@ -31,17 +31,17 @@ class Panel extends CI_Controller
 
             $this->uspesne_prihlasenie();
 
-            $this->dlazdice("pocet_pouzivatelov", "pocet_administratorov", "pocet_administratorov", "pocet_udalosti", "aktivny_pouzivatelia", "registrovali_dnes");
+            $this->dlazdice("pocet_pouzivatelov", "pocet_organizatorov", "pocet_administratorov", "pocet_udalosti", "aktivny_pouzivatelia", "registrovali_dnes");
 
-            $this->load->view("admin/rozhranie/panel_hlavicka");
-            $this->load->view("admin/rozhranie/panel_navigacia");
+            $this->load->view("web/rozhranie/panel_hlavicka");
+            $this->load->view("web/rozhranie/panel_navigacia");
 
-            $this->load->view("admin/panel/panel",
+            $this->load->view("web/panel/admin_panel",
                 $this->data);
 
             $this->dialog(site_url('udalosti/vytvorit'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
 
-            $this->load->view("admin/rozhranie/panel_pata");
+            $this->load->view("web/rozhranie/panel_pata");
         } else {
             redirect("prihlasenie/pristup");
         }
@@ -57,17 +57,19 @@ class Panel extends CI_Controller
             $this->pridaj_data("odmietnute_udalosti",
                 $this->Udalost_model->zoznam(ODMIETNUTE));
 
-            $this->load->view("admin/rozhranie/panel_hlavicka");
-            $this->load->view("admin/rozhranie/panel_navigacia");
+            $this->load->view("web/rozhranie/panel_hlavicka");
+            $this->load->view("web/rozhranie/panel_navigacia");
 
-            $this->load->view("admin/panel/panel_udalosti",
+            $this->load->view("web/panel/admin_panel_udalosti",
                 $this->data);
 
             $this->dialog(site_url('udalosti/vytvorit'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
-            $this->dialog(site_url('udalosti/odstran'),"Odstránenie udalosti", "Naozaj chcete odstrániť udalosť?", "odstranit-udalost", "udalost_dialog_odstranit", "", "dialog_odstranit");
             $this->dialog(site_url('udalosti/aktualizuj'),"Aktualizovanie udalosti", "", "aktualizovat-udalost", "udalost_dialog_aktualizuj", "aktulizovat_udalost_formular", "dialog_udalosti");
+            $this->dialog(site_url('udalosti/odstran'),"Odstránenie udalosti", "Naozaj chcete odstrániť udalosť?", "odstranit-udalost", "udalost_dialog_odstranit", "", "dialog_potvrdit");
+            $this->dialog(site_url('udalosti/prijat'),"Potvrdenie udalosti", "Naozaj chcete pridať udalosť do aktuálnych udalosti?", "prijat-udalost", "udalost_dialog_prijat", "", "dialog_potvrdit");
+            $this->dialog(site_url('udalosti/odmietnut'),"Odmietnutie udalosti", "Naozaj chcete odobrať udalosť z aktuálnych udalosti?", "odmietnut-udalost", "udalost_dialog_odmietnut", "", "dialog_potvrdit");
 
-            $this->load->view("admin/rozhranie/panel_pata");
+            $this->load->view("web/rozhranie/panel_pata");
         } else {
             redirect("prihlasenie/pristup");
         }
@@ -79,19 +81,21 @@ class Panel extends CI_Controller
             $this->pridaj_data("zoznam_pouzivatelov",
                 $this->Rola_pouzivatela_model->zoznam_pouzivatelov());
 
-            $this->load->view("admin/rozhranie/panel_hlavicka");
-            $this->load->view("admin/rozhranie/panel_navigacia");
+            $this->load->view("web/rozhranie/panel_hlavicka");
+            $this->load->view("web/rozhranie/panel_navigacia");
 
-            $this->load->view("admin/panel/panel_pouzivatelia",
+            $this->load->view("web/panel/admin_panel_pouzivatelia",
                 $this->data);
 
             $this->dialog(site_url('udalosti/vytvorit'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
 
-            $this->dialog(site_url('registracia/vytvorit'),"Nový používatel", "", "novy-pouzivatel_admin", "pouzivatel_admin_dialog_vytvorit", "novy_pouzivatel_admin_formular", "dialog_pouzivatel_organizator_admin");
-            $this->dialog(site_url('pouzivatelia/odstran'),"Odstránenie používatela", "Naozaj chcete odstrániť používatela?", "odstranit-pouzivatel_admin", "pouzivatel_admin_dialog_odstranit", "", "dialog_odstranit");
-            $this->dialog(site_url('pouzivatelia/aktualizuj'),"Aktualizovať používatela", "", "aktualizovat-pouzivatel_admin", "pouzivatel_admin_dialog_aktualizuj", "aktulizovat_pouzivatel_admin_formular", "dialog_pouzivatel_organizator_admin");
+            $this->dialog(site_url('registracia/vytvorit'),"Nový používateľ", "", "novy-pouzivatel_admin", "pouzivatel_dialog_vytvorit", "novy_pouzivatel_formular", "dialog_pouzivatel");
+            $this->dialog(site_url('pouzivatelia/aktualizuj'),"Aktualizovať používateľa", "", "aktualizovat-pouzivatel_admin", "pouzivatel_dialog_aktualizuj", "aktulizovat_pouzivatel_formular", "dialog_pouzivatel");
+            $this->dialog(site_url('pouzivatelia/odstran'),"Odstránenie používateľa", "Naozaj chcete odstrániť používateľa?", "odstranit-pouzivatel_admin", "pouzivatel_dialog_odstranit", "", "dialog_potvrdit");
+            $this->dialog(site_url('pouzivatelia/akceptovat'),"Akceptovanie používateľa", "Naozaj chcete akceptovať používateľa?", "akceptovat-pouzivatel_admin", "pouzivatel_dialog_akceptovat", "", "dialog_potvrdit");
+            $this->dialog(site_url('pouzivatelia/blokovat'),"Blokovanie používateľa", "Naozaj chcete blokovať používateľa?", "blokovat-pouzivatel_admin", "pouzivatel_dialog_blokovat", "", "dialog_potvrdit");
 
-            $this->load->view("admin/rozhranie/panel_pata");
+            $this->load->view("web/rozhranie/panel_pata");
         } else {
             redirect("prihlasenie/pristup");
         }
@@ -103,19 +107,19 @@ class Panel extends CI_Controller
             $this->pridaj_data("zoznam_cien",
                 $this->Cennik_model->zoznam());
 
-            $this->load->view("admin/rozhranie/panel_hlavicka");
-            $this->load->view("admin/rozhranie/panel_navigacia");
+            $this->load->view("web/rozhranie/panel_hlavicka");
+            $this->load->view("web/rozhranie/panel_navigacia");
 
-            $this->load->view("admin/panel/panel_cennik",
+            $this->load->view("web/panel/admin_panel_cennik",
                 $this->data);
 
             $this->dialog(site_url('udalosti/vytvorit'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
 
             $this->dialog(site_url('cennik/vytvorit'),"Nový cenník", "", "novy-cennik", "cennik_dialog_vytvorit", "novy_cennik_formular", "dialog_cennik");
-            $this->dialog(site_url('cennik/odstran'),"Odstránenie cenníka", "Naozaj chcete odstrániť cenník?", "odstranit-cennik", "cennik_dialog_odstranit", "", "dialog_odstranit");
+            $this->dialog(site_url('cennik/odstran'),"Odstránenie cenníka", "Naozaj chcete odstrániť cenník?", "odstranit-cennik", "cennik_dialog_odstranit", "", "dialog_potvrdit");
             $this->dialog(site_url('cennik/aktualizuj'),"Aktualizovať cenník", "", "aktualizovat-cennik", "cennik_dialog_aktualizuj", "aktulizovat_cennik_formular", "dialog_cennik");
 
-            $this->load->view("admin/rozhranie/panel_pata");
+            $this->load->view("web/rozhranie/panel_pata");
         } else {
             redirect("prihlasenie/pristup");
         }
@@ -127,15 +131,15 @@ class Panel extends CI_Controller
             $this->pridaj_data("zaujmy",
                 $this->Zaujem_model->zoznam());
 
-            $this->load->view("admin/rozhranie/panel_hlavicka");
-            $this->load->view("admin/rozhranie/panel_navigacia");
+            $this->load->view("web/rozhranie/panel_hlavicka");
+            $this->load->view("web/rozhranie/panel_navigacia");
 
-            $this->load->view("admin/panel/panel_zaujmy",
+            $this->load->view("web/panel/admin_panel_zaujmy",
                 $this->data);
 
             $this->dialog(site_url('udalosti/vytvorit'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
 
-            $this->load->view("admin/rozhranie/panel_pata");
+            $this->load->view("web/rozhranie/panel_pata");
         } else {
             redirect("prihlasenie/pristup");
         }
@@ -147,15 +151,15 @@ class Panel extends CI_Controller
             $this->pridaj_data("miesta",
                 $this->Miesto_model->zoznam());
 
-            $this->load->view("admin/rozhranie/panel_hlavicka");
-            $this->load->view("admin/rozhranie/panel_navigacia");
+            $this->load->view("web/rozhranie/panel_hlavicka");
+            $this->load->view("web/rozhranie/panel_navigacia");
 
-            $this->load->view("admin/panel/panel_miesta",
+            $this->load->view("web/panel/admin_panel_miesta",
                 $this->data);
 
             $this->dialog(site_url('udalosti/vytvorit'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
 
-            $this->load->view("admin/rozhranie/panel_pata");
+            $this->load->view("web/rozhranie/panel_pata");
         } else {
             redirect("prihlasenie/pristup");
         }
@@ -164,15 +168,15 @@ class Panel extends CI_Controller
     public function lokalizacia()
     {
         if ($this->session->userdata('email_admina')) {
-            $this->load->view("admin/rozhranie/panel_hlavicka");
-            $this->load->view("admin/rozhranie/panel_navigacia");
+            $this->load->view("web/rozhranie/panel_hlavicka");
+            $this->load->view("web/rozhranie/panel_navigacia");
 
-            $this->load->view("admin/panel/panel_lokalizacia",
+            $this->load->view("web/panel/admin_panel_lokalizacia",
                 $this->data);
 
             $this->dialog(site_url('udalosti/vytvorit'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
 
-            $this->load->view("admin/rozhranie/panel_pata");
+            $this->load->view("web/rozhranie/panel_pata");
         } else {
             redirect("prihlasenie/pristup");
         }
@@ -181,22 +185,28 @@ class Panel extends CI_Controller
     public function organizatori()
     {
         if ($this->session->userdata('email_admina')) {
+            $this->pridaj_data("nepotvrdene_organizatori",
+                $this->Rola_pouzivatela_model->zoznam_organizatorov($this->session->userdata('email_admina'), NEPRECITANE));
             $this->pridaj_data("zoznam_organizatorov",
-                $this->Rola_pouzivatela_model->zoznam_organizatorov($this->session->userdata('email_admina')));
+                $this->Rola_pouzivatela_model->zoznam_organizatorov($this->session->userdata('email_admina'), AKCEPTOVANE));
+            $this->pridaj_data("odmietnute_organizatori",
+                $this->Rola_pouzivatela_model->zoznam_organizatorov($this->session->userdata('email_admina'), BLOKOVANE));
 
-            $this->load->view("admin/rozhranie/panel_hlavicka");
-            $this->load->view("admin/rozhranie/panel_navigacia");
+            $this->load->view("web/rozhranie/panel_hlavicka");
+            $this->load->view("web/rozhranie/panel_navigacia");
 
-            $this->load->view("admin/panel/panel_organizatori",
+            $this->load->view("web/panel/admin_panel_organizatori",
                 $this->data);
 
             $this->dialog(site_url('udalosti/vytvorit'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
 
-            $this->dialog(site_url('registracia/vytvorit'),"Nový organizátor", "", "novy-pouzivatel_organizator", "pouzivatel_organizator_dialog_vytvorit", "novy_pouzivatel_organizator_formular", "dialog_pouzivatel_organizator_admin");
-            $this->dialog(site_url('pouzivatelia/odstran'),"Odstránenie organizátora", "Naozaj chcete odstrániť organizátora?", "odstranit-pouzivatel_organizator", "pouzivatel_organizator_dialog_odstranit", "", "dialog_odstranit");
-            $this->dialog(site_url('pouzivatelia/aktualizuj'),"Aktualizovať organizátora", "", "aktualizovat-pouzivatel_organizator", "pouzivatel_organizator_dialog_aktualizuj", "aktulizovat_pouzivatel_organizator_formular", "dialog_pouzivatel_organizator_admin");
+            $this->dialog(site_url('registracia/vytvorit'),"Nový organizátor", "", "novy-pouzivatel_admin", "pouzivatel_dialog_vytvorit", "novy_pouzivatel_formular", "dialog_pouzivatel");
+            $this->dialog(site_url('pouzivatelia/aktualizuj'),"Aktualizovať organizátora", "", "aktualizovat-pouzivatel_admin", "pouzivatel_dialog_aktualizuj", "aktulizovat_pouzivatel_formular", "dialog_pouzivatel");
+            $this->dialog(site_url('pouzivatelia/odstran'),"Odstránenie organizátora", "Naozaj chcete odstrániť organizátora?", "odstranit-pouzivatel_admin", "pouzivatel_dialog_odstranit", "", "dialog_potvrdit");
+            $this->dialog(site_url('pouzivatelia/akceptovat'),"Akceptovanie organizátora", "Naozaj chcete akceptovať organizátora?", "akceptovat-pouzivatel_admin", "pouzivatel_dialog_akceptovat", "", "dialog_potvrdit");
+            $this->dialog(site_url('pouzivatelia/blokovat'),"Blokovanie organizátora", "Naozaj chcete blokovať organizátora?", "blokovat-pouzivatel_admin", "pouzivatel_dialog_blokovat", "", "dialog_potvrdit");
 
-            $this->load->view("admin/rozhranie/panel_pata");
+            $this->load->view("web/rozhranie/panel_pata");
         } else {
             redirect("prihlasenie/pristup");
         }
@@ -208,19 +218,19 @@ class Panel extends CI_Controller
             $this->pridaj_data("zoznam_administratorov",
                 $this->Rola_pouzivatela_model->zoznam_administratorov($this->session->userdata('email_admina')));
 
-            $this->load->view("admin/rozhranie/panel_hlavicka");
-            $this->load->view("admin/rozhranie/panel_navigacia");
+            $this->load->view("web/rozhranie/panel_hlavicka");
+            $this->load->view("web/rozhranie/panel_navigacia");
 
-            $this->load->view("admin/panel/panel_administratori",
+            $this->load->view("web/panel/admin_panel_administratori",
                 $this->data);
 
             $this->dialog(site_url('udalosti/vytvorit'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
 
-            $this->dialog(site_url('registracia/vytvorit'),"Nový administrátor", "", "novy-pouzivatel_admin", "pouzivatel_admin_dialog_vytvorit", "novy_pouzivatel_admin_formular", "dialog_pouzivatel_organizator_admin");
-            $this->dialog(site_url('pouzivatelia/odstran'),"Odstránenie administrátora", "Naozaj chcete odstrániť administrátora?", "odstranit-pouzivatel_admin", "pouzivatel_admin_dialog_odstranit", "", "dialog_odstranit");
-            $this->dialog(site_url('pouzivatelia/aktualizuj'),"Aktualizovať administrátora", "", "aktualizovat-pouzivatel_admin", "pouzivatel_admin_dialog_aktualizuj", "aktulizovat_pouzivatel_admin_formular", "dialog_pouzivatel_organizator_admin");
+            $this->dialog(site_url('registracia/vytvorit'),"Nový administrátor", "", "novy-pouzivatel_admin", "pouzivatel_dialog_vytvorit", "novy_pouzivatel_formular", "dialog_pouzivatel");
+            $this->dialog(site_url('pouzivatelia/odstran'),"Odstránenie administrátora", "Naozaj chcete odstrániť administrátora?", "odstranit-pouzivatel_admin", "pouzivatel_dialog_odstranit", "", "dialog_potvrdit");
+            $this->dialog(site_url('pouzivatelia/aktualizuj'),"Aktualizovať administrátora", "", "aktualizovat-pouzivatel_admin", "pouzivatel_dialog_aktualizuj", "aktulizovat_pouzivatel_formular", "dialog_pouzivatel");
 
-            $this->load->view("admin/rozhranie/panel_pata");
+            $this->load->view("web/rozhranie/panel_pata");
         } else {
             redirect("prihlasenie/pristup");
         }
@@ -239,7 +249,7 @@ class Panel extends CI_Controller
         }else{
             $this->load->view("json/json_admin",
                 array(
-                    "udalosti" => $this->Udalost_model->zoznam()));
+                    "udalosti" => $this->Udalost_model->zoznam(PRIJATE)));
         }
         } else {
             redirect("prihlasenie/pristup");
@@ -258,7 +268,7 @@ class Panel extends CI_Controller
     }
 
     private function dialog($adresa, $titul, $text, $identifikator, $tlacidlo, $formular, $dialog){
-        $this->load->view("admin/dialog/".$dialog,
+        $this->load->view("web/dialog/".$dialog,
             array(
                 "adresa" => $adresa,
                 "titul" => $titul,

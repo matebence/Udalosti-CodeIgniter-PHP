@@ -20,7 +20,7 @@
                                     <th class="zaujmy-miesta">ID</th>
                                     <th class="zaujmy-miesta">Váha</th>
                                     <th class="zaujmy-miesta">Suma</th>
-                                    <th></th>
+                                    <th class="cennik-operacie">Operácie</th>
                                 </tr>
                             </thead>
                             <tbody>

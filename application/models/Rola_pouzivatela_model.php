@@ -60,6 +60,7 @@ class Rola_pouzivatela_model extends CI_model
         $this->db->from('rola_pouzivatela');
         $this->db->join('pouzivatel', 'pouzivatel.idPouzivatel = rola_pouzivatela.idPouzivatel');
         $this->db->join('rola', 'rola.idRola = rola_pouzivatela.idRola');
+        $this->db->where('stav', AKCEPTOVANE);
         $this->db->where('nazov', $typ_roli);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
@@ -96,13 +97,14 @@ class Rola_pouzivatela_model extends CI_model
         return null;
     }
 
-    public function zoznam_organizatorov($email){
+    public function zoznam_organizatorov($email, $stav){
         $this->db->select('*');
         $this->db->from('rola_pouzivatela');
         $this->db->join('pouzivatel', 'pouzivatel.idPouzivatel = rola_pouzivatela.idPouzivatel');
         $this->db->join('rola', 'rola.idRola = rola_pouzivatela.idRola');
         $this->db->order_by("pouzivatel.timestamp", "desc");
         $this->db->where('nazov', ORGANIZATOR);
+        $this->db->where("stav", $stav);
         $this->db->where('email <>', $email);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {

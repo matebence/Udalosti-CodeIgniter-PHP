@@ -44,12 +44,12 @@ class Zaujmy extends CI_Controller
 
     private function validacia_vstupnych_udajov(){
         $this->form_validation->set_rules('email',
-            'Email používatela',
+            'Email používateľa',
             'required|valid_email',
             array('required' => 'Email je povinné pole!',
                 'valid_email' => 'Nesprávny formát emailovej adresi!'));
         $this->form_validation->set_rules('token',
-            'Token používatela',
+            'Token používateľa',
             'required|min_length[32]',
             array('required' => 'Token je povinné pole!',
                 'min_length' => 'Nesprávny token!'));

@@ -13,7 +13,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="content table-responsive table-full-width">
+                    <div class="content table-responsive">
                         <table class="table table-hover table-striped">
                             <thead>
                                 <tr>
@@ -22,7 +22,7 @@
                                     <th>Meno</th>
                                     <th>Heslo</th>
                                     <th>Vytvorený</th>
-                                    <th></th>
+                                    <th>Operácie</th>
                                 </tr>
                             </thead>
                             <tbody>

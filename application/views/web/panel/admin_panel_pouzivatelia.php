@@ -13,7 +13,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="content table-responsive table-full-width">
+                    <div class="content table-responsive">
                         <table class="table table-hover table-striped">
                             <thead>
                                 <tr>
@@ -24,7 +24,10 @@
                                     <th>Stav</th>
                                     <th>Token</th>
                                     <th>Vytvorený</th>
-                                    <th></th>
+                                    <th>Akceptovať</th>
+                                    <th>Blokovať</th>
+                                    <th>Editovať</th>
+                                    <th>Odstrániť</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -33,17 +36,17 @@
                                 if(!empty($zoznam_pouzivatelov)){
                                     foreach ($zoznam_pouzivatelov as $pouzivatel) {
                                         echo "<tr>";
-                                        echo "<td>".$pouzivatel['idPouzivatel']."</td>";
-                                        echo "<td>".$pouzivatel['email']."</td>";
-                                        echo "<td>".$pouzivatel['meno']."</td>";
-                                        echo "<td>".$pouzivatel['heslo']."</td>";
-                                        echo "<td>".$pouzivatel['stav']."</td>";
-                                        echo "<td>".$pouzivatel['token']."</td>";
-                                        echo "<td>".$pouzivatel['timestamp']."</td>";
-                                        echo "<td>
-                                                    <i class='".$pouzivatel['idPouzivatel']." fa fa-edit editovat' data-toggle='modal' data-target='#aktualizovat-pouzivatel_admin'></i>
-                                                    <i class='".$pouzivatel['idPouzivatel']." fa fa-trash odstranit' data-toggle='modal' data-target='#odstranit-pouzivatel_admin'></i>
-                                                  </td>";
+                                            echo "<td>".$pouzivatel['idPouzivatel']."</td>";
+                                            echo "<td>".$pouzivatel['email']."</td>";
+                                            echo "<td>".$pouzivatel['meno']."</td>";
+                                            echo "<td>".$pouzivatel['heslo']."</td>";
+                                            echo "<td>".$pouzivatel['stav']."</td>";
+                                            echo "<td>".$pouzivatel['token']."</td>";
+                                            echo "<td>".$pouzivatel['timestamp']."</td>";
+                                            echo "<td><i class='".$pouzivatel['idPouzivatel']." fa fa-check-circle akceptovat' data-toggle='modal' data-target='#akceptovat-pouzivatel_admin'></i></td>";
+                                            echo "<td><i class='".$pouzivatel['idPouzivatel']." fa fa-minus-circle blokovat' data-toggle='modal' data-target='#blokovat-pouzivatel_admin'></i></td>";
+                                            echo "<td><i class='".$pouzivatel['idPouzivatel']." fa fa-edit editovat' data-toggle='modal' data-target='#aktualizovat-pouzivatel_admin'></i></td>";
+                                            echo "<td><i class='".$pouzivatel['idPouzivatel']." fa fa-trash odstranit' data-toggle='modal' data-target='#odstranit-pouzivatel_admin'></i></td>";
                                         echo "</tr>";
                                     }
                                 }

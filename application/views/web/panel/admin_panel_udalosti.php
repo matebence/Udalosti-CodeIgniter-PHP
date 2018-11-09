@@ -28,8 +28,11 @@
                                     <th>Štát</th>
                                     <th>Okres</th>
                                     <th>Mesto</th>
+                                    <th>Stav</th>
                                     <th>Vytvorený</th>
-                                    <th></th>
+                                    <th>Prijať</th>
+                                    <th>Odmietnúť</th>
+                                    <th>Odstrániť</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -40,7 +43,7 @@
                                         echo "<tr>";
                                             echo "<td>" . $udalost['idUdalost'] . "</td>";
                                             echo "<td>" . $udalost['suma'] . " €</td>";
-                                            echo "<td><a class='nahlad' href='#'>".$udalost['obrazok']."<img alt='Obrázok udalosti' src='".base_url().$udalost['obrazok']."' /></a></td>";
+                                            echo "<td><a class='nahlad' href='".base_url().$udalost['obrazok']."' target='_blank'>".$udalost['obrazok']."<img alt='Obrázok udalosti' src='".base_url().$udalost['obrazok']."' /></a></td>";
                                             echo "<td>" . $udalost['nazov'] . "</td>";
                                             echo "<td>" . $udalost['datum'] . "</td>";
                                             echo "<td>" . $udalost['cas'] . "</td>";
@@ -49,12 +52,11 @@
                                             echo "<td>" . $udalost['stat'] . "</td>";
                                             echo "<td>" . $udalost['okres'] . "</td>";
                                             echo "<td>" . $udalost['mesto'] . "</td>";
+                                            echo "<td>" . $udalost['stav'] . "</td>";
                                             echo "<td>" . $udalost['timestamp'] . "</td>";
-                                            echo "<td>
-                                                    <i class='".$udalost['idUdalost']." fa fa-check-circle pridat' data-toggle='modal' data-target='#pridat-udalost'></i>
-                                                    <i class='".$udalost['idUdalost']." fa fa-minus-circle odmietnut' data-toggle='modal' data-target='#odmietnut-udalost'></i>
-                                                    <i class='".$udalost['idUdalost']." fa fa-trash odstranit' data-toggle='modal' data-target='#odstranit-udalost'></i>
-                                                  </td>";
+                                            echo "<td><i class='".$udalost['idUdalost']." fa fa-check-circle prijat' data-toggle='modal' data-target='#prijat-udalost'></i></td>";
+                                            echo "<td><i class='".$udalost['idUdalost']." fa fa-minus-circle odmietnut' data-toggle='modal' data-target='#odmietnut-udalost'></i></td>";
+                                            echo "<td><i class='".$udalost['idUdalost']." fa fa-trash odstranit' data-toggle='modal' data-target='#odstranit-udalost'></i></i></td>";
                                         echo "</tr>";
                                     }
                                 }
@@ -91,8 +93,12 @@
                                 <th>Štát</th>
                                 <th>Okres</th>
                                 <th>Mesto</th>
+                                <th>Stav</th>
                                 <th>Vytvorený</th>
-                                <th></th>
+                                <th>Prijať</th>
+                                <th>Odmietnúť</th>
+                                <th>Editovať</th>
+                                <th>Odstrániť</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -101,22 +107,23 @@
                                 if (!empty($aktualne_udalosti)) {
                                     foreach ($aktualne_udalosti as $udalost) {
                                         echo "<tr>";
-                                        echo "<td>" . $udalost['idUdalost'] . "</td>";
-                                        echo "<td>" . $udalost['suma'] . " €</td>";
-                                        echo "<td><a class='nahlad' href='#'>".$udalost['obrazok']."<img alt='Obrázok udalosti' src='".base_url().$udalost['obrazok']."' /></a></td>";
-                                        echo "<td>" . $udalost['nazov'] . "</td>";
-                                        echo "<td>" . $udalost['datum'] . "</td>";
-                                        echo "<td>" . $udalost['cas'] . "</td>";
-                                        echo "<td>" . $udalost['vstupenka'] . "€</td>";
-                                        echo "<td>" . $udalost['ulica'] . "</td>";
-                                        echo "<td>" . $udalost['stat'] . "</td>";
-                                        echo "<td>" . $udalost['okres'] . "</td>";
-                                        echo "<td>" . $udalost['mesto'] . "</td>";
-                                        echo "<td>" . $udalost['timestamp'] . "</td>";
-                                        echo "<td>
-                                                    <i class='".$udalost['idUdalost']." fa fa-edit editovat' data-toggle='modal' data-target='#aktualizovat-udalost'></i>
-                                                    <i class='".$udalost['idUdalost']." fa fa-trash odstranit' data-toggle='modal' data-target='#odstranit-udalost'></i>
-                                                  </td>";
+                                            echo "<td>" . $udalost['idUdalost'] . "</td>";
+                                            echo "<td>" . $udalost['suma'] . " €</td>";
+                                            echo "<td><a class='nahlad' href='".base_url().$udalost['obrazok']."' target='_blank'>".$udalost['obrazok']."<img alt='Obrázok udalosti' src='".base_url().$udalost['obrazok']."' /></a></td>";
+                                            echo "<td>" . $udalost['nazov'] . "</td>";
+                                            echo "<td>" . $udalost['datum'] . "</td>";
+                                            echo "<td>" . $udalost['cas'] . "</td>";
+                                            echo "<td>" . $udalost['vstupenka'] . "€</td>";
+                                            echo "<td>" . $udalost['ulica'] . "</td>";
+                                            echo "<td>" . $udalost['stat'] . "</td>";
+                                            echo "<td>" . $udalost['okres'] . "</td>";
+                                            echo "<td>" . $udalost['mesto'] . "</td>";
+                                            echo "<td>" . $udalost['stav'] . "</td>";
+                                            echo "<td>" . $udalost['timestamp'] . "</td>";
+                                            echo "<td><i class='".$udalost['idUdalost']." fa fa-check-circle prijat' data-toggle='modal' data-target='#prijat-udalost'></i></td>";
+                                            echo "<td><i class='".$udalost['idUdalost']." fa fa-minus-circle odmietnut' data-toggle='modal' data-target='#odmietnut-udalost'></i></td>";
+                                            echo "<td><i class='".$udalost['idUdalost']." fa fa-edit editovat' data-toggle='modal' data-target='#aktualizovat-udalost'></i></i></td>";
+                                            echo "<td><i class='".$udalost['idUdalost']." fa fa-trash odstranit' data-toggle='modal' data-target='#odstranit-udalost'></i></i></td>";
                                         echo "</tr>";
                                     }
                                 }
@@ -153,8 +160,10 @@
                                 <th>Štát</th>
                                 <th>Okres</th>
                                 <th>Mesto</th>
+                                <th>Stav</th>
                                 <th>Vytvorený</th>
-                                <th></th>
+                                <th>Prijať</th>
+                                <th>Odstrániť</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -163,22 +172,21 @@
                                 if (!empty($odmietnute_udalosti)) {
                                     foreach ($odmietnute_udalosti as $udalost) {
                                         echo "<tr>";
-                                        echo "<td>" . $udalost['idUdalost'] . "</td>";
-                                        echo "<td>" . $udalost['suma'] . " €</td>";
-                                        echo "<td><a class='nahlad' href='#'>".$udalost['obrazok']."<img alt='Obrázok udalosti' src='".base_url().$udalost['obrazok']."' /></a></td>";
-                                        echo "<td>" . $udalost['nazov'] . "</td>";
-                                        echo "<td>" . $udalost['datum'] . "</td>";
-                                        echo "<td>" . $udalost['cas'] . "</td>";
-                                        echo "<td>" . $udalost['vstupenka'] . "€</td>";
-                                        echo "<td>" . $udalost['ulica'] . "</td>";
-                                        echo "<td>" . $udalost['stat'] . "</td>";
-                                        echo "<td>" . $udalost['okres'] . "</td>";
-                                        echo "<td>" . $udalost['mesto'] . "</td>";
-                                        echo "<td>" . $udalost['timestamp'] . "</td>";
-                                        echo "<td>
-                                                    <i class='".$udalost['idUdalost']." fa fa-check-circle pridat' data-toggle='modal' data-target='#pridat-udalost'></i>
-                                                    <i class='".$udalost['idUdalost']." fa fa-trash odstranit' data-toggle='modal' data-target='#odstranit-udalost'></i>
-                                                  </td>";
+                                            echo "<td>" . $udalost['idUdalost'] . "</td>";
+                                            echo "<td>" . $udalost['suma'] . " €</td>";
+                                            echo "<td><a class='nahlad' href='".base_url().$udalost['obrazok']."' target='_blank'>".$udalost['obrazok']."<img alt='Obrázok udalosti' src='".base_url().$udalost['obrazok']."' /></a></td>";
+                                            echo "<td>" . $udalost['nazov'] . "</td>";
+                                            echo "<td>" . $udalost['datum'] . "</td>";
+                                            echo "<td>" . $udalost['cas'] . "</td>";
+                                            echo "<td>" . $udalost['vstupenka'] . "€</td>";
+                                            echo "<td>" . $udalost['ulica'] . "</td>";
+                                            echo "<td>" . $udalost['stat'] . "</td>";
+                                            echo "<td>" . $udalost['okres'] . "</td>";
+                                            echo "<td>" . $udalost['mesto'] . "</td>";
+                                            echo "<td>" . $udalost['stav'] . "</td>";
+                                            echo "<td>" . $udalost['timestamp'] . "</td>";
+                                            echo "<td><i class='".$udalost['idUdalost']." fa fa-check-circle prijat' data-toggle='modal' data-target='#prijat-udalost'></i></td>";
+                                            echo "<td><i class='".$udalost['idUdalost']." fa fa-trash odstranit' data-toggle='modal' data-target='#odstranit-udalost'></i></i></td>";
                                         echo "</tr>";
                                     }
                                 }

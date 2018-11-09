@@ -1,4 +1,4 @@
-var operacia = {"VYVOR_AKTUALIZUJ": 1, "VYPLN_FORMULAR": 2, "ZISKAJ_CENNIK": 3};
+var operacia = {"VYTVOR_AKTUALIZUJ": 1, "VYPLN_FORMULAR": 2, "ZISKAJ_CENNIK": 3};
 var identifikator = 0;
 var castStranky = "";
 
@@ -12,33 +12,43 @@ $(".zatvorit").click(function () {
 
 
 
-$("#novy_pouzivatel_admin_formular").on('submit', (function (e) {
+
+$("#novy_pouzivatel_formular").on('submit', (function (e) {
     e.preventDefault();
-    spracujData("/udalosti/index.php/registracia/vytvorit", this, operacia.VYVOR_AKTUALIZUJ);
+    spracujData("/udalosti/index.php/registracia/vytvorit", this, operacia.VYTVOR_AKTUALIZUJ);
 }));
 
-$("#pouzivatel_admin_dialog_vytvorit").click(function () {
-    $("#novy_pouzivatel_admin_formular").trigger("submit");
+$("#pouzivatel_dialog_vytvorit").click(function () {
+    $("#novy_pouzivatel_formular").trigger("submit");
 });
 
-$("#aktulizovat_pouzivatel_admin_formular").on('submit', (function (e) {
+$("#aktulizovat_pouzivatel_formular").on('submit', (function (e) {
     e.preventDefault();
-    spracujData("/udalosti/index.php/pouzivatelia/aktualizuj/" + identifikator, this, operacia.VYVOR_AKTUALIZUJ);
+    spracujData("/udalosti/index.php/pouzivatelia/aktualizuj/" + identifikator, this, operacia.VYTVOR_AKTUALIZUJ);
 }));
 
-$("#pouzivatel_admin_dialog_aktualizuj").click(function () {
-    $("#aktulizovat_pouzivatel_admin_formular").trigger("submit");
+$("#pouzivatel_dialog_aktualizuj").click(function () {
+    $("#aktulizovat_pouzivatel_formular").trigger("submit");
 });
 
-$(".pouzivatel_admin_dialog_odstranit").click(function () {
-    spracujData("/udalosti/index.php/pouzivatelia/odstran/" + identifikator, null, operacia.VYVOR_AKTUALIZUJ);
+$(".pouzivatel_dialog_odstranit").click(function () {
+    spracujData("/udalosti/index.php/pouzivatelia/odstran/" + identifikator, null, operacia.VYTVOR_AKTUALIZUJ);
 });
+
+$(".pouzivatel_dialog_akceptovat").click(function () {
+    spracujData("/udalosti/index.php/pouzivatelia/akceptovat/" + identifikator, null, operacia.VYTVOR_AKTUALIZUJ);
+});
+
+$(".pouzivatel_dialog_blokovat").click(function () {
+    spracujData("/udalosti/index.php/pouzivatelia/blokovat/" + identifikator, null, operacia.VYTVOR_AKTUALIZUJ);
+});
+
 
 
 
 $("#nova_udalost_formular").on('submit', (function (e) {
     e.preventDefault();
-    spracujData("/udalosti/index.php/udalosti/vytvorit", this, operacia.VYVOR_AKTUALIZUJ);
+    spracujData("/udalosti/index.php/udalosti/vytvorit", this, operacia.VYTVOR_AKTUALIZUJ);
 }));
 
 $("#udalost_dialog_vytvorit").click(function () {
@@ -47,7 +57,7 @@ $("#udalost_dialog_vytvorit").click(function () {
 
 $("#aktulizovat_udalost_formular").on('submit', (function (e) {
     e.preventDefault();
-    spracujData("/udalosti/index.php/udalosti/aktualizuj/" + identifikator, this, operacia.VYVOR_AKTUALIZUJ);
+    spracujData("/udalosti/index.php/udalosti/aktualizuj/" + identifikator, this, operacia.VYTVOR_AKTUALIZUJ);
 }));
 
 $("#udalost_dialog_aktualizuj").click(function () {
@@ -55,14 +65,23 @@ $("#udalost_dialog_aktualizuj").click(function () {
 });
 
 $(".udalost_dialog_odstranit").click(function () {
-    spracujData("/udalosti/index.php/udalosti/odstran/" + identifikator, null, operacia.VYVOR_AKTUALIZUJ);
+    spracujData("/udalosti/index.php/udalosti/odstran/" + identifikator, null, operacia.VYTVOR_AKTUALIZUJ);
 });
+
+$(".udalost_dialog_prijat").click(function () {
+    spracujData("/udalosti/index.php/udalosti/prijat/" + identifikator, null, operacia.VYTVOR_AKTUALIZUJ);
+});
+
+$(".udalost_dialog_odmietnut").click(function () {
+    spracujData("/udalosti/index.php/udalosti/odmietnut/" + identifikator, null, operacia.VYTVOR_AKTUALIZUJ);
+});
+
 
 
 
 $("#novy_cennik_formular").on('submit', (function (e) {
     e.preventDefault();
-    spracujData("/udalosti/index.php/cennik/vytvorit", this, operacia.VYVOR_AKTUALIZUJ);
+    spracujData("/udalosti/index.php/cennik/vytvorit", this, operacia.VYTVOR_AKTUALIZUJ);
 }));
 
 $("#cennik_dialog_vytvorit").click(function () {
@@ -71,7 +90,7 @@ $("#cennik_dialog_vytvorit").click(function () {
 
 $("#aktulizovat_cennik_formular").on('submit', (function (e) {
     e.preventDefault();
-    spracujData("/udalosti/index.php/cennik/aktualizuj/" + identifikator, this, operacia.VYVOR_AKTUALIZUJ);
+    spracujData("/udalosti/index.php/cennik/aktualizuj/" + identifikator, this, operacia.VYTVOR_AKTUALIZUJ);
 }));
 
 $("#cennik_dialog_aktualizuj").click(function () {
@@ -79,13 +98,29 @@ $("#cennik_dialog_aktualizuj").click(function () {
 });
 
 $(".cennik_dialog_odstranit").click(function () {
-    spracujData("/udalosti/index.php/cennik/odstran/" + identifikator, null, operacia.VYVOR_AKTUALIZUJ);
+    spracujData("/udalosti/index.php/cennik/odstran/" + identifikator, null, operacia.VYTVOR_AKTUALIZUJ);
 });
 
 
 
 
 $(".odstranit").click(function () {
+    identifikator = parseInt($(this).attr('class').split(" ")[0]);
+});
+
+$(".prijat").click(function () {
+    identifikator = parseInt($(this).attr('class').split(" ")[0]);
+});
+
+$(".odmietnut").click(function () {
+    identifikator = parseInt($(this).attr('class').split(" ")[0]);
+});
+
+$(".akceptovat").click(function () {
+    identifikator = parseInt($(this).attr('class').split(" ")[0]);
+});
+
+$(".blokovat").click(function () {
     identifikator = parseInt($(this).attr('class').split(" ")[0]);
 });
 
@@ -103,6 +138,7 @@ $(".editovat").click(function () {
         spracujData("/udalosti/index.php/cennik/informacia/" + identifikator, null, operacia.VYPLN_FORMULAR);
     }
 });
+
 
 
 
@@ -137,6 +173,7 @@ function naplnCennik(data) {
 
 
 
+
 function spracujData(adresa, _this, aktualneUdaje) {
     $.ajax({
         url: window.location.origin + adresa,
@@ -150,7 +187,7 @@ function spracujData(adresa, _this, aktualneUdaje) {
         success: function (data) {
             if (aktualneUdaje == operacia.VYPLN_FORMULAR) {
                 naplnPoleExistujucimyUdajmy(data)
-            } else if (aktualneUdaje == operacia.VYVOR_AKTUALIZUJ) {
+            } else if (aktualneUdaje == operacia.VYTVOR_AKTUALIZUJ) {
                 odpovedServera(data);
             } else if (aktualneUdaje == operacia.ZISKAJ_CENNIK) {
                 naplnCennik(data)
@@ -158,6 +195,7 @@ function spracujData(adresa, _this, aktualneUdaje) {
         }
     });
 }
+
 
 
 
