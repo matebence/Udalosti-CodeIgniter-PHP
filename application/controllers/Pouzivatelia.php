@@ -40,32 +40,48 @@ class Pouzivatelia extends CI_Controller
                 }
 
                 $aktualizovany_pouzivatel = $this->Pouzivatel_model->aktualizuj(null, $id_pouzivatel, $pouzivatel);
-                if($aktualizovany_pouzivatel){
-
-                    $pouzivatel = null;
-                    $admin = false;
-                    $oznam = "";
-
-                    if(strcmp($this->input->post('rola'), "admin") == 0){
-                        $pouzivatel = $this->Rola_pouzivatela_model->aktualizuj($id_pouzivatel, array("idRola" => 1));
-                        $admin = true;
-                    }else if(strcmp($this->input->post('rola'), "pouzivatel") == 0){
-                        $pouzivatel = $this->Rola_pouzivatela_model->aktualizuj($id_pouzivatel, array("idRola" => 2));
-                    }
-
-                    if($pouzivatel){
-                        if($admin){
-                            $oznam = "Administrátor bol aktualizovaný";
-                        }else{
-                            $oznam = "Použivatel bol aktualizovaný";
-                        }
-
+                if(strcmp($this->input->post('rola'), ADMIN) == 0){
+                    if($aktualizovany_pouzivatel) {
                         $this->load->view("web/notifikacia/notifikacia_oznam.php",
                             array(
                                 "ikona" => "pe-7s-check",
                                 "typ" => "success",
-                                "oznam" => $oznam,
-                                "presmeruj" => $admin
+                                "oznam" => "Administrátor bol aktualizovaný",
+                                "presmeruj" => true
+                            ));
+                    }else{
+                        $this->load->view("web/notifikacia/notifikacia_oznam.php",
+                            array(
+                                "ikona" => "pe-7s-attention",
+                                "typ" => "warning",
+                                "oznam" => "Pri aktualizovaní došlo chybe!"
+                            ));
+                    }
+                }else if(strcmp($this->input->post('rola'), ORGANIZATOR) == 0){
+                    if($aktualizovany_pouzivatel) {
+                        $this->load->view("web/notifikacia/notifikacia_oznam.php",
+                            array(
+                                "ikona" => "pe-7s-check",
+                                "typ" => "success",
+                                "oznam" => "Organizátor bol aktualizovaný",
+                                "presmeruj" => false
+                            ));
+                    }else{
+                        $this->load->view("web/notifikacia/notifikacia_oznam.php",
+                            array(
+                                "ikona" => "pe-7s-attention",
+                                "typ" => "warning",
+                                "oznam" => "Pri aktualizovaní došlo chybe!"
+                            ));
+                    }
+                }else if(strcmp($this->input->post('rola'), POUZIVATEL) == 0){
+                    if($aktualizovany_pouzivatel) {
+                        $this->load->view("web/notifikacia/notifikacia_oznam.php",
+                            array(
+                                "ikona" => "pe-7s-check",
+                                "typ" => "success",
+                                "oznam" => "Použivatel bol aktualizovaný",
+                                "presmeruj" => false
                             ));
                     }else{
                         $this->load->view("web/notifikacia/notifikacia_oznam.php",

@@ -41,7 +41,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <?php if(isset($titul)){if(strcmp($titul, "Nový používateľ") == 0){ echo "<input type='hidden' name='rola' value='".POUZIVATEL."'>"; }else if(strcmp($titul, "Nový organizátor") == 0){ echo "<input type='hidden' name='rola' value='".ORGANIZATOR."'>";}else if(strcmp($titul, "Nový administrátor") == 0){ echo "<input type='hidden' name='rola' value='".ADMIN."'>";}}?>
+                                    <?php if(isset($titul)){if((strcmp($titul, "Nový používateľ") == 0) || (strcmp($titul, "Aktualizovať používateľa") == 0)){ echo "<input type='hidden' name='rola' value='".POUZIVATEL."'>"; }else if((strcmp($titul, "Nový organizátor") == 0) || (strcmp($titul, "Aktualizovať organizátora") == 0)){ echo "<input type='hidden' name='rola' value='".ORGANIZATOR."'>";}else if((strcmp($titul, "Nový administrátor") == 0) || (strcmp($titul, "Aktualizovať administrátora") == 0)){ echo "<input type='hidden' name='rola' value='".ADMIN."'>";}}?>
 
                                     <input type="hidden" name="nova_registracia" value="1">
                                     <input type="hidden" name="prehliadac" value="1">

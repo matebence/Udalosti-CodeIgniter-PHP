@@ -106,7 +106,7 @@ class Registracia extends CI_Controller
                                 $pouzivatel = $this->Rola_pouzivatela_model->vytvorit($id_noveho_pouzivatela, $this->Rola_model->rola(ORGANIZATOR));
 
                                 if($pouzivatel){
-                                    $this->session->set_flashdata('uspech', 'Registrácia prebehla úspešne! Účet bude schváleny najmänej do 24h.');
+                                    $this->session->set_flashdata('uspech', 'Registrácia prebehla úspešne! Účet bude schváleny do 24h.');
                                     $this->load->view("web/dialog/dialog_oznam");
                                 }else{
                                     $this->session->set_flashdata('chyba', 'Pri registrácií došlo chybe!');

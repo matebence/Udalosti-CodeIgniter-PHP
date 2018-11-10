@@ -20,6 +20,8 @@ class Prihlasenie extends CI_Controller
 
         if ($this->session->userdata('email_admina')) {
             redirect("panel");
+        }else if($this->session->userdata('email_organizatora')){
+            redirect("panel/udalosti");
         }else{
             $this->prihlasit();
         }
@@ -41,7 +43,9 @@ class Prihlasenie extends CI_Controller
                         $this->session->set_userdata('prihlaseny', true);
                         $this->index();
                     } else if(strcmp(ORGANIZATOR, $rola) == 0){
-
+                        $this->session->set_userdata('email_organizatora', $this->input->post('email'));
+                        $this->session->set_userdata('prihlaseny', true);
+                        $this->index();
                     } else if(strcmp(POUZIVATEL, $rola) == 0){
                         if ($this->input->post('prehliadac')) {
                             $this->session->set_flashdata('chyba', 'Nesprávne prihlasovacie údaje!');
@@ -54,6 +58,15 @@ class Prihlasenie extends CI_Controller
 
                             $data["token"] = $this->Pouzivatel_model->token($prihlasovacie_udaje["email"]);
                             $this->load->view("json/json_vystup_pridanie_dat", $data);
+                        }
+                    }else{
+                        $this->session->set_flashdata('chyba', 'Nesprávne prihlasovacie údaje!');
+
+                        if ($this->input->post('prehliadac')) {
+                            $this->load->view("web/dialog/dialog_oznam");
+                            $this->load->view("web/rozhranie/prihlasenie_pata");
+                        } else {
+                            $this->load->view("json/json_vystup_pridanie_dat");
                         }
                     }
                 } else {

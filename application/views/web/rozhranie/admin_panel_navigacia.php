@@ -13,59 +13,59 @@
                 <li>
                     <a href="<?php echo site_url("panel"); ?>">
                         <i class="pe-7s-graph"></i>
-                        <p>Panel</p>
+                        <p>panel</p>
                     </a>
                     <hr>
                 </li>
                 <li>
                     <a href="<?php echo site_url("panel/udalosti"); ?>">
                         <i class="pe-7s-star"></i>
-                        <p>Udalosti</p>
+                        <p>udalosti</p>
                     </a>
                 </li>
                 <li>
                     <a href="<?php echo site_url("panel/pouzivatelia"); ?>">
                         <i class="pe-7s-user"></i>
-                        <p>Používatelia</p>
+                        <p>používatelia</p>
                     </a>
                 </li>
                 <li>
                     <a href="<?php echo site_url("panel/cennik"); ?>">
                         <i class="pe-7s-cash"></i>
-                        <p>Cenník</p>
+                        <p>cenník</p>
                     </a>
                     <hr>
                 </li>
                 <li>
                     <a href="<?php echo site_url("panel/zaujmy"); ?>">
                         <i class="pe-7s-like"></i>
-                        <p>Záujmy používatelov</p>
+                        <p>záujmy používatelov</p>
                     </a>
                 </li>
                 <li>
                     <a href="<?php echo site_url("panel/miesta"); ?>">
                         <i class="pe-7s-map-marker"></i>
-                        <p>Miesta</p>
+                        <p>miesta</p>
                     </a>
                     <hr>
                 </li>
                 <li>
                     <a href="<?php echo site_url("panel/lokalizacia"); ?>">
                         <i class="pe-7s-map-2"></i>
-                        <p>Lokalizácia</p>
+                        <p>lokalizácia</p>
                     </a>
                     <hr>
                 </li>
                 <li>
                     <a href="<?php echo site_url("panel/organizatori"); ?>">
                         <i class="pe-7s-portfolio"></i>
-                        <p>Organizátori</p>
+                        <p>organizátori</p>
                     </a>
                 </li>
                 <li>
                     <a href="<?php echo site_url("panel/administratori"); ?>">
                         <i class="pe-7s-key"></i>
-                        <p>Administrátori</p>
+                        <p>administrátori</p>
                     </a>
                 </li>
             </ul>

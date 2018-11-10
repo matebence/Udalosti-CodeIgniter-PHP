@@ -7,7 +7,7 @@
                         <div class="col-md-12">
                             <div class="header">
                                 <h4 class="title" style="display: inline;">Organizátori</h4>
-                                <a href="#" class="btn btn-success pull-right" data-toggle="modal" data-target='#novy-pouzivatel_admin'><i
+                                <a href="#" class="btn btn-success pull-right" data-toggle="modal" data-target='#novy-pouzivatel'><i
                                             class="fa fa-plus-circle"></i><span>Nový organizátor</span></a>
                                 <p class="category">Zoznam nepotvrdených organizátorov</p>
                             </div>
@@ -21,6 +21,7 @@
                                 <th>Email</th>
                                 <th>Meno</th>
                                 <th>Heslo</th>
+                                <th>Stav</th>
                                 <th>Vytvorený</th>
                                 <th>Akceptovať</th>
                                 <th>Blokovať</th>
@@ -37,10 +38,11 @@
                                             echo "<td>".$organizator['email']."</td>";
                                             echo "<td>".$organizator['meno']."</td>";
                                             echo "<td>".$organizator['heslo']."</td>";
+                                            echo "<td>".$organizator['stav']."</td>";
                                             echo "<td>".$organizator['timestamp']."</td>";
-                                            echo "<td><i class='".$organizator['idPouzivatel']." fa fa-check-circle akceptovat' data-toggle='modal' data-target='#akceptovat-pouzivatel_admin'></i></td>";
-                                            echo "<td><i class='".$organizator['idPouzivatel']." fa fa-minus-circle blokovat' data-toggle='modal' data-target='#blokovat-pouzivatel_admin'></i></td>";
-                                            echo "<td><i class='".$organizator['idPouzivatel']." fa fa-trash odstranit' data-toggle='modal' data-target='#odstranit-pouzivatel_admin'></i></i></td>";
+                                            echo "<td><i class='".$organizator['idPouzivatel']." fa fa-check-circle akceptovat' data-toggle='modal' data-target='#akceptovat-pouzivatel'></i></td>";
+                                            echo "<td><i class='".$organizator['idPouzivatel']." fa fa-minus-circle blokovat' data-toggle='modal' data-target='#blokovat-pouzivatel'></i></td>";
+                                            echo "<td><i class='".$organizator['idPouzivatel']." fa fa-trash odstranit' data-toggle='modal' data-target='#odstranit-pouzivatel'></i></i></td>";
                                         echo "</tr>";
                                     }
                                 }
@@ -62,7 +64,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="content table-responsive table-full-width">
+                    <div class="content table-responsive">
                         <table class="table table-hover table-striped">
                             <thead>
                             <tr>
@@ -70,6 +72,7 @@
                                 <th>Email</th>
                                 <th>Meno</th>
                                 <th>Heslo</th>
+                                <th>Stav</th>
                                 <th>Vytvorený</th>
                                 <th>Akceptovať</th>
                                 <th>Blokovať</th>
@@ -87,11 +90,12 @@
                                             echo "<td>".$organizator['email']."</td>";
                                             echo "<td>".$organizator['meno']."</td>";
                                             echo "<td>".$organizator['heslo']."</td>";
+                                            echo "<td>".$organizator['stav']."</td>";
                                             echo "<td>".$organizator['timestamp']."</td>";
-                                            echo "<td><i class='".$organizator['idPouzivatel']." fa fa-check-circle akceptovat' data-toggle='modal' data-target='#akceptovat-pouzivatel_admin'></i></td>";
-                                            echo "<td><i class='".$organizator['idPouzivatel']." fa fa-minus-circle blokovat' data-toggle='modal' data-target='#blokovat-pouzivatel_admin'></i></td>";
-                                            echo "<td><i class='".$organizator['idPouzivatel']." fa fa-edit editovat' data-toggle='modal' data-target='#aktualizovat-pouzivatel_admin'></i></i></td>";
-                                            echo "<td><i class='".$organizator['idPouzivatel']." fa fa-trash odstranit' data-toggle='modal' data-target='#odstranit-pouzivatel_admin'></i></i></td>";
+                                            echo "<td><i class='".$organizator['idPouzivatel']." fa fa-check-circle akceptovat' data-toggle='modal' data-target='#akceptovat-pouzivatel'></i></td>";
+                                            echo "<td><i class='".$organizator['idPouzivatel']." fa fa-minus-circle blokovat' data-toggle='modal' data-target='#blokovat-pouzivatel'></i></td>";
+                                            echo "<td><i class='".$organizator['idPouzivatel']." fa fa-edit editovat' data-toggle='modal' data-target='#aktualizovat-pouzivatel'></i></i></td>";
+                                            echo "<td><i class='".$organizator['idPouzivatel']." fa fa-trash odstranit' data-toggle='modal' data-target='#odstranit-pouzivatel'></i></i></td>";
                                         echo "</tr>";
                                     }
                                 }
@@ -113,7 +117,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="content table-responsive table-full-width">
+                    <div class="content table-responsive">
                         <table class="table table-hover table-striped">
                             <thead>
                             <tr>
@@ -121,6 +125,7 @@
                                 <th>Email</th>
                                 <th>Meno</th>
                                 <th>Heslo</th>
+                                <th>Stav</th>
                                 <th>Vytvorený</th>
                                 <th>Akceptovať</th>
                                 <th>Odstrániť</th>
@@ -136,9 +141,10 @@
                                             echo "<td>".$organizator['email']."</td>";
                                             echo "<td>".$organizator['meno']."</td>";
                                             echo "<td>".$organizator['heslo']."</td>";
+                                            echo "<td>".$organizator['stav']."</td>";
                                             echo "<td>".$organizator['timestamp']."</td>";
-                                            echo "<td><i class='".$organizator['idPouzivatel']." fa fa-check-circle akceptovat' data-toggle='modal' data-target='#akceptovat-pouzivatel_admin'></i></td>";
-                                            echo "<td><i class='".$organizator['idPouzivatel']." fa fa-trash odstranit' data-toggle='modal' data-target='#odstranit-pouzivatel_admin'></i></i></td>";
+                                            echo "<td><i class='".$organizator['idPouzivatel']." fa fa-check-circle akceptovat' data-toggle='modal' data-target='#akceptovat-pouzivatel'></i></td>";
+                                            echo "<td><i class='".$organizator['idPouzivatel']." fa fa-trash odstranit' data-toggle='modal' data-target='#odstranit-pouzivatel'></i></i></td>";
                                         echo "</tr>";
                                     }
                                 }

@@ -19,47 +19,51 @@ function navigacia() {
     var castStranky = adresa.substr(adresa.lastIndexOf("/")+1,adresa.length);
 
     if(castStranky == "panel"){
-        aktivnyPrvokNavigacie($(".nav li"), 0);
+        aktivnyPrvokNavigacie($(".nav li > a > p"), "panel");
         $("#vytvorit_udalost").show();
 
     }else if(castStranky == "udalosti"){
-        aktivnyPrvokNavigacie($(".nav li"), 1);
+        aktivnyPrvokNavigacie($(".nav li > a > p"), "udalosti");
         $("#vytvorit_udalost").hide();
 
     }else if(castStranky == "pouzivatelia"){
-        aktivnyPrvokNavigacie($(".nav li"), 2);
+        aktivnyPrvokNavigacie($(".nav li > a > p"), "používatelia");
         $("#vytvorit_udalost").show();
 
     }else if(castStranky == "cennik"){
-        aktivnyPrvokNavigacie($(".nav li"), 3);
+        aktivnyPrvokNavigacie($(".nav li > a > p"), "cenník");
         $("#vytvorit_udalost").show();
 
     }else if(castStranky == "zaujmy"){
-        aktivnyPrvokNavigacie($(".nav li"), 4);
+        aktivnyPrvokNavigacie($(".nav li > a > p"), "záujmy používatelov");
         $("#vytvorit_udalost").show();
 
     }else if(castStranky == "miesta"){
-        aktivnyPrvokNavigacie($(".nav li"), 5);
+        aktivnyPrvokNavigacie($(".nav li > a > p"), "miesta");
         $("#vytvorit_udalost").show();
 
     }else if(castStranky == "lokalizacia"){
-        aktivnyPrvokNavigacie($(".nav li"), 6);
+        aktivnyPrvokNavigacie($(".nav li > a > p"), "lokalizácia");
         $("#vytvorit_udalost").show();
 
     }else if(castStranky == "organizatori"){
-        aktivnyPrvokNavigacie($(".nav li"), 7);
+        aktivnyPrvokNavigacie($(".nav li > a > p"), "organizátori");
         $("#vytvorit_udalost").show();
     }else if(castStranky == "administratori"){
-        aktivnyPrvokNavigacie($(".nav li"), 8);
+        aktivnyPrvokNavigacie($(".nav li > a > p"), "administrátori");
         $("#vytvorit_udalost").show();
     }
 }
 
-function aktivnyPrvokNavigacie(prvok, pozicia){
-    if(prvok.eq(pozicia).hasClass("active")){
-        prvok.eq(pozicia).removeClass("active");
-    }else{
-        prvok.eq(pozicia).addClass("active");
+function aktivnyPrvokNavigacie(prvok, nazov){
+    for(var i = 0;i<prvok.length;i++){
+        if(prvok.eq(i).text() === nazov){
+            if(prvok.eq(i).parent().parent().hasClass("active")){
+                prvok.eq(i).parent().parent().removeClass("active");
+            }else{
+                prvok.eq(i).parent().parent().addClass("active");
+            }
+        }
     }
 }
 

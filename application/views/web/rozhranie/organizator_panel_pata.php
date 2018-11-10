@@ -1,7 +1,7 @@
             <footer class="footer">
                 <div class="container-fluid">
                     <p class="copyright pull-right">
-                        &copy;<?php echo date("Y"); ?> <a href="<?php echo site_url("panel"); ?>">Udalosti</a>
+                        &copy;<?php echo date("Y"); ?> <a href="<?php echo site_url("panel/udalosti"); ?>">Udalosti</a>
                     </p>
                 </div>
             </footer>
@@ -23,7 +23,7 @@
                     echo "$(document).ready(function(){";
                         echo "$.notify({";
                             echo "icon: 'pe-7s-unlock',";
-                            echo "message: 'Úspešné prihlásenie! Vítame Vás <b>    $email_admina</b>.'";
+                            echo "message: 'Úspešné prihlásenie! Vítame Vás <b>$email_organizatora</b>.'";
                     echo "},{";
                         echo "type: 'info',";
                         echo "timer: 4000";

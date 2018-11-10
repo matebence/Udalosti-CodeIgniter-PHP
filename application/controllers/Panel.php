@@ -27,7 +27,7 @@ class Panel extends CI_Controller
     {
         if ($this->session->userdata('email_admina')) {
 
-            $spravy = $this->Udalost_model->pocet_neprecitanych_udalosti_organizatorov();
+            $spravy = $this->Udalost_model->pocet_sprav();
             $pocet_sprav = 0;
 
             if(isset($spravy[0])){
@@ -52,14 +52,12 @@ class Panel extends CI_Controller
             $this->dlazdice("pocet_pouzivatelov", "pocet_organizatorov", "pocet_administratorov", "pocet_udalosti", "aktivny_pouzivatelia", "registrovali_dnes");
 
             $this->load->view("web/rozhranie/panel_hlavicka");
-            $this->load->view("web/rozhranie/panel_navigacia", $this->data);
-
-            $this->load->view("web/panel/admin_panel",
-                $this->data);
+            $this->load->view("web/rozhranie/admin_panel_navigacia", $this->data);
+            $this->load->view("web/panel/admin_panel", $this->data);
 
             $this->dialog(site_url('udalosti/vytvorit'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
 
-            $this->load->view("web/rozhranie/panel_pata");
+            $this->load->view("web/rozhranie/admin_panel_pata");
         } else {
             redirect("prihlasenie/pristup");
         }
@@ -69,7 +67,7 @@ class Panel extends CI_Controller
     {
         if ($this->session->userdata('email_admina')) {
 
-            $spravy = $this->Udalost_model->pocet_neprecitanych_udalosti_organizatorov();
+            $spravy = $this->Udalost_model->pocet_sprav();
             $pocet_sprav = 0;
 
             if(isset($spravy[0])){
@@ -93,7 +91,7 @@ class Panel extends CI_Controller
             $this->pridaj_data("spravy", $pocet_sprav);
 
             $this->load->view("web/rozhranie/panel_hlavicka");
-            $this->load->view("web/rozhranie/panel_navigacia", $this->data);
+            $this->load->view("web/rozhranie/admin_panel_navigacia", $this->data);
             $this->load->view("web/panel/admin_panel_udalosti", $this->data);
 
             $this->dialog(site_url('udalosti/vytvorit'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
@@ -102,7 +100,16 @@ class Panel extends CI_Controller
             $this->dialog(site_url('udalosti/prijat'),"Potvrdenie udalosti", "Naozaj chcete pridať udalosť do aktuálnych udalosti?", "prijat-udalost", "udalost_dialog_prijat", "", "dialog_potvrdit");
             $this->dialog(site_url('udalosti/odmietnut'),"Odmietnutie udalosti", "Naozaj chcete odobrať udalosť z aktuálnych udalosti?", "odmietnut-udalost", "udalost_dialog_odmietnut", "", "dialog_potvrdit");
 
-            $this->load->view("web/rozhranie/panel_pata");
+            $this->load->view("web/rozhranie/admin_panel_pata");
+        } else if($this->session->userdata('email_organizatora')){
+
+            $this->pridaj_data("email_organizatora", $this->session->userdata('email_organizatora'));
+
+            $this->uspesne_prihlasenie();
+
+            $this->load->view("web/rozhranie/panel_hlavicka");
+            $this->load->view("web/rozhranie/organizator_panel_navigacia");
+            $this->load->view("web/rozhranie/organizator_panel_pata", $this->data);
         } else {
             redirect("prihlasenie/pristup");
         }
@@ -112,7 +119,7 @@ class Panel extends CI_Controller
     {
         if ($this->session->userdata('email_admina')) {
 
-            $spravy = $this->Udalost_model->pocet_neprecitanych_udalosti_organizatorov();
+            $spravy = $this->Udalost_model->pocet_sprav();
             $pocet_sprav = 0;
 
             if(isset($spravy[0])){
@@ -134,18 +141,18 @@ class Panel extends CI_Controller
             $this->pridaj_data("spravy", $pocet_sprav);
 
             $this->load->view("web/rozhranie/panel_hlavicka");
-            $this->load->view("web/rozhranie/panel_navigacia", $this->data);
+            $this->load->view("web/rozhranie/admin_panel_navigacia", $this->data);
             $this->load->view("web/panel/admin_panel_pouzivatelia", $this->data);
 
             $this->dialog(site_url('udalosti/vytvorit'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
 
-            $this->dialog(site_url('registracia/vytvorit'),"Nový používateľ", "", "novy-pouzivatel_admin", "pouzivatel_dialog_vytvorit", "novy_pouzivatel_formular", "dialog_pouzivatel");
-            $this->dialog(site_url('pouzivatelia/aktualizuj'),"Aktualizovať používateľa", "", "aktualizovat-pouzivatel_admin", "pouzivatel_dialog_aktualizuj", "aktulizovat_pouzivatel_formular", "dialog_pouzivatel");
-            $this->dialog(site_url('pouzivatelia/odstran'),"Odstránenie používateľa", "Naozaj chcete odstrániť používateľa?", "odstranit-pouzivatel_admin", "pouzivatel_dialog_odstranit", "", "dialog_potvrdit");
-            $this->dialog(site_url('pouzivatelia/akceptovat'),"Akceptovanie používateľa", "Naozaj chcete akceptovať používateľa?", "akceptovat-pouzivatel_admin", "pouzivatel_dialog_akceptovat", "", "dialog_potvrdit");
-            $this->dialog(site_url('pouzivatelia/blokovat'),"Blokovanie používateľa", "Naozaj chcete blokovať používateľa?", "blokovat-pouzivatel_admin", "pouzivatel_dialog_blokovat", "", "dialog_potvrdit");
+            $this->dialog(site_url('registracia/vytvorit'),"Nový používateľ", "", "novy-pouzivatel", "pouzivatel_dialog_vytvorit", "novy_pouzivatel_formular", "dialog_pouzivatel");
+            $this->dialog(site_url('pouzivatelia/aktualizuj'),"Aktualizovať používateľa", "", "aktualizovat-pouzivatel", "pouzivatel_dialog_aktualizuj", "aktulizovat_pouzivatel_formular", "dialog_pouzivatel");
+            $this->dialog(site_url('pouzivatelia/odstran'),"Odstránenie používateľa", "Naozaj chcete odstrániť používateľa?", "odstranit-pouzivatel", "pouzivatel_dialog_odstranit", "", "dialog_potvrdit");
+            $this->dialog(site_url('pouzivatelia/akceptovat'),"Akceptovanie používateľa", "Naozaj chcete akceptovať používateľa?", "akceptovat-pouzivatel", "pouzivatel_dialog_akceptovat", "", "dialog_potvrdit");
+            $this->dialog(site_url('pouzivatelia/blokovat'),"Blokovanie používateľa", "Naozaj chcete blokovať používateľa?", "blokovat-pouzivatel", "pouzivatel_dialog_blokovat", "", "dialog_potvrdit");
 
-            $this->load->view("web/rozhranie/panel_pata");
+            $this->load->view("web/rozhranie/admin_panel_pata");
         } else {
             redirect("prihlasenie/pristup");
         }
@@ -155,7 +162,7 @@ class Panel extends CI_Controller
     {
         if ($this->session->userdata('email_admina')) {
 
-            $spravy = $this->Udalost_model->pocet_neprecitanych_udalosti_organizatorov();
+            $spravy = $this->Udalost_model->pocet_sprav();
             $pocet_sprav = 0;
 
             if(isset($spravy[0])){
@@ -177,7 +184,7 @@ class Panel extends CI_Controller
             $this->pridaj_data("spravy", $pocet_sprav);
 
             $this->load->view("web/rozhranie/panel_hlavicka");
-            $this->load->view("web/rozhranie/panel_navigacia", $this->data);
+            $this->load->view("web/rozhranie/admin_panel_navigacia", $this->data);
             $this->load->view("web/panel/admin_panel_cennik", $this->data);
 
             $this->dialog(site_url('udalosti/vytvorit'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
@@ -186,7 +193,7 @@ class Panel extends CI_Controller
             $this->dialog(site_url('cennik/odstran'),"Odstránenie cenníka", "Naozaj chcete odstrániť cenník?", "odstranit-cennik", "cennik_dialog_odstranit", "", "dialog_potvrdit");
             $this->dialog(site_url('cennik/aktualizuj'),"Aktualizovať cenník", "", "aktualizovat-cennik", "cennik_dialog_aktualizuj", "aktulizovat_cennik_formular", "dialog_cennik");
 
-            $this->load->view("web/rozhranie/panel_pata");
+            $this->load->view("web/rozhranie/admin_panel_pata");
         } else {
             redirect("prihlasenie/pristup");
         }
@@ -196,7 +203,7 @@ class Panel extends CI_Controller
     {
         if ($this->session->userdata('email_admina')) {
 
-            $spravy = $this->Udalost_model->pocet_neprecitanych_udalosti_organizatorov();
+            $spravy = $this->Udalost_model->pocet_sprav();
             $pocet_sprav = 0;
 
             if(isset($spravy[0])){
@@ -218,12 +225,12 @@ class Panel extends CI_Controller
             $this->pridaj_data("spravy", $pocet_sprav);
 
             $this->load->view("web/rozhranie/panel_hlavicka");
-            $this->load->view("web/rozhranie/panel_navigacia", $this->data);
+            $this->load->view("web/rozhranie/admin_panel_navigacia", $this->data);
             $this->load->view("web/panel/admin_panel_zaujmy", $this->data);
 
             $this->dialog(site_url('udalosti/vytvorit'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
 
-            $this->load->view("web/rozhranie/panel_pata");
+            $this->load->view("web/rozhranie/admin_panel_pata");
         } else {
             redirect("prihlasenie/pristup");
         }
@@ -233,7 +240,7 @@ class Panel extends CI_Controller
     {
         if ($this->session->userdata('email_admina')) {
 
-            $spravy = $this->Udalost_model->pocet_neprecitanych_udalosti_organizatorov();
+            $spravy = $this->Udalost_model->pocet_sprav();
             $pocet_sprav = 0;
 
             if(isset($spravy[0])){
@@ -255,12 +262,12 @@ class Panel extends CI_Controller
             $this->pridaj_data("spravy", $pocet_sprav);
 
             $this->load->view("web/rozhranie/panel_hlavicka");
-            $this->load->view("web/rozhranie/panel_navigacia", $this->data);
+            $this->load->view("web/rozhranie/admin_panel_navigacia", $this->data);
             $this->load->view("web/panel/admin_panel_miesta", $this->data);
 
             $this->dialog(site_url('udalosti/vytvorit'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
 
-            $this->load->view("web/rozhranie/panel_pata");
+            $this->load->view("web/rozhranie/admin_panel_pata");
         } else {
             redirect("prihlasenie/pristup");
         }
@@ -270,7 +277,7 @@ class Panel extends CI_Controller
     {
         if ($this->session->userdata('email_admina')) {
 
-            $spravy = $this->Udalost_model->pocet_neprecitanych_udalosti_organizatorov();
+            $spravy = $this->Udalost_model->pocet_sprav();
             $pocet_sprav = 0;
 
             if(isset($spravy[0])){
@@ -291,12 +298,12 @@ class Panel extends CI_Controller
             $this->pridaj_data("spravy", $pocet_sprav);
 
             $this->load->view("web/rozhranie/panel_hlavicka");
-            $this->load->view("web/rozhranie/panel_navigacia", $this->data);
+            $this->load->view("web/rozhranie/admin_panel_navigacia", $this->data);
             $this->load->view("web/panel/admin_panel_lokalizacia", $this->data);
 
             $this->dialog(site_url('udalosti/vytvorit'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
 
-            $this->load->view("web/rozhranie/panel_pata");
+            $this->load->view("web/rozhranie/admin_panel_pata");
         } else {
             redirect("prihlasenie/pristup");
         }
@@ -306,7 +313,7 @@ class Panel extends CI_Controller
     {
         if ($this->session->userdata('email_admina')) {
 
-            $spravy = $this->Udalost_model->pocet_neprecitanych_udalosti_organizatorov();
+            $spravy = $this->Udalost_model->pocet_sprav();
             $pocet_sprav = 0;
 
             if(isset($spravy[0])){
@@ -330,18 +337,18 @@ class Panel extends CI_Controller
             $this->pridaj_data("spravy", $pocet_sprav);
 
             $this->load->view("web/rozhranie/panel_hlavicka");
-            $this->load->view("web/rozhranie/panel_navigacia", $this->data);
+            $this->load->view("web/rozhranie/admin_panel_navigacia", $this->data);
             $this->load->view("web/panel/admin_panel_organizatori", $this->data);
 
             $this->dialog(site_url('udalosti/vytvorit'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
 
-            $this->dialog(site_url('registracia/vytvorit'),"Nový organizátor", "", "novy-pouzivatel_admin", "pouzivatel_dialog_vytvorit", "novy_pouzivatel_formular", "dialog_pouzivatel");
-            $this->dialog(site_url('pouzivatelia/aktualizuj'),"Aktualizovať organizátora", "", "aktualizovat-pouzivatel_admin", "pouzivatel_dialog_aktualizuj", "aktulizovat_pouzivatel_formular", "dialog_pouzivatel");
-            $this->dialog(site_url('pouzivatelia/odstran'),"Odstránenie organizátora", "Naozaj chcete odstrániť organizátora?", "odstranit-pouzivatel_admin", "pouzivatel_dialog_odstranit", "", "dialog_potvrdit");
-            $this->dialog(site_url('pouzivatelia/akceptovat'),"Akceptovanie organizátora", "Naozaj chcete akceptovať organizátora?", "akceptovat-pouzivatel_admin", "pouzivatel_dialog_akceptovat", "", "dialog_potvrdit");
-            $this->dialog(site_url('pouzivatelia/blokovat'),"Blokovanie organizátora", "Naozaj chcete blokovať organizátora?", "blokovat-pouzivatel_admin", "pouzivatel_dialog_blokovat", "", "dialog_potvrdit");
+            $this->dialog(site_url('registracia/vytvorit'),"Nový organizátor", "", "novy-pouzivatel", "pouzivatel_dialog_vytvorit", "novy_pouzivatel_formular", "dialog_pouzivatel");
+            $this->dialog(site_url('pouzivatelia/aktualizuj'),"Aktualizovať organizátora", "", "aktualizovat-pouzivatel", "pouzivatel_dialog_aktualizuj", "aktulizovat_pouzivatel_formular", "dialog_pouzivatel");
+            $this->dialog(site_url('pouzivatelia/odstran'),"Odstránenie organizátora", "Naozaj chcete odstrániť organizátora?", "odstranit-pouzivatel", "pouzivatel_dialog_odstranit", "", "dialog_potvrdit");
+            $this->dialog(site_url('pouzivatelia/akceptovat'),"Akceptovanie organizátora", "Naozaj chcete akceptovať organizátora?", "akceptovat-pouzivatel", "pouzivatel_dialog_akceptovat", "", "dialog_potvrdit");
+            $this->dialog(site_url('pouzivatelia/blokovat'),"Blokovanie organizátora", "Naozaj chcete blokovať organizátora?", "blokovat-pouzivatel", "pouzivatel_dialog_blokovat", "", "dialog_potvrdit");
 
-            $this->load->view("web/rozhranie/panel_pata");
+            $this->load->view("web/rozhranie/admin_panel_pata");
         } else {
             redirect("prihlasenie/pristup");
         }
@@ -351,7 +358,7 @@ class Panel extends CI_Controller
     {
         if ($this->session->userdata('email_admina')) {
 
-            $spravy = $this->Udalost_model->pocet_neprecitanych_udalosti_organizatorov();
+            $spravy = $this->Udalost_model->pocet_sprav();
             $pocet_sprav = 0;
 
             if(isset($spravy[0])){
@@ -373,16 +380,16 @@ class Panel extends CI_Controller
             $this->pridaj_data("spravy", $pocet_sprav);
 
             $this->load->view("web/rozhranie/panel_hlavicka");
-            $this->load->view("web/rozhranie/panel_navigacia", $this->data);
+            $this->load->view("web/rozhranie/admin_panel_navigacia", $this->data);
             $this->load->view("web/panel/admin_panel_administratori", $this->data);
 
             $this->dialog(site_url('udalosti/vytvorit'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
 
-            $this->dialog(site_url('registracia/vytvorit'),"Nový administrátor", "", "novy-pouzivatel_admin", "pouzivatel_dialog_vytvorit", "novy_pouzivatel_formular", "dialog_pouzivatel");
-            $this->dialog(site_url('pouzivatelia/odstran'),"Odstránenie administrátora", "Naozaj chcete odstrániť administrátora?", "odstranit-pouzivatel_admin", "pouzivatel_dialog_odstranit", "", "dialog_potvrdit");
-            $this->dialog(site_url('pouzivatelia/aktualizuj'),"Aktualizovať administrátora", "", "aktualizovat-pouzivatel_admin", "pouzivatel_dialog_aktualizuj", "aktulizovat_pouzivatel_formular", "dialog_pouzivatel");
+            $this->dialog(site_url('registracia/vytvorit'),"Nový administrátor", "", "novy-pouzivatel", "pouzivatel_dialog_vytvorit", "novy_pouzivatel_formular", "dialog_pouzivatel");
+            $this->dialog(site_url('pouzivatelia/odstran'),"Odstránenie administrátora", "Naozaj chcete odstrániť administrátora?", "odstranit-pouzivatel", "pouzivatel_dialog_odstranit", "", "dialog_potvrdit");
+            $this->dialog(site_url('pouzivatelia/aktualizuj'),"Aktualizovať administrátora", "", "aktualizovat-pouzivatel", "pouzivatel_dialog_aktualizuj", "aktulizovat_pouzivatel_formular", "dialog_pouzivatel");
 
-            $this->load->view("web/rozhranie/panel_pata");
+            $this->load->view("web/rozhranie/admin_panel_pata");
         } else {
             redirect("prihlasenie/pristup");
         }

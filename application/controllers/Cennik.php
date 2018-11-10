@@ -20,7 +20,7 @@ class Cennik extends CI_Controller
 
     private function zoznam()
     {
-        if ($this->session->userdata('email_admina')) {
+        if (($this->session->userdata('email_admina')) || ($this->session->userdata('email_organizatora'))) {
             $this->load->view("json/json_admin", array(
                 "zoznam_cien" => $this->Cennik_model->zoznam()
             ));

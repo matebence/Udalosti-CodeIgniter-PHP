@@ -2,6 +2,9 @@ var operacia = {"VYTVOR_AKTUALIZUJ": 1, "VYPLN_FORMULAR": 2, "ZISKAJ_CENNIK": 3}
 var identifikator = 0;
 var castStranky = "";
 
+
+
+
 $(document).ready(function () {
     spracujData("/udalosti/index.php/cennik/", null, operacia.ZISKAJ_CENNIK);
 });
@@ -132,7 +135,7 @@ $(".editovat").click(function () {
 
     if (castStranky == "udalosti") {
         spracujData("/udalosti/index.php/udalosti/informacia/" + identifikator, null, operacia.VYPLN_FORMULAR);
-    } else if ((castStranky == "pouzivatelia") || (castStranky == "administratori")) {
+    } else if ((castStranky == "administratori") || (castStranky == "organizatori") || (castStranky == "pouzivatelia")) {
         spracujData("/udalosti/index.php/pouzivatelia/informacia/" + identifikator, null, operacia.VYPLN_FORMULAR);
     } else if(castStranky == "cennik"){
         spracujData("/udalosti/index.php/cennik/informacia/" + identifikator, null, operacia.VYPLN_FORMULAR);
@@ -214,12 +217,12 @@ function naplnPoleExistujucimyUdajmy(data) {
         $("#okres-aktualizovat-udalost").val(udalost.okres);
         $("#mesto-aktualizovat-udalost").val(udalost.mesto);
 
-    } else if ((castStranky == "pouzivatelia") || (castStranky == "administratori")) {
+    } else if ((castStranky == "administratori") || (castStranky == "organizatori") || (castStranky == "pouzivatelia")) {
         var pouzivatel = data.udaje_pouzivatela;
 
-        $("#meno-aktualizovat-pouzivatel_admin").val(pouzivatel.meno);
-        $("#email-aktualizovat-pouzivatel_admin").val(pouzivatel.email);
-        $("#rola-aktualizovat-pouzivatel_admin").val(pouzivatel.nazov);
+        $("#meno-aktualizovat-pouzivatel").val(pouzivatel.meno);
+        $("#email-aktualizovat-pouzivatel").val(pouzivatel.email);
+        $("#rola-aktualizovat-pouzivatel").val(pouzivatel.nazov);
 
     } else if (castStranky == "cennik"){
         var cennik = data.udaje_cennika;

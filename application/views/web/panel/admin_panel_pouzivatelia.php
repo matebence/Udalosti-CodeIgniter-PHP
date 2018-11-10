@@ -7,7 +7,7 @@
                         <div class="col-md-12">
                             <div class="header">
                                 <h4 class="title" style="display: inline;">Používatelia</h4>
-                                <a href="#" class="btn btn-success pull-right" data-toggle="modal" data-target='#novy-pouzivatel_admin'><i
+                                <a href="#" class="btn btn-success pull-right" data-toggle="modal" data-target='#novy-pouzivatel'><i
                                         class="fa fa-plus-circle"></i><span>Nový používatel</span></a>
                                 <p class="category">Zoznam všetkých použivatelov</p>
                             </div>
@@ -43,10 +43,10 @@
                                             echo "<td>".$pouzivatel['stav']."</td>";
                                             echo "<td>".$pouzivatel['token']."</td>";
                                             echo "<td>".$pouzivatel['timestamp']."</td>";
-                                            echo "<td><i class='".$pouzivatel['idPouzivatel']." fa fa-check-circle akceptovat' data-toggle='modal' data-target='#akceptovat-pouzivatel_admin'></i></td>";
-                                            echo "<td><i class='".$pouzivatel['idPouzivatel']." fa fa-minus-circle blokovat' data-toggle='modal' data-target='#blokovat-pouzivatel_admin'></i></td>";
-                                            echo "<td><i class='".$pouzivatel['idPouzivatel']." fa fa-edit editovat' data-toggle='modal' data-target='#aktualizovat-pouzivatel_admin'></i></td>";
-                                            echo "<td><i class='".$pouzivatel['idPouzivatel']." fa fa-trash odstranit' data-toggle='modal' data-target='#odstranit-pouzivatel_admin'></i></td>";
+                                            echo "<td><i class='".$pouzivatel['idPouzivatel']." fa fa-check-circle akceptovat' data-toggle='modal' data-target='#akceptovat-pouzivatel'></i></td>";
+                                            echo "<td><i class='".$pouzivatel['idPouzivatel']." fa fa-minus-circle blokovat' data-toggle='modal' data-target='#blokovat-pouzivatel'></i></td>";
+                                            echo "<td><i class='".$pouzivatel['idPouzivatel']." fa fa-edit editovat' data-toggle='modal' data-target='#aktualizovat-pouzivatel'></i></td>";
+                                            echo "<td><i class='".$pouzivatel['idPouzivatel']." fa fa-trash odstranit' data-toggle='modal' data-target='#odstranit-pouzivatel'></i></td>";
                                         echo "</tr>";
                                     }
                                 }

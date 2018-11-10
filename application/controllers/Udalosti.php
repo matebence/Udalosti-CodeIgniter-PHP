@@ -160,7 +160,7 @@ class Udalosti extends CI_Controller
                     array(
                         "ikona" => "pe-7s-attention",
                         "typ" => "warning",
-                        "oznam" => "Pri pridaní udalosti do aktuálnych udalosti došlo chybe"
+                        "oznam" => "Pri pridaní udalosti do aktuálnych udalosti nastala chyba"
                     ));
             }
         } else {
@@ -187,7 +187,7 @@ class Udalosti extends CI_Controller
                     array(
                         "ikona" => "pe-7s-attention",
                         "typ" => "warning",
-                        "oznam" => "Pri odobraní udalosti z aktuálnych udalosti došlo chybe"
+                        "oznam" => "Pri odobraní udalosti z aktuálnych udalosti nastala chyba"
                     ));
             }
         } else {
@@ -207,14 +207,14 @@ class Udalosti extends CI_Controller
                     array(
                         "ikona" => "pe-7s-check",
                         "typ" => "success",
-                        "oznam" => "Udalosť bola odstránena"
+                        "oznam" => "Odstránenie prebehlo úspešne"
                     ));
             } else {
                 $this->load->view("web/notifikacia/notifikacia_oznam.php",
                     array(
                         "ikona" => "pe-7s-attention",
                         "typ" => "warning",
-                        "oznam" => "Pri odstránení udalosti došlo chybe"
+                        "oznam" => "Pri odstránení nastala chyba"
                     ));
             }
         } else {
