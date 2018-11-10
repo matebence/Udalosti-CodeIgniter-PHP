@@ -2,7 +2,7 @@
 
 class Cennik_model extends CI_model
 {
-    public function vytvorit($cennik= array())
+    public function vytvorit($cennik = array())
     {
         $udaj = $this->db->insert('cennik', $cennik);
         if ($udaj) {
@@ -29,7 +29,8 @@ class Cennik_model extends CI_model
         return $odstran ? true : false;
     }
 
-    public function informacia($id_cennik){
+    public function informacia($id_cennik)
+    {
         $this->db->select('vaha, suma');
         $this->db->from('cennik');
         $this->db->where("idCennik", $id_cennik);
@@ -40,7 +41,8 @@ class Cennik_model extends CI_model
         return null;
     }
 
-    public function zoznam(){
+    public function zoznam()
+    {
         $this->db->select('*');
         $this->db->from('cennik');
         $query = $this->db->get();
@@ -50,7 +52,8 @@ class Cennik_model extends CI_model
         return 0;
     }
 
-    public function pocet(){
+    public function pocet()
+    {
         $this->db->select('idCennik, COUNT(*) AS Pocet');
         $this->db->from('udalost');
         $this->db->group_by('idCennik');
@@ -61,4 +64,5 @@ class Cennik_model extends CI_model
         return 0;
     }
 }
+
 ?>

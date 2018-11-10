@@ -6,31 +6,29 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="header">
-                                <h4 class="title" style="display: inline;">Záujmy</h4>
-                                <p class="category">Zoznam záujmy používatelov</p>
+                                <h4 class="title" style="display: inline;">Miesta</h4>
+                                <p class="category">Zoznam miest udalostí</p>
                             </div>
                         </div>
                     </div>
                     <div class="content table-responsive table-full-width">
                         <table class="table table-hover table-striped">
                             <thead>
-                                <tr>
-                                    <th class="zaujmy-miesta">Udalost</th>
-                                    <th class="zaujmy-miesta">Miesto</th>
-                                    <th class="zaujmy-miesta">Dátum</th>
-                                    <th class="zaujmy-miesta">Počet používatelov</th>
-                                </tr>
+                            <tr>
+                                <th class="zaujmy-miesta">Štát</th>
+                                <th class="zaujmy-miesta">Okres</th>
+                                <th class="zaujmy-miesta">Mesto</th>
+                            </tr>
                             </thead>
                             <tbody>
                             <?php
-                            if(isset($zaujmy)){
-                                if(!empty($zaujmy)){
-                                    foreach ($zaujmy as $zaujem) {
+                            if(isset($zoznam_miest)){
+                                if(!empty($zoznam_miest)){
+                                    foreach ($zoznam_miest as $miesto) {
                                         echo "<tr class='zaujmy-miesta'>";
-                                            echo "<td>".$zaujem['nazov']."</td>";
-                                            echo "<td>".$zaujem['mesto']."</td>";
-                                            echo "<td>".$zaujem['datum']."</td>";
-                                            echo "<td>".$zaujem['pocet']."</td>";
+                                            echo "<td>".$miesto['stat']."</td>";
+                                            echo "<td>".$miesto['okres']."</td>";
+                                            echo "<td>".$miesto['mesto']."</td>";
                                         echo "</tr>";
                                     }
                                 }

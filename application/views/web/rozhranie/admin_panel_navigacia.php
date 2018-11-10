@@ -91,13 +91,13 @@
                                 <i class="fa fa-globe"></i>
                                 <b class="caret hidden-sm hidden-xs"></b>
                                 <?php
-                                if ($spravy > 0) {
-                                    echo "<span class='notification hidden-sm hidden-xs'>".$spravy."</span>";
-                                    echo "<p class='hidden-lg hidden-md'>";
-                                    echo $spravy." Nových správ";
-                                    echo "<b class='caret'></b>";
-                                    echo "</p>";
-                                }
+                                    if ($spravy > 0) {
+                                        echo "<span class='notification hidden-sm hidden-xs'>".$spravy."</span>";
+                                        echo "<p class='hidden-lg hidden-md'>";
+                                        echo $spravy." Nových správ";
+                                        echo "<b class='caret'></b>";
+                                        echo "</p>";
+                                    }
                                 ?>
                             </a>
                             <ul class="dropdown-menu">

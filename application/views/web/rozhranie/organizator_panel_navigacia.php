@@ -15,12 +15,14 @@
                         <i class="pe-7s-star"></i>
                         <p>udalosti</p>
                     </a>
+                    <hr>
                 </li>
                 <li>
                     <a href="<?php echo site_url("panel/zaujmy"); ?>">
                         <i class="pe-7s-like"></i>
                         <p>záujmy používatelov</p>
                     </a>
+                    <hr>
                 </li>
                 <li>
                     <a href="<?php echo site_url("panel/miesta"); ?>">
@@ -52,6 +54,11 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" class="nova_udalost" id="vytvorit_udalost" data-toggle='modal' data-target='#nova-udalost'>
+                                <p>Pridať novú udalosť</p>
+                            </a>
+                        </li>
                         <li>
                             <a href="<?php echo site_url("prihlasenie/pristup"); ?>">
                                 <p>Odhlásiť sa</p>

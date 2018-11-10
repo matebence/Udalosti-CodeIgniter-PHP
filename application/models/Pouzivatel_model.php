@@ -2,7 +2,7 @@
 
 class Pouzivatel_model extends CI_model
 {
-    public function vytvorit($pouzivatel= array())
+    public function vytvorit($pouzivatel = array())
     {
         $udaj = $this->db->insert('pouzivatel', $pouzivatel);
         if ($udaj) {
@@ -16,9 +16,9 @@ class Pouzivatel_model extends CI_model
     {
         if (!empty($udaj)) {
 
-            if($email != null){
+            if ($email != null) {
                 $this->db->where('email', $email);
-            }else{
+            } else {
                 $this->db->where('idPouzivatel', $id_pouzivatel);
             }
 
@@ -49,14 +49,15 @@ class Pouzivatel_model extends CI_model
         }
     }
 
-    public function token($email){
+    public function token($email)
+    {
         $this->db->select('token');
         $this->db->from('pouzivatel');
         $this->db->where('email', $email);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
-            return  $query->row()->token;
-        }else{
+            return $query->row()->token;
+        } else {
             return "";
         }
     }
@@ -68,8 +69,8 @@ class Pouzivatel_model extends CI_model
         $this->db->where('email', $email);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
-            return  $query->row()->idPouzivatel;
-        }else{
+            return $query->row()->idPouzivatel;
+        } else {
             return 0;
         }
     }
@@ -97,7 +98,8 @@ class Pouzivatel_model extends CI_model
         return 0;
     }
 
-    public function registrovali_dnes(){
+    public function registrovali_dnes()
+    {
         $this->db->select('meno');
         $this->db->from('pouzivatel');
         $this->db->where('DATE(timestamp) = CURDATE()');
@@ -108,4 +110,5 @@ class Pouzivatel_model extends CI_model
         return 0;
     }
 }
+
 ?>

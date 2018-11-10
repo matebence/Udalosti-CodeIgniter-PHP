@@ -29,11 +29,17 @@ class Miesto_model extends CI_model
         return $odstran ? true : false;
     }
 
-    public function zoznam()
+    public function zoznam($id_pouzivatel)
     {
         $this->db->select('stat, okres, mesto');
         $this->db->from('miesto');
         $this->db->join('udalost', 'miesto.idMiesto = udalost.idMiesto');
+        $this->db->join('organizator', 'organizator.idUdalost = udalost.idUdalost');
+
+        if ($id_pouzivatel > 0) {
+            $this->db->where("organizator.idPouzivatel", $id_pouzivatel);
+        }
+
         $this->db->where("datum >= CURDATE()");
         $this->db->group_by('mesto');
         $this->db->order_by("datum", "asc");

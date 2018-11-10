@@ -1,30 +1,32 @@
-$(document).ready(function(){
+$(document).ready(function () {
     $.ajax({
-        url: window.location.origin+"/udalosti/index.php/panel/ziskaj_data",
+        url: window.location.origin + "/udalosti/index.php/panel/ziskaj_data",
         dataType: 'text',
         type: 'post',
         format: "json",
         data: {
             'panel': true
         },
-        success: function(data){
+        success: function (data) {
             var udaje = JSON.parse(data);
 
-            if(udaje.length != 0){
+            if (data.length > 5000) {
+                location.reload();
+            } else if (udaje.length != 0) {
                 kolacovyGraf(udaje);
                 stlpcovyGrafOkres(udaje);
                 stlpcovyGrafStat(udaje);
                 ciarovyGraf(udaje);
                 stlpcovyGrafZaujmy(udaje);
-            }else{
+            } else {
                 $(".grafUdalosti").html("<p>Databazá udalostí je prázdna</p>");
             }
         }
     });
 });
 
-function kolacovyGraf(udaje){
-    if(udaje.cennik == undefined){
+function kolacovyGraf(udaje) {
+    if (udaje.cennik == undefined) {
         $(".grafUdalosti").eq(0).html("<p>Databazá cien je prázdna</p>");
     }
 
@@ -39,7 +41,7 @@ function kolacovyGraf(udaje){
 
     for (i = 0; i < udaje.cennik.length; i++) {
         percenta[i] = (parseInt(udaje.cennik[i].Pocet) / spolu) * 100;
-        percenta[i] = Math.floor(percenta[i])+"%"
+        percenta[i] = Math.floor(percenta[i]) + "%"
     }
 
     var nastavenia = {
@@ -66,8 +68,8 @@ function kolacovyGraf(udaje){
     });
 }
 
-function stlpcovyGrafOkres(udaje){
-    if(udaje.okres == undefined){
+function stlpcovyGrafOkres(udaje) {
+    if (udaje.okres == undefined) {
         $(".grafUdalosti").eq(3).html("<p>Databazá udalostí je prázdna</p>");
     }
 
@@ -103,8 +105,8 @@ function stlpcovyGrafOkres(udaje){
     Chartist.Bar('#stlpcovyGrafOkres', nastavenia, preferencie, graf);
 }
 
-function stlpcovyGrafStat(udaje){
-    if(udaje.stat == undefined){
+function stlpcovyGrafStat(udaje) {
+    if (udaje.stat == undefined) {
         $(".grafUdalosti").eq(4).html("<p>Databazá udalostí je prázdna</p>");
     }
 
@@ -140,8 +142,8 @@ function stlpcovyGrafStat(udaje){
     Chartist.Bar('#stlpcovyGrafStat', nastavenia, preferencie, graf);
 }
 
-function stlpcovyGrafZaujmy(udaje){
-    if(udaje.zaujmy == undefined){
+function stlpcovyGrafZaujmy(udaje) {
+    if (udaje.zaujmy == undefined) {
         $(".grafUdalosti").eq(1).html("<p>Databazá záujmov je prázdna</p>");
     }
 
@@ -177,8 +179,8 @@ function stlpcovyGrafZaujmy(udaje){
     Chartist.Bar('#stlpcovyGrafZaujmy', nastavenia, preferencie, graf);
 }
 
-function ciarovyGraf(udaje){
-    if(udaje.mesiac == undefined){
+function ciarovyGraf(udaje) {
+    if (udaje.mesiac == undefined) {
         $(".grafUdalosti").eq(2).html("<p>Databazá udalostí je prázdna</p>");
     }
 
@@ -215,8 +217,7 @@ function ciarovyGraf(udaje){
     };
 
     var graf = [
-        ['screen and (max-width: 640px)', {
-        }]
+        ['screen and (max-width: 640px)', {}]
     ];
 
     Chartist.Line('#ciarovyGraf', nastavenia, preferencie, graf);

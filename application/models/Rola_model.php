@@ -2,7 +2,7 @@
 
 class Rola_model extends CI_model
 {
-    public function vytvorit($rola= array())
+    public function vytvorit($rola = array())
     {
         $udaj = $this->db->insert('rola', $rola);
         if ($udaj) {
@@ -43,4 +43,5 @@ class Rola_model extends CI_model
         }
     }
 }
+
 ?>

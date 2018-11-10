@@ -57,8 +57,8 @@
                                             <label>Obrázok</label>
                                             <div class="input-group upload">
                                                 <label class="input-group-btn">
-                                                    <span class="btn btn-basic">
-                                                        Prehladávať&hellip; <input type="file" name="obrazok" style="display: none;">
+                                                    <span class="btn btn-basic obrazok_udalosti_pozicia">
+                                                        Prehladávať&hellip; <input class="obrazok_udalosti" type="file" name="obrazok" style="display: none;">
                                                     </span>
                                                 </label>
                                                 <input type="text" id="obrazok_udalosti-<?php if(isset($identifikator)){echo $identifikator;}?>" class="form-control" readonly title="">

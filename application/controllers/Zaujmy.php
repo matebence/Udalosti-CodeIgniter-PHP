@@ -21,7 +21,7 @@ class Zaujmy extends CI_Controller
 
     private function vytvorit()
     {
-        if ((strcmp($this->input->post("token"), $this->Pouzivatel_model->token($this->input->post("email"))) == 0 && ($this->input->post("email")))) {
+        if (((strcmp($this->input->post("token"), $this->Pouzivatel_model->token($this->input->post("email"))) == 0) && ($this->input->post("email")))) {
             if ($this->validacia_vstupnych_udajov()) {
                 $novy_zaujem = array(
                     'idUdalost' => $this->input->post('idUdalost'),
@@ -31,7 +31,7 @@ class Zaujmy extends CI_Controller
                 $id_noveho_zaujmu = $this->Zaujem_model->vytvorit($novy_zaujem);
                 if ($id_noveho_zaujmu) {
                     $this->session->set_flashdata('uspech', 'Udalosť bola pridaná do záujmov');
-                }else{
+                } else {
                     $this->session->set_flashdata('chyba', 'Chyba udalosť sa nepridala do záujmov');
                 }
 
@@ -42,7 +42,8 @@ class Zaujmy extends CI_Controller
         }
     }
 
-    private function validacia_vstupnych_udajov(){
+    private function validacia_vstupnych_udajov()
+    {
         $this->form_validation->set_rules('email',
             'Email používateľa',
             'required|valid_email',
@@ -67,7 +68,7 @@ class Zaujmy extends CI_Controller
 
     public function potvrd()
     {
-        if ((strcmp($this->input->post("token"), $this->Pouzivatel_model->token($this->input->post("email"))) == 0 && ($this->input->post("email")))) {
+        if (((strcmp($this->input->post("token"), $this->Pouzivatel_model->token($this->input->post("email"))) == 0) && ($this->input->post("email")))) {
             $data["udalosti"] = $this->Zaujem_model->potvrdenie_zaujmu(
                 $this->input->post("idUdalost"),
                 $this->input->post("email")
@@ -80,7 +81,7 @@ class Zaujmy extends CI_Controller
 
     public function zoznam()
     {
-        if ((strcmp($this->input->post("token"), $this->Pouzivatel_model->token($this->input->post("email"))) == 0 && ($this->input->post("email")))) {
+        if (((strcmp($this->input->post("token"), $this->Pouzivatel_model->token($this->input->post("email"))) == 0) && ($this->input->post("email")))) {
             $data["udalosti"] = $this->Zaujem_model->zaujmy(
                 $this->input->post("email"));
             $this->load->view("json/json_vystup_dat", $data);
@@ -91,12 +92,12 @@ class Zaujmy extends CI_Controller
 
     public function odstran()
     {
-        if ((strcmp($this->input->post("token"), $this->Pouzivatel_model->token($this->input->post("email"))) == 0 && ($this->input->post("email")))) {
-            $stav =  $this->Zaujem_model->odstran($this->input->post("idUdalost"), $this->Pouzivatel_model->id_hladaneho_pouzivatela($this->input->post("email")));
+        if (((strcmp($this->input->post("token"), $this->Pouzivatel_model->token($this->input->post("email"))) == 0) && ($this->input->post("email")))) {
+            $stav = $this->Zaujem_model->odstran($this->input->post("idUdalost"), $this->Pouzivatel_model->id_hladaneho_pouzivatela($this->input->post("email")));
 
-            if($stav){
+            if ($stav) {
                 $this->session->set_flashdata('uspech', 'Udalosť bola odstránená zo záujmov');
-            }else{
+            } else {
                 $this->session->set_flashdata('chyba', 'Chyba pri odstráneni udalosti zo záujmov');
             }
             $this->load->view("json/json_vystup_odpoved");

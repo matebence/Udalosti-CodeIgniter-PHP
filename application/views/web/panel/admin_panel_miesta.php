@@ -26,9 +26,9 @@
                                 if(!empty($miesta)){
                                     foreach ($miesta as $miesto) {
                                         echo "<tr class='zaujmy-miesta'>";
-                                        echo "<td>".$miesto['stat']."</td>";
-                                        echo "<td>".$miesto['okres']."</td>";
-                                        echo "<td>".$miesto['mesto']."</td>";
+                                            echo "<td>".$miesto['stat']."</td>";
+                                            echo "<td>".$miesto['okres']."</td>";
+                                            echo "<td>".$miesto['mesto']."</td>";
                                         echo "</tr>";
                                     }
                                 }

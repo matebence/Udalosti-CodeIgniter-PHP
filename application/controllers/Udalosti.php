@@ -13,6 +13,7 @@ class Udalosti extends CI_Controller
         $this->load->library('image_lib');
 
         $this->load->model('Udalost_model');
+        $this->load->model('Organizator_model');
         $this->load->model('Pouzivatel_model');
         $this->load->model('Miesto_model');
     }
@@ -24,11 +25,11 @@ class Udalosti extends CI_Controller
 
     public function vytvorit()
     {
-        if ($this->session->userdata('email_admina')) {
+        if ($this->session->userdata('email_admina') || $this->session->userdata('email_organizatora')) {
             if ($this->validacia_vstupnych_udajov()) {
                 $obrazok = $this->obrazok();
 
-                if (strcmp($obrazok, "") == 0) {
+                if (strcmp($obrazok, "chyba") == 0) {
                     $this->load->view("web/notifikacia/notifikacia_oznam.php",
                         array(
                             "ikona" => "pe-7s-attention",
@@ -52,8 +53,34 @@ class Udalosti extends CI_Controller
                         "cas" => $this->input->post("cas"),
                         "vstupenka" => $this->input->post("vstupenka")
                     );
-                    $id_novej_udalosti = $this->Udalost_model->vytvorit($nova_udalost);
-                    if ($id_novej_udalosti) {
+
+                    $organizator_udalosti = array();
+                    if ($this->session->userdata('email_admina')) {
+
+                        $nova_udalost["stav"] = PRIJATE;
+                        $id_novej_udalosti = $this->Udalost_model->vytvorit($nova_udalost);
+
+                        if ($id_novej_udalosti) {
+                            $organizator_udalosti = array(
+                                "idUdalost" => $id_novej_udalosti,
+                                "idPouzivatel" => $this->Pouzivatel_model->id_hladaneho_pouzivatela($this->session->userdata('email_admina'))
+                            );
+                        }
+                    } else if ($this->session->userdata('email_organizatora')) {
+
+                        $nova_udalost["stav"] = NEPRECITANE;
+                        $id_novej_udalosti = $this->Udalost_model->vytvorit($nova_udalost);
+
+                        if ($id_novej_udalosti) {
+                            $organizator_udalosti = array(
+                                "idUdalost" => $id_novej_udalosti,
+                                "idPouzivatel" => $this->Pouzivatel_model->id_hladaneho_pouzivatela($this->session->userdata('email_organizatora'))
+                            );
+                        }
+                    }
+
+                    $id_organizatora_udalosti = $this->Organizator_model->vytvorit($organizator_udalosti);
+                    if ($id_organizatora_udalosti) {
                         $this->load->view("web/notifikacia/notifikacia_oznam.php",
                             array(
                                 "ikona" => "pe-7s-check",
@@ -83,10 +110,14 @@ class Udalosti extends CI_Controller
 
     public function aktualizuj($id_udalost)
     {
-        if (($this->session->userdata('email_admina')) && ($id_udalost)) {
+        if ((($this->session->userdata('email_admina')) || ($this->session->userdata('email_organizatora'))) && ($id_udalost)) {
             if ($this->validacia_vstupnych_udajov()) {
 
-                $obrazok = $this->obrazok();
+                $obrazok = null;
+                if ($this->input->post("zmena_obrazka")) {
+                    $obrazok = $this->obrazok();
+                }
+
                 $miesto_udalosti = array(
                     "stat" => $this->input->post("stat"),
                     "okres" => $this->input->post("okres"),
@@ -107,9 +138,19 @@ class Udalosti extends CI_Controller
                         "vstupenka" => $this->input->post("vstupenka")
                     );
 
-                    if (!strcmp($obrazok, "") == 0) {
-                        $udalost["obrazok"] = $obrazok;
-                        $this->odstran_obrazok($id_udalost);
+                    if ($obrazok != null) {
+                        if (strcmp($obrazok, "chyba") == 0) {
+                            $this->load->view("web/notifikacia/notifikacia_oznam.php",
+                                array(
+                                    "ikona" => "pe-7s-attention",
+                                    "typ" => "warning",
+                                    "oznam" => "Chyba obrázka! Skúste ešte raz."
+                                ));
+                            return;
+                        } else {
+                            $udalost["obrazok"] = $obrazok;
+                            $this->odstran_obrazok_a_miesto($id_udalost, false);
+                        }
                     }
 
                     $aktualizovana_udalost = $this->Udalost_model->aktualizuj($id_udalost, $udalost);
@@ -141,7 +182,8 @@ class Udalosti extends CI_Controller
         }
     }
 
-    public function prijat($id_udalost){
+    public function prijat($id_udalost)
+    {
         if (($this->session->userdata('email_admina')) && ($id_udalost)) {
             $udalost = array(
                 "stav" => PRIJATE
@@ -168,7 +210,8 @@ class Udalosti extends CI_Controller
         }
     }
 
-    public function odmietnut($id_udalost){
+    public function odmietnut($id_udalost)
+    {
         if (($this->session->userdata('email_admina')) && ($id_udalost)) {
             $udalost = array(
                 "stav" => ODMIETNUTE
@@ -197,25 +240,35 @@ class Udalosti extends CI_Controller
 
     public function odstran($id_udalost)
     {
-        if (($this->session->userdata('email_admina')) && ($id_udalost)) {
+        if ((($this->session->userdata('email_admina')) || ($this->session->userdata('email_organizatora'))) && ($id_udalost)) {
 
-            $this->odstran_obrazok_a_miesto($id_udalost);
-            $id_udalosti = $this->Udalost_model->odstran($id_udalost);
+            $this->odstran_obrazok_a_miesto($id_udalost, true);
+            $id_organizatora = 0;
 
-            if ($id_udalosti) {
-                $this->load->view("web/notifikacia/notifikacia_oznam.php",
-                    array(
-                        "ikona" => "pe-7s-check",
-                        "typ" => "success",
-                        "oznam" => "Odstránenie prebehlo úspešne"
-                    ));
-            } else {
-                $this->load->view("web/notifikacia/notifikacia_oznam.php",
-                    array(
-                        "ikona" => "pe-7s-attention",
-                        "typ" => "warning",
-                        "oznam" => "Pri odstránení nastala chyba"
-                    ));
+            if ($this->session->userdata('email_admina')) {
+                $id_organizatora = $this->Organizator_model->odstran($id_udalost, $this->Pouzivatel_model->id_hladaneho_pouzivatela($this->session->userdata('email_admina')));
+            } else if ($this->session->userdata('email_organizatora')) {
+                $id_organizatora = $this->Organizator_model->odstran($id_udalost, $this->Pouzivatel_model->id_hladaneho_pouzivatela($this->session->userdata('email_organizatora')));
+            }
+
+            if ($id_organizatora) {
+                if ($this->Udalost_model->odstran($id_udalost)) {
+
+                    $this->load->view("web/notifikacia/notifikacia_oznam.php",
+                        array(
+                            "ikona" => "pe-7s-check",
+                            "typ" => "success",
+                            "oznam" => "Odstránenie prebehlo úspešne"
+                        ));
+                } else {
+
+                    $this->load->view("web/notifikacia/notifikacia_oznam.php",
+                        array(
+                            "ikona" => "pe-7s-attention",
+                            "typ" => "warning",
+                            "oznam" => "Pri odstránení nastala chyba"
+                        ));
+                }
             }
         } else {
             redirect("prihlasenie/pristup");
@@ -224,7 +277,7 @@ class Udalosti extends CI_Controller
 
     public function informacia($id_udalost)
     {
-        if (($this->session->userdata('email_admina')) && ($id_udalost)) {
+        if ((($this->session->userdata('email_admina')) || ($this->session->userdata('email_organizatora'))) && ($id_udalost)) {
             $this->load->view("json/json_admin", array(
                 "aktualne_udaje_udalosti" => $this->Udalost_model->informacia($id_udalost)
             ));
@@ -328,7 +381,7 @@ class Udalosti extends CI_Controller
 
         $this->upload->initialize($config);
         if (!$this->upload->do_upload('obrazok')) {
-            return "";
+            return "chyba";
         } else {
             $meta_data_obrazka = $this->upload->data();
             return $this->velkost_obrazka($meta_data_obrazka, 850, 400);
@@ -353,11 +406,13 @@ class Udalosti extends CI_Controller
         return 'uploads/' . $nazov_obrazka;
     }
 
-    private function odstran_obrazok_a_miesto($id_udalost)
+    private function odstran_obrazok_a_miesto($id_udalost, $miesto)
     {
         $udalost = $this->Udalost_model->informacia($id_udalost);
 
-        $this->Miesto_model->odstran($udalost["idMiesto"]);
+        if ($miesto) {
+            $this->Miesto_model->odstran($udalost["idMiesto"]);
+        }
         unlink($udalost["obrazok"]);
     }
 }

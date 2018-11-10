@@ -55,7 +55,8 @@ class Rola_pouzivatela_model extends CI_model
         }
     }
 
-    public function pocet($typ_roli){
+    public function pocet($typ_roli)
+    {
         $this->db->select('meno');
         $this->db->from('rola_pouzivatela');
         $this->db->join('pouzivatel', 'pouzivatel.idPouzivatel = rola_pouzivatela.idPouzivatel');
@@ -83,7 +84,8 @@ class Rola_pouzivatela_model extends CI_model
         return null;
     }
 
-    public function zoznam_pouzivatelov(){
+    public function zoznam_pouzivatelov()
+    {
         $this->db->select('*');
         $this->db->from('rola_pouzivatela');
         $this->db->join('pouzivatel', 'pouzivatel.idPouzivatel = rola_pouzivatela.idPouzivatel');
@@ -97,7 +99,8 @@ class Rola_pouzivatela_model extends CI_model
         return null;
     }
 
-    public function zoznam_organizatorov($email, $stav){
+    public function zoznam_organizatorov($email, $stav)
+    {
         $this->db->select('*');
         $this->db->from('rola_pouzivatela');
         $this->db->join('pouzivatel', 'pouzivatel.idPouzivatel = rola_pouzivatela.idPouzivatel');
@@ -113,7 +116,8 @@ class Rola_pouzivatela_model extends CI_model
         return null;
     }
 
-    public function zoznam_administratorov($email){
+    public function zoznam_administratorov($email)
+    {
         $this->db->select('*');
         $this->db->from('rola_pouzivatela');
         $this->db->join('pouzivatel', 'pouzivatel.idPouzivatel = rola_pouzivatela.idPouzivatel');
@@ -128,4 +132,5 @@ class Rola_pouzivatela_model extends CI_model
         return null;
     }
 }
+
 ?>

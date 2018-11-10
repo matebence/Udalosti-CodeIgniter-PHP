@@ -1,5 +1,5 @@
 <?php if((empty(validation_errors_array())) && (strcmp($ikona, "pe-7s-check") == 0)){
-    echo "uspech";
+    echo "<p style='display: none'>uspech</p>";
 }
 ?>
 
@@ -23,11 +23,3 @@
         });
     });
 </script>
-
-<?php if(isset($presmeruj)){
-    if($presmeruj){
-        echo "uspech";
-
-    }
-}
-?>

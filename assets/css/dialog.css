@@ -19,26 +19,26 @@
     width: 85%;
 }
 
-#datum, #cas{
+#datum, #cas {
     position: relative;
 }
 
-.input-group-append{
+.input-group-append {
     position: absolute;
 }
 
-.modal-body{
+.modal-body {
     max-height: calc(100vh - 200px);
     overflow-y: auto;
 }
 
 .modal {
     background: rgba(000, 000, 000, 0.8);
-    min-height:1000000px;
+    min-height: 1000000px;
 }
 
 @media (max-width: 991px) {
-    .dateTimePicker{
+    .dateTimePicker {
         margin-top: 8px;
     }
 
@@ -77,6 +77,6 @@
     }
 }
 
-.upload{
+.upload {
     width: auto;
 }

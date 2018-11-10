@@ -31,12 +31,12 @@
                                 if(!empty($zoznam_administratorov)){
                                     foreach ($zoznam_administratorov as $admin) {
                                         echo "<tr>";
-                                        echo "<td>".$admin['idPouzivatel']."</td>";
-                                        echo "<td>".$admin['email']."</td>";
-                                        echo "<td>".$admin['meno']."</td>";
-                                        echo "<td>".$admin['heslo']."</td>";
-                                        echo "<td>".$admin['timestamp']."</td>";
-                                        echo "<td>
+                                            echo "<td>".$admin['idPouzivatel']."</td>";
+                                            echo "<td>".$admin['email']."</td>";
+                                            echo "<td>".$admin['meno']."</td>";
+                                            echo "<td>".$admin['heslo']."</td>";
+                                            echo "<td>".$admin['timestamp']."</td>";
+                                            echo "<td>
                                                     <i class='".$admin['idPouzivatel']." fa fa-edit editovat' data-toggle='modal' data-target='#aktualizovat-pouzivatel'></i>
                                                     <i class='".$admin['idPouzivatel']." fa fa-trash odstranit' data-toggle='modal' data-target='#odstranit-pouzivatel'></i>
                                                   </td>";

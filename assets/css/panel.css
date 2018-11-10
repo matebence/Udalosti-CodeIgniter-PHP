@@ -2,76 +2,76 @@
 
 html,
 li, p, a, span,
-h1, h2, h3, h4, h5, h6{
+h1, h2, h3, h4, h5, h6 {
     font-family: RalewayRegular, serif;
 }
 
-.eq{
+.eq {
     display: none;
 }
 
-#obrazok{
+#obrazok {
     width: 28px;
     height: 35px;
 }
 
-#mapa{
-    position:relative;
-    width:100%;
+#mapa {
+    position: relative;
+    width: 100%;
     height: calc(100% - 127px);
     border: none;
 }
 
-.editovat{
+.editovat {
     color: #2071a1;
 }
 
-.editovat:hover{
+.editovat:hover {
     cursor: pointer;
 }
 
-.odstranit{
+.odstranit {
     color: red;
 }
 
-.odstranit:hover{
+.odstranit:hover {
     cursor: pointer;
 }
 
-.prijat, .akceptovat{
+.prijat, .akceptovat {
     color: green;
 }
 
-.prijat:hover, .akceptovat:hover{
+.prijat:hover, .akceptovat:hover {
     cursor: pointer;
 }
 
-.odmietnut, .blokovat{
+.odmietnut, .blokovat {
     color: #ffc1a9;
 }
 
-.odmietnut:hover, .blokovat:hover{
+.odmietnut:hover, .blokovat:hover {
     cursor: pointer;
 }
 
-.fa{
+.fa {
     display: inline;
 }
 
-.editovat, .odstranit, .prijat, .akceptovat, .odmietnut, .blokovat{
+.editovat, .odstranit, .prijat, .akceptovat, .odmietnut, .blokovat {
     margin-left: 5px;
 }
 
-td, th{
+td, th {
     font-family: RalewayRegular, serif;
     text-align: center;
 }
 
-th.cennik-operacie, .cennik-operacie{
+th.cennik-operacie, .cennik-operacie {
     text-align: right;
 }
 
-.zaujmy-miesta{
+.zaujmy-miesta {
     text-align: center;
 }
 
@@ -106,11 +106,11 @@ a.nahlad:hover img {
     z-index: 1001;
 }
 
-.okres-mesta-obce-odpoved:hover{
-    background-color:#f1f1f1;
+.okres-mesta-obce-odpoved:hover {
+    background-color: #f1f1f1;
 }
 
-.table-responsive{
+.table-responsive {
     overflow: auto;
 }
 
@@ -173,7 +173,7 @@ a.nahlad:hover img {
     border-color: #13a152;
 }
 
-.btn-success, .btn-success, .btn-success, .btn-success, .open > .btn-success.dropdown-toggle{
+.btn-success, .btn-success, .btn-success, .btn-success, .open > .btn-success.dropdown-toggle {
     background-color: transparent;
     color: #4ba155;
     border-color: #4ba155;

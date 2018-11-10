@@ -20,9 +20,9 @@ class Prihlasenie extends CI_Controller
 
         if ($this->session->userdata('email_admina')) {
             redirect("panel");
-        }else if($this->session->userdata('email_organizatora')){
+        } else if ($this->session->userdata('email_organizatora')) {
             redirect("panel/udalosti");
-        }else{
+        } else {
             $this->prihlasit();
         }
     }
@@ -38,28 +38,28 @@ class Prihlasenie extends CI_Controller
                 if ($prihlasovacie_udaje["heslo"] != null) {
 
                     $rola = $this->Rola_pouzivatela_model->prihlas($prihlasovacie_udaje);
-                    if(strcmp(ADMIN, $rola) == 0){
+                    if (strcmp(ADMIN, $rola) == 0) {
                         $this->session->set_userdata('email_admina', $this->input->post('email'));
                         $this->session->set_userdata('prihlaseny', true);
                         $this->index();
-                    } else if(strcmp(ORGANIZATOR, $rola) == 0){
+                    } else if (strcmp(ORGANIZATOR, $rola) == 0) {
                         $this->session->set_userdata('email_organizatora', $this->input->post('email'));
                         $this->session->set_userdata('prihlaseny', true);
                         $this->index();
-                    } else if(strcmp(POUZIVATEL, $rola) == 0){
+                    } else if (strcmp(POUZIVATEL, $rola) == 0) {
                         if ($this->input->post('prehliadac')) {
                             $this->session->set_flashdata('chyba', 'Nesprávne prihlasovacie údaje!');
                             $this->load->view("web/dialog/dialog_oznam");
                             $this->load->view("web/rozhranie/prihlasenie_pata");
 
-                        }else{
+                        } else {
                             $this->Pouzivatel_model->aktualizuj($prihlasovacie_udaje['email'], null, array("token" => md5(uniqid(rand(), true))));
                             $this->session->set_flashdata('autentifikacia', 'Spravné prihlasovacie údaje');
 
                             $data["token"] = $this->Pouzivatel_model->token($prihlasovacie_udaje["email"]);
                             $this->load->view("json/json_vystup_pridanie_dat", $data);
                         }
-                    }else{
+                    } else {
                         $this->session->set_flashdata('chyba', 'Nesprávne prihlasovacie údaje!');
 
                         if ($this->input->post('prehliadac')) {
@@ -122,12 +122,10 @@ class Prihlasenie extends CI_Controller
         }
     }
 
-    public function pristup(){
+    public function pristup()
+    {
         $this->session->sess_destroy();
-
-        $this->load->view("web/rozhranie/prihlasenie_hlavicka");
-        $this->load->view("web/prihlasenie/prihlasenie");
-        $this->load->view("web/rozhranie/prihlasenie_pata");
+        $this->index();
     }
 
     public function odhlasit()
@@ -140,4 +138,5 @@ class Prihlasenie extends CI_Controller
         $this->load->view("json/json_vystup_pridanie_dat");
     }
 }
+
 ?>

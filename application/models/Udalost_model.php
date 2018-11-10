@@ -31,7 +31,7 @@ class Udalost_model extends CI_model
 
     public function zoznam_udalosti($stat, $email)
     {
-        $this->db->select("udalost.idUdalost, obrazok, nazov, DATE_FORMAT(datum,'%m') as den, MONTHNAME(datum) as mesiac, DATE_FORMAT(cas, '%H:%i') as cas, mesto, ulica, vstupenka, COUNT(zaujem.idUdalost) as zaujemcovia, IF(SUM(pouzivatel.email = '".$email."') > 0, 1, 0) as zaujem");
+        $this->db->select("udalost.idUdalost, obrazok, nazov, DATE_FORMAT(datum,'%m') as den, MONTHNAME(datum) as mesiac, DATE_FORMAT(cas, '%H:%i') as cas, mesto, ulica, vstupenka, COUNT(zaujem.idUdalost) as zaujemcovia, IF(SUM(pouzivatel.email = '" . $email . "') > 0, 1, 0) as zaujem");
         $this->db->from('zaujem');
         $this->db->join('udalost', 'udalost.idUdalost = zaujem.idUdalost', 'right');
         $this->db->join('pouzivatel', 'pouzivatel.idPouzivatel = zaujem.idPouzivatel', 'left');
@@ -52,7 +52,7 @@ class Udalost_model extends CI_model
 
     public function zoznam_udalosti_v_okoli($stat, $email, $okres, $mesto)
     {
-        $this->db->select("udalost.idUdalost, obrazok, nazov, DATE_FORMAT(datum,'%m') as den, MONTHNAME(datum) as mesiac, DATE_FORMAT(cas, '%H:%i') as cas, mesto, ulica, vstupenka, COUNT(zaujem.idUdalost) as zaujemcovia, IF(SUM(pouzivatel.email = '".$email."') > 0, 1, 0) as zaujem");
+        $this->db->select("udalost.idUdalost, obrazok, nazov, DATE_FORMAT(datum,'%m') as den, MONTHNAME(datum) as mesiac, DATE_FORMAT(cas, '%H:%i') as cas, mesto, ulica, vstupenka, COUNT(zaujem.idUdalost) as zaujemcovia, IF(SUM(pouzivatel.email = '" . $email . "') > 0, 1, 0) as zaujem");
         $this->db->from('zaujem');
         $this->db->join('udalost', 'udalost.idUdalost = zaujem.idUdalost', 'right');
         $this->db->join('pouzivatel', 'pouzivatel.idPouzivatel = zaujem.idPouzivatel', 'left');
@@ -89,7 +89,8 @@ class Udalost_model extends CI_model
         return $query->result_array();
     }
 
-    public function pocet_udalosti(){
+    public function pocet_udalosti()
+    {
         $this->db->select('nazov');
         $this->db->from('udalost');
         $this->db->where("stav", PRIJATE);
@@ -100,7 +101,8 @@ class Udalost_model extends CI_model
         return 0;
     }
 
-    public function pocet_udalosti_v_mesiaci(){
+    public function pocet_udalosti_v_mesiaci()
+    {
         $this->db->select('MONTHNAME(datum) AS Mesiac, COUNT(*) AS Pocet');
         $this->db->from('udalost');
         $this->db->where("stav", PRIJATE);
@@ -113,7 +115,8 @@ class Udalost_model extends CI_model
         return 0;
     }
 
-    public function pocet_sprav(){
+    public function pocet_sprav()
+    {
         $this->db->select('COUNT(*) AS Pocet, idUdalost AS idOznamy');
         $this->db->from('udalost');
         $this->db->where("stav", NEPRECITANE);
@@ -139,7 +142,8 @@ class Udalost_model extends CI_model
         return 0;
     }
 
-    public function informacia($id_udalost){
+    public function informacia($id_udalost)
+    {
         $this->db->select('*');
         $this->db->from('udalost');
         $this->db->join('miesto', 'udalost.idMiesto = miesto.idMiesto');
@@ -151,21 +155,8 @@ class Udalost_model extends CI_model
         return null;
     }
 
-    public function zoznam($stav){
-        $this->db->select('*');
-        $this->db->from('udalost');
-        $this->db->join('cennik', 'udalost.idCennik = cennik.idCennik');
-        $this->db->join('miesto', 'udalost.idMiesto = miesto.idMiesto');
-        $this->db->where("stav", $stav);
-        $this->db->order_by("udalost.timestamp", "desc");
-        $query = $this->db->get();
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
-        }
-        return null;
-    }
-
-    public function udalosti_podla_okresu(){
+    public function udalosti_podla_okresu()
+    {
         $this->db->select('okres, COUNT(*) AS Pocet');
         $this->db->from('udalost');
         $this->db->join('miesto', 'udalost.idMiesto = miesto.idMiesto');
@@ -178,7 +169,8 @@ class Udalost_model extends CI_model
         return 0;
     }
 
-    public function udalosti_podla_statu(){
+    public function udalosti_podla_statu()
+    {
         $this->db->select('stat, COUNT(*) AS Pocet');
         $this->db->from('udalost');
         $this->db->join('miesto', 'udalost.idMiesto = miesto.idMiesto');

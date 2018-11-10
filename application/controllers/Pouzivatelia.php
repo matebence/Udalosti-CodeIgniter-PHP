@@ -13,7 +13,8 @@ class Pouzivatelia extends CI_Controller
         $this->load->model('Rola_pouzivatela_model');
     }
 
-    public function informacia($id_pouzivatel){
+    public function informacia($id_pouzivatel)
+    {
         if (($this->session->userdata('email_admina')) && ($id_pouzivatel)) {
             $this->load->view("json/json_admin", array(
                 "aktualny_pouzivatel" => $this->Rola_pouzivatela_model->informacia($id_pouzivatel)
@@ -23,11 +24,12 @@ class Pouzivatelia extends CI_Controller
         }
     }
 
-    public function aktualizuj($id_pouzivatel){
+    public function aktualizuj($id_pouzivatel)
+    {
         if (($this->session->userdata('email_admina')) && ($id_pouzivatel)) {
             $heslo_bolo_aktualizovane = false;
 
-            if(($this->input->post("heslo")) && ($this->input->post("potvrd"))){
+            if (($this->input->post("heslo")) && ($this->input->post("potvrd"))) {
                 $heslo_bolo_aktualizovane = true;
             }
 
@@ -35,21 +37,20 @@ class Pouzivatelia extends CI_Controller
                 $pouzivatel = array(
                     "meno" => $this->input->post("meno"),
                     "email" => $this->input->post("email"));
-                if($heslo_bolo_aktualizovane){
+                if ($heslo_bolo_aktualizovane) {
                     $pouzivatel["heslo"] = $this->sifrovanie_hesla($this->input->post('heslo'));
                 }
 
                 $aktualizovany_pouzivatel = $this->Pouzivatel_model->aktualizuj(null, $id_pouzivatel, $pouzivatel);
-                if(strcmp($this->input->post('rola'), ADMIN) == 0){
-                    if($aktualizovany_pouzivatel) {
+                if (strcmp($this->input->post('rola'), ADMIN) == 0) {
+                    if ($aktualizovany_pouzivatel) {
                         $this->load->view("web/notifikacia/notifikacia_oznam.php",
                             array(
                                 "ikona" => "pe-7s-check",
                                 "typ" => "success",
-                                "oznam" => "Administrátor bol aktualizovaný",
-                                "presmeruj" => true
+                                "oznam" => "Administrátor bol aktualizovaný"
                             ));
-                    }else{
+                    } else {
                         $this->load->view("web/notifikacia/notifikacia_oznam.php",
                             array(
                                 "ikona" => "pe-7s-attention",
@@ -57,16 +58,15 @@ class Pouzivatelia extends CI_Controller
                                 "oznam" => "Pri aktualizovaní došlo chybe!"
                             ));
                     }
-                }else if(strcmp($this->input->post('rola'), ORGANIZATOR) == 0){
-                    if($aktualizovany_pouzivatel) {
+                } else if (strcmp($this->input->post('rola'), ORGANIZATOR) == 0) {
+                    if ($aktualizovany_pouzivatel) {
                         $this->load->view("web/notifikacia/notifikacia_oznam.php",
                             array(
                                 "ikona" => "pe-7s-check",
                                 "typ" => "success",
-                                "oznam" => "Organizátor bol aktualizovaný",
-                                "presmeruj" => false
+                                "oznam" => "Organizátor bol aktualizovaný"
                             ));
-                    }else{
+                    } else {
                         $this->load->view("web/notifikacia/notifikacia_oznam.php",
                             array(
                                 "ikona" => "pe-7s-attention",
@@ -74,16 +74,15 @@ class Pouzivatelia extends CI_Controller
                                 "oznam" => "Pri aktualizovaní došlo chybe!"
                             ));
                     }
-                }else if(strcmp($this->input->post('rola'), POUZIVATEL) == 0){
-                    if($aktualizovany_pouzivatel) {
+                } else if (strcmp($this->input->post('rola'), POUZIVATEL) == 0) {
+                    if ($aktualizovany_pouzivatel) {
                         $this->load->view("web/notifikacia/notifikacia_oznam.php",
                             array(
                                 "ikona" => "pe-7s-check",
                                 "typ" => "success",
-                                "oznam" => "Použivatel bol aktualizovaný",
-                                "presmeruj" => false
+                                "oznam" => "Použivatel bol aktualizovaný"
                             ));
-                    }else{
+                    } else {
                         $this->load->view("web/notifikacia/notifikacia_oznam.php",
                             array(
                                 "ikona" => "pe-7s-attention",
@@ -92,7 +91,7 @@ class Pouzivatelia extends CI_Controller
                             ));
                     }
                 }
-            }else{
+            } else {
                 $this->load->view("web/notifikacia/notifikacia_oznam.php",
                     array(
                         "ikona" => "pe-7s-attention",
@@ -104,7 +103,8 @@ class Pouzivatelia extends CI_Controller
         }
     }
 
-    public function akceptovat($id_pouzivatel){
+    public function akceptovat($id_pouzivatel)
+    {
         if (($this->session->userdata('email_admina')) && ($id_pouzivatel)) {
             $pouzivatel = array(
                 "stav" => AKCEPTOVANE
@@ -131,7 +131,8 @@ class Pouzivatelia extends CI_Controller
         }
     }
 
-    public function blokovat($id_pouzivatel){
+    public function blokovat($id_pouzivatel)
+    {
         if (($this->session->userdata('email_admina')) && ($id_pouzivatel)) {
             $pouzivatel = array(
                 "stav" => BLOKOVANE
@@ -158,17 +159,18 @@ class Pouzivatelia extends CI_Controller
         }
     }
 
-    public function odstran($id_pouzivatel){
+    public function odstran($id_pouzivatel)
+    {
         if (($this->session->userdata('email_admina')) && ($id_pouzivatel)) {
 
-            if(($this->Pouzivatel_model->odstran($id_pouzivatel)) && ($this->Rola_pouzivatela_model->odstran($id_pouzivatel))){
+            if (($this->Pouzivatel_model->odstran($id_pouzivatel)) && ($this->Rola_pouzivatela_model->odstran($id_pouzivatel))) {
                 $this->load->view("web/notifikacia/notifikacia_oznam.php",
                     array(
                         "ikona" => "pe-7s-check",
                         "typ" => "success",
                         "oznam" => "Odstránenie prebehlo úspešne"
                     ));
-            }else {
+            } else {
                 $this->load->view("web/notifikacia/notifikacia_oznam.php",
                     array(
                         "ikona" => "pe-7s-attention",
@@ -196,7 +198,7 @@ class Pouzivatelia extends CI_Controller
             array('required' => 'Nesprávny formát emailovej adresi!',
                 'valid_email' => 'Nesprávny formát emailovej adresi!'));
 
-        if($nove_heslo){
+        if ($nove_heslo) {
             $this->form_validation->set_rules('heslo',
                 'Heslo regitrujúcého',
                 'required|min_length[5]|max_length[20]',
@@ -236,4 +238,5 @@ class Pouzivatelia extends CI_Controller
         return $salt;
     }
 }
+
 ?>

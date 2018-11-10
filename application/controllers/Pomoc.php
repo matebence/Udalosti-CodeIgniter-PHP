@@ -50,7 +50,7 @@ class Pomoc extends CI_Controller
         $obsah = "Dobrý deň,\npožiadal(a) ste nás o zaslanie zabudnutého hesla, pokračujte cez nižšie uvedený odkaz prosím:\n%s\nĎakujeme a prajeme príjemný deň.\nS priateľským pozdravom\nZákaznícky servis udalosti.sk\nTento e-mail je generovaný automaticky, prosím neodpovedajte naň.";
         $adresa = site_url() . "/pomoc/formular_pre_zabudnute_heslo?kluc=" . md5($emailova_adresa_prijemcu["email"]) . "&hodnota=" . $heslo;
 
-        if ($heslo != null && $this->posli_email($emailova_adresa_prijemcu["email"], "Zabudnuté heslo", sprintf($obsah, $adresa))) {
+        if (($heslo != null) && ($this->posli_email($emailova_adresa_prijemcu["email"], "Zabudnuté heslo", sprintf($obsah, $adresa)))) {
             $this->session->set_flashdata('uspech', 'Na Vašu emailovú adresu sme poslali mail.');
 
             $this->load->view("web/dialog/dialog_oznam");
@@ -135,4 +135,5 @@ class Pomoc extends CI_Controller
         return $salt;
     }
 }
+
 ?>

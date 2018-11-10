@@ -29,13 +29,13 @@
                                 if(!empty($zoznam_cien)){
                                     foreach ($zoznam_cien as $cennik) {
                                         echo "<tr>";
-                                        echo "<td class='zaujmy-miesta'>".$cennik['idCennik']."</td>";
-                                        echo "<td class='zaujmy-miesta'>".$cennik['vaha']."</td>";
-                                        echo "<td class='zaujmy-miesta'>".$cennik['suma']. " €</td>";
-                                        echo "<td class='cennik-operacie'>
+                                            echo "<td class='zaujmy-miesta'>".$cennik['idCennik']."</td>";
+                                            echo "<td class='zaujmy-miesta'>".$cennik['vaha']."</td>";
+                                            echo "<td class='zaujmy-miesta'>".$cennik['suma']. " €</td>";
+                                            echo "<td class='cennik-operacie'>
                                                     <i class='".$cennik['idCennik']." fa fa-edit editovat' data-toggle='modal' data-target='#aktualizovat-cennik'></i>
                                                     <i class='".$cennik['idCennik']." fa fa-trash odstranit' data-toggle='modal' data-target='#odstranit-cennik'></i>
-                                                  </td>";
+                                                 </td>";
                                         echo "</tr>";
                                     }
                                 }

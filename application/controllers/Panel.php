@@ -13,6 +13,7 @@ class Panel extends CI_Controller
         $this->load->model('Pouzivatel_model');
         $this->load->model('Rola_pouzivatela_model');
         $this->load->model('Udalost_model');
+        $this->load->model('Organizator_model');
         $this->load->model('Cennik_model');
         $this->load->model('Zaujem_model');
         $this->load->model('Miesto_model');
@@ -85,9 +86,9 @@ class Panel extends CI_Controller
                 }
             }
 
-            $this->pridaj_data("nepotvrdene_udalosti", $this->Udalost_model->zoznam(NEPRECITANE));
-            $this->pridaj_data("aktualne_udalosti", $this->Udalost_model->zoznam(PRIJATE));
-            $this->pridaj_data("odmietnute_udalosti", $this->Udalost_model->zoznam(ODMIETNUTE));
+            $this->pridaj_data("nepotvrdene_udalosti", $this->Organizator_model->zoznam(null, NEPRECITANE));
+            $this->pridaj_data("aktualne_udalosti", $this->Organizator_model->zoznam(null, PRIJATE));
+            $this->pridaj_data("odmietnute_udalosti", $this->Organizator_model->zoznam(null, ODMIETNUTE));
             $this->pridaj_data("spravy", $pocet_sprav);
 
             $this->load->view("web/rozhranie/panel_hlavicka");
@@ -104,11 +105,18 @@ class Panel extends CI_Controller
         } else if($this->session->userdata('email_organizatora')){
 
             $this->pridaj_data("email_organizatora", $this->session->userdata('email_organizatora'));
+            $this->pridaj_data("zoznam_udalosti", $this->Organizator_model->zoznam($this->session->userdata('email_organizatora'), null));
 
             $this->uspesne_prihlasenie();
 
             $this->load->view("web/rozhranie/panel_hlavicka");
             $this->load->view("web/rozhranie/organizator_panel_navigacia");
+            $this->load->view("web/panel/organizator_panel_udalosti", $this->data);
+
+            $this->dialog(site_url('udalosti/vytvorit'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
+            $this->dialog(site_url('udalosti/aktualizuj'),"Aktualizovanie udalosti", "", "aktualizovat-udalost", "udalost_dialog_aktualizuj", "aktulizovat_udalost_formular", "dialog_udalosti");
+            $this->dialog(site_url('udalosti/odstran'),"Odstránenie udalosti", "Naozaj chcete odstrániť udalosť?", "odstranit-udalost", "udalost_dialog_odstranit", "", "dialog_potvrdit");
+
             $this->load->view("web/rozhranie/organizator_panel_pata", $this->data);
         } else {
             redirect("prihlasenie/pristup");
@@ -221,7 +229,7 @@ class Panel extends CI_Controller
                 }
             }
 
-            $this->pridaj_data("zaujmy", $this->Zaujem_model->zoznam());
+            $this->pridaj_data("zaujmy", $this->Zaujem_model->zoznam(0));
             $this->pridaj_data("spravy", $pocet_sprav);
 
             $this->load->view("web/rozhranie/panel_hlavicka");
@@ -231,6 +239,17 @@ class Panel extends CI_Controller
             $this->dialog(site_url('udalosti/vytvorit'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
 
             $this->load->view("web/rozhranie/admin_panel_pata");
+        }else if($this->session->userdata('email_organizatora')){
+
+            $this->pridaj_data("zoznam_zaujmov", $this->Zaujem_model->zoznam($this->Pouzivatel_model->id_hladaneho_pouzivatela($this->session->userdata('email_organizatora'))));
+
+            $this->load->view("web/rozhranie/panel_hlavicka");
+            $this->load->view("web/rozhranie/organizator_panel_navigacia");
+            $this->load->view("web/panel/organizator_panel_zaujmy", $this->data);
+
+            $this->dialog(site_url('udalosti/vytvorit'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
+
+            $this->load->view("web/rozhranie/organizator_panel_pata");
         } else {
             redirect("prihlasenie/pristup");
         }
@@ -258,7 +277,7 @@ class Panel extends CI_Controller
                 }
             }
 
-            $this->pridaj_data("miesta", $this->Miesto_model->zoznam());
+            $this->pridaj_data("miesta", $this->Miesto_model->zoznam(0));
             $this->pridaj_data("spravy", $pocet_sprav);
 
             $this->load->view("web/rozhranie/panel_hlavicka");
@@ -268,6 +287,17 @@ class Panel extends CI_Controller
             $this->dialog(site_url('udalosti/vytvorit'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
 
             $this->load->view("web/rozhranie/admin_panel_pata");
+        }else if($this->session->userdata('email_organizatora')){
+
+            $this->pridaj_data("zoznam_miest", $this->Miesto_model->zoznam($this->Pouzivatel_model->id_hladaneho_pouzivatela($this->session->userdata('email_organizatora'))));
+
+            $this->load->view("web/rozhranie/panel_hlavicka");
+            $this->load->view("web/rozhranie/organizator_panel_navigacia");
+            $this->load->view("web/panel/organizator_panel_miesta", $this->data);
+
+            $this->dialog(site_url('udalosti/vytvorit'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
+
+            $this->load->view("web/rozhranie/organizator_panel_pata");
         } else {
             redirect("prihlasenie/pristup");
         }
@@ -299,12 +329,21 @@ class Panel extends CI_Controller
 
             $this->load->view("web/rozhranie/panel_hlavicka");
             $this->load->view("web/rozhranie/admin_panel_navigacia", $this->data);
-            $this->load->view("web/panel/admin_panel_lokalizacia", $this->data);
+            $this->load->view("web/panel/panel_lokalizacia", $this->data);
 
             $this->dialog(site_url('udalosti/vytvorit'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
 
             $this->load->view("web/rozhranie/admin_panel_pata");
-        } else {
+        }else if($this->session->userdata('email_organizatora')){
+
+            $this->load->view("web/rozhranie/panel_hlavicka");
+            $this->load->view("web/rozhranie/organizator_panel_navigacia");
+            $this->load->view("web/panel/panel_lokalizacia", $this->data);
+
+            $this->dialog(site_url('udalosti/vytvorit'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
+
+            $this->load->view("web/rozhranie/organizator_panel_pata");
+        }else {
             redirect("prihlasenie/pristup");
         }
     }
@@ -396,20 +435,26 @@ class Panel extends CI_Controller
     }
 
     public function ziskaj_data(){
-        if ($this->session->userdata('email_admina')) {
-        if($this->input->post("panel")){
-            $this->load->view("json/json_admin",
-                array(
-                    "cennik" => $this->Cennik_model->pocet(),
-                    "mesiac" => $this->Udalost_model->pocet_udalosti_v_mesiaci(),
-                    "stat" => $this->Udalost_model->udalosti_podla_statu(),
-                    "okres" => $this->Udalost_model->udalosti_podla_okresu(),
-                    "zaujmy" => $this->Zaujem_model->zoznam()));
-        }else{
-            $this->load->view("json/json_admin",
-                array(
-                    "udalosti" => $this->Udalost_model->zoznam(PRIJATE)));
-        }
+        if (($this->session->userdata('email_admina') || ($this->session->userdata('email_organizatora')))) {
+            if($this->input->post("panel")){
+                $this->load->view("json/json_admin",
+                    array(
+                        "cennik" => $this->Cennik_model->pocet(),
+                        "mesiac" => $this->Udalost_model->pocet_udalosti_v_mesiaci(),
+                        "stat" => $this->Udalost_model->udalosti_podla_statu(),
+                        "okres" => $this->Udalost_model->udalosti_podla_okresu(),
+                        "zaujmy" => $this->Zaujem_model->zoznam()));
+            }else{
+                if($this->session->userdata('email_admina')){
+                    $this->load->view("json/json_admin",
+                        array(
+                            "udalosti" => $this->Organizator_model->zoznam(null, PRIJATE)));
+                }else if($this->session->userdata('email_organizatora')){
+                    $this->load->view("json/json_admin",
+                        array(
+                            "udalosti" => $this->Organizator_model->zoznam($this->session->userdata('email_organizatora'), PRIJATE)));
+                }
+            }
         } else {
             redirect("prihlasenie/pristup");
         }

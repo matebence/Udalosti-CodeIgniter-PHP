@@ -107,6 +107,13 @@ $(".cennik_dialog_odstranit").click(function () {
 
 
 
+$(".obrazok_udalosti").eq(1).change(function (){
+    $(".obrazok_udalosti_pozicia").eq(1).append("<input type='hidden' name='zmena_obrazka' value='1'>")
+});
+
+
+
+
 $(".odstranit").click(function () {
     identifikator = parseInt($(this).attr('class').split(" ")[0]);
 });
@@ -156,7 +163,7 @@ function dataFormulara(_this) {
 }
 
 function odpovedServera(data) {
-    var uspech = "uspech";
+    var uspech = "<p style='display: none'>uspech</p>";
 
     if (data.substr(0, uspech.length) == uspech) {
         setTimeout(function () {
@@ -188,7 +195,9 @@ function spracujData(adresa, _this, aktualneUdaje) {
         processData: false,
 
         success: function (data) {
-            if (aktualneUdaje == operacia.VYPLN_FORMULAR) {
+            if(data.length > 5000){
+                location.reload();
+            } else if (aktualneUdaje == operacia.VYPLN_FORMULAR) {
                 naplnPoleExistujucimyUdajmy(data)
             } else if (aktualneUdaje == operacia.VYTVOR_AKTUALIZUJ) {
                 odpovedServera(data);
