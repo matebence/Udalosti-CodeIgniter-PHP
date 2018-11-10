@@ -26,15 +26,33 @@ class Panel extends CI_Controller
     private function panel()
     {
         if ($this->session->userdata('email_admina')) {
-            $this->pridaj_data("email_admina",
-                $this->session->userdata('email_admina'));
+
+            $spravy = $this->Udalost_model->pocet_neprecitanych_udalosti_organizatorov();
+            $pocet_sprav = 0;
+
+            if(isset($spravy[0])){
+                $pocet_sprav += $spravy[0]["Pocet"];
+
+                if($spravy[0]["Pocet"] > 0) {
+                    $this->pridaj_data("udalosti_spravy", $spravy[0]["Pocet"] . "x nové udalosti");
+                }
+            }
+            if(isset($spravy[1])){
+                $pocet_sprav += $spravy[1]["Pocet"];
+
+                if($spravy[1]["Pocet"] > 0){
+                    $this->pridaj_data("organizatory_spravy", $spravy[1]["Pocet"]. "x nové organizátori");
+                }
+            }
+
+            $this->pridaj_data("email_admina", $this->session->userdata('email_admina'));
+            $this->pridaj_data("spravy", $pocet_sprav);
 
             $this->uspesne_prihlasenie();
-
             $this->dlazdice("pocet_pouzivatelov", "pocet_organizatorov", "pocet_administratorov", "pocet_udalosti", "aktivny_pouzivatelia", "registrovali_dnes");
 
             $this->load->view("web/rozhranie/panel_hlavicka");
-            $this->load->view("web/rozhranie/panel_navigacia");
+            $this->load->view("web/rozhranie/panel_navigacia", $this->data);
 
             $this->load->view("web/panel/admin_panel",
                 $this->data);
@@ -50,18 +68,33 @@ class Panel extends CI_Controller
     public function udalosti()
     {
         if ($this->session->userdata('email_admina')) {
-            $this->pridaj_data("nepotvrdene_udalosti",
-                $this->Udalost_model->zoznam(NEPRECITANE));
-            $this->pridaj_data("aktualne_udalosti",
-                $this->Udalost_model->zoznam(PRIJATE));
-            $this->pridaj_data("odmietnute_udalosti",
-                $this->Udalost_model->zoznam(ODMIETNUTE));
+
+            $spravy = $this->Udalost_model->pocet_neprecitanych_udalosti_organizatorov();
+            $pocet_sprav = 0;
+
+            if(isset($spravy[0])){
+                $pocet_sprav += $spravy[0]["Pocet"];
+
+                if($spravy[0]["Pocet"] > 0) {
+                    $this->pridaj_data("udalosti_spravy", $spravy[0]["Pocet"] . "x nové udalosti");
+                }
+            }
+            if(isset($spravy[1])){
+                $pocet_sprav += $spravy[1]["Pocet"];
+
+                if($spravy[1]["Pocet"] > 0){
+                    $this->pridaj_data("organizatory_spravy", $spravy[1]["Pocet"]. "x nové organizátori");
+                }
+            }
+
+            $this->pridaj_data("nepotvrdene_udalosti", $this->Udalost_model->zoznam(NEPRECITANE));
+            $this->pridaj_data("aktualne_udalosti", $this->Udalost_model->zoznam(PRIJATE));
+            $this->pridaj_data("odmietnute_udalosti", $this->Udalost_model->zoznam(ODMIETNUTE));
+            $this->pridaj_data("spravy", $pocet_sprav);
 
             $this->load->view("web/rozhranie/panel_hlavicka");
-            $this->load->view("web/rozhranie/panel_navigacia");
-
-            $this->load->view("web/panel/admin_panel_udalosti",
-                $this->data);
+            $this->load->view("web/rozhranie/panel_navigacia", $this->data);
+            $this->load->view("web/panel/admin_panel_udalosti", $this->data);
 
             $this->dialog(site_url('udalosti/vytvorit'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
             $this->dialog(site_url('udalosti/aktualizuj'),"Aktualizovanie udalosti", "", "aktualizovat-udalost", "udalost_dialog_aktualizuj", "aktulizovat_udalost_formular", "dialog_udalosti");
@@ -78,14 +111,31 @@ class Panel extends CI_Controller
     public function pouzivatelia()
     {
         if ($this->session->userdata('email_admina')) {
-            $this->pridaj_data("zoznam_pouzivatelov",
-                $this->Rola_pouzivatela_model->zoznam_pouzivatelov());
+
+            $spravy = $this->Udalost_model->pocet_neprecitanych_udalosti_organizatorov();
+            $pocet_sprav = 0;
+
+            if(isset($spravy[0])){
+                $pocet_sprav += $spravy[0]["Pocet"];
+
+                if($spravy[0]["Pocet"] > 0) {
+                    $this->pridaj_data("udalosti_spravy", $spravy[0]["Pocet"] . "x nové udalosti");
+                }
+            }
+            if(isset($spravy[1])){
+                $pocet_sprav += $spravy[1]["Pocet"];
+
+                if($spravy[1]["Pocet"] > 0){
+                    $this->pridaj_data("organizatory_spravy", $spravy[1]["Pocet"]. "x nové organizátori");
+                }
+            }
+
+            $this->pridaj_data("zoznam_pouzivatelov", $this->Rola_pouzivatela_model->zoznam_pouzivatelov());
+            $this->pridaj_data("spravy", $pocet_sprav);
 
             $this->load->view("web/rozhranie/panel_hlavicka");
-            $this->load->view("web/rozhranie/panel_navigacia");
-
-            $this->load->view("web/panel/admin_panel_pouzivatelia",
-                $this->data);
+            $this->load->view("web/rozhranie/panel_navigacia", $this->data);
+            $this->load->view("web/panel/admin_panel_pouzivatelia", $this->data);
 
             $this->dialog(site_url('udalosti/vytvorit'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
 
@@ -104,14 +154,31 @@ class Panel extends CI_Controller
     public function cennik()
     {
         if ($this->session->userdata('email_admina')) {
-            $this->pridaj_data("zoznam_cien",
-                $this->Cennik_model->zoznam());
+
+            $spravy = $this->Udalost_model->pocet_neprecitanych_udalosti_organizatorov();
+            $pocet_sprav = 0;
+
+            if(isset($spravy[0])){
+                $pocet_sprav += $spravy[0]["Pocet"];
+
+                if($spravy[0]["Pocet"] > 0) {
+                    $this->pridaj_data("udalosti_spravy", $spravy[0]["Pocet"] . "x nové udalosti");
+                }
+            }
+            if(isset($spravy[1])){
+                $pocet_sprav += $spravy[1]["Pocet"];
+
+                if($spravy[1]["Pocet"] > 0){
+                    $this->pridaj_data("organizatory_spravy", $spravy[1]["Pocet"]. "x nové organizátori");
+                }
+            }
+
+            $this->pridaj_data("zoznam_cien", $this->Cennik_model->zoznam());
+            $this->pridaj_data("spravy", $pocet_sprav);
 
             $this->load->view("web/rozhranie/panel_hlavicka");
-            $this->load->view("web/rozhranie/panel_navigacia");
-
-            $this->load->view("web/panel/admin_panel_cennik",
-                $this->data);
+            $this->load->view("web/rozhranie/panel_navigacia", $this->data);
+            $this->load->view("web/panel/admin_panel_cennik", $this->data);
 
             $this->dialog(site_url('udalosti/vytvorit'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
 
@@ -128,14 +195,31 @@ class Panel extends CI_Controller
     public function zaujmy()
     {
         if ($this->session->userdata('email_admina')) {
-            $this->pridaj_data("zaujmy",
-                $this->Zaujem_model->zoznam());
+
+            $spravy = $this->Udalost_model->pocet_neprecitanych_udalosti_organizatorov();
+            $pocet_sprav = 0;
+
+            if(isset($spravy[0])){
+                $pocet_sprav += $spravy[0]["Pocet"];
+
+                if($spravy[0]["Pocet"] > 0) {
+                    $this->pridaj_data("udalosti_spravy", $spravy[0]["Pocet"] . "x nové udalosti");
+                }
+            }
+            if(isset($spravy[1])){
+                $pocet_sprav += $spravy[1]["Pocet"];
+
+                if($spravy[1]["Pocet"] > 0){
+                    $this->pridaj_data("organizatory_spravy", $spravy[1]["Pocet"]. "x nové organizátori");
+                }
+            }
+
+            $this->pridaj_data("zaujmy", $this->Zaujem_model->zoznam());
+            $this->pridaj_data("spravy", $pocet_sprav);
 
             $this->load->view("web/rozhranie/panel_hlavicka");
-            $this->load->view("web/rozhranie/panel_navigacia");
-
-            $this->load->view("web/panel/admin_panel_zaujmy",
-                $this->data);
+            $this->load->view("web/rozhranie/panel_navigacia", $this->data);
+            $this->load->view("web/panel/admin_panel_zaujmy", $this->data);
 
             $this->dialog(site_url('udalosti/vytvorit'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
 
@@ -148,14 +232,31 @@ class Panel extends CI_Controller
     public function miesta()
     {
         if ($this->session->userdata('email_admina')) {
-            $this->pridaj_data("miesta",
-                $this->Miesto_model->zoznam());
+
+            $spravy = $this->Udalost_model->pocet_neprecitanych_udalosti_organizatorov();
+            $pocet_sprav = 0;
+
+            if(isset($spravy[0])){
+                $pocet_sprav += $spravy[0]["Pocet"];
+
+                if($spravy[0]["Pocet"] > 0) {
+                    $this->pridaj_data("udalosti_spravy", $spravy[0]["Pocet"] . "x nové udalosti");
+                }
+            }
+            if(isset($spravy[1])){
+                $pocet_sprav += $spravy[1]["Pocet"];
+
+                if($spravy[1]["Pocet"] > 0){
+                    $this->pridaj_data("organizatory_spravy", $spravy[1]["Pocet"]. "x nové organizátori");
+                }
+            }
+
+            $this->pridaj_data("miesta", $this->Miesto_model->zoznam());
+            $this->pridaj_data("spravy", $pocet_sprav);
 
             $this->load->view("web/rozhranie/panel_hlavicka");
-            $this->load->view("web/rozhranie/panel_navigacia");
-
-            $this->load->view("web/panel/admin_panel_miesta",
-                $this->data);
+            $this->load->view("web/rozhranie/panel_navigacia", $this->data);
+            $this->load->view("web/panel/admin_panel_miesta", $this->data);
 
             $this->dialog(site_url('udalosti/vytvorit'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
 
@@ -168,11 +269,30 @@ class Panel extends CI_Controller
     public function lokalizacia()
     {
         if ($this->session->userdata('email_admina')) {
-            $this->load->view("web/rozhranie/panel_hlavicka");
-            $this->load->view("web/rozhranie/panel_navigacia");
 
-            $this->load->view("web/panel/admin_panel_lokalizacia",
-                $this->data);
+            $spravy = $this->Udalost_model->pocet_neprecitanych_udalosti_organizatorov();
+            $pocet_sprav = 0;
+
+            if(isset($spravy[0])){
+                $pocet_sprav += $spravy[0]["Pocet"];
+
+                if($spravy[0]["Pocet"] > 0) {
+                    $this->pridaj_data("udalosti_spravy", $spravy[0]["Pocet"] . "x nové udalosti");
+                }
+            }
+            if(isset($spravy[1])){
+                $pocet_sprav += $spravy[1]["Pocet"];
+
+                if($spravy[1]["Pocet"] > 0){
+                    $this->pridaj_data("organizatory_spravy", $spravy[1]["Pocet"]. "x nové organizátori");
+                }
+            }
+
+            $this->pridaj_data("spravy", $pocet_sprav);
+
+            $this->load->view("web/rozhranie/panel_hlavicka");
+            $this->load->view("web/rozhranie/panel_navigacia", $this->data);
+            $this->load->view("web/panel/admin_panel_lokalizacia", $this->data);
 
             $this->dialog(site_url('udalosti/vytvorit'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
 
@@ -185,18 +305,33 @@ class Panel extends CI_Controller
     public function organizatori()
     {
         if ($this->session->userdata('email_admina')) {
-            $this->pridaj_data("nepotvrdene_organizatori",
-                $this->Rola_pouzivatela_model->zoznam_organizatorov($this->session->userdata('email_admina'), NEPRECITANE));
-            $this->pridaj_data("zoznam_organizatorov",
-                $this->Rola_pouzivatela_model->zoznam_organizatorov($this->session->userdata('email_admina'), AKCEPTOVANE));
-            $this->pridaj_data("odmietnute_organizatori",
-                $this->Rola_pouzivatela_model->zoznam_organizatorov($this->session->userdata('email_admina'), BLOKOVANE));
+
+            $spravy = $this->Udalost_model->pocet_neprecitanych_udalosti_organizatorov();
+            $pocet_sprav = 0;
+
+            if(isset($spravy[0])){
+                $pocet_sprav += $spravy[0]["Pocet"];
+
+                if($spravy[0]["Pocet"] > 0) {
+                    $this->pridaj_data("udalosti_spravy", $spravy[0]["Pocet"] . "x nové udalosti");
+                }
+            }
+            if(isset($spravy[1])){
+                $pocet_sprav += $spravy[1]["Pocet"];
+
+                if($spravy[1]["Pocet"] > 0){
+                    $this->pridaj_data("organizatory_spravy", $spravy[1]["Pocet"]. "x nové organizátori");
+                }
+            }
+
+            $this->pridaj_data("nepotvrdene_organizatori", $this->Rola_pouzivatela_model->zoznam_organizatorov($this->session->userdata('email_admina'), NEPRECITANE));
+            $this->pridaj_data("zoznam_organizatorov", $this->Rola_pouzivatela_model->zoznam_organizatorov($this->session->userdata('email_admina'), AKCEPTOVANE));
+            $this->pridaj_data("odmietnute_organizatori", $this->Rola_pouzivatela_model->zoznam_organizatorov($this->session->userdata('email_admina'), BLOKOVANE));
+            $this->pridaj_data("spravy", $pocet_sprav);
 
             $this->load->view("web/rozhranie/panel_hlavicka");
-            $this->load->view("web/rozhranie/panel_navigacia");
-
-            $this->load->view("web/panel/admin_panel_organizatori",
-                $this->data);
+            $this->load->view("web/rozhranie/panel_navigacia", $this->data);
+            $this->load->view("web/panel/admin_panel_organizatori", $this->data);
 
             $this->dialog(site_url('udalosti/vytvorit'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
 
@@ -215,14 +350,31 @@ class Panel extends CI_Controller
     public function administratori()
     {
         if ($this->session->userdata('email_admina')) {
-            $this->pridaj_data("zoznam_administratorov",
-                $this->Rola_pouzivatela_model->zoznam_administratorov($this->session->userdata('email_admina')));
+
+            $spravy = $this->Udalost_model->pocet_neprecitanych_udalosti_organizatorov();
+            $pocet_sprav = 0;
+
+            if(isset($spravy[0])){
+                $pocet_sprav += $spravy[0]["Pocet"];
+
+                if($spravy[0]["Pocet"] > 0) {
+                    $this->pridaj_data("udalosti_spravy", $spravy[0]["Pocet"] . "x nové udalosti");
+                }
+            }
+            if(isset($spravy[1])){
+                $pocet_sprav += $spravy[1]["Pocet"];
+
+                if($spravy[1]["Pocet"] > 0){
+                    $this->pridaj_data("organizatory_spravy", $spravy[1]["Pocet"]. "x nové organizátori");
+                }
+            }
+
+            $this->pridaj_data("zoznam_administratorov", $this->Rola_pouzivatela_model->zoznam_administratorov($this->session->userdata('email_admina')));
+            $this->pridaj_data("spravy", $pocet_sprav);
 
             $this->load->view("web/rozhranie/panel_hlavicka");
-            $this->load->view("web/rozhranie/panel_navigacia");
-
-            $this->load->view("web/panel/admin_panel_administratori",
-                $this->data);
+            $this->load->view("web/rozhranie/panel_navigacia", $this->data);
+            $this->load->view("web/panel/admin_panel_administratori", $this->data);
 
             $this->dialog(site_url('udalosti/vytvorit'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
 

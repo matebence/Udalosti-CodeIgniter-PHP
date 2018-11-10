@@ -46,7 +46,7 @@ class Pouzivatelia extends CI_Controller
                     $admin = false;
                     $oznam = "";
 
-                    if(strcmp($this->input->post('rola'), "web") == 0){
+                    if(strcmp($this->input->post('rola'), "admin") == 0){
                         $pouzivatel = $this->Rola_pouzivatela_model->aktualizuj($id_pouzivatel, array("idRola" => 1));
                         $admin = true;
                     }else if(strcmp($this->input->post('rola'), "pouzivatel") == 0){
@@ -72,7 +72,7 @@ class Pouzivatelia extends CI_Controller
                             array(
                                 "ikona" => "pe-7s-attention",
                                 "typ" => "warning",
-                                "oznam" => "Pri aktualizovaní používateľa došlo chybe!"
+                                "oznam" => "Pri aktualizovaní došlo chybe!"
                             ));
                     }
                 }
@@ -100,14 +100,14 @@ class Pouzivatelia extends CI_Controller
                     array(
                         "ikona" => "pe-7s-check",
                         "typ" => "success",
-                        "oznam" => "Používateľ akceptovaný"
+                        "oznam" => "Akceptovanie prebehlo úspešne"
                     ));
             } else {
                 $this->load->view("web/notifikacia/notifikacia_oznam.php",
                     array(
                         "ikona" => "pe-7s-attention",
                         "typ" => "warning",
-                        "oznam" => "Pri akceptovaní používateľa došlo chybe"
+                        "oznam" => "Pri akceptovaní došlo chybe"
                     ));
             }
         } else {
@@ -127,14 +127,14 @@ class Pouzivatelia extends CI_Controller
                     array(
                         "ikona" => "pe-7s-check",
                         "typ" => "success",
-                        "oznam" => "Používateľ blokovaný"
+                        "oznam" => "Blokovanie prebehlo úspešne"
                     ));
             } else {
                 $this->load->view("web/notifikacia/notifikacia_oznam.php",
                     array(
                         "ikona" => "pe-7s-attention",
                         "typ" => "warning",
-                        "oznam" => "Pri blokovaní používateľa došlo chybe"
+                        "oznam" => "Pri blokovaní došlo chybe"
                     ));
             }
         } else {

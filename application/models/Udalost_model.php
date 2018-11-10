@@ -113,6 +113,32 @@ class Udalost_model extends CI_model
         return 0;
     }
 
+    public function pocet_neprecitanych_udalosti_organizatorov(){
+        $this->db->select('COUNT(*) AS Pocet');
+        $this->db->from('udalost');
+        $this->db->where("stav", NEPRECITANE);
+
+        $udalosti = $this->db->get_compiled_select();
+
+        $this->db->select('COUNT(*) AS Pocet');
+        $this->db->from('rola_pouzivatela');
+        $this->db->join('pouzivatel', 'pouzivatel.idPouzivatel = rola_pouzivatela.idPouzivatel');
+        $this->db->join('rola', 'rola.idRola = rola_pouzivatela.idRola');
+        $this->db->where('nazov', ORGANIZATOR);
+        $this->db->where("stav", NEPRECITANE);
+
+        $pouzivatelia = $this->db->get_compiled_select();
+
+        $this->db->select('Pocet');
+        $this->db->from("($udalosti UNION $pouzivatelia) as oznamy");
+
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return 0;
+    }
+
     public function informacia($id_udalost){
         $this->db->select('*');
         $this->db->from('udalost');

@@ -85,6 +85,38 @@
                     <a class="navbar-brand" href="<?php echo site_url("panel"); ?>">Adminer</a>
                 </div>
                 <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-globe"></i>
+                                <b class="caret hidden-sm hidden-xs"></b>
+                                <?php
+                                if ($spravy > 0) {
+                                    echo "<span class='notification hidden-sm hidden-xs'>".$spravy."</span>";
+                                    echo "<p class='hidden-lg hidden-md'>";
+                                    echo $spravy." Nových správ";
+                                    echo "<b class='caret'></b>";
+                                    echo "</p>";
+                                }
+                                ?>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <?php
+                                    if($spravy >0){
+                                        if(isset($udalosti_spravy)){
+                                            echo "<li><a href='".site_url("panel/udalosti")."'>".$udalosti_spravy."</a></li>";
+                                        }
+                                        if(isset($organizatory_spravy)){
+                                            echo "<li><a href='".site_url("panel/organizatori")."'>".$organizatory_spravy."</a></li>";
+                                        }
+                                    }else{
+                                        echo "<li><a href='#'>Žiadné správy</a></li>";
+                                    }
+                                ?>
+                            </ul>
+                        </li>
+                    </ul>
+
                     <ul class="nav navbar-nav navbar-right">
                         <li>
                             <a href="#" class="nova_udalost" id="vytvorit_udalost" data-toggle='modal' data-target='#nova-udalost'>
