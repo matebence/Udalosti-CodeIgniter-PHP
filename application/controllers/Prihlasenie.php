@@ -94,6 +94,32 @@ class Prihlasenie extends CI_Controller
         }
     }
 
+    public function odhlasit()
+    {
+        $this->session->sess_destroy();
+        $this->Pouzivatel_model->aktualizuj($this->input->post('email'), null, array("token" => ""));
+
+        $this->session->set_flashdata('uspech', 'Odhlásenie prebehlo úspešne.');
+
+        $this->load->view("json/json_vystup_pridanie_dat");
+    }
+
+    public function pristup()
+    {
+        $this->session->sess_destroy();
+        $this->index();
+    }
+
+    private function spravnost_hesla($heslo_vstup, $heslo_db)
+    {
+        $hash = crypt($heslo_vstup, $heslo_db);
+        if ($hash === $heslo_db) {
+            return $heslo_db;
+        } else {
+            return null;
+        }
+    }
+
     private function validacia_vstupnych_udajov()
     {
         $this->form_validation->set_rules('email',
@@ -110,32 +136,6 @@ class Prihlasenie extends CI_Controller
         } else {
             return false;
         }
-    }
-
-    private function spravnost_hesla($heslo_vstup, $heslo_db)
-    {
-        $hash = crypt($heslo_vstup, $heslo_db);
-        if ($hash === $heslo_db) {
-            return $heslo_db;
-        } else {
-            return null;
-        }
-    }
-
-    public function pristup()
-    {
-        $this->session->sess_destroy();
-        $this->index();
-    }
-
-    public function odhlasit()
-    {
-        $this->session->sess_destroy();
-        $this->Pouzivatel_model->aktualizuj($this->input->post('email'), null, array("token" => ""));
-
-        $this->session->set_flashdata('uspech', 'Odhlásenie prebehlo úspešne.');
-
-        $this->load->view("json/json_vystup_pridanie_dat");
     }
 }
 

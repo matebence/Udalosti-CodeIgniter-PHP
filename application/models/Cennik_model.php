@@ -29,6 +29,17 @@ class Cennik_model extends CI_model
         return $odstran ? true : false;
     }
 
+    public function zoznam()
+    {
+        $this->db->select('*');
+        $this->db->from('cennik');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return 0;
+    }
+
     public function informacia($id_cennik)
     {
         $this->db->select('vaha, suma');
@@ -39,17 +50,6 @@ class Cennik_model extends CI_model
             return $query->result_array()[0];
         }
         return null;
-    }
-
-    public function zoznam()
-    {
-        $this->db->select('*');
-        $this->db->from('cennik');
-        $query = $this->db->get();
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
-        }
-        return 0;
     }
 
     public function pocet()

@@ -55,35 +55,6 @@ class Rola_pouzivatela_model extends CI_model
         }
     }
 
-    public function pocet($typ_roli)
-    {
-        $this->db->select('meno');
-        $this->db->from('rola_pouzivatela');
-        $this->db->join('pouzivatel', 'pouzivatel.idPouzivatel = rola_pouzivatela.idPouzivatel');
-        $this->db->join('rola', 'rola.idRola = rola_pouzivatela.idRola');
-        $this->db->where('stav', AKCEPTOVANE);
-        $this->db->where('nazov', $typ_roli);
-        $query = $this->db->get();
-        if ($query->num_rows() > 0) {
-            return $query->num_rows();
-        }
-        return 0;
-    }
-
-    public function informacia($id_pouzivatel)
-    {
-        $this->db->select('meno, email, nazov');
-        $this->db->from('rola_pouzivatela');
-        $this->db->join('pouzivatel', 'pouzivatel.idPouzivatel = rola_pouzivatela.idPouzivatel');
-        $this->db->join('rola', 'rola.idRola = rola_pouzivatela.idRola');
-        $this->db->where("pouzivatel.idPouzivatel", $id_pouzivatel);
-        $query = $this->db->get();
-        if ($query->num_rows() > 0) {
-            return $query->result_array()[0];
-        }
-        return null;
-    }
-
     public function zoznam_pouzivatelov()
     {
         $this->db->select('*');
@@ -130,6 +101,35 @@ class Rola_pouzivatela_model extends CI_model
             return $query->result_array();
         }
         return null;
+    }
+
+    public function informacia($id_pouzivatel)
+    {
+        $this->db->select('meno, email, nazov');
+        $this->db->from('rola_pouzivatela');
+        $this->db->join('pouzivatel', 'pouzivatel.idPouzivatel = rola_pouzivatela.idPouzivatel');
+        $this->db->join('rola', 'rola.idRola = rola_pouzivatela.idRola');
+        $this->db->where("pouzivatel.idPouzivatel", $id_pouzivatel);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result_array()[0];
+        }
+        return null;
+    }
+
+    public function pocet($typ_roli)
+    {
+        $this->db->select('meno');
+        $this->db->from('rola_pouzivatela');
+        $this->db->join('pouzivatel', 'pouzivatel.idPouzivatel = rola_pouzivatela.idPouzivatel');
+        $this->db->join('rola', 'rola.idRola = rola_pouzivatela.idRola');
+        $this->db->where('stav', AKCEPTOVANE);
+        $this->db->where('nazov', $typ_roli);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->num_rows();
+        }
+        return 0;
     }
 }
 

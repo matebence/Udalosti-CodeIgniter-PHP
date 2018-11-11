@@ -62,6 +62,18 @@ class Pouzivatel_model extends CI_model
         }
     }
 
+    public function aktivny_pouzivatelia()
+    {
+        $this->db->select('*');
+        $this->db->from('pouzivatel');
+        $this->db->where("LENGTH(token) > 1");
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->num_rows();
+        }
+        return 0;
+    }
+
     public function id_hladaneho_pouzivatela($email)
     {
         $this->db->select('idPouzivatel');
@@ -75,29 +87,6 @@ class Pouzivatel_model extends CI_model
         }
     }
 
-    public function nove_heslo_pouzivatela($email, $nove_heslo)
-    {
-        if (!empty($nove_heslo)) {
-            $this->db->where('md5(email)', $email);
-            $this->db->update('pouzivatel', $nove_heslo);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public function aktivny_pouzivatelia()
-    {
-        $this->db->select('*');
-        $this->db->from('pouzivatel');
-        $this->db->where("LENGTH(token) > 1");
-        $query = $this->db->get();
-        if ($query->num_rows() > 0) {
-            return $query->num_rows();
-        }
-        return 0;
-    }
-
     public function registrovali_dnes()
     {
         $this->db->select('meno');
@@ -108,6 +97,17 @@ class Pouzivatel_model extends CI_model
             return $query->num_rows();
         }
         return 0;
+    }
+
+    public function nove_heslo_pouzivatela($email, $nove_heslo)
+    {
+        if (!empty($nove_heslo)) {
+            $this->db->where('md5(email)', $email);
+            $this->db->update('pouzivatel', $nove_heslo);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 

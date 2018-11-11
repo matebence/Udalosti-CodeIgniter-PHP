@@ -42,27 +42,19 @@ class Zaujmy extends CI_Controller
         }
     }
 
-    private function validacia_vstupnych_udajov()
+    public function odstran()
     {
-        $this->form_validation->set_rules('email',
-            'Email používateľa',
-            'required|valid_email',
-            array('required' => 'Email je povinné pole!',
-                'valid_email' => 'Nesprávny formát emailovej adresi!'));
-        $this->form_validation->set_rules('token',
-            'Token používateľa',
-            'required|min_length[32]',
-            array('required' => 'Token je povinné pole!',
-                'min_length' => 'Nesprávny token!'));
-        $this->form_validation->set_rules('idUdalost',
-            'Identifikátor udalosti',
-            'required|numeric',
-            array('required' => 'idUdalosť je povinné pole!',
-                'numeric' => 'idUdalosť musí byť číslo!'));
-        if ($this->form_validation->run() == true) {
-            return true;
+        if (((strcmp($this->input->post("token"), $this->Pouzivatel_model->token($this->input->post("email"))) == 0) && ($this->input->post("email")))) {
+            $stav = $this->Zaujem_model->odstran($this->input->post("idUdalost"), $this->Pouzivatel_model->id_hladaneho_pouzivatela($this->input->post("email")));
+
+            if ($stav) {
+                $this->session->set_flashdata('uspech', 'Udalosť bola odstránená zo záujmov');
+            } else {
+                $this->session->set_flashdata('chyba', 'Chyba pri odstráneni udalosti zo záujmov');
+            }
+            $this->load->view("json/json_vystup_odpoved");
         } else {
-            return false;
+            redirect("prihlasenie/pristup");
         }
     }
 
@@ -90,19 +82,27 @@ class Zaujmy extends CI_Controller
         }
     }
 
-    public function odstran()
+    private function validacia_vstupnych_udajov()
     {
-        if (((strcmp($this->input->post("token"), $this->Pouzivatel_model->token($this->input->post("email"))) == 0) && ($this->input->post("email")))) {
-            $stav = $this->Zaujem_model->odstran($this->input->post("idUdalost"), $this->Pouzivatel_model->id_hladaneho_pouzivatela($this->input->post("email")));
-
-            if ($stav) {
-                $this->session->set_flashdata('uspech', 'Udalosť bola odstránená zo záujmov');
-            } else {
-                $this->session->set_flashdata('chyba', 'Chyba pri odstráneni udalosti zo záujmov');
-            }
-            $this->load->view("json/json_vystup_odpoved");
+        $this->form_validation->set_rules('email',
+            'Email používateľa',
+            'required|valid_email',
+            array('required' => 'Email je povinné pole!',
+                'valid_email' => 'Nesprávny formát emailovej adresi!'));
+        $this->form_validation->set_rules('token',
+            'Token používateľa',
+            'required|min_length[32]',
+            array('required' => 'Token je povinné pole!',
+                'min_length' => 'Nesprávny token!'));
+        $this->form_validation->set_rules('idUdalost',
+            'Identifikátor udalosti',
+            'required|numeric',
+            array('required' => 'idUdalosť je povinné pole!',
+                'numeric' => 'idUdalosť musí byť číslo!'));
+        if ($this->form_validation->run() == true) {
+            return true;
         } else {
-            redirect("prihlasenie/pristup");
+            return false;
         }
     }
 }

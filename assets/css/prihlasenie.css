@@ -1,33 +1,12 @@
 @import 'pismena.css';
 
-html {
-    background: url(../img/udalosti_pozadie.jpg) no-repeat fixed center;
-    background-size: cover;
-}
-
-body {
-    display: table-cell;
-    width: 100vw;
-    height: 100vh;
-    vertical-align: middle;
-    text-align: center;
-    background-color: inherit;
-}
-
 p, a, li, ul, pre {
     font-family: RalewayRegular, serif;
 }
 
-footer {
-    width: 100vw;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    background: rgba(0, 0, 0, 0.61);
-}
-
-.eq {
-    display: none;
+html {
+    background: url(../img/udalosti_pozadie.jpg) no-repeat fixed center;
+    background-size: cover;
 }
 
 body.telo {
@@ -39,6 +18,52 @@ body.telo {
 .telo {
     margin-top: 35px;
     margin-bottom: 35px;
+}
+
+.telo > #oddelovac {
+    color: white;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.telo > #zabudnute_heslo, .telo > #registracia {
+    font-family: RalewayRegular, serif;
+    color: white;
+}
+
+.telo > #zabudnute_heslo:hover, .telo > #registracia:hover {
+    color: #0397d6;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+body {
+    display: table-cell;
+    width: 100vw;
+    height: 100vh;
+    vertical-align: middle;
+    text-align: center;
+    background-color: inherit;
+}
+
+footer {
+    width: 100vw;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.61);
+}
+
+footer.pata > p {
+    font-family: RalewayRegular, serif;
+    text-align: right;
+    color: white;
+    margin: 0;
+    padding: 5px;
+}
+
+.eq {
+    display: none;
 }
 
 .logo {
@@ -98,6 +123,15 @@ input[type="submit"]:hover {
     background: #037cb0;
 }
 
+.formular_prihlasenie, .formular_registracia, .formular_zabudnute_heslo, .formular_obnovenie_hesla {
+    width: 320px;
+    margin: 0 auto;
+}
+
+#email_zabudnute, #poslat, #registracia_meno, #registracia_email, #registracia_heslo, #registracia_potvrd, #registrovat {
+    display: none;
+}
+
 ::placeholder {
     color: white;
 }
@@ -110,39 +144,6 @@ input[type="submit"]:hover {
     color: white;
 }
 
-.formular_prihlasenie, .formular_registracia, .formular_zabudnute_heslo, .formular_obnovenie_hesla {
-    width: 320px;
-    margin: 0 auto;
-}
-
-.telo > #oddelovac {
-    color: white;
-    margin-left: 5px;
-    margin-right: 5px;
-}
-
-.telo > #zabudnute_heslo, .telo > #registracia {
-    font-family: RalewayRegular, serif;
-    color: white;
-}
-
-.telo > #zabudnute_heslo:hover, .telo > #registracia:hover {
-    color: #0397d6;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-#email_zabudnute, #poslat, #registracia_meno, #registracia_email, #registracia_heslo, #registracia_potvrd, #registrovat {
-    display: none;
-}
-
-footer.pata > p {
-    font-family: RalewayRegular, serif;
-    text-align: right;
-    color: white;
-    margin: 0;
-    padding: 5px;
-}
 
 @media (max-width: 540px) {
     html {

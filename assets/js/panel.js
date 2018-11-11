@@ -6,6 +6,9 @@ $(document).ready(function () {
     zvolenySubor();
 });
 
+
+
+
 $(".nova_udalost").click(function () {
     zoznamMiestOkresov("#mesto-nova-udalost", "#mesta-obce", "mesta_obce.json");
     zoznamMiestOkresov("#mesto-aktualizovat-udalost", "#mesta-obce", "mesta_obce.json");
@@ -13,6 +16,9 @@ $(".nova_udalost").click(function () {
     zoznamMiestOkresov("#okres-nova-udalost", "#okresy", "okresy.json");
     zoznamMiestOkresov("#okres-aktualizovat-udalost", "#okresy", "okresy.json");
 });
+
+
+
 
 function navigacia() {
     var adresa = window.location.href;

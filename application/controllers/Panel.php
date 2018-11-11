@@ -443,7 +443,7 @@ class Panel extends CI_Controller
                         "mesiac" => $this->Udalost_model->pocet_udalosti_v_mesiaci(),
                         "stat" => $this->Udalost_model->udalosti_podla_statu(),
                         "okres" => $this->Udalost_model->udalosti_podla_okresu(),
-                        "zaujmy" => $this->Zaujem_model->zoznam()));
+                        "zaujmy" => $this->Zaujem_model->zoznam(0)));
             }else{
                 if($this->session->userdata('email_admina')){
                     $this->load->view("json/json_admin",

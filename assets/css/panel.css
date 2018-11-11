@@ -22,6 +22,19 @@ h1, h2, h3, h4, h5, h6 {
     border: none;
 }
 
+td, th {
+    font-family: RalewayRegular, serif;
+    text-align: center;
+}
+
+th.cennik-operacie, .cennik-operacie {
+    text-align: right;
+}
+
+.zaujmy-miesta {
+    text-align: center;
+}
+
 .editovat {
     color: #2071a1;
 }
@@ -54,25 +67,12 @@ h1, h2, h3, h4, h5, h6 {
     cursor: pointer;
 }
 
-.fa {
-    display: inline;
-}
-
 .editovat, .odstranit, .prijat, .akceptovat, .odmietnut, .blokovat {
     margin-left: 5px;
 }
 
-td, th {
-    font-family: RalewayRegular, serif;
-    text-align: center;
-}
-
-th.cennik-operacie, .cennik-operacie {
-    text-align: right;
-}
-
-.zaujmy-miesta {
-    text-align: center;
+.fa {
+    display: inline;
 }
 
 a.nahlad {

@@ -18,27 +18,6 @@ class Cennik extends CI_Controller
         $this->zoznam();
     }
 
-    private function zoznam()
-    {
-        if (($this->session->userdata('email_admina')) || ($this->session->userdata('email_organizatora'))) {
-            $this->load->view("json/json_admin", array(
-                "zoznam_cien" => $this->Cennik_model->zoznam()
-            ));
-        }else {
-            redirect("prihlasenie/pristup");
-        }
-    }
-
-    public function informacia($id_cennik){
-        if ($this->session->userdata('email_admina')) {
-            $this->load->view("json/json_admin", array(
-                "aktualny_cennik" => $this->Cennik_model->informacia($id_cennik)
-            ));
-        }else {
-            redirect("prihlasenie/pristup");
-        }
-    }
-
     public function vytvorit()
     {
         if ($this->session->userdata('email_admina')) {
@@ -132,6 +111,27 @@ class Cennik extends CI_Controller
                         "oznam" => "Pri odstránení cenníka došlo chybe"
                     ));
             }
+        }else {
+            redirect("prihlasenie/pristup");
+        }
+    }
+
+    private function zoznam()
+    {
+        if (($this->session->userdata('email_admina')) || ($this->session->userdata('email_organizatora'))) {
+            $this->load->view("json/json_admin", array(
+                "zoznam_cien" => $this->Cennik_model->zoznam()
+            ));
+        }else {
+            redirect("prihlasenie/pristup");
+        }
+    }
+
+    public function informacia($id_cennik){
+        if ($this->session->userdata('email_admina')) {
+            $this->load->view("json/json_admin", array(
+                "aktualny_cennik" => $this->Cennik_model->informacia($id_cennik)
+            ));
         }else {
             redirect("prihlasenie/pristup");
         }

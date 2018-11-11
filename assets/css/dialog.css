@@ -1,5 +1,9 @@
 @import 'pismena.css';
 
+#datum, #cas {
+    position: relative;
+}
+
 .alert-danger, .alert-success {
     width: 23vw;
     margin: 0 auto;
@@ -15,16 +19,12 @@
     color: #d7d7d7;
 }
 
-.input-group {
-    width: 85%;
-}
-
-#datum, #cas {
-    position: relative;
-}
-
 .input-group-append {
     position: absolute;
+}
+
+.input-group {
+    width: 85%;
 }
 
 .modal-body {
@@ -35,6 +35,10 @@
 .modal {
     background: rgba(000, 000, 000, 0.8);
     min-height: 1000000px;
+}
+
+.upload {
+    width: auto;
 }
 
 @media (max-width: 991px) {
@@ -75,8 +79,4 @@
     .alert-danger {
         width: 80vw;
     }
-}
-
-.upload {
-    width: auto;
 }

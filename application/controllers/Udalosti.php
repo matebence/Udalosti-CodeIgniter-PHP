@@ -275,17 +275,6 @@ class Udalosti extends CI_Controller
         }
     }
 
-    public function informacia($id_udalost)
-    {
-        if ((($this->session->userdata('email_admina')) || ($this->session->userdata('email_organizatora'))) && ($id_udalost)) {
-            $this->load->view("json/json_admin", array(
-                "aktualne_udaje_udalosti" => $this->Udalost_model->informacia($id_udalost)
-            ));
-        } else {
-            redirect("prihlasenie/pristup");
-        }
-    }
-
     private function zoznam()
     {
         if ((strcmp($this->input->post("token"), $this->Pouzivatel_model->token($this->input->post("email"))) == 0 && ($this->input->post("email")))) {
@@ -310,6 +299,64 @@ class Udalosti extends CI_Controller
         } else {
             redirect("prihlasenie/pristup");
         }
+    }
+
+    public function informacia($id_udalost)
+    {
+        if ((($this->session->userdata('email_admina')) || ($this->session->userdata('email_organizatora'))) && ($id_udalost)) {
+            $this->load->view("json/json_admin", array(
+                "aktualne_udaje_udalosti" => $this->Udalost_model->informacia($id_udalost)
+            ));
+        } else {
+            redirect("prihlasenie/pristup");
+        }
+    }
+
+    private function obrazok()
+    {
+        $config['upload_path'] = './uploads';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size'] = 8000;
+        $config['max_width'] = 2000;
+        $config['max_height'] = 1500;
+        $config['overwrite'] = FALSE;
+        $config['encrypt_name'] = TRUE;
+
+        $this->upload->initialize($config);
+        if (!$this->upload->do_upload('obrazok')) {
+            return "chyba";
+        } else {
+            $meta_data_obrazka = $this->upload->data();
+            return $this->velkost_obrazka($meta_data_obrazka, 850, 400);
+        }
+    }
+
+    private function velkost_obrazka($data, $sirka, $vyska)
+    {
+        $nazov_obrazka = $data['file_name'];
+
+        $config['image_library'] = 'gd2';
+        $config['source_image'] = './uploads/' . $nazov_obrazka;
+        $config['create_thumb'] = FALSE;
+        $config['maintain_ratio'] = TRUE;
+        $config['width'] = $sirka;
+        $config['height'] = $vyska;
+
+        $this->image_lib->clear();
+        $this->image_lib->initialize($config);
+        $this->image_lib->resize();
+
+        return 'uploads/' . $nazov_obrazka;
+    }
+
+    private function odstran_obrazok_a_miesto($id_udalost, $miesto)
+    {
+        $udalost = $this->Udalost_model->informacia($id_udalost);
+
+        if ($miesto) {
+            $this->Miesto_model->odstran($udalost["idMiesto"]);
+        }
+        unlink($udalost["obrazok"]);
     }
 
     private function validacia_vstupnych_udajov()
@@ -367,53 +414,6 @@ class Udalosti extends CI_Controller
         } else {
             return false;
         }
-    }
-
-    private function obrazok()
-    {
-        $config['upload_path'] = './uploads';
-        $config['allowed_types'] = 'gif|jpg|png';
-        $config['max_size'] = 8000;
-        $config['max_width'] = 2000;
-        $config['max_height'] = 1500;
-        $config['overwrite'] = FALSE;
-        $config['encrypt_name'] = TRUE;
-
-        $this->upload->initialize($config);
-        if (!$this->upload->do_upload('obrazok')) {
-            return "chyba";
-        } else {
-            $meta_data_obrazka = $this->upload->data();
-            return $this->velkost_obrazka($meta_data_obrazka, 850, 400);
-        }
-    }
-
-    private function velkost_obrazka($data, $sirka, $vyska)
-    {
-        $nazov_obrazka = $data['file_name'];
-
-        $config['image_library'] = 'gd2';
-        $config['source_image'] = './uploads/' . $nazov_obrazka;
-        $config['create_thumb'] = FALSE;
-        $config['maintain_ratio'] = TRUE;
-        $config['width'] = $sirka;
-        $config['height'] = $vyska;
-
-        $this->image_lib->clear();
-        $this->image_lib->initialize($config);
-        $this->image_lib->resize();
-
-        return 'uploads/' . $nazov_obrazka;
-    }
-
-    private function odstran_obrazok_a_miesto($id_udalost, $miesto)
-    {
-        $udalost = $this->Udalost_model->informacia($id_udalost);
-
-        if ($miesto) {
-            $this->Miesto_model->odstran($udalost["idMiesto"]);
-        }
-        unlink($udalost["obrazok"]);
     }
 }
 

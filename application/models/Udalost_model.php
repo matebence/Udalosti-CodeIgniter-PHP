@@ -89,6 +89,47 @@ class Udalost_model extends CI_model
         return $query->result_array();
     }
 
+    public function informacia($id_udalost)
+    {
+        $this->db->select('*');
+        $this->db->from('udalost');
+        $this->db->join('miesto', 'udalost.idMiesto = miesto.idMiesto');
+        $this->db->where("idUdalost", $id_udalost);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result_array()[0];
+        }
+        return null;
+    }
+
+    public function udalosti_podla_okresu()
+    {
+        $this->db->select('okres, COUNT(*) AS Pocet');
+        $this->db->from('udalost');
+        $this->db->join('miesto', 'udalost.idMiesto = miesto.idMiesto');
+        $this->db->where("stav", PRIJATE);
+        $this->db->group_by('okres');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return 0;
+    }
+
+    public function udalosti_podla_statu()
+    {
+        $this->db->select('stat, COUNT(*) AS Pocet');
+        $this->db->from('udalost');
+        $this->db->join('miesto', 'udalost.idMiesto = miesto.idMiesto');
+        $this->db->where("stav", PRIJATE);
+        $this->db->group_by('stat');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return 0;
+    }
+
     public function pocet_udalosti()
     {
         $this->db->select('nazov');
@@ -135,47 +176,6 @@ class Udalost_model extends CI_model
         $this->db->select('Pocet, idOznamy');
         $this->db->from("($udalosti UNION $pouzivatelia) as oznamy");
 
-        $query = $this->db->get();
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
-        }
-        return 0;
-    }
-
-    public function informacia($id_udalost)
-    {
-        $this->db->select('*');
-        $this->db->from('udalost');
-        $this->db->join('miesto', 'udalost.idMiesto = miesto.idMiesto');
-        $this->db->where("idUdalost", $id_udalost);
-        $query = $this->db->get();
-        if ($query->num_rows() > 0) {
-            return $query->result_array()[0];
-        }
-        return null;
-    }
-
-    public function udalosti_podla_okresu()
-    {
-        $this->db->select('okres, COUNT(*) AS Pocet');
-        $this->db->from('udalost');
-        $this->db->join('miesto', 'udalost.idMiesto = miesto.idMiesto');
-        $this->db->where("stav", PRIJATE);
-        $this->db->group_by('okres');
-        $query = $this->db->get();
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
-        }
-        return 0;
-    }
-
-    public function udalosti_podla_statu()
-    {
-        $this->db->select('stat, COUNT(*) AS Pocet');
-        $this->db->from('udalost');
-        $this->db->join('miesto', 'udalost.idMiesto = miesto.idMiesto');
-        $this->db->where("stav", PRIJATE);
-        $this->db->group_by('stat');
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             return $query->result_array();

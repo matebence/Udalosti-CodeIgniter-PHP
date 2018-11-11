@@ -181,9 +181,6 @@ function naplnCennik(data) {
     }
 }
 
-
-
-
 function spracujData(adresa, _this, aktualneUdaje) {
     $.ajax({
         url: window.location.origin + adresa,
@@ -207,9 +204,6 @@ function spracujData(adresa, _this, aktualneUdaje) {
         }
     });
 }
-
-
-
 
 function naplnPoleExistujucimyUdajmy(data) {
     if (castStranky == "udalosti") {

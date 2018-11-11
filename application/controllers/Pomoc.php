@@ -60,30 +60,6 @@ class Pomoc extends CI_Controller
         }
     }
 
-    private function posli_email($emailova_adresa, $predmet, $obsah_emailu)
-    {
-        $this->email->from(NOREPLY_EMAIL_ADDRESS, FIRMA);
-        $this->email->to($emailova_adresa);
-        $this->email->subject($predmet);
-        $this->email->message($obsah_emailu);
-
-        if ($this->email->send()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public function formular_pre_zabudnute_heslo()
-    {
-        if (($this->input->get("kluc")) && ($this->input->get("hodnota"))) {
-            $data['email_hash'] = $this->input->get("kluc");
-            $this->load->view("web/rozhranie/prihlasenie_hlavicka");
-            $this->load->view("web/prihlasenie/prihlasenie_zabudnute_heslo", $data);
-            $this->load->view("web/rozhranie/prihlasenie_pata");
-        }
-    }
-
     public function obnovenie_hesla()
     {
         if ($this->input->post("nove_heslo")) {
@@ -115,6 +91,30 @@ class Pomoc extends CI_Controller
             } else {
                 $this->load->view("web/dialog/dialog_oznam");
             }
+        }
+    }
+
+    public function formular_pre_zabudnute_heslo()
+    {
+        if (($this->input->get("kluc")) && ($this->input->get("hodnota"))) {
+            $data['email_hash'] = $this->input->get("kluc");
+            $this->load->view("web/rozhranie/prihlasenie_hlavicka");
+            $this->load->view("web/prihlasenie/prihlasenie_zabudnute_heslo", $data);
+            $this->load->view("web/rozhranie/prihlasenie_pata");
+        }
+    }
+
+    private function posli_email($emailova_adresa, $predmet, $obsah_emailu)
+    {
+        $this->email->from(NOREPLY_EMAIL_ADDRESS, FIRMA);
+        $this->email->to($emailova_adresa);
+        $this->email->subject($predmet);
+        $this->email->message($obsah_emailu);
+
+        if ($this->email->send()) {
+            return true;
+        } else {
+            return false;
         }
     }
 

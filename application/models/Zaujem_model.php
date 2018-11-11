@@ -29,18 +29,6 @@ class Zaujem_model extends CI_model
         return $odstran ? true : false;
     }
 
-    public function potvrdenie_zaujmu($id_udalost, $email)
-    {
-        $this->db->select("udalost.idUdalost, obrazok, nazov, DATE_FORMAT(datum,'%m') as den, MONTHNAME(datum) as mesiac, DATE_FORMAT(cas, '%H:%i') as cas, mesto, ulica, vstupenka, COUNT(zaujem.idUdalost) as zaujemcovia, IF(SUM(pouzivatel.email = '" . $email . "') > 0, 1, 0) as zaujem");
-        $this->db->from('zaujem');
-        $this->db->join('udalost', 'udalost.idUdalost = zaujem.idUdalost', 'right');
-        $this->db->join('pouzivatel', 'pouzivatel.idPouzivatel = zaujem.idPouzivatel', 'left');
-        $this->db->join('miesto', 'udalost.idMiesto = miesto.idMiesto');
-        $this->db->where("udalost.idUdalost", $id_udalost);
-        $query = $this->db->get();
-        return $query->result_array();
-    }
-
     public function zoznam($id_pouzivatel)
     {
         $this->db->select('nazov, mesto, datum, COUNT(*) as pocet');
@@ -79,6 +67,18 @@ class Zaujem_model extends CI_model
         $this->db->from("($pomocna_tabulka) as zaujmy");
         $this->db->where("zaujem", true);
 
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function potvrdenie_zaujmu($id_udalost, $email)
+    {
+        $this->db->select("udalost.idUdalost, obrazok, nazov, DATE_FORMAT(datum,'%m') as den, MONTHNAME(datum) as mesiac, DATE_FORMAT(cas, '%H:%i') as cas, mesto, ulica, vstupenka, COUNT(zaujem.idUdalost) as zaujemcovia, IF(SUM(pouzivatel.email = '" . $email . "') > 0, 1, 0) as zaujem");
+        $this->db->from('zaujem');
+        $this->db->join('udalost', 'udalost.idUdalost = zaujem.idUdalost', 'right');
+        $this->db->join('pouzivatel', 'pouzivatel.idPouzivatel = zaujem.idPouzivatel', 'left');
+        $this->db->join('miesto', 'udalost.idMiesto = miesto.idMiesto');
+        $this->db->where("udalost.idUdalost", $id_udalost);
         $query = $this->db->get();
         return $query->result_array();
     }

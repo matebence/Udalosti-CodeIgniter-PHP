@@ -13,17 +13,6 @@ class Pouzivatelia extends CI_Controller
         $this->load->model('Rola_pouzivatela_model');
     }
 
-    public function informacia($id_pouzivatel)
-    {
-        if (($this->session->userdata('email_admina')) && ($id_pouzivatel)) {
-            $this->load->view("json/json_admin", array(
-                "aktualny_pouzivatel" => $this->Rola_pouzivatela_model->informacia($id_pouzivatel)
-            ));
-        } else {
-            redirect("prihlasenie/pristup");
-        }
-    }
-
     public function aktualizuj($id_pouzivatel)
     {
         if (($this->session->userdata('email_admina')) && ($id_pouzivatel)) {
@@ -183,6 +172,34 @@ class Pouzivatelia extends CI_Controller
         }
     }
 
+    public function informacia($id_pouzivatel)
+    {
+        if (($this->session->userdata('email_admina')) && ($id_pouzivatel)) {
+            $this->load->view("json/json_admin", array(
+                "aktualny_pouzivatel" => $this->Rola_pouzivatela_model->informacia($id_pouzivatel)
+            ));
+        } else {
+            redirect("prihlasenie/pristup");
+        }
+    }
+
+    private function sifrovanie_hesla($password)
+    {
+        $salt = $this->retazec(22);
+        $spolu = BLOWFISH_FORMAT . $salt;
+        $hash = crypt($password, $spolu);
+        return $hash;
+    }
+
+    private function retazec($dlzka_vystupu)
+    {
+        $unique_random_retazec = md5(uniqid(mt_rand(), true));
+        $base64_retazec = base64_encode($unique_random_retazec);
+        $base64_retazec_bez_plus = str_replace('+', '.', $base64_retazec);
+        $salt = substr($base64_retazec_bez_plus, 0, $dlzka_vystupu);
+        return $salt;
+    }
+
     private function validacia_vstupnych_udajov($nove_heslo)
     {
         $this->form_validation->set_rules('meno',
@@ -219,23 +236,6 @@ class Pouzivatelia extends CI_Controller
         } else {
             return false;
         }
-    }
-
-    private function sifrovanie_hesla($password)
-    {
-        $salt = $this->retazec(22);
-        $spolu = BLOWFISH_FORMAT . $salt;
-        $hash = crypt($password, $spolu);
-        return $hash;
-    }
-
-    private function retazec($dlzka_vystupu)
-    {
-        $unique_random_retazec = md5(uniqid(mt_rand(), true));
-        $base64_retazec = base64_encode($unique_random_retazec);
-        $base64_retazec_bez_plus = str_replace('+', '.', $base64_retazec);
-        $salt = substr($base64_retazec_bez_plus, 0, $dlzka_vystupu);
-        return $salt;
     }
 }
 
