@@ -356,7 +356,10 @@ class Udalosti extends CI_Controller
         if ($miesto) {
             $this->Miesto_model->odstran($udalost["idMiesto"]);
         }
-        unlink($udalost["obrazok"]);
+
+        if(file_exists($udalost["obrazok"])){
+            unlink($udalost["obrazok"]);
+        }
     }
 
     private function validacia_vstupnych_udajov()
