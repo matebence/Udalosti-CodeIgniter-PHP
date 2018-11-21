@@ -30,7 +30,6 @@
                                 <th>Mesto</th>
                                 <th>Stav</th>
                                 <th>Vytvorený</th>
-                                <th>Editovať</th>
                                 <th>Odstrániť</th>
                             </tr>
                             </thead>
@@ -53,7 +52,6 @@
                                             echo "<td>" . $udalost['mesto'] . "</td>";
                                             echo "<td>" . $udalost['stav'] . "</td>";
                                             echo "<td>" . $udalost['timestamp'] . "</td>";
-                                            echo "<td><i class='".$udalost['idUdalost']." fa fa-edit editovat' data-toggle='modal' data-target='#aktualizovat-udalost'></i></i></td>";
                                             echo "<td><i class='".$udalost['idUdalost']." fa fa-trash odstranit' data-toggle='modal' data-target='#odstranit-udalost'></i></i></td>";
                                         echo "</tr>";
                                     }

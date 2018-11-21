@@ -2,7 +2,8 @@
 <html lang="sk">
 <head>
     <meta charset="utf-8" />
-    <title>Udalosti Adminer</title>
+
+    <title>Udalosti</title>
 
     <link rel="apple-touch-icon" sizes="57x57" href="<?php echo base_url() . "assets/img/favicon/"; ?>apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="<?php echo base_url() . "assets/img/favicon/"; ?>apple-icon-60x60.png">
