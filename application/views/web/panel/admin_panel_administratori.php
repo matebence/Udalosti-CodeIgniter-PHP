@@ -22,7 +22,8 @@
                                     <th>Meno</th>
                                     <th>Heslo</th>
                                     <th>Vytvorený</th>
-                                    <th>Operácie</th>
+                                    <th>Editovať</th>
+                                    <th>Odstrániť</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -36,10 +37,8 @@
                                             echo "<td>".$admin['meno']."</td>";
                                             echo "<td>".$admin['heslo']."</td>";
                                             echo "<td>".$admin['timestamp']."</td>";
-                                            echo "<td>
-                                                    <i class='".$admin['idPouzivatel']." fa fa-edit editovat' data-toggle='modal' data-target='#aktualizovat-pouzivatel'></i>
-                                                    <i class='".$admin['idPouzivatel']." fa fa-trash odstranit' data-toggle='modal' data-target='#odstranit-pouzivatel'></i>
-                                                  </td>";
+                                            echo "<td><i class='".$admin['idPouzivatel']." fa fa-edit editovat' data-toggle='modal' data-target='#aktualizovat-pouzivatel'></i></td>";
+                                            echo "<td><i class='".$admin['idPouzivatel']." fa fa-trash odstranit' data-toggle='modal' data-target='#odstranit-pouzivatel'></i></td>";
                                         echo "</tr>";
                                     }
                                 }

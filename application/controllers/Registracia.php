@@ -110,7 +110,7 @@ class Registracia extends CI_Controller
                                 $this->load->view("web/dialog/dialog_oznam");
                             }
                         } else {
-                            $this->Rola_pouzivatela_model->vytvorit($id_noveho_pouzivatela, $this->Rola_model->rola(POUZIVATEL));
+                            $pouzivatel = $this->Rola_pouzivatela_model->vytvorit($id_noveho_pouzivatela, $this->Rola_model->rola(POUZIVATEL));
 
                             if ($pouzivatel) {
                                 $this->session->set_flashdata('uspech', 'Registrácia prebehla úspšne.');

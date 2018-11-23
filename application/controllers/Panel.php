@@ -144,7 +144,9 @@ class Panel extends CI_Controller
                 }
             }
 
-            $this->pridaj_data("zoznam_pouzivatelov", $this->Rola_pouzivatela_model->zoznam_pouzivatelov());
+            $this->pridaj_data("zoznam_akceptovanych_pouzivatelov", $this->Rola_pouzivatela_model->zoznam_pouzivatelov(AKCEPTOVANE));
+            $this->pridaj_data("zoznam_blokovanych_pouzivatelov", $this->Rola_pouzivatela_model->zoznam_pouzivatelov(BLOKOVANE));
+
             $this->pridaj_data("spravy", $pocet_sprav);
 
             $this->load->view("web/rozhranie/panel_hlavicka");

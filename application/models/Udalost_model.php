@@ -40,7 +40,7 @@ class Udalost_model extends CI_model
             $this->db->where("stat", $stat);
         }
         $this->db->where("datum >= CURDATE()");
-        $this->db->where("stav", PRIJATE);
+        $this->db->where("udalost.stav", PRIJATE);
         $this->db->group_by("udalost.idUdalost");
         $this->db->order_by("datum", "asc");
         $this->db->order_by("udalost.timestamp", "desc");
@@ -77,7 +77,7 @@ class Udalost_model extends CI_model
             $this->db->or_where("mesto ='" . $mesto . "')");
         }
         $this->db->where("(datum >= CURDATE())");
-        $this->db->where("stav", PRIJATE);
+        $this->db->where("udalost.stav", PRIJATE);
         $this->db->group_by("udalost.idUdalost");
         $this->db->order_by("datum", "asc");
         $this->db->order_by("udalost.timestamp", "desc");

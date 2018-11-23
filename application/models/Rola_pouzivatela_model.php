@@ -55,7 +55,7 @@ class Rola_pouzivatela_model extends CI_model
         }
     }
 
-    public function zoznam_pouzivatelov()
+    public function zoznam_pouzivatelov($stav)
     {
         $this->db->select('*');
         $this->db->from('rola_pouzivatela');
@@ -63,6 +63,7 @@ class Rola_pouzivatela_model extends CI_model
         $this->db->join('rola', 'rola.idRola = rola_pouzivatela.idRola');
         $this->db->order_by("pouzivatel.timestamp", "desc");
         $this->db->where('nazov', POUZIVATEL);
+        $this->db->where('pouzivatel.stav', $stav);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             return $query->result_array();
