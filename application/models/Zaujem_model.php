@@ -56,7 +56,6 @@ class Zaujem_model extends CI_model
         $this->db->from('zaujem');
         $this->db->join('udalost', 'udalost.idUdalost = zaujem.idUdalost', 'right');
         $this->db->join('pouzivatel', 'pouzivatel.idPouzivatel = zaujem.idPouzivatel', 'left');
-        $this->db->join('cennik', 'udalost.idCennik = cennik.idCennik');
         $this->db->join('miesto', 'udalost.idMiesto = miesto.idMiesto');
         $this->db->group_by("udalost.idUdalost");
         $this->db->order_by("datum", "asc");

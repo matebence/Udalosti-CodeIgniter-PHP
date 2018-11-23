@@ -35,7 +35,6 @@ class Organizator_model extends CI_model
         $this->db->from('organizator');
         $this->db->join('pouzivatel', 'organizator.idPouzivatel = pouzivatel.idPouzivatel');
         $this->db->join('udalost', 'organizator.idUdalost = udalost.idUdalost');
-        $this->db->join('cennik', 'udalost.idCennik = cennik.idCennik');
         $this->db->join('miesto', 'udalost.idMiesto = miesto.idMiesto');
 
         if ($stav != null) {

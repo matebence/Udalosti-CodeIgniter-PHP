@@ -14,7 +14,6 @@ class Panel extends CI_Controller
         $this->load->model('Rola_pouzivatela_model');
         $this->load->model('Udalost_model');
         $this->load->model('Organizator_model');
-        $this->load->model('Cennik_model');
         $this->load->model('Zaujem_model');
         $this->load->model('Miesto_model');
     }
@@ -159,47 +158,6 @@ class Panel extends CI_Controller
             $this->dialog(site_url('pouzivatelia/odstran'),"Odstránenie používateľa", "Naozaj chcete odstrániť používateľa?", "odstranit-pouzivatel", "pouzivatel_dialog_odstranit", "", "dialog_potvrdit");
             $this->dialog(site_url('pouzivatelia/akceptovat'),"Akceptovanie používateľa", "Naozaj chcete akceptovať používateľa?", "akceptovat-pouzivatel", "pouzivatel_dialog_akceptovat", "", "dialog_potvrdit");
             $this->dialog(site_url('pouzivatelia/blokovat'),"Blokovanie používateľa", "Naozaj chcete blokovať používateľa?", "blokovat-pouzivatel", "pouzivatel_dialog_blokovat", "", "dialog_potvrdit");
-
-            $this->load->view("web/rozhranie/admin_panel_pata");
-        } else {
-            redirect("prihlasenie/pristup");
-        }
-    }
-
-    public function cennik()
-    {
-        if ($this->session->userdata('email_admina')) {
-
-            $spravy = $this->Udalost_model->pocet_sprav();
-            $pocet_sprav = 0;
-
-            if(isset($spravy[0])){
-                $pocet_sprav += $spravy[0]["Pocet"];
-
-                if($spravy[0]["Pocet"] > 0) {
-                    $this->pridaj_data("udalosti_spravy", $spravy[0]["Pocet"] . "x nové udalosti");
-                }
-            }
-            if(isset($spravy[1])){
-                $pocet_sprav += $spravy[1]["Pocet"];
-
-                if($spravy[1]["Pocet"] > 0){
-                    $this->pridaj_data("organizatory_spravy", $spravy[1]["Pocet"]. "x nové organizátori");
-                }
-            }
-
-            $this->pridaj_data("zoznam_cien", $this->Cennik_model->zoznam());
-            $this->pridaj_data("spravy", $pocet_sprav);
-
-            $this->load->view("web/rozhranie/panel_hlavicka");
-            $this->load->view("web/rozhranie/admin_panel_navigacia", $this->data);
-            $this->load->view("web/panel/admin_panel_cennik", $this->data);
-
-            $this->dialog(site_url('udalosti/vytvorit'),"Nová udalosť", "", "nova-udalost", "udalost_dialog_vytvorit", "nova_udalost_formular", "dialog_udalosti");
-
-            $this->dialog(site_url('cennik/vytvorit'),"Nový cenník", "", "novy-cennik", "cennik_dialog_vytvorit", "novy_cennik_formular", "dialog_cennik");
-            $this->dialog(site_url('cennik/odstran'),"Odstránenie cenníka", "Naozaj chcete odstrániť cenník?", "odstranit-cennik", "cennik_dialog_odstranit", "", "dialog_potvrdit");
-            $this->dialog(site_url('cennik/aktualizuj'),"Aktualizovať cenník", "", "aktualizovat-cennik", "cennik_dialog_aktualizuj", "aktulizovat_cennik_formular", "dialog_cennik");
 
             $this->load->view("web/rozhranie/admin_panel_pata");
         } else {
@@ -439,7 +397,6 @@ class Panel extends CI_Controller
             if($this->input->post("panel")){
                 $this->load->view("json/json_admin",
                     array(
-                        "cennik" => $this->Cennik_model->pocet(),
                         "mesiac" => $this->Udalost_model->pocet_udalosti_v_mesiaci(),
                         "stat" => $this->Udalost_model->udalosti_podla_statu(),
                         "okres" => $this->Udalost_model->udalosti_podla_okresu(),

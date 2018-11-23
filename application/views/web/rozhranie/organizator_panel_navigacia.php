@@ -20,7 +20,7 @@
                 <li>
                     <a href="<?php echo site_url("panel/zaujmy"); ?>">
                         <i class="pe-7s-like"></i>
-                        <p>záujmy používatelov</p>
+                        <p>záujmy</p>
                     </a>
                     <hr>
                 </li>

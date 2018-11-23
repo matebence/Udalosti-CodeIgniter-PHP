@@ -108,16 +108,14 @@
         </div>
 
         <div class="row">
-            <div class="col-md-4">
-                <div class="card">
-
+            <div class="col-md-6">
+                <div class="card ">
                     <div class="header">
-                        <h4 class="title">Cenník</h4>
-                        <p class="category">Podla počtu cenníka</p>
+                        <h4 class="title">Okres</h4>
+                        <p class="category">Počet udalostí podľa okresov</p>
                     </div>
                     <div class="content grafUdalosti">
-                        <div id="kolacovyGraf" class="ct-chart ct-perfect-fourth"></div>
-
+                        <div id="stlpcovyGrafOkres" class="ct-chart"></div>
                         <div class="footer">
                             <hr>
                             <div class="stats">
@@ -127,14 +125,14 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="card ">
                     <div class="header">
-                        <h4 class="title">Záujmy</h4>
-                        <p class="category">Podľa záujmu používatelov</p>
+                        <h4 class="title">Štát</h4>
+                        <p class="category">Počet udalostí podľa štátov</p>
                     </div>
                     <div class="content grafUdalosti">
-                        <div id="stlpcovyGrafZaujmy" class="ct-chart"></div>
+                        <div id="stlpcovyGrafStat" class="ct-chart"></div>
 
                         <div class="footer">
                             <hr>
@@ -185,31 +183,14 @@
         </div>
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="card ">
                     <div class="header">
-                        <h4 class="title">Okres</h4>
-                        <p class="category">Počet udalostí podľa okresov</p>
+                        <h4 class="title">Záujmy</h4>
+                        <p class="category">Podľa záujmu používatelov</p>
                     </div>
                     <div class="content grafUdalosti">
-                        <div id="stlpcovyGrafOkres" class="ct-chart"></div>
-                        <div class="footer">
-                            <hr>
-                            <div class="stats">
-                                <i class="fa fa-history"></i> Aktualizované práve teraz
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card ">
-                    <div class="header">
-                        <h4 class="title">Štát</h4>
-                        <p class="category">Počet udalostí podľa štátov</p>
-                    </div>
-                    <div class="content grafUdalosti">
-                        <div id="stlpcovyGrafStat" class="ct-chart"></div>
+                        <div id="stlpcovyGrafZaujmy" class="ct-chart"></div>
 
                         <div class="footer">
                             <hr>

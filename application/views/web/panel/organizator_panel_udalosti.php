@@ -18,7 +18,6 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Cenník</th>
                                 <th>Obrázok</th>
                                 <th>Názov</th>
                                 <th>Dátum</th>
@@ -40,7 +39,6 @@
                                     foreach ($zoznam_udalosti as $udalost) {
                                         echo "<tr>";
                                             echo "<td>" . $udalost['idUdalost'] . "</td>";
-                                            echo "<td>" . $udalost['suma'] . " €</td>";
                                             echo "<td><a class='nahlad' href='".base_url().$udalost['obrazok']."' target='_blank'>".$udalost['obrazok']."<img alt='Obrázok udalosti' src='".base_url().$udalost['obrazok']."' /></a></td>";
                                             echo "<td>" . $udalost['nazov'] . "</td>";
                                             echo "<td>" . $udalost['datum'] . "</td>";

@@ -18,7 +18,6 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Cenník</th>
                                     <th>Obrázok</th>
                                     <th>Názov</th>
                                     <th>Dátum</th>
@@ -32,7 +31,6 @@
                                     <th>Vytvorený</th>
                                     <th>Prijať</th>
                                     <th>Odmietnúť</th>
-                                    <th>Odstrániť</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -42,7 +40,6 @@
                                     foreach ($nepotvrdene_udalosti as $udalost) {
                                         echo "<tr>";
                                             echo "<td>" . $udalost['idUdalost'] . "</td>";
-                                            echo "<td>" . $udalost['suma'] . " €</td>";
                                             echo "<td><a class='nahlad' href='".base_url().$udalost['obrazok']."' target='_blank'>".$udalost['obrazok']."<img alt='Obrázok udalosti' src='".base_url().$udalost['obrazok']."' /></a></td>";
                                             echo "<td>" . $udalost['nazov'] . "</td>";
                                             echo "<td>" . $udalost['datum'] . "</td>";
@@ -56,7 +53,6 @@
                                             echo "<td>" . $udalost['timestamp'] . "</td>";
                                             echo "<td><i class='".$udalost['idUdalost']." fa fa-check-circle prijat' data-toggle='modal' data-target='#prijat-udalost'></i></td>";
                                             echo "<td><i class='".$udalost['idUdalost']." fa fa-minus-circle odmietnut' data-toggle='modal' data-target='#odmietnut-udalost'></i></td>";
-                                            echo "<td><i class='".$udalost['idUdalost']." fa fa-trash odstranit' data-toggle='modal' data-target='#odstranit-udalost'></i></i></td>";
                                         echo "</tr>";
                                     }
                                 }
@@ -83,7 +79,6 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Cenník</th>
                                 <th>Obrázok</th>
                                 <th>Názov</th>
                                 <th>Dátum</th>
@@ -95,7 +90,6 @@
                                 <th>Mesto</th>
                                 <th>Stav</th>
                                 <th>Vytvorený</th>
-                                <th>Prijať</th>
                                 <th>Odmietnúť</th>
                                 <th>Editovať</th>
                                 <th>Odstrániť</th>
@@ -108,7 +102,6 @@
                                     foreach ($aktualne_udalosti as $udalost) {
                                         echo "<tr>";
                                             echo "<td>" . $udalost['idUdalost'] . "</td>";
-                                            echo "<td>" . $udalost['suma'] . " €</td>";
                                             echo "<td><a class='nahlad' href='".base_url().$udalost['obrazok']."' target='_blank'>".$udalost['obrazok']."<img alt='Obrázok udalosti' src='".base_url().$udalost['obrazok']."' /></a></td>";
                                             echo "<td>" . $udalost['nazov'] . "</td>";
                                             echo "<td>" . $udalost['datum'] . "</td>";
@@ -120,7 +113,6 @@
                                             echo "<td>" . $udalost['mesto'] . "</td>";
                                             echo "<td>" . $udalost['stav'] . "</td>";
                                             echo "<td>" . $udalost['timestamp'] . "</td>";
-                                            echo "<td><i class='".$udalost['idUdalost']." fa fa-check-circle prijat' data-toggle='modal' data-target='#prijat-udalost'></i></td>";
                                             echo "<td><i class='".$udalost['idUdalost']." fa fa-minus-circle odmietnut' data-toggle='modal' data-target='#odmietnut-udalost'></i></td>";
                                             echo "<td><i class='".$udalost['idUdalost']." fa fa-edit editovat' data-toggle='modal' data-target='#aktualizovat-udalost'></i></i></td>";
                                             echo "<td><i class='".$udalost['idUdalost']." fa fa-trash odstranit' data-toggle='modal' data-target='#odstranit-udalost'></i></i></td>";
@@ -150,7 +142,6 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Cenník</th>
                                 <th>Obrázok</th>
                                 <th>Názov</th>
                                 <th>Dátum</th>
@@ -173,7 +164,6 @@
                                     foreach ($odmietnute_udalosti as $udalost) {
                                         echo "<tr>";
                                             echo "<td>" . $udalost['idUdalost'] . "</td>";
-                                            echo "<td>" . $udalost['suma'] . " €</td>";
                                             echo "<td><a class='nahlad' href='".base_url().$udalost['obrazok']."' target='_blank'>".$udalost['obrazok']."<img alt='Obrázok udalosti' src='".base_url().$udalost['obrazok']."' /></a></td>";
                                             echo "<td>" . $udalost['nazov'] . "</td>";
                                             echo "<td>" . $udalost['datum'] . "</td>";

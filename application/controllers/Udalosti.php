@@ -45,7 +45,6 @@ class Udalosti extends CI_Controller
                     );
 
                     $nova_udalost = array(
-                        "idCennik" => $this->input->post("cennik"),
                         "idMiesto" => $this->Miesto_model->vytvorit($miesto_udalosti),
                         "obrazok" => $obrazok,
                         "nazov" => $this->input->post("nazov"),
@@ -130,7 +129,6 @@ class Udalosti extends CI_Controller
 
                 if ($aktualne_miesto) {
                     $udalost = array(
-                        "idCennik" => $this->input->post("cennik"),
                         "idMiesto" => $id_miesto,
                         "nazov" => $this->input->post("nazov"),
                         "datum" => $this->input->post("datum"),
@@ -364,11 +362,6 @@ class Udalosti extends CI_Controller
 
     private function validacia_vstupnych_udajov()
     {
-        $this->form_validation->set_rules('cennik',
-            'Váha danej udalosti podľa cenníka',
-            'required|numeric',
-            array('required' => 'Cenník nebol vybratí',
-                'numeric' => 'Nesprávny formát cenníka!'));
         $this->form_validation->set_rules('stat',
             'Štát kde sa udalosť koná',
             'required|min_length[3]|max_length[20]',
@@ -401,16 +394,19 @@ class Udalosti extends CI_Controller
                 'max_length' => 'Nesprávny formát názvu!'));
         $this->form_validation->set_rules('datum',
             'Dátum kedy sa udalosť koná',
-            'required',
-            array('required' => 'Dátum nie je vyplnené'));
+            'required|callback_validaciaDatumu',
+            array('required' => 'Dátum nie je vyplnený',
+                  'validaciaDatumu' => "Nesprávny formát dátumu!"));
         $this->form_validation->set_rules('cas',
             'Čas kedy sa udalosť koná',
-            'required',
-            array('required' => 'Čas nie je vyplnené'));
+            'required|callback_validaciaCasu',
+            array('required' => 'Čas nie je vyplnený',
+                  'validaciaCasu' => "Nesprávny formát času!"));
         $this->form_validation->set_rules('vstupenka',
             'Cena vstupenky na udalosť',
-            'required',
-            array('required' => 'Cena vstupenky nebola zadaná'));
+            'required|is_natural',
+            array('required' => 'Cena vstupenky nebola zadaná',
+                  'is_natural' => 'Cena vstupenky musí byť čislo'));
 
         if ($this->form_validation->run() == true) {
             return true;
@@ -418,6 +414,21 @@ class Udalosti extends CI_Controller
             return false;
         }
     }
-}
 
+    function validaciaDatumu($datum) {
+        if (preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",$datum)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function validaciaCasu($cas) {
+        if (preg_match("/^(([0-1][0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?)$/", $cas)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
 ?>

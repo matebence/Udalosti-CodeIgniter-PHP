@@ -13,14 +13,7 @@
                             <div class="content">
                                 <form id="<?php if(isset($formular)){echo $formular;}?>" action="<?php if(isset($adresa)){echo $adresa;}?>" method="post" enctype="multipart/form-data">
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Cenník</label>
-                                                <select id="cennik-<?php if(isset($identifikator)){echo $identifikator;}?>" name="cennik" class="form-control">
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Názov</label>
                                                 <input type="text" id="nazov-<?php if(isset($identifikator)){echo $identifikator;}?>" name="nazov" class="form-control" placeholder="Názov">
@@ -70,11 +63,11 @@
                                         <div class="col-sm-6">
                                             <div class="form-group dateTimePicker">
                                                 <label>Dátum</label>
-                                                <input id="datum-<?php if(isset($identifikator)){echo $identifikator;}?>" type="text" name="datum" class="form-control" placeholder="Dátum">
+                                                <input id="datum-<?php if(isset($identifikator)){echo $identifikator;}?>" readonly type="text" name="datum" class="form-control" placeholder="Dátum">
                                                 <script>
                                                     $('#datum-<?php if(isset($identifikator)){echo $identifikator;}?>').datepicker({
                                                         uiLibrary: 'bootstrap4',
-                                                        format: 'yyyy/mm/dd'
+                                                        format: 'yyyy-mm-dd'
                                                     });
                                                 </script>
                                             </div>
@@ -82,7 +75,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group dateTimePicker">
                                                 <label>Čas</label>
-                                                <input id="cas-<?php if(isset($identifikator)){echo $identifikator;}?>" type="text" name="cas" class="form-control" placeholder="Čas">
+                                                <input id="cas-<?php if(isset($identifikator)){echo $identifikator;}?>" readonly type="text" name="cas" class="form-control" placeholder="Čas">
                                                 <script>
                                                     $('#cas-<?php if(isset($identifikator)){echo $identifikator;}?>').timepicker({
                                                         uiLibrary: 'bootstrap4'
@@ -102,7 +95,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Vstupenka</label>
-                                                <input type="text" id="vstupenka-<?php if(isset($identifikator)){echo $identifikator;}?>" name="vstupenka" class="form-control" placeholder="Cena vstupenky">
+                                                <input type="number" id="vstupenka-<?php if(isset($identifikator)){echo $identifikator;}?>" name="vstupenka" class="form-control" placeholder="Cena vstupenky">
                                             </div>
                                         </div>
                                     </div>

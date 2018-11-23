@@ -13,7 +13,6 @@ $(document).ready(function () {
             if (data.length > 5000) {
                 location.reload();
             } else if (udaje.length != 0) {
-                kolacovyGraf(udaje);
                 stlpcovyGrafOkres(udaje);
                 stlpcovyGrafStat(udaje);
                 ciarovyGraf(udaje);
@@ -25,52 +24,9 @@ $(document).ready(function () {
     });
 });
 
-function kolacovyGraf(udaje) {
-    if (udaje.cennik == undefined) {
-        $(".grafUdalosti").eq(0).html("<p>Databazá cien je prázdna</p>");
-    }
-
-    var spolu = 0;
-    var pocet = new Array(udaje.cennik.length);
-    var percenta = new Array(udaje.cennik.length);
-
-    for (i = 0; i < udaje.cennik.length; i++) {
-        pocet[i] = udaje.cennik[i].Pocet;
-        spolu += parseInt(udaje.cennik[i].Pocet);
-    }
-
-    for (i = 0; i < udaje.cennik.length; i++) {
-        percenta[i] = (parseInt(udaje.cennik[i].Pocet) / spolu) * 100;
-        percenta[i] = Math.floor(percenta[i]) + "%"
-    }
-
-    var nastavenia = {
-        series: [
-            [25, 30, 20, 25]
-        ]
-    };
-
-    var preferencie = {
-        donut: true,
-        donutWidth: 40,
-        startAngle: 0,
-        total: 100,
-        showLabel: false,
-        axisX: {
-            showGrid: false
-        }
-    };
-
-    Chartist.Pie('#kolacovyGraf', nastavenia, preferencie);
-    Chartist.Pie('#kolacovyGraf', {
-        labels: percenta,
-        series: pocet
-    });
-}
-
 function stlpcovyGrafOkres(udaje) {
     if (udaje.okres == undefined) {
-        $(".grafUdalosti").eq(3).html("<p>Databazá udalostí je prázdna</p>");
+        $(".grafUdalosti").eq(0).html("<p>Databazá udalostí je prázdna</p>");
     }
 
     var pocet = new Array(udaje.okres.length);
@@ -107,7 +63,7 @@ function stlpcovyGrafOkres(udaje) {
 
 function stlpcovyGrafStat(udaje) {
     if (udaje.stat == undefined) {
-        $(".grafUdalosti").eq(4).html("<p>Databazá udalostí je prázdna</p>");
+        $(".grafUdalosti").eq(1).html("<p>Databazá udalostí je prázdna</p>");
     }
 
     var pocet = new Array(udaje.stat.length);
@@ -144,7 +100,7 @@ function stlpcovyGrafStat(udaje) {
 
 function stlpcovyGrafZaujmy(udaje) {
     if (udaje.zaujmy == undefined) {
-        $(".grafUdalosti").eq(1).html("<p>Databazá záujmov je prázdna</p>");
+        $(".grafUdalosti").eq(3).html("<p>Databazá záujmov je prázdna</p>");
     }
 
     var pocet = new Array(udaje.zaujmy.length);

@@ -1,13 +1,9 @@
-var operacia = {"VYTVOR_AKTUALIZUJ": 1, "VYPLN_FORMULAR": 2, "ZISKAJ_CENNIK": 3};
+var operacia = {"VYTVOR_AKTUALIZUJ": 1, "VYPLN_FORMULAR": 2};
 var identifikator = 0;
 var castStranky = "";
 
 
 
-
-$(document).ready(function () {
-    spracujData("/udalosti/index.php/cennik/", null, operacia.ZISKAJ_CENNIK);
-});
 
 $(".zatvorit").click(function () {
     $("#dialog").fadeOut()
@@ -82,31 +78,6 @@ $(".udalost_dialog_odmietnut").click(function () {
 
 
 
-$("#novy_cennik_formular").on('submit', (function (e) {
-    e.preventDefault();
-    spracujData("/udalosti/index.php/cennik/vytvorit", this, operacia.VYTVOR_AKTUALIZUJ);
-}));
-
-$("#cennik_dialog_vytvorit").click(function () {
-    $("#novy_cennik_formular").trigger("submit");
-});
-
-$("#aktulizovat_cennik_formular").on('submit', (function (e) {
-    e.preventDefault();
-    spracujData("/udalosti/index.php/cennik/aktualizuj/" + identifikator, this, operacia.VYTVOR_AKTUALIZUJ);
-}));
-
-$("#cennik_dialog_aktualizuj").click(function () {
-    $("#aktulizovat_cennik_formular").trigger("submit");
-});
-
-$(".cennik_dialog_odstranit").click(function () {
-    spracujData("/udalosti/index.php/cennik/odstran/" + identifikator, null, operacia.VYTVOR_AKTUALIZUJ);
-});
-
-
-
-
 $(".obrazok_udalosti").eq(1).change(function (){
     $(".obrazok_udalosti_pozicia").eq(1).append("<input type='hidden' name='zmena_obrazka' value='1'>")
 });
@@ -144,8 +115,6 @@ $(".editovat").click(function () {
         spracujData("/udalosti/index.php/udalosti/informacia/" + identifikator, null, operacia.VYPLN_FORMULAR);
     } else if ((castStranky == "administratori") || (castStranky == "organizatori") || (castStranky == "pouzivatelia")) {
         spracujData("/udalosti/index.php/pouzivatelia/informacia/" + identifikator, null, operacia.VYPLN_FORMULAR);
-    } else if(castStranky == "cennik"){
-        spracujData("/udalosti/index.php/cennik/informacia/" + identifikator, null, operacia.VYPLN_FORMULAR);
     }
 });
 
@@ -174,13 +143,6 @@ function odpovedServera(data) {
     $(".modal").append(data);
 }
 
-function naplnCennik(data) {
-    for (var i = 0; i < data.zoznam_cien.length; i++) {
-        $("#cennik-aktualizovat-udalost").append("<option value='"+data.zoznam_cien[i].idCennik+"'>"+data.zoznam_cien[i].suma+" €</option>");
-        $("#cennik-nova-udalost").append("<option value='"+data.zoznam_cien[i].idCennik+"'>"+data.zoznam_cien[i].suma+" €</option>");
-    }
-}
-
 function spracujData(adresa, _this, aktualneUdaje) {
     $.ajax({
         url: window.location.origin + adresa,
@@ -198,8 +160,6 @@ function spracujData(adresa, _this, aktualneUdaje) {
                 naplnPoleExistujucimyUdajmy(data)
             } else if (aktualneUdaje == operacia.VYTVOR_AKTUALIZUJ) {
                 odpovedServera(data);
-            } else if (aktualneUdaje == operacia.ZISKAJ_CENNIK) {
-                naplnCennik(data)
             }
         }
     });
@@ -209,7 +169,6 @@ function naplnPoleExistujucimyUdajmy(data) {
     if (castStranky == "udalosti") {
         var udalost = data.udaje_udalosti;
 
-        $("#cennik-aktualizovat-udalost").val(udalost.idCennik);
         $("#nazov-aktualizovat-udalost").val(udalost.nazov);
         $("#obrazok_udalosti-aktualizovat-udalost").val(udalost.obrazok);
         $("#datum-aktualizovat-udalost").val(udalost.datum);
@@ -227,10 +186,5 @@ function naplnPoleExistujucimyUdajmy(data) {
         $("#email-aktualizovat-pouzivatel").val(pouzivatel.email);
         $("#rola-aktualizovat-pouzivatel").val(pouzivatel.nazov);
 
-    } else if (castStranky == "cennik"){
-        var cennik = data.udaje_cennika;
-
-        $("#vaha-aktualizovat-cennik").val(cennik.vaha);
-        $("#suma-aktualizovat-cennik").val(cennik.suma);
     }
 }

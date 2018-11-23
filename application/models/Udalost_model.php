@@ -35,7 +35,6 @@ class Udalost_model extends CI_model
         $this->db->from('zaujem');
         $this->db->join('udalost', 'udalost.idUdalost = zaujem.idUdalost', 'right');
         $this->db->join('pouzivatel', 'pouzivatel.idPouzivatel = zaujem.idPouzivatel', 'left');
-        $this->db->join('cennik', 'udalost.idCennik = cennik.idCennik');
         $this->db->join('miesto', 'udalost.idMiesto = miesto.idMiesto');
         if ($stat != null) {
             $this->db->where("stat", $stat);
@@ -44,7 +43,6 @@ class Udalost_model extends CI_model
         $this->db->where("stav", PRIJATE);
         $this->db->group_by("udalost.idUdalost");
         $this->db->order_by("datum", "asc");
-        $this->db->order_by("vaha", "desc");
         $this->db->order_by("udalost.timestamp", "desc");
         $query = $this->db->get();
         return $query->result_array();
@@ -56,7 +54,6 @@ class Udalost_model extends CI_model
         $this->db->from('zaujem');
         $this->db->join('udalost', 'udalost.idUdalost = zaujem.idUdalost', 'right');
         $this->db->join('pouzivatel', 'pouzivatel.idPouzivatel = zaujem.idPouzivatel', 'left');
-        $this->db->join('cennik', 'udalost.idCennik = cennik.idCennik');
         $this->db->join('miesto', 'udalost.idMiesto = miesto.idMiesto');
         if ($stat != null) {
             $podmienka = "";
@@ -83,7 +80,6 @@ class Udalost_model extends CI_model
         $this->db->where("stav", PRIJATE);
         $this->db->group_by("udalost.idUdalost");
         $this->db->order_by("datum", "asc");
-        $this->db->order_by("vaha", "desc");
         $this->db->order_by("udalost.timestamp", "desc");
         $query = $this->db->get();
         return $query->result_array();

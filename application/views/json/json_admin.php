@@ -3,9 +3,6 @@ header('Content-Type: application/json');
 
 $json = array();
 
-if (isset($cennik) && !(empty($cennik))) {
-    $json["cennik"] = $cennik;
-}
 if (isset($zoznam_cien) && !(empty($zoznam_cien))) {
     $json["zoznam_cien"] = $zoznam_cien;
 }
@@ -37,9 +34,6 @@ if (isset($aktualne_udaje_udalosti) && !(empty($aktualne_udaje_udalosti))) {
 }
 if (isset($aktualny_pouzivatel) && !(empty($aktualny_pouzivatel))) {
     $json["udaje_pouzivatela"] = $aktualny_pouzivatel;
-}
-if (isset($aktualny_cennik) && !(empty($aktualny_cennik))) {
-    $json["udaje_cennika"] = $aktualny_cennik;
 }
 
 echo json_encode($json, JSON_UNESCAPED_UNICODE);

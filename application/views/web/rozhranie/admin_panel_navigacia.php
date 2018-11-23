@@ -30,16 +30,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="<?php echo site_url("panel/cennik"); ?>">
-                        <i class="pe-7s-cash"></i>
-                        <p>cenník</p>
-                    </a>
-                    <hr>
-                </li>
-                <li>
                     <a href="<?php echo site_url("panel/zaujmy"); ?>">
                         <i class="pe-7s-like"></i>
-                        <p>záujmy používatelov</p>
+                        <p>záujmy</p>
                     </a>
                 </li>
                 <li>

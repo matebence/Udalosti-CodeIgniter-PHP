@@ -25,7 +25,6 @@
                                 <th>Vytvorený</th>
                                 <th>Akceptovať</th>
                                 <th>Blokovať</th>
-                                <th>Odstrániť</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -42,7 +41,6 @@
                                             echo "<td>".$organizator['timestamp']."</td>";
                                             echo "<td><i class='".$organizator['idPouzivatel']." fa fa-check-circle akceptovat' data-toggle='modal' data-target='#akceptovat-pouzivatel'></i></td>";
                                             echo "<td><i class='".$organizator['idPouzivatel']." fa fa-minus-circle blokovat' data-toggle='modal' data-target='#blokovat-pouzivatel'></i></td>";
-                                            echo "<td><i class='".$organizator['idPouzivatel']." fa fa-trash odstranit' data-toggle='modal' data-target='#odstranit-pouzivatel'></i></i></td>";
                                         echo "</tr>";
                                     }
                                 }
@@ -74,7 +72,6 @@
                                 <th>Heslo</th>
                                 <th>Stav</th>
                                 <th>Vytvorený</th>
-                                <th>Akceptovať</th>
                                 <th>Blokovať</th>
                                 <th>Editovať</th>
                                 <th>Odstrániť</th>
@@ -92,7 +89,6 @@
                                             echo "<td>".$organizator['heslo']."</td>";
                                             echo "<td>".$organizator['stav']."</td>";
                                             echo "<td>".$organizator['timestamp']."</td>";
-                                            echo "<td><i class='".$organizator['idPouzivatel']." fa fa-check-circle akceptovat' data-toggle='modal' data-target='#akceptovat-pouzivatel'></i></td>";
                                             echo "<td><i class='".$organizator['idPouzivatel']." fa fa-minus-circle blokovat' data-toggle='modal' data-target='#blokovat-pouzivatel'></i></td>";
                                             echo "<td><i class='".$organizator['idPouzivatel']." fa fa-edit editovat' data-toggle='modal' data-target='#aktualizovat-pouzivatel'></i></i></td>";
                                             echo "<td><i class='".$organizator['idPouzivatel']." fa fa-trash odstranit' data-toggle='modal' data-target='#odstranit-pouzivatel'></i></i></td>";

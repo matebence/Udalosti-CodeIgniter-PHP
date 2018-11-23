@@ -36,12 +36,8 @@ function navigacia() {
         aktivnyPrvokNavigacie($(".nav li > a > p"), "používatelia");
         $("#vytvorit_udalost").show();
 
-    } else if (castStranky == "cennik") {
-        aktivnyPrvokNavigacie($(".nav li > a > p"), "cenník");
-        $("#vytvorit_udalost").show();
-
     } else if (castStranky == "zaujmy") {
-        aktivnyPrvokNavigacie($(".nav li > a > p"), "záujmy používatelov");
+        aktivnyPrvokNavigacie($(".nav li > a > p"), "záujmy");
         $("#vytvorit_udalost").show();
 
     } else if (castStranky == "miesta") {
