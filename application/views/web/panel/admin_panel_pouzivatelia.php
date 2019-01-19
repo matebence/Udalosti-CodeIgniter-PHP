@@ -64,8 +64,6 @@
                         <div class="col-md-12">
                             <div class="header">
                                 <h4 class="title" style="display: inline;">Používatelia</h4>
-                                <a href="#" class="btn btn-success pull-right" data-toggle="modal" data-target='#novy-pouzivatel'><i
-                                            class="fa fa-plus-circle"></i><span>Nový používatel</span></a>
                                 <p class="category">Zoznam blokovaných použivateľov</p>
                             </div>
                         </div>
