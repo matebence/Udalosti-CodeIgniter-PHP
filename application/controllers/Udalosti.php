@@ -277,7 +277,7 @@ class Udalosti extends CI_Controller
     {
         if ((strcmp($this->input->post("token"), $this->Pouzivatel_model->token($this->input->post("email"))) == 0 && ($this->input->post("email")))) {
             $data["udalosti"] = $this->Udalost_model->zoznam_udalosti(
-                $this->input->post("stat"),
+                $this->spravny_format_statu($this->input->post("stat")),
                 $this->input->post("email"));
             $this->load->view("json/json_vystup_dat", $data);
         } else {
@@ -289,9 +289,9 @@ class Udalosti extends CI_Controller
     {
         if ((strcmp($this->input->post("token"), $this->Pouzivatel_model->token($this->input->post("email"))) == 0) && ($this->input->post("email"))) {
             $data["udalosti"] = $this->Udalost_model->zoznam_udalosti_v_okoli(
-                $this->input->post("stat"),
+                $this->spravny_format_statu($this->input->post("stat")),
                 $this->input->post("email"),
-                $this->input->post("okres"),
+                substr($this->input->post("okres"),strlen("okres ")),
                 $this->input->post("mesto"));
             $this->load->view("json/json_vystup_dat", $data);
         } else {
@@ -428,6 +428,20 @@ class Udalosti extends CI_Controller
             return true;
         } else {
             return false;
+        }
+    }
+
+    private function spravny_format_statu($stat){
+        if(strcmp($stat, "Slovensko") == 0){
+            return $stat;
+        } else if(strcmp($stat, "Slovakia") == 0){
+            return "Slovensko";
+        } else if(strcmp($stat, "Slowakei") == 0){
+            return "Slovensko";
+        } else if(strcmp($stat, "Slovak Republic") == 0){
+            return "Slovensko";
+        }else{
+            return;
         }
     }
 }
