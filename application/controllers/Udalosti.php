@@ -441,7 +441,7 @@ class Udalosti extends CI_Controller
         } else if(strcmp($stat, "Slovak Republic") == 0){
             return "Slovensko";
         }else{
-            return;
+            return $stat;
         }
     }
 }
