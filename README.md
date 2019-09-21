@@ -1,11 +1,11 @@
-# Aplikácia Udalosti Backend - PHP & MySQL
+# Udalosti - PHP & MySQL
 
-Aplikácia je dostupná na adrese:<br />
+The application is available at:<br />
 http://app-udalosti.8u.cz/<br />
 
 
 
-# Štruktúra aplikácie
+# Application structure
 
 __application<br />
 __assets<br />
@@ -21,7 +21,7 @@ package.json<br />
 
 
 
-## Použité technológie
+## Technologies
 
 Node.js<br />
 NPM<br />
