@@ -1,10 +1,4 @@
 # Udalosti - PHP & MySQL
-
-The application is available at:<br />
-http://app-udalosti.8u.cz/<br />
-
-
-
 # Application structure
 
 __application<br />
